@@ -1,4 +1,4 @@
-﻿namespace Core.App
+﻿namespace Core.App.AddingSolutionsToOrder
 {
     public class AddSolutionToOrderHandler
     {
@@ -12,11 +12,5 @@
 
             // zapisz do bazy
         }
-    }
-
-    public class AddSolutionToOrderCommand
-    {
-        public Guid OrderId { get; set; }
-        public Guid SolutionId { get; set; }
     }
 }
