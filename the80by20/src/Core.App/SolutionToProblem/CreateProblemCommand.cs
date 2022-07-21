@@ -12,7 +12,8 @@ namespace Core.App.SolutionToProblem
     {
         public string Description { get; set; }
         
-        public string Category { get; set; } // todo zrobić VO Kategoria
+        // TODO Create VO Category
+        public string Category { get; set; }
 
         public Guid UserId { get; set; }
 
@@ -28,18 +29,18 @@ namespace Core.App.SolutionToProblem
             _repository = repository;
         }
 
-        // application logic - coordinates flow + cross cuttings:
-        // wrap with db transaction - handler decorator or aspect oriented // todo like in grzybek's github
+        // INFO application logic - coordinates flow + cross cuttings:
+        // wrap with db transaction - handler decorator or aspect oriented
         // wrap with try catch logger
         public async Task Handle(CreateProblemCommand command)
         {
-            // input validation logic
-            // todo FluentValidator on command
+            // INFO input validation logic
+            // TODO FluentValidator on command
 
             var solutionToProblemAggregate = SolutionToProblemAggregate.New(
-                RequiredSolutionElementTypes.FromSolutionElements(command.SolutionElementTypes));
+                RequiredSolutionElementTypes.From(command.SolutionElementTypes));
 
-            SolutionToProblemData solutionToProblemData = new SolutionToProblemData()
+            SolutionToProblemData solutionToProblemData = new()
             {
                 AggregateId = solutionToProblemAggregate.Id,
                 UserId = command.UserId,
@@ -49,9 +50,7 @@ namespace Core.App.SolutionToProblem
 
             await _repository.CreateProblem(solutionToProblemAggregate, solutionToProblemData);
 
-            // opcja reposne dla request
-            // Created z id problemu
-            // Responze 200
+            // INFO calling controler action can response to request using Created with id or Ok, or Bad Request
         }
     }
 }

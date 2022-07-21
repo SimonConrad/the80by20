@@ -3,14 +3,6 @@ using Core.Domain.SharedKernel;
 
 namespace Core.Domain.SolutionToProblem
 {
-    // TODO: https://docs.google.com/document/d/14OyR6srTvONRx7bgmX-wAvLPc5D4RnmPUODeFujrdQo/edit#
-    // TODO: Persystencja: mapping EF core (np SolutionToProblemId. Guid - w legacy fighter), z prywatnymi setterami, Valu Objecty serializowane do json-a, grzybek
-    // TODO: Value Objecty jak w ddd-dotnet-starter
-    // TODO: vo jako record? - master of aggregates
-    // TODO: Utworzenie nowego obiektu - rekord agregata w tabelce, rekord SolutionToProblemAnemic (pk jako fk do Solution to problem), transkacje załzył handler use case-a Utwórz problem
-    // TODO: testy bddd: given -agregat w stanie, when -komenda do agregata - then - sprawdzenie getterow lub domain excpetiona lub jesli persystuje kolekcje eventów w agregacie to tak sprawdzić czy event domenowy jest
-    // TODO: PRzeportować proces zamówienia z bottego na moj zamowienia i tam użyc sersi domenowy, polityke
-    // interfejs repo do odczytu zapisu agregata w warstwie domain implmentacja w warstwie dal, mappingi ef w warstwie dal
     [AggregateDdd]
     public class SolutionToProblemAggregate
     {

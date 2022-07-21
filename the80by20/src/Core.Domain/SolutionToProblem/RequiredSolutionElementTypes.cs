@@ -6,11 +6,9 @@ namespace Core.Domain.SolutionToProblem;
 [ValueObjectDdd]
 public class RequiredSolutionElementTypes // todo immutable collection like SolutionElements
 {
-
     public IEnumerable<SolutionElementType> Elements { get; init; }
 
-
-    public static RequiredSolutionElementTypes FromSolutionElements(params SolutionElementType[] elements) => new()
+    public static RequiredSolutionElementTypes From(params SolutionElementType[] elements) => new()
     {
         Elements = elements.Distinct()
     };

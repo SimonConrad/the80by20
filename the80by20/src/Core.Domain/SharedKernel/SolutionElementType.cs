@@ -2,7 +2,7 @@
 
 namespace Core.Domain.SharedKernel;
 
-[DomainEnumDDD]
+[DomainEnumDdd]
 public enum SolutionElementType
 {
     RoiAnalysis,

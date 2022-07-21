@@ -7,8 +7,9 @@ using Common.TacticalDDD;
 
 namespace Core.Domain.SolutionToProblem
 {
-    // todo think if data encapuslation is needed
-    [AggregateData]
+    // TODO think if data encapuslation is needed
+    // TODO mapping by DAL strategy
+    [AggregateDataDdd]
     public class SolutionToProblemData
     {
         public SolutionToProblemId AggregateId { get; set; }
