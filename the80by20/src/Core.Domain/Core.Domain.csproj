@@ -8,11 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SolutionToProblem\" />
   </ItemGroup>
 
 </Project>
