@@ -1,12 +1,17 @@
-﻿using Common.TacticalDDD;
+﻿using Common;
+using Common.TacticalDDD;
 using Core.Domain.SharedKernel;
 
 namespace Core.Domain.SolutionToProblem
 {
     [AggregateDdd]
-    public class SolutionToProblemAggregate
+    public class SolutionToProblemAggregate : BaseEntity
     {
-        public SolutionToProblemId Id { get; init; } 
+        protected SolutionToProblemAggregate() // INFO for EF purpose
+        {
+        }
+
+        public SolutionToProblemId Id { get; private set; } 
         public RequiredSolutionElementTypes RequiredSolutionElementTypes { get; init; } 
 
         public static SolutionToProblemAggregate New(RequiredSolutionElementTypes requiredSolutionElementTypes) => new(SolutionToProblemId.New(), requiredSolutionElementTypes);
