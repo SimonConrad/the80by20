@@ -20,7 +20,7 @@ namespace Core.Dal.SolutionToProblem
                 e.HasKey(a => a.Id);
                 e.Property(a => a.Id)
                     .HasConversion(
-                        v => v.Id,
+                        v => v.Value,
                         v => SolutionToProblemId.FromGuid(v));
                 
                 e.Ignore(a => a.RequiredSolutionElementTypes);

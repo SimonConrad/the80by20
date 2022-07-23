@@ -25,6 +25,7 @@ namespace Core.Domain.SolutionToProblem
         public bool Confirmed { get; private set; }
         public bool Rejected { get; private set; }
         public bool WorkingOnSolutionStarted { get; private set; }
+        public bool WorkingOnSolutionEnded { get; private set; }
 
         public Price Price { get; private set; } = new();
         public SolutionAbstract SolutionAbstract { get; private set; }  = new();
@@ -93,6 +94,8 @@ namespace Core.Domain.SolutionToProblem
             {
                 throw new SolutionToProblemException("Cannot end solution without required elment types");
             }
+
+            WorkingOnSolutionEnded = true;
         }
     }
 }
