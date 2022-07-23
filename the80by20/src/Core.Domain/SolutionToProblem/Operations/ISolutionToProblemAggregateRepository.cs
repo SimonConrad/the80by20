@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.TacticalDDD;
+﻿using Common.DDD;
 
-namespace Core.Domain.SolutionToProblem
+namespace Core.Domain.SolutionToProblem.Operations
 {
     // INFO save and restore always via aggregate
     [AggregateRepositoryDdd]

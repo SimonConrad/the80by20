@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Common;
 using Core.Domain.SolutionToProblem;
+using Core.Domain.SolutionToProblem.Capabilities;
+using Core.Domain.SolutionToProblem.Operations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Dal.SolutionToProblem
@@ -18,10 +20,10 @@ namespace Core.Dal.SolutionToProblem
                 e.MapBaseEntityProperties();
 
                 e.HasKey(a => a.Id);
-                e.Property(a => a.Id)
-                    .HasConversion(
-                        v => v.Value,
-                        v => SolutionToProblemId.FromGuid(v));
+                //e.Property(a => a.Id)
+                //    .HasConversion(
+                //        v => v.Value,
+                //        v => SolutionToProblemId.FromGuid(v));
                 
                 e.Ignore(a => a.RequiredSolutionElementTypes);
                 e.Ignore(a => a.Confirmed);

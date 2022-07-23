@@ -1,6 +1,7 @@
-﻿using Common.TacticalDDD;
+﻿using Common.DDD;
+using Core.Domain.SolutionToProblem.Operations;
 
-namespace Core.Domain.SolutionToProblem;
+namespace Core.Domain.SolutionToProblem.Capabilities;
 
 [ValueObjectDdd]
 public class SolutionElements

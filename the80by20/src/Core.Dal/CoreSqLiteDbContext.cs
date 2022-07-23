@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 using Core.Dal.SolutionToProblem;
 using Core.Domain.SolutionToProblem;
+using Core.Domain.SolutionToProblem.Operations;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;

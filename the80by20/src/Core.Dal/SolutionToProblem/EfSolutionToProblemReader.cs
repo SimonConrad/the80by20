@@ -1,8 +1,7 @@
 ﻿using Core.App.SolutionToProblem.Reads;
-using Core.Dal;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApi.SolutionToProblemReads
+namespace Core.Dal.SolutionToProblem
 {
     public class EfSolutionToProblemReader : ISolutionToProblemReader
     {
@@ -16,11 +15,11 @@ namespace WebApi.SolutionToProblemReads
         public async Task<SolutionToProblemReadModel> Get(Guid solutionToProblemId)
         {
             var res = await _coreSqLiteDbContext.SolutionToProblemAggregates
-                .SingleAsync(s => s.Id.Value == solutionToProblemId); // TODO equtability of ID value object
+                .SingleAsync(s => s.Id == solutionToProblemId);
 
             return new()
             {
-                SolutionToProblemId = res.Id.Value
+                SolutionToProblemId = res.Id
             };
         }
     }

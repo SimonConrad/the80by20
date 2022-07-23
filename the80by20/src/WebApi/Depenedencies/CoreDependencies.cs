@@ -3,7 +3,7 @@ using Core.App.SolutionToProblem.Commands;
 using Core.App.SolutionToProblem.Reads;
 using Core.Dal.SolutionToProblem;
 using Core.Domain.SolutionToProblem;
-using WebApi.SolutionToProblemReads;
+using Core.Domain.SolutionToProblem.Operations;
 
 namespace WebApi.Depenedencies;
 

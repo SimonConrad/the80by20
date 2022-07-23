@@ -1,4 +1,4 @@
-﻿using Core.Domain.SharedKernel;
+﻿using Core.Domain.SharedKernel.Capabilities;
 
 namespace Core.App.SolutionToProblem.Commands
 {

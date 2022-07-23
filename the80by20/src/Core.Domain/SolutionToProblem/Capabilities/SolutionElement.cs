@@ -1,7 +1,7 @@
-﻿using Common.TacticalDDD;
-using Core.Domain.SharedKernel;
+﻿using Common.DDD;
+using Core.Domain.SharedKernel.Capabilities;
 
-namespace Core.Domain.SolutionToProblem;
+namespace Core.Domain.SolutionToProblem.Capabilities;
 
 [ValueObjectDdd]
 public class SolutionElement // TODO IEquatble to make SolutionElements._elements work

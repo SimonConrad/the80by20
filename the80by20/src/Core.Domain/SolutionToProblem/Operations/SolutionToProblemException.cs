@@ -1,6 +1,6 @@
-﻿using Common.TacticalDDD;
+﻿using Common.DDD;
 
-namespace Core.Domain.SolutionToProblem;
+namespace Core.Domain.SolutionToProblem.Operations;
 
 [DomainExceptionDdd]
 public class SolutionToProblemException : Exception

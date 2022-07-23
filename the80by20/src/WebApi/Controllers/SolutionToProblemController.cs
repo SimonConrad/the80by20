@@ -2,7 +2,6 @@ using Core.App.SolutionToProblem;
 using Core.App.SolutionToProblem.Commands;
 using Core.App.SolutionToProblem.Reads;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.SolutionToProblemReads;
 
 namespace WebApi.Controllers
 {

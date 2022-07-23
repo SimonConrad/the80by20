@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.TacticalDDD;
+﻿using Common.DDD;
+using Core.Domain.SolutionToProblem.Capabilities;
 
-namespace Core.Domain.SolutionToProblem
+namespace Core.Domain.SolutionToProblem.Operations
 {
     // TODO think if data encapuslation is needed
     // TODO mapping by DAL strategy
     [AggregateDataDdd]
     public class SolutionToProblemData
     {
-        public SolutionToProblemId AggregateId { get; set; }
+        public Guid AggregateId { get; set; }
 
         public Guid UserId { get; set; }
 

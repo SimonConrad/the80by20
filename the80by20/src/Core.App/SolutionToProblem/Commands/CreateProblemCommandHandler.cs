@@ -1,4 +1,5 @@
 ﻿using Core.Domain.SolutionToProblem;
+using Core.Domain.SolutionToProblem.Operations;
 
 namespace Core.App.SolutionToProblem.Commands;
 
@@ -32,6 +33,6 @@ public class CreateProblemCommandHandler
 
         await _repository.CreateProblem(solutionToProblemAggregate, solutionToProblemData);
 
-        return solutionToProblemAggregate.Id.Value;
+        return solutionToProblemAggregate.Id;
     }
 }

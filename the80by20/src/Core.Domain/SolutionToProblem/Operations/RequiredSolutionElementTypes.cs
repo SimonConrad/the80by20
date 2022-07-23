@@ -1,7 +1,7 @@
-﻿using Common.TacticalDDD;
-using Core.Domain.SharedKernel;
+﻿using Common.DDD;
+using Core.Domain.SharedKernel.Capabilities;
 
-namespace Core.Domain.SolutionToProblem;
+namespace Core.Domain.SolutionToProblem.Operations;
 
 [ValueObjectDdd]
 public class RequiredSolutionElementTypes // todo immutable collection like SolutionElements

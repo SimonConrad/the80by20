@@ -1,6 +1,6 @@
-﻿using Common.TacticalDDD;
+﻿using Common.DDD;
 
-namespace Core.Domain.SharedKernel;
+namespace Core.Domain.SharedKernel.Capabilities;
 
 [DomainEnumDdd]
 public enum SolutionElementType

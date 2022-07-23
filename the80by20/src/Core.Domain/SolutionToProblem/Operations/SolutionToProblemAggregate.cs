@@ -1,8 +1,8 @@
-﻿using Common;
-using Common.TacticalDDD;
-using Core.Domain.SharedKernel;
+﻿using Common.DDD;
+using Core.Domain.SharedKernel.Capabilities;
+using Core.Domain.SolutionToProblem.Capabilities;
 
-namespace Core.Domain.SolutionToProblem
+namespace Core.Domain.SolutionToProblem.Operations
 {
     [AggregateDdd]
     public class SolutionToProblemAggregate : BaseEntity
@@ -11,12 +11,14 @@ namespace Core.Domain.SolutionToProblem
         {
         }
 
-        public SolutionToProblemId Id { get; private set; } 
+        //public SolutionToProblemId Id { get; private set; }
+
         public RequiredSolutionElementTypes RequiredSolutionElementTypes { get; init; } 
 
-        public static SolutionToProblemAggregate New(RequiredSolutionElementTypes requiredSolutionElementTypes) => new(SolutionToProblemId.New(), requiredSolutionElementTypes);
+        public static SolutionToProblemAggregate New(RequiredSolutionElementTypes requiredSolutionElementTypes) 
+            => new(Guid.NewGuid(), requiredSolutionElementTypes);
 
-        private SolutionToProblemAggregate(SolutionToProblemId id, RequiredSolutionElementTypes requiredSolutionElementTypes)
+        private SolutionToProblemAggregate(Guid id, RequiredSolutionElementTypes requiredSolutionElementTypes)
         {
             Id = id;
             RequiredSolutionElementTypes = requiredSolutionElementTypes;

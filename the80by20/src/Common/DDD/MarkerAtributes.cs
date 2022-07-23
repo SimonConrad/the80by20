@@ -1,9 +1,13 @@
-﻿namespace Common.TacticalDDD
+﻿namespace Common.DDD // TODO Comment each element with practilal explanantion -when to use, what gives us
 {
     public class AggregateDddAttribute : Attribute
     {}
 
     public class ValueObjectDddAttribute : Attribute
+    {}
+
+    // Has identity that makes it unique unlike vallue object wich is compared by value eneity is compared by identity, aggragate is also entity
+    public class EntityDddAttribute : Attribute
     {}
 
     public class DomainExceptionDddAttribute : Attribute
