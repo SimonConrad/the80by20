@@ -6,7 +6,7 @@ namespace Core.Domain.SolutionToProblem.Operations
     [AggregateRepositoryDdd]
     public interface ISolutionToProblemAggregateRepository // todo implement in Cire.Dal - create new layer
     {
-        Task CreateProblem(SolutionToProblemAggregate aggregate, SolutionToProblemData solutionToProblemData);
+        Task CreateProblem(SolutionToProblemAggregate aggregate, SolutionToProblemData data);
 
         // INFO  possible aggregate persistance options
         // (1) map via raw sql - insert, update, select into aggregate object

@@ -9,6 +9,10 @@ public class SolutionToProblemReadModel
 {
     public Guid SolutionToProblemId { get; set; }
 
+    public Guid UserId { get; set; }
+
+    public string Description { get; set; }
+
     public bool IsConfirmed { get; set; }
 
     public bool IsRejected { get; set; }

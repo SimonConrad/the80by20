@@ -1,5 +1,14 @@
-﻿namespace Common.DDD // TODO Comment each element with practilal explanantion -when to use, what gives us
+﻿namespace Common.DDD // TODO Comment each ddd tactical element with practilal explanantion - when to use, what gives us
+// todo fix typos
+// todo use for slides in presentations
 {
+    // Aggregate, kind of entity (has identity and each instance is unique) that:
+    // INFO defines transaction  boundary - which is persisted in transactional (ACID) way in database, best approach one transaction one aggregate
+    // INFO if more aggregates state changes to be persisted in one business transaction then use saga pattern which makes mange such buinsess transaction in kind of acid way - uses compensation if needed
+    // INFO aggragate is discovered via invang on this riants (yellow card in ES design level), invariant guard that state change is done in consistant way - state after this change is in consitnat way immediatley.
+    // INFO State - cohesive pieces of information that constitutes buissnes object state 
+    // INFO watch out for problem of including informations (for example related entities, or not needed header fields) that are not included in invariants, avoid lazy loading of such, best if aggregate is one table and small, best id + serialized value objects
+    // INFO keep data and operations on this data (behaviors, methods) togther in one object - rile of good cohesions - applies really hard to aggragtes - avoid service changing orm entities setter way of coding - it is anti cohesive
     public class AggregateDddAttribute : Attribute
     {}
 

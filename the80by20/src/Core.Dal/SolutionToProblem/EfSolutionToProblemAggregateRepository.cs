@@ -13,9 +13,10 @@ public class EfSolutionToProblemAggregateRepository : ISolutionToProblemAggregat
         _context = context;
     }
 
-    public async Task CreateProblem(SolutionToProblemAggregate aggregate, SolutionToProblemData solutionToProblemData)
+    public async Task CreateProblem(SolutionToProblemAggregate aggregate, SolutionToProblemData data)
     {
         _context.SolutionToProblemAggregates.Add(aggregate);
+        _context.SolutionToProblemDatas.Add(data);
         await _context.SaveChangesAsync();
     }
 }

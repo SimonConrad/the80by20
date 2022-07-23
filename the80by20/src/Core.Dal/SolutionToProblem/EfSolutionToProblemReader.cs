@@ -14,12 +14,17 @@ namespace Core.Dal.SolutionToProblem
 
         public async Task<SolutionToProblemReadModel> Get(Guid solutionToProblemId)
         {
-            var res = await _coreSqLiteDbContext.SolutionToProblemAggregates
+            var aggregate = await _coreSqLiteDbContext.SolutionToProblemAggregates
                 .SingleAsync(s => s.Id == solutionToProblemId);
+
+            var data = await _coreSqLiteDbContext.SolutionToProblemDatas
+                .SingleAsync(d => d.AggregateId == solutionToProblemId);
 
             return new()
             {
-                SolutionToProblemId = res.Id
+                SolutionToProblemId = aggregate.Id,
+                UserId = data.UserId,
+                Description = data.Description
             };
         }
     }

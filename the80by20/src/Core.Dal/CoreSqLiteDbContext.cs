@@ -8,11 +8,12 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Core.Dal
 {
-    // TODO Create SqlServerDbcontext
+    // TODO Create SqlServerDbcontext with normal sql server db and migrations
     public class CoreSqLiteDbContext : DbContext
     {
         private readonly DbConnection _connection;
         public DbSet<SolutionToProblemAggregate> SolutionToProblemAggregates { get; set; }
+        public DbSet<SolutionToProblemData> SolutionToProblemDatas { get; set; }
 
         public static DbConnection CreateInMemoryDatabase()
         {
