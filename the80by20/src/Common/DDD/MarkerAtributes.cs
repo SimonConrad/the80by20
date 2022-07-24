@@ -6,7 +6,8 @@
     /// <summary>
     /// agregat oznacza granicę spójności, technicznie transakcyjnie, ale chodzi o spójnośc biznesową
     /// malutkie chudziutkie agregaty, nie ma w nich niepotrzebnych informacji
-    /// agregat nie zawiera innego agregatu - nie sa ze soba zrośnięte, agergaty to samotne wyspy,
+    /// agregaty sa od siebie nizealezne, agregat nie moze wolac innego agregatu,
+    /// nie moze byc parametrem innego agregatu, agregat nie zawiera innego agregatu - nie sa ze soba zrośnięte, agergaty to samotne wyspy,
     /// agregat to niezalezny komponent, jesli musi sie komunikowac z innym agergatem to uzywajac value objectow
     ///
     ///
