@@ -1,36 +1,38 @@
 ﻿namespace Common.DDD // TODO Comment each ddd tactical element with practilal explanantion - when to use, what gives us
 // todo fix typos
+// todo review and fix content
 // todo use for slides in presentations
 {
     /// <summary>
     /// Aggregate - defines buisness transaction boundary, it means that:
-    ///     - encapsulate cohesive set of buisness information values that are always in consistant state
-    ///     - coheseive set of information instances (information values) that are persisted is state
-    ///     - State - cohesive set of informations instances (values) that constitutes buissnes object state 
-    ///     - the state consistancy is achived by:
+    ///     - it encapsulates cohesive (together they constitues buisness object) set of buisness information instances (information values) that are always in consistant state
+    ///     - state - it is coheseive set of information instances that are persisted
+    ///     - state - cohesive set of informations instances (values) that constitutes buissnes object state 
+    ///     - the state consistancy is achived by aggratae building block by:
     ///         - aggregate public api so that the state is not changed directly
+    ///         - encapulsated state in object (private fileds)
     ///         - state change happen in transactional write to database (ACID)
-    ///         - aggregate instance is persisted (its ids and state, sometimes hsitory of events (events sourcing)) 
+    ///         - aggregate instance is persisted (its ids and state, sometimes hsitory of its' events (events sourcing)) 
     ///
     ///     - aggregate should be small and include only buisness informations that are used by so called invariants:
     ///         - invariant is necessary condition that must be fulfilled for the state change to happen (in event storming buisness-wise important state chnage that happened is called domain event)
     ///         - if modelling system using event storming design level, state change is represented by events, command for these event are commands, ...
-    ///         - ... invariant can be identified between command and event, invariant is condition that is neccessary to be fullfiled (at once, not eventually) so that the event can happen
+    ///         - ... invariant can be identified between command and event, invariant is condition that is neccessary to be fullfiled (at once, not only eventually) so that the event can happen
     /// 
     ///     - the process of modelling agregate (for the puprpose of implementation) is called - discovering aggregate boundaries
     ///         - based on es design level - we put togther tuples of command-invariant-event
-    ///         - which such tuples to chose? These in with invariants tath are using same information, or theses with commands taht touches information that tuple with invariant use
+    ///         - which such tuples to put togther into one aggregate? These in which invariants  are using same information, or these with commands taht touches information that tuple with invariant use
     ///         - such small group of tuples of command-(invaraint)-event can be traeted as model of aggragtae (api (methods), information (private fields), events (represents state change, sometimes list of events), id)
     ///
     ///     - aggragate is discovered via invariants (yellow card in ES design level), invariant guard that state change is done in consistant way - state after this change is in consitnat way immediatley.
     ///         - watch out for problem of including informations (for example related entities, or not needed header fields) that are not included in invariants, avoid lazy loading of such
-    ///         , best if aggregate is one table and small, best id + serialized value objects
-    ///         - such header data as aggergate-data - its pf is fk to aggeragte
+    ///         , best if aggregate is one table and small, best: id + serialized value objects
+    ///         - such header data can be implemented as aggergate-data - its pf is fk to aggeragte, it is somtimes Readmodel
     ///         - keep data and operations on this data (behaviors, methods) togther in one object - rule of good cohesions - applies really good to aggragtes
-    ///         - avoid procedural way of changing state - service changing orm entities setter way of coding - it is anti cohesive
+    ///         - avoid procedural way of changing state - service changing orm entities - setters in entity are used by service - it is anti cohesive
     ///
     /// 
-    ///     - others (to be lkeaned up)
+    ///     - others (to be cleaned up)
     ///         - state consitutues of buimsees information that sohuld be chnaged together, so that after the change these information values (state) are consistent state (perisited in db)
     ///         - aggregate guards to not to transition system into inconsistnet stae
     ///         - aggregate should be statefull, and its state is persisted (it is not input model withou state)
@@ -91,4 +93,37 @@
     // INFO factory - separate class for example for creating policy (construct interface implmentation), for vo or aggregate - factory method
     public class FactoryDddAttribute : Attribute
     { }
+   
+    /// TODO asynchronous read model
+    /// <summary>
+    /// Read model
+    /// 
+    /// read model and write model should be same only in CRUDs (like Administration module), ex. category anemic entity
+    /// 
+    /// in cases when wrtie logic is more complex, like in Core module we incorportae deep model for writes:
+    /// ... consisting of ddd buildig blocks -  application logic started by command, domain logic operating on different levels: capabilities, operations, politics, decision makers
+    /// read model on the other site is separate model concentrating on containing  data related to decisions, and for fast reads
+    /// read model consists of information needed for read in app (green card in event storming), this read information is then used to make decision while doing command
+    /// 
+    /// read model can be implemented by object consisting of plain fields but also we may use value objects (from domain layer) ...
+    /// ... and reader which fetch or save data from peristance - db / cache and is optimized for doing fast read - ex plan sql using ado, dapper, separate database optimized for reads, denormalized tables etc.
+    /// read model data is projection of persisted data by writes (projections is combination of written data optimized for reads) ...
+    /// ... so when persisting agregate data also read model data should be persisted - maybe done synchronously, for example: in same placa as aggregates is saved ...
+    /// or asynchronously using messaging - read model listener can be subscribed to aggregate events and then proper data from domain event can be persistsed 
+    /// 
+    /// information in read model is different then information in ddd entities and aggregate beacouse these 2 sets of data have diffrenet purposes ...
+    /// ... entities / aggregates - logic which especially guards consistnent state transisitons by invariants...
+    /// ... read model - data for reads, and services - readers, for purpose of analytics and decison - support commands
+    /// 
+    /// to achieve loosely copupled read model and entity but somehow relate read model to entityt / aggregate, read model can have id pointing to aggragate ...
+    /// ... but don't have navigation proprties from aggregate to read model and opposite way - it may enter problem for enetring aggragate into inconcistant state
+    ///
+    ///
+    /// ... read model should be mapped to data struture taht can be serialized into json when transmitted over http, so this mapping should be included in applicatin,
+    /// ... this data can be reader-dto
+    /// </summary>
+    public class ReadModelDddAttribute : Attribute
+    {
+
+    }
 }

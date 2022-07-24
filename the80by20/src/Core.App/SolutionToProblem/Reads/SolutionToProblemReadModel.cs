@@ -1,10 +1,12 @@
-﻿using Core.Domain.SharedKernel.Capabilities;
+﻿using Common.DDD;
+using Core.Domain.SharedKernel.Capabilities;
 using Core.Domain.SolutionToProblem;
 using Core.Domain.SolutionToProblem.Capabilities;
 
 namespace Core.App.SolutionToProblem.Reads;
 
 // TODO make as C#'s record
+[ReadModelDdd]
 public class SolutionToProblemReadModel
 {
     public Guid SolutionToProblemId { get; set; }
