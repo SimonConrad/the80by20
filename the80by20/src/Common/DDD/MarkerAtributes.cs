@@ -4,6 +4,12 @@
 // todo use for slides in presentations
 {
     /// <summary>
+    /// agregat oznacza granicę spójności, technicznie transakcyjnie, ale chodzi o spójnośc biznesową
+    /// malutkie chudziutkie agregaty, nie ma w nich niepotrzebnych informacji
+    /// agregat nie zawiera innego agregatu - nie sa ze soba zrośnięte, agergaty to samotne wyspy,
+    /// agregat to niezalezny komponent, jesli musi sie komunikowac z innym agergatem to uzywajac value objectow
+    ///
+    ///
     /// Aggregate - defines buisness transaction boundary, it means that:
     ///     - it encapsulates cohesive (together they constitues buisness object) set of buisness information instances (information values) that are always in consistant state
     ///     - state - it is coheseive set of information instances that are persisted
@@ -44,7 +50,7 @@
     ///         - agg is persisted in transactional (ACID) way in database, best approach one transaction one aggregate
     ///         - if more aggregates states changes need to be persisted in one business transaction then use saga pattern
     ///         - saga makes manging such buinsess transaction in kind of acid way - uses compensation if needed
-    /// </summary>
+    /// </summary
     public class AggregateDddAttribute : Attribute
     {}
 
@@ -126,4 +132,15 @@
     {
 
     }
+
+    // domeny, subdomeny, b ctxty, archetypy modeli biznesowy, struktury wielkiej skali
+    // najpierw subdomeny, potem destylacja b ctxtu
+    // granice bounded contextu wyznaczemy heurystyka pojedynczego zrodla prawdy, czyli jest jedno zrodlo prawdy jesli:
+    // zadajac pytanie biznesowe otrzymuje odpowiedz, na ktora wplyw maja komendy + zdarzenia wystepujace w ramach jednego kontkstu
+    // np złamanie zasady pojedynczego zrodla prawdy:
+    // jesli zadajac pytanie o dostepnosc musze wiedziec czy jest cos na magazynie (1 b.ctxt)
+    // + dodtakowo złozyć to z inromacja czy cos jest w rezerwacji (2 ctxt)
+    // powinienem miec jeden bctxt dostepnosc, część wspólna to id - wzorzec snowflake i to, że produkt jest czym innym w bctxt dostepnosc a czym innym w bctxt bestseller
+    // z kolei kesz tych informacji readmodel moze byc zlozony z kilku bctxtow, ale to kesz - wtorny wzgledem komand ktore wplywaja na informacje czyli odpowiedz na pytanie biznesowe
+    // te komendy i zdarzenia powinny byc razem w jednym bctxt
 }
