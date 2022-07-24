@@ -128,6 +128,16 @@
     ///
     /// ... read model should be mapped to data struture taht can be serialized into json when transmitted over http, so this mapping should be included in applicatin,
     /// ... this data can be reader-dto
+    ///
+    ///
+    ///
+    /// Aggregates designing rules
+    /// 4 rules about designing aggregates by Eric Evans:
+    /// - Model true invariants in consistency boundaries (granica spójności - agreagt zawiera tylko te instancje informacji, ktore wszystkie razem tworza spojny stan)
+    /// - Design small aggregate
+    /// - Reference other aggregates by identity
+    /// - Use Eventual Consistency outside the boundary
+    /// 
     /// </summary>
     public class ReadModelDddAttribute : Attribute
     {
@@ -145,7 +155,7 @@
     // z kolei kesz tych informacji readmodel moze byc zlozony z kilku bctxtow, ale to kesz - wtorny wzgledem komand ktore wplywaja na informacje czyli odpowiedz na pytanie biznesowe
     // te komendy i zdarzenia powinny byc razem w jednym bctxt
     //
-    // inne złamanie pojedynczego źrdóła prawy żeby ofpowidz na pytanie czy pacjent jes żywy - musimy przejśc sie po kilku oddziałącj i zajc do kostnicy
+    // inne złamanie pojedynczego źrdóła prawy żeby  na pytanie czy pacjent jes żywy - musimy przejśc sie po kilku oddziałącj i zajc do kostnicy
     // antywzorzec feature envy - jeden bctxt zadzrosci drugiemy danych, zachowań
     // ksiazki veinberga
 }
