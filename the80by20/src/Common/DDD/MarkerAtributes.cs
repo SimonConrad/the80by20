@@ -4,6 +4,8 @@
 // todo use for slides in presentations
 {
     /// <summary>
+    ///https://www.informit.com/articles/article.aspx?p=2020371
+    /// 
     /// agregat oznacza granicę spójności, technicznie transakcyjnie, ale chodzi o spójnośc biznesową
     /// malutkie chudziutkie agregaty, nie ma w nich niepotrzebnych informacji
     /// agregaty sa od siebie nizealezne, agregat nie moze wolac innego agregatu,
