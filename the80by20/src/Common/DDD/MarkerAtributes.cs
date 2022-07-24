@@ -144,4 +144,8 @@
     // powinienem miec jeden bctxt dostepnosc, część wspólna to id - wzorzec snowflake i to, że produkt jest czym innym w bctxt dostepnosc a czym innym w bctxt bestseller
     // z kolei kesz tych informacji readmodel moze byc zlozony z kilku bctxtow, ale to kesz - wtorny wzgledem komand ktore wplywaja na informacje czyli odpowiedz na pytanie biznesowe
     // te komendy i zdarzenia powinny byc razem w jednym bctxt
+    //
+    // inne złamanie pojedynczego źrdóła prawy żeby ofpowidz na pytanie czy pacjent jes żywy - musimy przejśc sie po kilku oddziałącj i zajc do kostnicy
+    // antywzorzec feature envy - jeden bctxt zadzrosci drugiemy danych, zachowań
+    // ksiazki veinberga
 }
