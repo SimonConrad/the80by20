@@ -6,8 +6,10 @@
     /// <summary>
     /// Aggregates designing rules
     /// 4 rules about designing aggregates by Eric Evans:
-    /// - Model true invariants in consistency boundaries (granica spójności - agreagt zawiera tylko te instancje informacji, ktore wszystkie razem tworza spojny stan)
-    /// - Design small aggregate
+    /// - Model true invariants in consistency boundaries ...
+    /// ... (consistency boundary granica spójności - agregat ogranicza (boundary) tylko te dane, ktore wszystkie razem tworza spojny stan (consistency),
+    /// ... ten stan jest zmiany w spósb transkacyjny (spójność transakcyjna - natychmiastowa i acid, nie mylić z eventuall consitancy))
+    /// - Design small aggregate - na podstawie ES Design Level - grupujemy wg powyższego rozkaz-inwariant-zdazenie - one zamodeluja agreagt
     /// - Reference other aggregates by identity
     /// - Use Eventual Consistency outside the boundary
     /// 
@@ -63,7 +65,7 @@
     ///         - agg is persisted in transactional (ACID) way in database, best approach one transaction one aggregate
     ///         - if more aggregates states changes need to be persisted in one business transaction then use saga pattern
     ///         - saga makes manging such buinsess transaction in kind of acid way - uses compensation if needed
-    /// </summary
+    /// </summary>
     public class AggregateDddAttribute : Attribute
     {}
 
@@ -88,6 +90,7 @@
     // saved in one transaction with aggregate only when  aggragted created,
     // but when changing aggregate it does not to be included in aggrage retrival
     // when this data is chnaged also aggragte not need to be retrived from database
+    // regerence aggragate with id, don do naviagation proporties to aggregate and opposite way
     public class AggregateDataDddAttribute : Attribute
     { }
 
@@ -150,6 +153,7 @@
     }
 
     // domeny, subdomeny, b ctxty, archetypy modeli biznesowy, struktury wielkiej skali
+    //
     // najpierw subdomeny, potem destylacja b ctxtu
     // granice bounded contextu wyznaczemy heurystyka pojedynczego zrodla prawdy, czyli jest jedno zrodlo prawdy jesli:
     // zadajac pytanie biznesowe otrzymuje odpowiedz, na ktora wplyw maja komendy + zdarzenia wystepujace w ramach jednego kontkstu
