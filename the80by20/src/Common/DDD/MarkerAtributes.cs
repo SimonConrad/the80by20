@@ -6,6 +6,10 @@
     /// <summary>
     /// https://www.informit.com/articles/article.aspx?p=2020371 Vaughn Vernon implementing ddd: aggregates
     /// 
+    /// // pdf in ddd folder implementing ddd-aggregates-vaughn vernon - with description of invariants , constatiancy boundary, transactional consistancy
+    /// Rule: Model True Invariants in Consistency Boundaries
+    ///
+    /// 
     /// agregat oznacza granicę spójności, technicznie transakcyjnie, ale chodzi o spójnośc biznesową
     /// malutkie chudziutkie agregaty, nie ma w nich niepotrzebnych informacji
     /// agregaty sa od siebie nizealezne, agregat nie moze wolac innego agregatu,
