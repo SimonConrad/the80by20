@@ -4,17 +4,17 @@
 // todo use for slides in presentations
 {
     /// <summary>
-    ///https://www.informit.com/articles/article.aspx?p=2020371
+    /// https://www.informit.com/articles/article.aspx?p=2020371 Vaughn Vernon implementing ddd: aggregates
     /// 
     /// agregat oznacza granicę spójności, technicznie transakcyjnie, ale chodzi o spójnośc biznesową
     /// malutkie chudziutkie agregaty, nie ma w nich niepotrzebnych informacji
     /// agregaty sa od siebie nizealezne, agregat nie moze wolac innego agregatu,
-    /// nie moze byc parametrem innego agregatu, agregat nie zawiera innego agregatu - nie sa ze soba zrośnięte, agergaty to samotne wyspy,
+    /// agregat nie moze byc parametrem innego agregatu, agregat nie zawiera innego agregatu - nie sa ze soba zrośnięte, agergaty to samotne wyspy, ewentulana referencja po idiku
     /// agregat to niezalezny komponent, jesli musi sie komunikowac z innym agergatem to uzywajac value objectow
     ///
     ///
     /// Aggregate - defines buisness transaction boundary, it means that:
-    ///     - it encapsulates cohesive (together they constitues buisness object) set of buisness information instances (information values) that are always in consistant state
+    ///     - it encapsulates cohesive (only together they constitues some invariant) set of buisness information instances (information values) that are always in consistant state
     ///     - state - it is coheseive set of information instances that are persisted
     ///     - state - cohesive set of informations instances (values) that constitutes buissnes object state 
     ///     - the state consistancy is achived by aggratae building block by:
