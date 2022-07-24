@@ -4,10 +4,16 @@
 // todo use for slides in presentations
 {
     /// <summary>
-    /// https://www.informit.com/articles/article.aspx?p=2020371 Vaughn Vernon implementing ddd: aggregates
+    /// Aggregates designing rules
+    /// 4 rules about designing aggregates by Eric Evans:
+    /// - Model true invariants in consistency boundaries (granica spójności - agreagt zawiera tylko te instancje informacji, ktore wszystkie razem tworza spojny stan)
+    /// - Design small aggregate
+    /// - Reference other aggregates by identity
+    /// - Use Eventual Consistency outside the boundary
     /// 
-    /// // pdf in ddd folder implementing ddd-aggregates-vaughn vernon - with description of invariants , constatiancy boundary, transactional consistancy
-    /// Rule: Model True Invariants in Consistency Boundaries
+    /// https://www.informit.com/articles/article.aspx?p=2020371 Vaughn Vernon implementing ddd: aggregates
+    /// // pdf in ddd folder implementing ddd-aggregates-vaughn vernon, part  - Rule: Model True Invariants in Consistency Boundaries
+    /// with description of invariants, constatiancy boundary, transactional consistancy
     ///
     /// 
     /// agregat oznacza granicę spójności, technicznie transakcyjnie, ale chodzi o spójnośc biznesową
@@ -137,13 +143,6 @@
     ///
     ///
     ///
-    /// Aggregates designing rules
-    /// 4 rules about designing aggregates by Eric Evans:
-    /// - Model true invariants in consistency boundaries (granica spójności - agreagt zawiera tylko te instancje informacji, ktore wszystkie razem tworza spojny stan)
-    /// - Design small aggregate
-    /// - Reference other aggregates by identity
-    /// - Use Eventual Consistency outside the boundary
-    /// 
     /// </summary>
     public class ReadModelDddAttribute : Attribute
     {
