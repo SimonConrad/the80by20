@@ -25,6 +25,6 @@ public class SolutionToProblemReadModel
 
     public SolutionAbstract SolutionAbstract { get; set; } // TODO proper mapping for webapi response model - do in webapi project
 
-    public Price Price { get; set; } // TODO proper mapping for webapi response model - do in webapi project
+    public Money Price { get; set; } // TODO proper mapping for webapi response model - do in webapi project
     
 }

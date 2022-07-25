@@ -29,7 +29,7 @@ namespace Core.Domain.SolutionToProblem.Operations
         public bool WorkingOnSolutionStarted { get; private set; }
         public bool WorkingOnSolutionEnded { get; private set; }
 
-        public Price Price { get; private set; } = new();
+        public Money Price { get; private set; } = Money.Zero();
         public SolutionAbstract SolutionAbstract { get; private set; }  = new();
         public SolutionElements SolutionElements { get; private set; } = new();
 
@@ -59,7 +59,7 @@ namespace Core.Domain.SolutionToProblem.Operations
             SolutionAbstract = solutionAbstract;
         }
 
-        public void SetPrice(Price price)
+        public void SetPrice(Money price)
         {
             Price = price;
 
