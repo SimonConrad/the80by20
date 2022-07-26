@@ -24,7 +24,8 @@ namespace Core.Dal.SolutionToProblem
 
             // todo in future can think about storing all readmodel data in one rreadmodel specialize for reads as readmodel during Event Storming
             // such readmodel can store duplicated data,
-            // and be consistent eventually by mechanism of listerner updating this readmodel subsribing to event (raised from aggragte update)  
+            // and be consistent eventually by mechanism of listerner updating this readmodel subsribing to event (raised from aggragte state chnage event)
+            // use for example rabbitmq, kafka, with peristant messages
             return new()
             {
                 SolutionToProblemId = data.AggregateId,

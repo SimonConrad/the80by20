@@ -1,6 +1,6 @@
 ﻿namespace Common.DDD;
 
-public class BaseEntityData
+public class AggergateData
 {
     public Guid AggregateId { get; set; }
 
