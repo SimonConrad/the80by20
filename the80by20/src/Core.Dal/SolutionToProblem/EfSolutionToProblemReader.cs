@@ -15,6 +15,7 @@ namespace Core.Dal.SolutionToProblem
 
         public async Task<SolutionToProblemReadModel> Get(SolutionToProblemId id)
         {
+            
             var aggregate = await _coreSqLiteDbContext.SolutionToProblemAggregates
                 .SingleAsync(s => s.Id == id);
 
@@ -23,9 +24,19 @@ namespace Core.Dal.SolutionToProblem
 
             return new()
             {
-                SolutionToProblemId = aggregate.Id,
+                SolutionToProblemId = data.AggregateId,
                 UserId = data.UserId,
-                Description = data.Description
+                Description = data.Description,
+
+
+                // todo in future can think about storing all readmodel data in one rreadmodel specialize for reads as readmodel during Event Storming
+                // such readmodel can store duplicated data,
+                // and be consistent eventually by mechanism of listerner updating this readmodel subsribing to event (raised from aggragte update)  
+                SolutionAbstract = aggregate.SolutionAbstract,
+                IsConfirmed = aggregate.Confirmed,
+                IsRejected = aggregate.Rejected,
+                WorkingOnSolutionStarted = aggregate.WorkingOnSolutionStarted,
+                WorkingOnSolutionEnded = aggregate.WorkingOnSolutionEnded
             };
         }
     }

@@ -25,12 +25,13 @@ namespace Core.Dal.SolutionToProblem
                         a => a.Value,
                         a => new SolutionToProblemId(a));
 
+                e.Property(a => a.SolutionAbstract)
+                    .HasConversion(
+                        a => a.Content,
+                        a => SolutionAbstract.FromContent(a));
+
                 e.Ignore(a => a.RequiredSolutionElementTypes);
-                e.Ignore(a => a.Confirmed);
-                e.Ignore(a => a.Rejected);
-                e.Ignore(a => a.WorkingOnSolutionStarted);
                 e.Ignore(a => a.Price);
-                e.Ignore(a => a.SolutionAbstract);
                 e.Ignore(a => a.SolutionElements);
             });
 

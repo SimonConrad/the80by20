@@ -21,8 +21,8 @@ namespace Core.Domain.SolutionToProblem.Operations
         public bool WorkingOnSolutionEnded { get; private set; }
 
         public Money Price { get; private set; } = Money.Zero();
-        public SolutionAbstract SolutionAbstract { get; private set; }  = new();
-        public SolutionElements SolutionElements { get; private set; } = new();
+        public SolutionAbstract SolutionAbstract { get; private set; } = SolutionAbstract.Empty();
+        public SolutionElements SolutionElements { get; private set; }
 
         public static SolutionToProblemAggregate New(RequiredSolutionElementTypes requiredSolutionElementTypes) 
             => new(SolutionToProblemId.New(), requiredSolutionElementTypes);
@@ -31,6 +31,17 @@ namespace Core.Domain.SolutionToProblem.Operations
         {
             Id = id;
             RequiredSolutionElementTypes = requiredSolutionElementTypes;
+
+            TestIfEfConverionsWork();
+        }
+
+        private void TestIfEfConverionsWork()
+        {
+            SolutionAbstract = SolutionAbstract.FromContent("raz, dwa, trzy");
+            Confirmed = true;
+            Rejected = true;
+            WorkingOnSolutionStarted = true;
+            WorkingOnSolutionEnded = true;
         }
 
         public void ConfirmProblem()

@@ -1,13 +1,31 @@
-﻿using Common.DDD;
+﻿using System.Reflection.Metadata.Ecma335;
+using Common.DDD;
 
 namespace Core.Domain.SolutionToProblem.Capabilities;
 
 [ValueObjectDdd]
-public class SolutionAbstract 
+public sealed record SolutionAbstract 
 {
-    public string Content { get; init; }
+    public string Content { get; }
 
-    public static SolutionAbstract FromContent(string content) => new() { Content = content };
+    public static SolutionAbstract FromContent(string content)
+    {
+        if (string.IsNullOrEmpty(content) || content.Length < 10)
+        {
+            throw new DomainException("Invalid content");
+        }
+
+        return new(content);
+    }
+
+    public static SolutionAbstract Empty() => new(string.Empty);
+
+    private  SolutionAbstract(string content)
+    {
+        Content = content;
+    }
 
     public bool NotEmpty() => !string.IsNullOrEmpty(Content);
+
+    public override string ToString() => $"{Content.Substring(10)} ...";
 }
