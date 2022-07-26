@@ -52,10 +52,9 @@ public class CreateProblemCommandHandler
 
         await _repository.Create(solutionToProblemAggregate, solutionToProblemCrudData);
 
-        // todo info in future do this in way of fire event and forget asynchronously using task api, without awaiting result
-        // to achieve this probaalby diffrent configuration of db is needed - try normal sql serve
-        // or publish using rabbitmq, nservicebys, kafka masstransit,
-        await Task.Run(() =>
+        // info fire event and forget asynchronously using task api, without awaiting result
+        // todo interchnage with messagin mechanism like:g rabbitmq, nservicebys, kafka masstransit, create ibnterfaces for that
+       /* await*/ Task.Run(() =>
         {
             _mediator.Publish(new ProblemCreated(solutionToProblemAggregate.Id, command.Category));
         });

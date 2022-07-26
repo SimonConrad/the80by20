@@ -8,20 +8,17 @@ namespace Core.App.SolutionToProblem.ReadModel;
 [ReadModelDdd]
 public class SolutionToProblemReadModelHandler : INotificationHandler<ProblemCreated>, INotificationHandler<ProblemUpdated>
 {
-    private readonly ISolutionToProblemAggregateRepository _aggregateRepository;
     private readonly ISolutionToProblemReadModelRepository _readModelRepository;
 
-    public SolutionToProblemReadModelHandler(ISolutionToProblemAggregateRepository aggregateRepository,
-        ISolutionToProblemReadModelRepository readModelRepository)
+    public SolutionToProblemReadModelHandler(ISolutionToProblemReadModelRepository readModelRepository)
     {
-        _aggregateRepository = aggregateRepository;
         _readModelRepository = readModelRepository;
     }
 
     public async Task Handle(ProblemCreated problemCreated, CancellationToken cancellationToken)
     {
-        var aggregate = await _aggregateRepository.Get(problemCreated.SolutionToProblemId);
-        var data = await _aggregateRepository.GetCrudData(problemCreated.SolutionToProblemId);
+        var aggregate = await _readModelRepository.GetAggregate(problemCreated.SolutionToProblemId);
+        var data = await _readModelRepository.GetAggregateCrudData(problemCreated.SolutionToProblemId);
 
         // info denormalized view consisting of projection of aggregate invariant attributes, related to aggregate crud data and others
         // dedicated for command deciding to do, based on es model

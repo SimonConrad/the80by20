@@ -12,4 +12,6 @@ public interface ISolutionToProblemReadModelRepository
     Task Create(SolutionToProblemReadModel readModel);
 
     Task Update(SolutionToProblemReadModel model);
+    Task<SolutionToProblemAggregate> GetAggregate(SolutionToProblemId id);
+    Task<SolutionToProblemCrudData> GetAggregateCrudData(SolutionToProblemId id);
 }

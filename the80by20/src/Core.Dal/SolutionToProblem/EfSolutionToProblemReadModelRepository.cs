@@ -1,4 +1,5 @@
-﻿using Core.App.SolutionToProblem.ReadModel;
+﻿using System.Data.Common;
+using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,9 +9,18 @@ namespace Core.Dal.SolutionToProblem
     {
         private readonly CoreSqLiteDbContext _coreSqLiteDbContext;
 
-        public EfSolutionToProblemReadModelRepository(CoreSqLiteDbContext coreSqLiteDbContext)
+        //public EfSolutionToProblemReadModelRepository(CoreSqLiteDbContext coreSqLiteDbContext)
+        //{
+        //    _coreSqLiteDbContext = coreSqLiteDbContext;
+        //}
+
+        //private readonly DbContextOptionsBuilder<CoreSqLiteDbContext> optionsBuilder;     
+        public EfSolutionToProblemReadModelRepository(DbConnection connection)
         {
-            _coreSqLiteDbContext = coreSqLiteDbContext;
+            //optionsBuilder = new DbContextOptionsBuilder<CoreSqLiteDbContext>();
+            //optionsBuilder.UseSqlite(connection);
+
+            _coreSqLiteDbContext = new CoreSqLiteDbContext(connection);
         }
 
         public async Task<SolutionToProblemReadModel> Get(SolutionToProblemId id)
@@ -29,6 +39,18 @@ namespace Core.Dal.SolutionToProblem
         {
             _coreSqLiteDbContext.SolutionToProblemReadModel.Update(readModel);
             await _coreSqLiteDbContext.SaveChangesAsync();
+        }
+
+        public async Task<SolutionToProblemAggregate> GetAggregate(SolutionToProblemId id)
+        {
+            var res = await _coreSqLiteDbContext.SolutionToProblemAggregate.FirstOrDefaultAsync(x => x.Id == id);
+            return res;
+        }
+
+        public async Task<SolutionToProblemCrudData> GetAggregateCrudData(SolutionToProblemId id)
+        {
+            var res = await _coreSqLiteDbContext.SolutionToProblemCrudData.FirstOrDefaultAsync(x => x.AggregateId == id.Value);
+            return res;
         }
     }
 }
