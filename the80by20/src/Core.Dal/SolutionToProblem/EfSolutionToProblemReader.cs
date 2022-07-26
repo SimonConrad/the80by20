@@ -37,6 +37,7 @@ namespace Core.Dal.SolutionToProblem
                 IsRejected = aggregate.Rejected,
                 WorkingOnSolutionStarted = aggregate.WorkingOnSolutionStarted,
                 WorkingOnSolutionEnded = aggregate.WorkingOnSolutionEnded,
+                RequiredSolutionElementTypes = aggregate.RequiredSolutionElementTypes.Elements.Select(t => t.ToString()).ToArray(),
                 Price = aggregate.Price
             };
         }

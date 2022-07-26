@@ -31,13 +31,15 @@ namespace Core.Dal.SolutionToProblem
                         a => a.Content,
                         a => SolutionAbstract.FromContent(a));
 
-
                 e.Property(a => a.Price)
                     .HasConversion(
                         a => a.Value,
                         a => Money.FromValue(a));
 
-                e.Ignore(a => a.RequiredSolutionElementTypes);
+                e.Property(a => a.RequiredSolutionElementTypes)
+                    .HasConversion(
+                        a => a.ToSnapshotInJson(),
+                        a => RequiredSolutionElementTypes.FromSnapshotInJson(a));
              
                 e.Ignore(a => a.SolutionElements);
             });

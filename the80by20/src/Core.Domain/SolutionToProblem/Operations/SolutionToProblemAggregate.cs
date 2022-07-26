@@ -15,6 +15,9 @@ namespace Core.Domain.SolutionToProblem.Operations
 
         public RequiredSolutionElementTypes RequiredSolutionElementTypes { get; private set; } 
 
+        public SolutionElements SolutionElements { get; private set; }
+
+
         public bool Confirmed { get; private set; }
         public bool Rejected { get; private set; }
         public bool WorkingOnSolutionStarted { get; private set; }
@@ -22,7 +25,6 @@ namespace Core.Domain.SolutionToProblem.Operations
 
         public Money Price { get; private set; } = Money.Zero();
         public SolutionAbstract SolutionAbstract { get; private set; } = SolutionAbstract.Empty();
-        public SolutionElements SolutionElements { get; private set; }
 
         public static SolutionToProblemAggregate New(RequiredSolutionElementTypes requiredSolutionElementTypes) 
             => new(SolutionToProblemId.New(), requiredSolutionElementTypes);
@@ -35,14 +37,16 @@ namespace Core.Domain.SolutionToProblem.Operations
             TestIfEfConverionsWork();
         }
 
+        // TODO only for testing purpose
         private void TestIfEfConverionsWork()
         {
             SolutionAbstract = SolutionAbstract.FromContent("raz, dwa, trzy");
+            Price = Money.FromValue(123.45m);
+
             Confirmed = true;
             Rejected = true;
             WorkingOnSolutionStarted = true;
             WorkingOnSolutionEnded = true;
-            Price = Money.FromValue(123.45m);
         }
 
         public void ConfirmProblem()
@@ -63,7 +67,6 @@ namespace Core.Domain.SolutionToProblem.Operations
             }
 
             WorkingOnSolutionStarted = true;
-
         }
 
         public void SetAbstract(SolutionAbstract solutionAbstract)
