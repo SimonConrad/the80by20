@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using Core.Domain.SharedKernel.Capabilities;
 using Core.Domain.SolutionToProblem;
 using Core.Domain.SolutionToProblem.Capabilities;
 using Core.Domain.SolutionToProblem.Operations;
@@ -30,8 +31,14 @@ namespace Core.Dal.SolutionToProblem
                         a => a.Content,
                         a => SolutionAbstract.FromContent(a));
 
+
+                e.Property(a => a.Price)
+                    .HasConversion(
+                        a => a.Value,
+                        a => Money.FromValue(a));
+
                 e.Ignore(a => a.RequiredSolutionElementTypes);
-                e.Ignore(a => a.Price);
+             
                 e.Ignore(a => a.SolutionElements);
             });
 

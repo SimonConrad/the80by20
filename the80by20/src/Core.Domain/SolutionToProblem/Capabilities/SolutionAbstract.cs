@@ -12,7 +12,7 @@ public sealed record SolutionAbstract
     {
         if (string.IsNullOrEmpty(content) || content.Length < 10)
         {
-            throw new DomainException("Invalid content");
+            throw new DomainException(nameof(SolutionAbstract));
         }
 
         return new(content);

@@ -42,6 +42,7 @@ namespace Core.Domain.SolutionToProblem.Operations
             Rejected = true;
             WorkingOnSolutionStarted = true;
             WorkingOnSolutionEnded = true;
+            Price = Money.FromValue(123.45m);
         }
 
         public void ConfirmProblem()

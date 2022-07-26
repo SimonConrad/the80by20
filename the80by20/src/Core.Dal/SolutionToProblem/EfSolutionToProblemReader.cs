@@ -36,7 +36,8 @@ namespace Core.Dal.SolutionToProblem
                 IsConfirmed = aggregate.Confirmed,
                 IsRejected = aggregate.Rejected,
                 WorkingOnSolutionStarted = aggregate.WorkingOnSolutionStarted,
-                WorkingOnSolutionEnded = aggregate.WorkingOnSolutionEnded
+                WorkingOnSolutionEnded = aggregate.WorkingOnSolutionEnded,
+                Price = aggregate.Price
             };
         }
     }
