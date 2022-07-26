@@ -1,6 +1,9 @@
 ﻿namespace Common.DDD;
 
 /// <summary>
+/// agregat  - model true invariants in consistency boundaries according to real business rules.
+///
+/// 
 /// Aggregates designing rules
 /// 4 rules about designing aggregates by Eric Evans:
 /// - Model true invariants in consistency boundaries ...

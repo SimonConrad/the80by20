@@ -1,4 +1,8 @@
-﻿## todos
+﻿## Event Storming model
+https://miro.com/app/board/uXjVOkhNSOs=/
+
+
+## todos
 TODO Comment each ddd tactical element with practilal explanantion - when to use, what gives us
 todo fix typos
 todo review and fix content
