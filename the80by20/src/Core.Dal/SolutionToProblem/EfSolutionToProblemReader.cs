@@ -1,4 +1,5 @@
 ﻿using Core.App.SolutionToProblem.Reads;
+using Core.Domain.SolutionToProblem.Operations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Dal.SolutionToProblem
@@ -12,13 +13,13 @@ namespace Core.Dal.SolutionToProblem
             _coreSqLiteDbContext = coreSqLiteDbContext;
         }
 
-        public async Task<SolutionToProblemReadModel> Get(Guid solutionToProblemId)
+        public async Task<SolutionToProblemReadModel> Get(SolutionToProblemId id)
         {
             var aggregate = await _coreSqLiteDbContext.SolutionToProblemAggregates
-                .SingleAsync(s => s.Id == solutionToProblemId);
+                .SingleAsync(s => s.Id == id);
 
             var data = await _coreSqLiteDbContext.SolutionToProblemDatas
-                .SingleAsync(d => d.AggregateId == solutionToProblemId);
+                .SingleAsync(d => d.AggregateId == id.Value);
 
             return new()
             {

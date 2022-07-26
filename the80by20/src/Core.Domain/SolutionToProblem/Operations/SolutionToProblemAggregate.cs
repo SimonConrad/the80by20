@@ -11,18 +11,9 @@ namespace Core.Domain.SolutionToProblem.Operations
         {
         }
 
-        //public SolutionToProblemId Id { get; private set; }
+        public SolutionToProblemId Id { get; private set; }
 
-        public RequiredSolutionElementTypes RequiredSolutionElementTypes { get; init; } 
-
-        public static SolutionToProblemAggregate New(RequiredSolutionElementTypes requiredSolutionElementTypes) 
-            => new(Guid.NewGuid(), requiredSolutionElementTypes);
-
-        private SolutionToProblemAggregate(Guid id, RequiredSolutionElementTypes requiredSolutionElementTypes)
-        {
-            Id = id;
-            RequiredSolutionElementTypes = requiredSolutionElementTypes;
-        }
+        public RequiredSolutionElementTypes RequiredSolutionElementTypes { get; private set; } 
 
         public bool Confirmed { get; private set; }
         public bool Rejected { get; private set; }
@@ -32,6 +23,15 @@ namespace Core.Domain.SolutionToProblem.Operations
         public Money Price { get; private set; } = Money.Zero();
         public SolutionAbstract SolutionAbstract { get; private set; }  = new();
         public SolutionElements SolutionElements { get; private set; } = new();
+
+        public static SolutionToProblemAggregate New(RequiredSolutionElementTypes requiredSolutionElementTypes) 
+            => new(SolutionToProblemId.New(), requiredSolutionElementTypes);
+
+        private SolutionToProblemAggregate(Guid id, RequiredSolutionElementTypes requiredSolutionElementTypes)
+        {
+            Id = id;
+            RequiredSolutionElementTypes = requiredSolutionElementTypes;
+        }
 
         public void ConfirmProblem()
         {

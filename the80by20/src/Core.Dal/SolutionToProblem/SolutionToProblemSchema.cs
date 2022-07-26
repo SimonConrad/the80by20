@@ -17,14 +17,14 @@ namespace Core.Dal.SolutionToProblem
         {
             modelBuilder.Entity<SolutionToProblemAggregate>(e =>
             {
-                e.MapBaseEntityProperties();
+                e.MapTechnicalProperties();
 
                 e.HasKey(a => a.Id);
-                //e.Property(a => a.Id)
-                //    .HasConversion(
-                //        v => v.Value,
-                //        v => SolutionToProblemId.FromGuid(v));
-                
+                e.Property(a => a.Id)
+                    .HasConversion(
+                        a => a.Value,
+                        a => new SolutionToProblemId(a));
+
                 e.Ignore(a => a.RequiredSolutionElementTypes);
                 e.Ignore(a => a.Confirmed);
                 e.Ignore(a => a.Rejected);
@@ -32,7 +32,6 @@ namespace Core.Dal.SolutionToProblem
                 e.Ignore(a => a.Price);
                 e.Ignore(a => a.SolutionAbstract);
                 e.Ignore(a => a.SolutionElements);
-
             });
 
 
@@ -55,7 +54,8 @@ namespace Core.Dal.SolutionToProblem
 
             modelBuilder.Entity<SolutionToProblemData>(e =>
             {
-                e.MapBaseEntityProperties();
+                e.MapTechnicalProperties();
+
                 e.HasKey(a => a.AggregateId);
 
             });

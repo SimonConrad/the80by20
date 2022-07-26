@@ -7,7 +7,6 @@ public class EfSolutionToProblemAggregateRepository : ISolutionToProblemAggregat
 {
     private readonly CoreSqLiteDbContext _context;
 
-
     public EfSolutionToProblemAggregateRepository(CoreSqLiteDbContext context)
     {
         _context = context;

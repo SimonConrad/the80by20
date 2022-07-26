@@ -6,6 +6,7 @@ using WebApi.Depenedencies;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOptions();
+
 builder.Services.AddSingleton(_ => CoreSqLiteDbContext.CreateInMemoryDatabase());
 builder.Services.AddDbContext<CoreSqLiteDbContext>();
 builder.Services.AddTransient<DbContext>(ctx => ctx.GetRequiredService<CoreSqLiteDbContext>());

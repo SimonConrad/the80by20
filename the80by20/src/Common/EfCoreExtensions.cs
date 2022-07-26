@@ -4,8 +4,10 @@ namespace Common;
 
 public  static class EfCoreExtensions
 {
-    public static void MapBaseEntityProperties<T>(this EntityTypeBuilder<T> builder) where T : class// where T : BaseEntity
+    public static void MapTechnicalProperties<T>(this EntityTypeBuilder<T> builder) where T : class
     {
         builder.Property("Version").IsRowVersion();
+
+        // TODO add audit
     }
 }

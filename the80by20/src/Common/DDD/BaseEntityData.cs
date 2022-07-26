@@ -1,7 +1,8 @@
 ﻿namespace Common.DDD;
 
-public class BaseEntity
+public class BaseEntityData
 {
-    //public Guid Id { get; protected set; } // INFO protected to achieve encapsulation
+    public Guid AggregateId { get; set; }
+
     private int? Version { get; set; } // TODO handle concurrency problem by optimistic concurrency with version
 }
