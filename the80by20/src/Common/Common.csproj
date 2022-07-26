@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
+    <Compile Remove="DDD\ES model\**" />
+    <EmbeddedResource Remove="DDD\ES model\**" />
+    <None Remove="DDD\ES model\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DDD\ES model\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
   </ItemGroup>
 
 </Project>
