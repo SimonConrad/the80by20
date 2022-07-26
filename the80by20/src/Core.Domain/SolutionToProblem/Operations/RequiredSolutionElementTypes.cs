@@ -9,12 +9,11 @@ namespace Core.Domain.SolutionToProblem.Operations;
 [ValueObjectDdd]
 public class RequiredSolutionElementTypes : IEquatable<RequiredSolutionElementTypes>
 {
-    public IEnumerable<SolutionElementType> Elements => _elements;
-    private readonly ImmutableHashSet<SolutionElementType> _elements;
+    public ImmutableHashSet<SolutionElementType> Elements { get; init; }
 
     private RequiredSolutionElementTypes(ImmutableHashSet<SolutionElementType> ihs)
     {
-        _elements = ihs;
+        Elements = ihs;
     }
 
     public static RequiredSolutionElementTypes From(params SolutionElementType[] elements)
@@ -67,6 +66,6 @@ public class RequiredSolutionElementTypes : IEquatable<RequiredSolutionElementTy
 
     public override int GetHashCode()
     {
-        return _elements.GetHashCode();
+        return Elements.GetHashCode();
     }
 }
