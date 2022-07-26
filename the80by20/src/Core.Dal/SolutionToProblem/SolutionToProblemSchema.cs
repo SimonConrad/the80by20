@@ -40,34 +40,18 @@ namespace Core.Dal.SolutionToProblem
                     .HasConversion(
                         a => a.ToSnapshotInJson(),
                         a => RequiredSolutionElementTypes.FromSnapshotInJson(a));
-             
-                e.Ignore(a => a.SolutionElements);
+
+                e.Property(a => a.SolutionElements)
+                    .HasConversion(
+                        a => a.ToSnapshotInJson(),
+                        a => SolutionElements.FromSnapshotInJson(a));
             });
-
-
-            // TODO Configure ef table-object mapping that SolutionToProblemData.AggregateId is PK, that is also FK referencing SolutionToProblemAggregate.Id
-            // but without navigation proporties, to not have possibility of lazy loading (problem: aggregate boundaries can be unitionally to wide - when loaded dependcies with lazy loading, - to broad transaction boundary)
-            //modelBuilder.Entity<SolutionToProblemData>(e =>
-            //{
-            //    e.MapBaseEntityProperties();
-
-
-            //    e.HasOne<SolutionToProblemAggregate>()
-            //        .WithOne().HasForeignKey()
-
-            //    // e.HasKey(d => d.AggregateId);
-
-            //    //e.HasOne<SolutionToProblemAggregate>
-
-            //});
-
 
             modelBuilder.Entity<SolutionToProblemData>(e =>
             {
                 e.MapTechnicalProperties();
 
                 e.HasKey(a => a.AggregateId);
-
             });
         }
     }

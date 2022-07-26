@@ -4,14 +4,18 @@ using Core.Domain.SharedKernel.Capabilities;
 namespace Core.Domain.SolutionToProblem.Capabilities;
 
 [ValueObjectDdd]
-public class SolutionElement // TODO IEquatble to make SolutionElements._elements work
+public sealed record SolutionElement
 {
-    public SolutionElementType Type { get; init; }
-    public  string Link { get; init; }
+    public SolutionElementType Type { get; }
+    public  string Link { get; }
 
-    public static SolutionElement From(SolutionElementType type, string link) =>
-        new() { Type = type, Link = link };
+    private SolutionElement(SolutionElementType type, string link)
+    {
+        Type = type;
+        Link = link;
+    }
 
+    public static SolutionElement From(SolutionElementType type, string link) => new(type, link);
 
-    // GetHashSet => tostinr propkow
+    public override string ToString() => $"solution-type: {Type.ToString()}; link: {Link}";
 }

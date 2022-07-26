@@ -22,23 +22,24 @@ namespace Core.Dal.SolutionToProblem
             var data = await _coreSqLiteDbContext.SolutionToProblemDatas
                 .SingleAsync(d => d.AggregateId == id.Value);
 
+            // todo in future can think about storing all readmodel data in one rreadmodel specialize for reads as readmodel during Event Storming
+            // such readmodel can store duplicated data,
+            // and be consistent eventually by mechanism of listerner updating this readmodel subsribing to event (raised from aggragte update)  
             return new()
             {
                 SolutionToProblemId = data.AggregateId,
                 UserId = data.UserId,
+                RequiredSolutionElementTypes = aggregate.RequiredSolutionElementTypes.Elements.Select(t => t.ToString()).ToArray(),
                 Description = data.Description,
 
-
-                // todo in future can think about storing all readmodel data in one rreadmodel specialize for reads as readmodel during Event Storming
-                // such readmodel can store duplicated data,
-                // and be consistent eventually by mechanism of listerner updating this readmodel subsribing to event (raised from aggragte update)  
-                SolutionAbstract = aggregate.SolutionAbstract,
                 IsConfirmed = aggregate.Confirmed,
                 IsRejected = aggregate.Rejected,
                 WorkingOnSolutionStarted = aggregate.WorkingOnSolutionStarted,
                 WorkingOnSolutionEnded = aggregate.WorkingOnSolutionEnded,
-                RequiredSolutionElementTypes = aggregate.RequiredSolutionElementTypes.Elements.Select(t => t.ToString()).ToArray(),
-                Price = aggregate.Price
+                
+                Price = aggregate.Price,
+                SolutionAbstract = aggregate.SolutionAbstract,
+                SolutionElementTypes = aggregate.SolutionElements.Elements.Select(t => t.ToString()).ToArray()
             };
         }
     }

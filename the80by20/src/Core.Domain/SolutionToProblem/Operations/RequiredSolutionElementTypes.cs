@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 namespace Core.Domain.SolutionToProblem.Operations;
 
 [ValueObjectDdd]
-public class RequiredSolutionElementTypes : IEquatable<RequiredSolutionElementTypes>
+public sealed class RequiredSolutionElementTypes : IEquatable<RequiredSolutionElementTypes>
 {
     public ImmutableHashSet<SolutionElementType> Elements { get; init; }
 
@@ -21,6 +21,8 @@ public class RequiredSolutionElementTypes : IEquatable<RequiredSolutionElementTy
         var ihs = elements.Distinct().ToImmutableHashSet();
         return new(ihs);
     }
+
+    public static RequiredSolutionElementTypes Empty() => new(ImmutableHashSet.Create<SolutionElementType>());
 
     public static RequiredSolutionElementTypes FromSnapshotInJson(string snapshotInJson)
     {

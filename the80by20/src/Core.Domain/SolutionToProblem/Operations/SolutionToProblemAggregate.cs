@@ -13,10 +13,8 @@ namespace Core.Domain.SolutionToProblem.Operations
 
         public SolutionToProblemId Id { get; private set; }
 
-        public RequiredSolutionElementTypes RequiredSolutionElementTypes { get; private set; } 
-
-        public SolutionElements SolutionElements { get; private set; }
-
+        public RequiredSolutionElementTypes RequiredSolutionElementTypes { get; private set; } = RequiredSolutionElementTypes.Empty();
+        
 
         public bool Confirmed { get; private set; }
         public bool Rejected { get; private set; }
@@ -26,6 +24,8 @@ namespace Core.Domain.SolutionToProblem.Operations
         public Money Price { get; private set; } = Money.Zero();
         public SolutionAbstract SolutionAbstract { get; private set; } = SolutionAbstract.Empty();
 
+        public SolutionElements SolutionElements { get; private set; } = SolutionElements.Empty();
+
         public static SolutionToProblemAggregate New(RequiredSolutionElementTypes requiredSolutionElementTypes) 
             => new(SolutionToProblemId.New(), requiredSolutionElementTypes);
 
@@ -34,11 +34,11 @@ namespace Core.Domain.SolutionToProblem.Operations
             Id = id;
             RequiredSolutionElementTypes = requiredSolutionElementTypes;
 
-            TestIfEfConverionsWork();
+            MockStateDataToTestIfEfConverionsWork();
         }
 
-        // TODO only for testing purpose
-        private void TestIfEfConverionsWork()
+        // INFO only for testing purpose
+        private void MockStateDataToTestIfEfConverionsWork()
         {
             SolutionAbstract = SolutionAbstract.FromContent("raz, dwa, trzy");
             Price = Money.FromValue(123.45m);
@@ -47,6 +47,10 @@ namespace Core.Domain.SolutionToProblem.Operations
             Rejected = true;
             WorkingOnSolutionStarted = true;
             WorkingOnSolutionEnded = true;
+
+            SolutionElements = SolutionElements.Empty()
+                .Add(SolutionElement.From(SolutionElementType.TheoryOfConceptWithExample, "gdrive-link1"))
+                .Add(SolutionElement.From(SolutionElementType.PocInCode, "gdrive-link2"));
         }
 
         public void ConfirmProblem()
@@ -77,17 +81,16 @@ namespace Core.Domain.SolutionToProblem.Operations
         public void SetPrice(Money price)
         {
             Price = price;
-
         }
 
         public void AddSolutionElement(SolutionElement solutionElement)
         {
-            SolutionElements.Add(solutionElement);
+            SolutionElements = SolutionElements.Add(solutionElement);
         }
 
         public void RemoveSolutionElement(SolutionElement solutionElement)
         {
-            SolutionElements.Remove(solutionElement);
+            SolutionElements = SolutionElements.Remove(solutionElement);
         }
 
         public void EndWorkingOnProblemSolution()
