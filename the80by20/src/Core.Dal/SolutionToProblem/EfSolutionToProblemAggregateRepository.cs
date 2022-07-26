@@ -1,5 +1,6 @@
 ﻿using Core.Domain.SolutionToProblem;
 using Core.Domain.SolutionToProblem.Operations;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Dal.SolutionToProblem;
 
@@ -12,10 +13,34 @@ public class EfSolutionToProblemAggregateRepository : ISolutionToProblemAggregat
         _context = context;
     }
 
-    public async Task CreateProblem(SolutionToProblemAggregate aggregate, SolutionToProblemData data)
+    public async Task Create(SolutionToProblemAggregate aggregate, SolutionToProblemCrudData crudData)
     {
-        _context.SolutionToProblemAggregates.Add(aggregate);
-        _context.SolutionToProblemDatas.Add(data);
+        _context.SolutionToProblemAggregate.Add(aggregate);
+        _context.SolutionToProblemCrudData.Add(crudData);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<SolutionToProblemAggregate> Get(SolutionToProblemId id)
+    {
+        var res = await _context.SolutionToProblemAggregate.FirstOrDefaultAsync(x => x.Id == id);
+        return res;
+    }
+
+    public async Task<SolutionToProblemCrudData> GetCrudData(SolutionToProblemId id)
+    {
+        var res = await _context.SolutionToProblemCrudData.FirstOrDefaultAsync(x => x.AggregateId == id.Value);
+        return res;
+    }
+
+    public async Task SaveAggragate(SolutionToProblemAggregate aggregate)
+    {
+        _context.SolutionToProblemAggregate.Update(aggregate);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task SaveData(SolutionToProblemCrudData crudData)
+    {
+        _context.SolutionToProblemCrudData.Update(crudData);
         await _context.SaveChangesAsync();
     }
 }

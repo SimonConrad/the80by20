@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SharedKernel.Capabilities;
 using Core.Domain.SolutionToProblem;
 using Core.Domain.SolutionToProblem.Capabilities;
@@ -47,11 +48,16 @@ namespace Core.Dal.SolutionToProblem
                         a => SolutionElements.FromSnapshotInJson(a));
             });
 
-            modelBuilder.Entity<SolutionToProblemData>(e =>
+            modelBuilder.Entity<SolutionToProblemCrudData>(e =>
             {
                 e.MapTechnicalProperties();
 
-                e.HasKey(a => a.AggregateId);
+                e.HasKey(d => d.AggregateId);
+            });
+
+            modelBuilder.Entity<SolutionToProblemReadModel>(e =>
+            {
+                e.HasKey(r => r.SolutionToProblemId);
             });
         }
     }

@@ -1,4 +1,6 @@
+using Core.App.SolutionToProblem.ReadModel;
 using Core.Dal;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using WebApi.Depenedencies;
@@ -19,6 +21,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "The 80 by 20", Version = "v1" });
 });
 
+builder.Services.AddMediatR(typeof(SolutionToProblemReadModelHandler));
 
 CoreDependencies.AddTo(builder);
 

@@ -1,4 +1,5 @@
 ﻿using System.Data.Common;
+using Core.App.SolutionToProblem.ReadModel;
 using Core.Dal.SolutionToProblem;
 using Core.Domain.SolutionToProblem;
 using Core.Domain.SolutionToProblem.Operations;
@@ -12,8 +13,16 @@ namespace Core.Dal
     public class CoreSqLiteDbContext : DbContext
     {
         private readonly DbConnection _connection;
-        public DbSet<SolutionToProblemAggregate> SolutionToProblemAggregates { get; set; }
-        public DbSet<SolutionToProblemData> SolutionToProblemDatas { get; set; }
+
+        #region write models
+        public DbSet<SolutionToProblemAggregate> SolutionToProblemAggregate { get; set; }
+        public DbSet<SolutionToProblemCrudData> SolutionToProblemCrudData { get; set; }
+        #endregion
+
+        #region read models
+        public DbSet<SolutionToProblemReadModel> SolutionToProblemReadModel { get; set; }
+        #endregion
+
 
         public static DbConnection CreateInMemoryDatabase()
         {

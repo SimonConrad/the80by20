@@ -25,3 +25,7 @@ te komendy i zdarzenia powinny byc razem w jednym bctxt
 inne złamanie pojedynczego źrdóła prawy żeby  na pytanie czy pacjent jes żywy - musimy przejśc sie po kilku oddziałącj i zajc do kostnicy
 antywzorzec feature envy - jeden bctxt zadzrosci drugiemy danych, zachowań
 ksiazki veinberga
+
+## messaging
+https://bd90.pl/mediatr-wprowadzenie-eventow-do-swiata-net-core/
+

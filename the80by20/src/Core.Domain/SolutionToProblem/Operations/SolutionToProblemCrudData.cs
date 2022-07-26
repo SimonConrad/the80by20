@@ -4,7 +4,7 @@ using Core.Domain.SolutionToProblem.Capabilities;
 namespace Core.Domain.SolutionToProblem.Operations
 {
     [AggregateDataDdd]
-    public class SolutionToProblemData : AggergateData
+    public class SolutionToProblemCrudData : AggergateData
     {
         public Guid UserId { get; set; }
 

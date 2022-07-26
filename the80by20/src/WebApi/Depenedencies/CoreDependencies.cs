@@ -1,6 +1,6 @@
 ﻿using Core.App.SolutionToProblem;
 using Core.App.SolutionToProblem.Commands;
-using Core.App.SolutionToProblem.Reads;
+using Core.App.SolutionToProblem.ReadModel;
 using Core.Dal.SolutionToProblem;
 using Core.Domain.SolutionToProblem;
 using Core.Domain.SolutionToProblem.Operations;
@@ -13,6 +13,6 @@ public class CoreDependencies
     {
         builder.Services.AddTransient<CreateProblemCommandHandler>();
         builder.Services.AddTransient<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
-        builder.Services.AddTransient<ISolutionToProblemReader, EfSolutionToProblemReader>();
+        builder.Services.AddTransient<ISolutionToProblemReadModelRepository, EfSolutionToProblemReadModelRepository>();
     }
 }

@@ -17,6 +17,10 @@ namespace Core.Domain.SolutionToProblem.Operations
     [AggregateRepositoryDdd]
     public interface ISolutionToProblemAggregateRepository
     {
-        Task CreateProblem(SolutionToProblemAggregate aggregate, SolutionToProblemData data);
+        Task Create(SolutionToProblemAggregate aggregate, SolutionToProblemCrudData crudData);
+        Task<SolutionToProblemAggregate> Get(SolutionToProblemId id);
+        Task<SolutionToProblemCrudData> GetCrudData(SolutionToProblemId id);
+        Task SaveAggragate(SolutionToProblemAggregate aggregate);
+        Task SaveData(SolutionToProblemCrudData crudData);
     }
 }

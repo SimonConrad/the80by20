@@ -1,6 +1,6 @@
 using Core.App.SolutionToProblem;
 using Core.App.SolutionToProblem.Commands;
-using Core.App.SolutionToProblem.Reads;
+using Core.App.SolutionToProblem.ReadModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -12,16 +12,16 @@ namespace WebApi.Controllers
     {
         private readonly ILogger<SolutionToProblemController> _logger;
         private readonly CreateProblemCommandHandler _createProblemCommandHandler;
-        private readonly ISolutionToProblemReader _solutionToProblemReader;
+        private readonly ISolutionToProblemReadModelRepository _solutionToProblemReadModelRepository;
 
         public SolutionToProblemController(ILogger<SolutionToProblemController> logger, 
             CreateProblemCommandHandler createProblemCommandHandler,
-            ISolutionToProblemReader solutionToProblemReader)
+            ISolutionToProblemReadModelRepository solutionToProblemReadModelRepository)
         {
             _logger = logger;
 
             _createProblemCommandHandler = createProblemCommandHandler;
-            _solutionToProblemReader = solutionToProblemReader;
+            _solutionToProblemReadModelRepository = solutionToProblemReadModelRepository;
         }
 
         [HttpPost("/problem")]
@@ -38,7 +38,7 @@ namespace WebApi.Controllers
         [HttpGet("/solutionstoproblems/{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var res = await _solutionToProblemReader.Get(id);
+            var res = await _solutionToProblemReadModelRepository.Get(id);
 
             return Ok(res);
         }
