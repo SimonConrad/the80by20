@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common;
+﻿using Common;
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SharedKernel.Capabilities;
-using Core.Domain.SolutionToProblem;
 using Core.Domain.SolutionToProblem.Capabilities;
 using Core.Domain.SolutionToProblem.Operations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Dal.SolutionToProblem
+namespace Core.Infrastructure.DAL.Repositories.SolutionToProblem
 {
     public static class SolutionToProblemSchema
     {

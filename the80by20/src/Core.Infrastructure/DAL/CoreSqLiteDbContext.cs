@@ -1,13 +1,13 @@
 ﻿using System.Data.Common;
 using Core.App.SolutionToProblem.ReadModel;
-using Core.Dal.SolutionToProblem;
 using Core.Domain.SolutionToProblem;
 using Core.Domain.SolutionToProblem.Operations;
+using Core.Infrastructure.DAL.Repositories.SolutionToProblem;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Core.Dal
+namespace Core.Infrastructure.DAL
 {
     // TODO Create SqlServerDbcontext with normal sql server db and migrations
     public class CoreSqLiteDbContext : DbContext

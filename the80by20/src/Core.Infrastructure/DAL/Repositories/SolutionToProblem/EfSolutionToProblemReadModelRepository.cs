@@ -3,7 +3,7 @@ using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Dal.SolutionToProblem
+namespace Core.Infrastructure.DAL.Repositories.SolutionToProblem
 {
     public class EfSolutionToProblemReadModelRepository : ISolutionToProblemReadModelRepository
     {

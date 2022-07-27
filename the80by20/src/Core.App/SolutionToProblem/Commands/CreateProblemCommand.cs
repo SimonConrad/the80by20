@@ -54,6 +54,7 @@ public class CreateProblemCommandHandler
 
         // info fire event and forget asynchronously using task api, without awaiting result
         // todo interchnage with messagin mechanism like:g rabbitmq, nservicebys, kafka masstransit, create ibnterfaces for that
+        // https://github.com/jbogard/MediatR/discussions/736 publishing startegy
        /* await*/ Task.Run(() =>
         {
             _mediator.Publish(new ProblemCreated(solutionToProblemAggregate.Id, command.Category));

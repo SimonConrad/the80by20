@@ -1,34 +1,25 @@
+using Core.App;
 using Core.App.SolutionToProblem.ReadModel;
-using Core.Dal;
+using Core.Infrastructure;
+using Core.Infrastructure.DAL;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using WebApi.Depenedencies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOptions();
+//builder.Services.AddOptions();
 
-builder.Services.AddSingleton(_ => CoreSqLiteDbContext.CreateInMemoryDatabase());
-builder.Services.AddDbContext<CoreSqLiteDbContext>();
-builder.Services.AddTransient<DbContext>(ctx => ctx.GetRequiredService<CoreSqLiteDbContext>());
+builder.Services
+    //.AddCore() todo 
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
 
-// Add services to the container.
-builder.Services.AddControllers();
-
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "The 80 by 20", Version = "v1" });
-});
-
-builder.Services.AddMediatR(typeof(SolutionToProblemReadModelHandler));
-
-CoreDependencies.AddTo(builder);
 
 var app = builder.Build();
+app.UseInfrastructure();
 
-app.UseSwagger();
-app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));
 
 using (var serviceScope = app.Services.CreateScope())
 {
@@ -36,11 +27,7 @@ using (var serviceScope = app.Services.CreateScope())
     await context.Database.EnsureCreatedAsync();
 }
 
-// Configure the HTTP request pipeline.
-app.UseHttpsRedirection();
+app.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
 
-app.UseAuthorization();
-
-app.MapControllers();
 
 app.Run();
