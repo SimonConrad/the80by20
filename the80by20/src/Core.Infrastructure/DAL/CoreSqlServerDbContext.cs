@@ -12,8 +12,6 @@ namespace Core.Infrastructure.DAL
 {
     public class CoreSqlServerDbContext : DbContext
     {
-        //private readonly DbConnection _connection;
-
         #region write models
         public DbSet<SolutionToProblemAggregate> SolutionToProblemAggregate { get; set; }
         public DbSet<SolutionToProblemCrudData> SolutionToProblemCrudData { get; set; }

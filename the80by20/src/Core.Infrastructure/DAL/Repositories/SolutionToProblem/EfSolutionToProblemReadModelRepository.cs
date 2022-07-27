@@ -2,54 +2,59 @@
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Core.Infrastructure.DAL.Repositories.SolutionToProblem
 {
     public class EfSolutionToProblemReadModelRepository : ISolutionToProblemReadModelRepository
     {
-        private readonly CoreSqLiteDbContext _coreSqLiteDbContext;
+        private readonly CoreSqlServerDbContext _coreSqlServerDbContext;
 
-        //public EfSolutionToProblemReadModelRepository(CoreSqLiteDbContext coreSqLiteDbContext)
+        //public EfSolutionToProblemReadModelRepository(CoreSqlServerDbContext coreSqlServerDbContext)
         //{
-        //    _coreSqLiteDbContext = coreSqLiteDbContext;
+        //    _coreSqlServerDbContext = coreSqlServerDbContext;
         //}
 
-        //private readonly DbContextOptionsBuilder<CoreSqLiteDbContext> optionsBuilder;     
-        public EfSolutionToProblemReadModelRepository(DbConnection connection)
+        private readonly DbContextOptionsBuilder<CoreSqlServerDbContext> optionsBuilder;
+        public EfSolutionToProblemReadModelRepository(IOptions<SqlServerOptions> sqlServerOptions)
         {
-            //optionsBuilder = new DbContextOptionsBuilder<CoreSqLiteDbContext>();
-            //optionsBuilder.UseSqlite(connection);
+            //var sqlServerOptions = new SqlServerOptions();
+            //configuration.GetSection(Extensions.OptionsSectionSqlServerName);
 
-            _coreSqLiteDbContext = new CoreSqLiteDbContext(connection);
+
+            optionsBuilder = new DbContextOptionsBuilder<CoreSqlServerDbContext>();
+            optionsBuilder.UseSqlServer(sqlServerOptions.Value.ConnectionString);
+
+            _coreSqlServerDbContext = new CoreSqlServerDbContext(optionsBuilder.Options);
         }
 
         public async Task<SolutionToProblemReadModel> Get(SolutionToProblemId id)
         {
-            var readModel  = await _coreSqLiteDbContext.SolutionToProblemReadModel.FirstOrDefaultAsync(r => r.SolutionToProblemId == id.Value);
+            var readModel  = await _coreSqlServerDbContext.SolutionToProblemReadModel.FirstOrDefaultAsync(r => r.SolutionToProblemId == id.Value);
             return readModel;
         }
 
         public async Task Create(SolutionToProblemReadModel readModel)
         {
-            _coreSqLiteDbContext.SolutionToProblemReadModel.Add(readModel);
-            await _coreSqLiteDbContext.SaveChangesAsync();
+            _coreSqlServerDbContext.SolutionToProblemReadModel.Add(readModel);
+            await _coreSqlServerDbContext.SaveChangesAsync();
         }
 
         public async Task Update(SolutionToProblemReadModel readModel)
         {
-            _coreSqLiteDbContext.SolutionToProblemReadModel.Update(readModel);
-            await _coreSqLiteDbContext.SaveChangesAsync();
+            _coreSqlServerDbContext.SolutionToProblemReadModel.Update(readModel);
+            await _coreSqlServerDbContext.SaveChangesAsync();
         }
 
         public async Task<SolutionToProblemAggregate> GetAggregate(SolutionToProblemId id)
         {
-            var res = await _coreSqLiteDbContext.SolutionToProblemAggregate.FirstOrDefaultAsync(x => x.Id == id);
+            var res = await _coreSqlServerDbContext.SolutionToProblemAggregate.FirstOrDefaultAsync(x => x.Id == id);
             return res;
         }
 
         public async Task<SolutionToProblemCrudData> GetAggregateCrudData(SolutionToProblemId id)
         {
-            var res = await _coreSqLiteDbContext.SolutionToProblemCrudData.FirstOrDefaultAsync(x => x.AggregateId == id.Value);
+            var res = await _coreSqlServerDbContext.SolutionToProblemCrudData.FirstOrDefaultAsync(x => x.AggregateId == id.Value);
             return res;
         }
     }
