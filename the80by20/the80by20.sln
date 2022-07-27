@@ -17,13 +17,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain", "src\Core.Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "src\WebApi\WebApi.csproj", "{704B5635-897A-4D29-88C8-05E21866B19F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__", "__", "{B748C109-9681-4236-9D56-C746761D8711}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infrastructure", "src\Core.Infrastructure\Core.Infrastructure.csproj", "{9AAE5282-0AFD-4CE3-BB97-8A4ACF627F8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ES model", "ES model", "{1F6A770D-C8AA-4642-9256-83F3118E9D68}"
 	ProjectSection(SolutionItems) = preProject
-		..\docs\readme\es-picture-that-explains-everything.png = ..\docs\readme\es-picture-that-explains-everything.png
-		migrations-and-eddbcontext.md = migrations-and-eddbcontext.md
+		__\ES model\the80by20 - core.pdf = __\ES model\the80by20 - core.pdf
+		__\ES model\the80by20 - modelowanie agregatu opiera się na wyznaczanie granicy spójności transakcji bizneswoej, natychmiastowej.pdf = __\ES model\the80by20 - modelowanie agregatu opiera się na wyznaczanie granicy spójności transakcji bizneswoej, natychmiastowej.pdf
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infrastructure", "src\Core.Infrastructure\Core.Infrastructure.csproj", "{9AAE5282-0AFD-4CE3-BB97-8A4ACF627F8E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "materials", "materials", "{A4EEEE70-7AD6-4BAA-A916-83F7844E76CF}"
+	ProjectSection(SolutionItems) = preProject
+		__\materials\aggregate-model-true-invariants-in-consitancy-boundaries.jpg = __\materials\aggregate-model-true-invariants-in-consitancy-boundaries.jpg
+		__\materials\cqrs-evetsourcing-ddd.png = __\materials\cqrs-evetsourcing-ddd.png
+		__\materials\cqrs_documents.pdf = __\materials\cqrs_documents.pdf
+		__\materials\ddd-bulding-blocks.png = __\materials\ddd-bulding-blocks.png
+		__\materials\es-picture-that-explains-everything.png = __\materials\es-picture-that-explains-everything.png
+		__\materials\implementing ddd-aggregates-vaughn vernon.pdf = __\materials\implementing ddd-aggregates-vaughn vernon.pdf
+		__\materials\migrations-and-eddbcontext.md = __\materials\migrations-and-eddbcontext.md
+		__\materials\readme.md = __\materials\readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__", "__", "{B24543F1-EB07-45AC-B795-CE02CF4D12C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +74,8 @@ Global
 		{61E7F04D-AE66-43EB-9C6E-9958A9169372} = {C19979BE-8ECE-4E18-97C1-7EC62EEB7C51}
 		{704B5635-897A-4D29-88C8-05E21866B19F} = {C19979BE-8ECE-4E18-97C1-7EC62EEB7C51}
 		{9AAE5282-0AFD-4CE3-BB97-8A4ACF627F8E} = {C19979BE-8ECE-4E18-97C1-7EC62EEB7C51}
+		{1F6A770D-C8AA-4642-9256-83F3118E9D68} = {B24543F1-EB07-45AC-B795-CE02CF4D12C6}
+		{A4EEEE70-7AD6-4BAA-A916-83F7844E76CF} = {B24543F1-EB07-45AC-B795-CE02CF4D12C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EF83377-9D3D-407D-89DA-82A9D7E6B66C}
