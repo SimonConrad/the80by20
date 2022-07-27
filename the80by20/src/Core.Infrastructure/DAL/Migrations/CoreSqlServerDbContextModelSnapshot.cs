@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Core.Infrastructure.DAL.Migrations
 {
-    [DbContext(typeof(CoreSqlServerDbContext))]
+    [DbContext(typeof(CoreDbContext))]
     partial class CoreSqlServerDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

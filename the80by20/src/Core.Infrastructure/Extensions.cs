@@ -7,6 +7,8 @@ namespace Core.Infrastructure;
 
 public static class Extensions
 {
+    public const string OptionsSectionAppName = "app";
+
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers();
@@ -31,7 +33,7 @@ public static class Extensions
         return services;
     }
 
-    public static WebApplication UseInfrastructure(this WebApplication app)
+    public static async Task<WebApplication> UseInfrastructure(this WebApplication app, IConfiguration configuration)
     {
         // todo
         //app.UseMiddleware<ExceptionMiddleware>();
@@ -54,7 +56,13 @@ public static class Extensions
 
         app.MapControllers();
 
+        if (!configuration.GetOptions<AppOptions>(OptionsSectionAppName).SqlLiteEnabled)
+            return app;
         
+        using var serviceScope = app.Services.CreateScope();
+        var context = serviceScope.ServiceProvider.GetRequiredService<CoreDbContext>();
+        await context.Database.EnsureCreatedAsync();
+
         return app;
     }
 

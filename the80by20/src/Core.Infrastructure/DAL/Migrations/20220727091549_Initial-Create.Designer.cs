@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Core.Infrastructure.DAL.Migrations
 {
-    [DbContext(typeof(CoreSqlServerDbContext))]
+    [DbContext(typeof(CoreDbContext))]
     [Migration("20220727091549_Initial-Create")]
     partial class InitialCreate
     {

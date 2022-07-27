@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Core.Infrastructure.DAL
 {
-    public class CoreSqlServerDbContext : DbContext
+    public class CoreDbContext : DbContext
     {
         #region write models
         public DbSet<SolutionToProblemAggregate> SolutionToProblemAggregate { get; set; }
@@ -21,7 +21,7 @@ namespace Core.Infrastructure.DAL
         public DbSet<SolutionToProblemReadModel> SolutionToProblemReadModel { get; set; }
         #endregion
 
-        public CoreSqlServerDbContext(DbContextOptions<CoreSqlServerDbContext> options) : base(options)
+        public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
         {
         }
 

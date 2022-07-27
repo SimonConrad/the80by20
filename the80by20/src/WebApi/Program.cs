@@ -9,30 +9,15 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddOptions();
-
 builder.Services
-    //.AddCore() todo 
+    //.AddCore() todo  policy for example
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 
-
 var app = builder.Build();
-app.UseInfrastructure();
-
-//const string optionsSectionAppName = "app";
-//// todo move to infrastruture
-//if (builder.Configuration.GetOptions<AppOptions>(optionsSectionAppName).SqlLiteEnabled)
-//{
-//    using (var serviceScope = app.Services.CreateScope())
-//    {
-//        var context = serviceScope.ServiceProvider.GetRequiredService<CoreSqLiteDbContext>();
-//        await context.Database.EnsureCreatedAsync();
-//    }
-//}
+await app.UseInfrastructure(builder.Configuration);
 
 
 app.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
-
 
 app.Run();

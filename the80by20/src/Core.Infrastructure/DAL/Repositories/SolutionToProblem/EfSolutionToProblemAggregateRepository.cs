@@ -5,9 +5,9 @@ namespace Core.Infrastructure.DAL.Repositories.SolutionToProblem;
 
 public class EfSolutionToProblemAggregateRepository : ISolutionToProblemAggregateRepository
 {
-    private readonly CoreSqlServerDbContext _context;
+    private readonly CoreDbContext _context;
 
-    public EfSolutionToProblemAggregateRepository(CoreSqlServerDbContext context)
+    public EfSolutionToProblemAggregateRepository(CoreDbContext context)
     {
         _context = context;
     }

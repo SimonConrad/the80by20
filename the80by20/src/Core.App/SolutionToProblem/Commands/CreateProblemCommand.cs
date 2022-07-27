@@ -52,13 +52,18 @@ public class CreateProblemCommandHandler
 
         await _repository.Create(solutionToProblemAggregate, solutionToProblemCrudData);
 
-        // info fire event and forget asynchronously using task api, without awaiting result
-        // todo interchnage with messagin mechanism like:g rabbitmq, nservicebys, kafka masstransit, create ibnterfaces for that
+        // TODO:
+        // info fire event and forget asynchronously using task api, without awaiting result, but this way problem with dbcontext injection
+        // todo interchnage with messagin mechanism like:g rabbitmq, nservicebys, kafka masstransit, create ibnterfaces for that,
+        // or maybe ihostedservice backround job will be suffcient or hangfire
         // https://github.com/jbogard/MediatR/discussions/736 publishing startegy
-       /* await*/ Task.Run(() =>
-        {
-            _mediator.Publish(new ProblemCreated(solutionToProblemAggregate.Id, command.Category));
-        });
+        // problem with await 
+        //Task.Run(() =>
+        // {
+        //     _mediator.Publish(new ProblemCreated(solutionToProblemAggregate.Id, command.Category));
+        // });
+
+        await _mediator.Publish(new ProblemCreated(solutionToProblemAggregate.Id, command.Category));
 
         return solutionToProblemAggregate.Id;
     }
