@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using Core.App.SolutionToProblem.ReadModel;
+﻿using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -10,10 +9,15 @@ namespace Core.Infrastructure.DAL.Repositories.SolutionToProblem
     {
         private readonly CoreDbContext _coreDbContext;
 
-        public EfSolutionToProblemReadModelRepository(CoreDbContext context)
+        public EfSolutionToProblemReadModelRepository(IOptions<DatabaseOptions> dbOptions)
         {
-            _coreDbContext = context;
+            _coreDbContext = new CoreDbContext(CoreDbContextFactory.Create(dbOptions.Value).Options);
         }
+
+        //public EfSolutionToProblemReadModelRepository(CoreDbContext coreDbContext)
+        //{
+        //    _coreDbContext = coreDbContext;
+        //}
 
         public async Task<SolutionToProblemReadModel> Get(SolutionToProblemId id)
         {

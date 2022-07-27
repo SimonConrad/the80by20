@@ -8,6 +8,8 @@ namespace Core.Infrastructure;
 public static class Extensions
 {
     public const string OptionsSectionAppName = "app";
+    private const string OptionsDataBaseName = "dataBase";
+
 
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
@@ -56,7 +58,7 @@ public static class Extensions
 
         app.MapControllers();
 
-        if (!configuration.GetOptions<AppOptions>(OptionsSectionAppName).SqlLiteEnabled)
+        if (!configuration.GetOptions<DatabaseOptions>(OptionsDataBaseName).SqlLiteEnabled)
             return app;
         
         using var serviceScope = app.Services.CreateScope();

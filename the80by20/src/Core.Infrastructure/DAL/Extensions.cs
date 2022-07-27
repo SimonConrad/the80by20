@@ -10,25 +10,24 @@ namespace Core.Infrastructure.DAL;
 // todo internal-visible like in my-spot
 public static class Extensions
 {
-    public const string OptionsSectionSqlServerName = "sqlServer";
-    public const string OptionsSectionAppName = "app";
+    private const string OptionsDataBaseName = "dataBase";
 
     public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        if (configuration.GetOptions<AppOptions>(OptionsSectionAppName).SqlLiteEnabled)
+        services.Configure<DatabaseOptions>(configuration.GetRequiredSection(OptionsDataBaseName));
+        var dataBaseOptions = configuration.GetOptions<DatabaseOptions>(OptionsDataBaseName);
+
+        if (dataBaseOptions.SqlLiteEnabled)
         {
-            services.AddSingleton(_ => CreateInMemoryDatabase());
-            services.AddDbContext<CoreDbContext>((x, y) =>
+            CoreDbContextFactory.OpenInMemorySqliteDatabaseConnection();
+            services.AddDbContext<CoreDbContext>((serviceProvider, dbContextOptionsBuilder) =>
             {
-                var connection = x.GetRequiredService<DbConnection>();
-                y.UseSqlite(connection);
+                dbContextOptionsBuilder.UseSqlite(CoreDbContextFactory.Connection);
             });
         }
         else
         {
-            services.Configure<SqlServerOptions>(configuration.GetRequiredSection(OptionsSectionSqlServerName));
-            var sqlServerOptions = configuration.GetOptions<SqlServerOptions>(OptionsSectionSqlServerName);
-            services.AddDbContext<CoreDbContext>(x => x.UseSqlServer(sqlServerOptions.ConnectionString));
+            services.AddDbContext<CoreDbContext>(x => x.UseSqlServer(dataBaseOptions.ConnectionString));
         }
 
         services.AddTransient<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
@@ -36,13 +35,4 @@ public static class Extensions
 
         return services;
     }
-
-
-    public static DbConnection CreateInMemoryDatabase()
-    {
-        var connection = new SqliteConnection("Filename=:memory:");
-        connection.Open();
-        return connection;
-    }
-
 }

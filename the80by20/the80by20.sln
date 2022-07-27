@@ -20,7 +20,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__", "__", "{B748C109-9681-4236-9D56-C746761D8711}"
 	ProjectSection(SolutionItems) = preProject
 		..\docs\readme\es-picture-that-explains-everything.png = ..\docs\readme\es-picture-that-explains-everything.png
-		migrations.md = migrations.md
+		migrations-and-eddbcontext.md = migrations-and-eddbcontext.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infrastructure", "src\Core.Infrastructure\Core.Infrastructure.csproj", "{9AAE5282-0AFD-4CE3-BB97-8A4ACF627F8E}"
