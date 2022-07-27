@@ -23,27 +23,16 @@ namespace Core.Infrastructure.DAL
         public DbSet<SolutionToProblemReadModel> SolutionToProblemReadModel { get; set; }
         #endregion
 
-
-        //public static DbConnection CreateInMemoryDatabase()
-        //{
-        //    var connection = new SqliteConnection("Filename=:memory:");
-        //    connection.Open();
-        //    return connection;
-        //}
-
-        //public CoreSqlServerDbContext(DbConnection connection)
-        //{
-        //    _connection = connection;
-        //}
+        public CoreSqlServerDbContext(DbContextOptions<CoreSqlServerDbContext> options) : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.Us
-
-            ////optionsBuilder
-            ////    .LogTo(Console.WriteLine)
-            ////    .EnableSensitiveDataLogging()
-            ////    .EnableDetailedErrors();
+            optionsBuilder
+                .LogTo(Console.WriteLine)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors();
 
             base.OnConfiguring(optionsBuilder);
         }
