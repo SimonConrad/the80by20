@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20220728095640_category-crud-entity")]
-    partial class categorycrudentity
+    [Migration("20220728141407_Initial-Create")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,23 +23,6 @@ namespace Core.Infrastructure.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("Core.App.Administration.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
 
             modelBuilder.Entity("Core.App.SolutionToProblem.ReadModel.SolutionToProblemReadModel", b =>
                 {
@@ -168,6 +151,21 @@ namespace Core.Infrastructure.DAL.Migrations
                     b.HasKey("AggregateId");
 
                     b.ToTable("SolutionToProblemCrudData");
+                });
+
+            modelBuilder.Entity("Core.Infrastructure.DAL.Administration.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
                 });
 #pragma warning restore 612, 618
         }

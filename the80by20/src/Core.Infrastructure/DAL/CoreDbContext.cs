@@ -17,6 +17,10 @@ namespace Core.Infrastructure.DAL
         public DbSet<SolutionToProblemReadModel> SolutionToProblemReadModel { get; set; }
         #endregion
 
+        #region crud models
+        public DbSet<Category> Category { get; set; }
+        #endregion
+
         public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
         {
         }

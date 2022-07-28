@@ -1,6 +1,8 @@
 using Core.App.SolutionToProblem.ReadModel;
+using Core.Domain.SharedKernel;
 using Core.Infrastructure.DAL;
 using Core.Infrastructure.Exceptions;
+using Core.Infrastructure.Time;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +25,9 @@ public static class Extensions
         //services.AddHttpContextAccessor();
 
         // todo
-        services.AddDatabase(configuration);
+        services
+            .AddDatabase(configuration)
+            .AddSingleton<IClock, Clock>();;
         
         //todo
         services.AddSwaggerGen(c =>

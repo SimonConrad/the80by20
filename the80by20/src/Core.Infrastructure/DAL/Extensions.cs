@@ -37,6 +37,8 @@ public static class Extensions
         services.AddScoped<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
         services.AddScoped<ISolutionToProblemReadModelRepository, EfSolutionToProblemReadModelRepository>();
 
+        services.AddHostedService<DatabaseInitializer>();
+
         return services;
     }
 }

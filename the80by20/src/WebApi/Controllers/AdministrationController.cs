@@ -3,7 +3,7 @@ using Core.Infrastructure.DAL.Administration;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
-
+// info CancellationToken can be passed in controller action method, passed down to async/await ef methods
 [ApiController]
 [Route("api/[controller]")]
 public class AdministrationController : ControllerBase
