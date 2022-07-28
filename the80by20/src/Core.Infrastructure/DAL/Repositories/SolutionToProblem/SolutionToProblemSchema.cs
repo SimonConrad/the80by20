@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
-using Common;
+﻿using Common;
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SharedKernel.Capabilities;
 using Core.Domain.SolutionToProblem.Capabilities;

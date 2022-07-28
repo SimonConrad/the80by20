@@ -1,16 +1,11 @@
 using Core.App;
-using Core.App.SolutionToProblem.ReadModel;
 using Core.Infrastructure;
-using Core.Infrastructure.DAL;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    //.AddCore() todo  policy for example
+    //.AddCore() // todo policy for example
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 

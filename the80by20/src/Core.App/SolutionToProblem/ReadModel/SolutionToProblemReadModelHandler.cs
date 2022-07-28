@@ -1,6 +1,5 @@
 ﻿using Common.DDD;
 using Core.App.SolutionToProblem.Events;
-using Core.Domain.SolutionToProblem.Operations;
 using MediatR;
 
 namespace Core.App.SolutionToProblem.ReadModel;

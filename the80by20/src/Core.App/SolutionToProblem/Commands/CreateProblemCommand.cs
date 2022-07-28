@@ -1,6 +1,5 @@
 ﻿using Core.App.SolutionToProblem.Events;
 using Core.Domain.SharedKernel.Capabilities;
-using Core.Domain.SolutionToProblem;
 using Core.Domain.SolutionToProblem.Operations;
 using MediatR;
 

@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using Common.DDD;
+﻿using Common.DDD;
 
 namespace Core.Domain.SolutionToProblem.Capabilities;
 

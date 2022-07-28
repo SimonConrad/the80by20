@@ -2,7 +2,6 @@
 using System.Text.Json;
 using Common.DDD;
 using Core.Domain.SharedKernel.Capabilities;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Core.Domain.SolutionToProblem.Operations;
 

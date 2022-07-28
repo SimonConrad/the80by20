@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Common.DDD;
 using Core.Domain.SharedKernel.Capabilities;
 using Core.Domain.SolutionToProblem.Operations;

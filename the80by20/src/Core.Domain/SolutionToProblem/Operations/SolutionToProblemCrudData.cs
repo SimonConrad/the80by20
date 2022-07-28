@@ -1,5 +1,4 @@
 ﻿using Common.DDD;
-using Core.Domain.SolutionToProblem.Capabilities;
 
 namespace Core.Domain.SolutionToProblem.Operations
 {

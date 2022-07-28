@@ -1,8 +1,6 @@
-﻿using System.Data.Common;
-using Core.App.SolutionToProblem.ReadModel;
+﻿using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Core.Infrastructure.DAL.Repositories.SolutionToProblem;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.DAL;

@@ -1,6 +1,4 @@
 ﻿using Common.DDD;
-using Core.Domain.SharedKernel.Capabilities;
-using Core.Domain.SolutionToProblem.Capabilities;
 
 namespace Core.App.SolutionToProblem.ReadModel;
 
