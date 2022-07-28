@@ -20,7 +20,8 @@ public class SolutionToProblemReadModelHandler : INotificationHandler<ProblemCre
         var aggregate = await _readModelRepository.GetAggregate(problemCreated.SolutionToProblemId);
         var data = await _readModelRepository.GetAggregateCrudData(problemCreated.SolutionToProblemId);
 
-        // info denormalized view consisting of projection of aggregate invariant attributes, related to aggregate crud data and others
+        // info denormalized (optimized for fast reads, and scope od data read)view consisting of projection of:
+        // aggregate invariant attributes, related to aggregate crud data, and others
         // dedicated for command deciding to do, based on es model
         var readmodel = new SolutionToProblemReadModel()
         {
@@ -28,6 +29,7 @@ public class SolutionToProblemReadModelHandler : INotificationHandler<ProblemCre
             UserId = data.UserId,
             RequiredSolutionElementTypes = string.Join("--", aggregate.RequiredSolutionElementTypes.Elements.Select(t => t.ToString()).ToArray()),
             Description = data.Description,
+            DescriptionLinks = data.DescriptionLinks,
 
             IsConfirmed = aggregate.Confirmed,
             IsRejected = aggregate.Rejected,

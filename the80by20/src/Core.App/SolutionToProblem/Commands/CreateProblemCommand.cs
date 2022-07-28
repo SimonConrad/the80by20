@@ -10,11 +10,10 @@ namespace Core.App.SolutionToProblem.Commands;
 public class CreateProblemCommand
 {
     public string Description { get; set; }
-        
-    // TODO Create VO Category
-    public string Category { get; set; }
+    
+    public string DescriptionLinks { get; set; }
 
-    public Guid UserId { get; set; }
+    public string Category { get; set; }
 
     public SolutionElementType[] SolutionElementTypes { get; set; }
 }
@@ -45,10 +44,12 @@ public class CreateProblemCommandHandler
         SolutionToProblemCrudData solutionToProblemCrudData = new()
         {
             AggregateId = solutionToProblemAggregate.Id,
-            UserId = command.UserId,
             Category = command.Category,
-            Description = command.Description
+            Description = command.Description,
+            DescriptionLinks = command.DescriptionLinks
         };
+        
+        solutionToProblemCrudData.SetUser(Guid.NewGuid()); // todo retrieve from current user and do in more sophisticated way, like in ef on save like readonly property
 
         await _repository.Create(solutionToProblemAggregate, solutionToProblemCrudData);
 

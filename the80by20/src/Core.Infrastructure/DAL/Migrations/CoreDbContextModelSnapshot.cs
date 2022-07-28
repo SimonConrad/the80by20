@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    partial class CoreSqlServerDbContextModelSnapshot : ModelSnapshot
+    partial class CoreDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,10 @@ namespace Core.Infrastructure.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionLinks")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -127,6 +131,10 @@ namespace Core.Infrastructure.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionLinks")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

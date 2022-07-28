@@ -27,6 +27,7 @@ namespace Core.Infrastructure.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // todo move to extensions
             optionsBuilder
                 .LogTo(Console.WriteLine)
                 .EnableSensitiveDataLogging()

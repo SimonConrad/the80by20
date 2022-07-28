@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Core.Infrastructure.DAL.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,6 +36,7 @@ namespace Core.Infrastructure.DAL.Migrations
                     AggregateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DescriptionLinks = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Version = table.Column<int>(type: "int", rowVersion: true, nullable: true)
                 },
@@ -52,6 +53,7 @@ namespace Core.Infrastructure.DAL.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RequiredSolutionElementTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DescriptionLinks = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     IsRejected = table.Column<bool>(type: "bit", nullable: false),

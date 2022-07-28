@@ -7,7 +7,9 @@ nuget package Microsoft.EntityFrameworkCore.Design
 
 fabryka CoreSqlServerDbContextDesignTimeFactory
 
-Add-Migration Initial-Create -Context CoreSqlServerDbContext -o "DAL/Migrations"
-Update-Database -context CoreSqlServerDbContext
+Add-Migration Initial-Create -Context CoreDbContext -o "DAL/Migrations"
+Update-Database -context CoreDbContext
 
-Remove-Migration -Context CoreSqlServerDbContext
+Add-Migration newcolumn -Context CoreDbContext
+
+Remove-Migration -Context CoreDbContext

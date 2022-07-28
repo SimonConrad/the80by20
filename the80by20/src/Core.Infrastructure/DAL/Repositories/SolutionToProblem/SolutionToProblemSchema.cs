@@ -1,4 +1,6 @@
-﻿using Common;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using Common;
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SharedKernel.Capabilities;
 using Core.Domain.SolutionToProblem.Capabilities;
@@ -47,6 +49,7 @@ namespace Core.Infrastructure.DAL.Repositories.SolutionToProblem
                 e.MapTechnicalProperties();
 
                 e.HasKey(d => d.AggregateId);
+
             });
 
             modelBuilder.Entity<SolutionToProblemReadModel>(e =>
