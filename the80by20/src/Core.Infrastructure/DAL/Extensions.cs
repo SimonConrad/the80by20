@@ -1,4 +1,5 @@
 ﻿using Common;
+using Core.App.Administration;
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Core.Infrastructure.DAL.Administration;
@@ -18,27 +19,29 @@ public static class Extensions
     {
         services.Configure<DatabaseOptions>(configuration.GetRequiredSection(OptionsDataBaseName));
         var dataBaseOptions = configuration.GetOptions<DatabaseOptions>(OptionsDataBaseName);
-
-        if (dataBaseOptions.SqlLiteEnabled)
-        {
-            CoreDbContextFactory.OpenInMemorySqliteDatabaseConnection();
-            services.AddDbContext<CoreDbContext>((serviceProvider, dbContextOptionsBuilder) =>
-            {
-                dbContextOptionsBuilder.UseSqlite(CoreDbContextFactory.Connection);
-            });
-        }
-        else
-        {
-            services.AddDbContext<CoreDbContext>(x => x.UseSqlServer(dataBaseOptions.ConnectionString));
-        }
+        services.AddDbContext<CoreDbContext>(x => x.UseSqlServer(dataBaseOptions.ConnectionString));
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-        services.AddScoped<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
-        services.AddScoped<ISolutionToProblemReadModelRepository, EfSolutionToProblemReadModelRepository>();
+        services
+            .AddSolutionToProblem()
+            .AddAdministration();
 
         services.AddHostedService<DatabaseInitializer>();
 
+        return services;
+    }
+
+    public static IServiceCollection AddSolutionToProblem(this IServiceCollection services)
+    {
+        services.AddScoped<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
+        services.AddScoped<ISolutionToProblemReadModelRepository, EfSolutionToProblemReadModelRepository>();
+        return services;
+    }
+
+    public static IServiceCollection AddAdministration(this IServiceCollection services)
+    {
+        services.AddScoped<ICategoryCrudRepository, CategoryCrudRepository>();
         return services;
     }
 }

@@ -1,23 +1,34 @@
-﻿using Core.App.SolutionToProblem.ReadModel;
+﻿using Core.App.Administration;
+using Core.App.SolutionToProblem.ReadModel;
+using Core.Domain.SharedKernel.Capabilities;
 using Core.Domain.SolutionToProblem.Operations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace Core.Infrastructure.DAL.SolutionToProblem
 {
+    // TODO pass cancelationtoken
     public class EfSolutionToProblemReadModelRepository : ISolutionToProblemReadModelRepository
     {
         private readonly CoreDbContext _coreDbContext;
 
-        public EfSolutionToProblemReadModelRepository(IOptions<DatabaseOptions> dbOptions)
+        public EfSolutionToProblemReadModelRepository(CoreDbContext coreDbContext)
         {
-            _coreDbContext = new CoreDbContext(CoreDbContextFactory.Create(dbOptions.Value).Options);
+            _coreDbContext = coreDbContext;
         }
 
-        //public EfSolutionToProblemReadModelRepository(CoreDbContext coreDbContext)
-        //{
-        //    _coreDbContext = coreDbContext;
-        //}
+        public async Task<Category[]> GetProblemsCategories()
+        {
+            var res = await _coreDbContext.Category.ToArrayAsync();
+
+            return res;
+        }
+
+        public IEnumerable<SolutionElementType> GetSolutionElementTypes()
+        {
+            IEnumerable<SolutionElementType> res =  Enum.GetValues(typeof(SolutionElementType)).Cast<SolutionElementType>();
+            return res;
+        }
 
         public async Task<SolutionToProblemReadModel> Get(SolutionToProblemId id)
         {
@@ -36,18 +47,6 @@ namespace Core.Infrastructure.DAL.SolutionToProblem
         {
             _coreDbContext.SolutionToProblemReadModel.Update(readModel);
             await _coreDbContext.SaveChangesAsync();
-        }
-
-        public async Task<SolutionToProblemAggregate> GetAggregate(SolutionToProblemId id)
-        {
-            var res = await _coreDbContext.SolutionToProblemAggregate.FirstOrDefaultAsync(x => x.Id == id);
-            return res;
-        }
-
-        public async Task<SolutionToProblemCrudData> GetAggregateCrudData(SolutionToProblemId id)
-        {
-            var res = await _coreDbContext.SolutionToProblemCrudData.FirstOrDefaultAsync(x => x.AggregateId == id.Value);
-            return res;
         }
     }
 }

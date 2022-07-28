@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Core.App.SolutionToProblem.Events;
 
-public sealed record ProblemCreated(SolutionToProblemId SolutionToProblemId, string Category) : INotification;
+public sealed record ProblemCreated(SolutionToProblemId SolutionToProblemId) : INotification;

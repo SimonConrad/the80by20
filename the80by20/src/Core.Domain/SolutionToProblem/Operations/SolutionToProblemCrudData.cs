@@ -15,7 +15,7 @@ namespace Core.Domain.SolutionToProblem.Operations
         public string DescriptionLinks { get; set; }
 
         // TODO Create VO Category
-        public string Category { get; set; }
+        public Guid Category { get; set; }
 
         public void SetUser(Guid userId)
         {

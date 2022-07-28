@@ -1,4 +1,5 @@
 ﻿using Core.App.SolutionToProblem.Commands;
+using Core.App.SolutionToProblem.Commands.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.App

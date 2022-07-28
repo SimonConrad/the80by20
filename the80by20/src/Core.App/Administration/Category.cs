@@ -1,6 +1,6 @@
 ﻿using Common.DDD;
 
-namespace Core.Infrastructure.DAL.Administration;
+namespace Core.App.Administration;
 
 [CrudEntity]
 public class Category

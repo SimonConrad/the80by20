@@ -1,4 +1,5 @@
 using Core.App.SolutionToProblem.Commands;
+using Core.App.SolutionToProblem.Commands.Handlers;
 using Core.App.SolutionToProblem.ReadModel;
 using Microsoft.AspNetCore.Mvc;
 

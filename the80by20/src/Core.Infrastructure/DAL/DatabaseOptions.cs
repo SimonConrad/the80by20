@@ -3,6 +3,4 @@
 public class DatabaseOptions
 {
     public string ConnectionString { get; set; }
-
-    public bool SqlLiteEnabled { get; set; }
 }

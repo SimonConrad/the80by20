@@ -1,4 +1,5 @@
-﻿using Core.App.SolutionToProblem.ReadModel;
+﻿using Core.App.Administration;
+using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Core.Infrastructure.DAL.Administration;
 using Core.Infrastructure.DAL.SolutionToProblem;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.DAL
 {
+    // in future do some in memory or not in memopry sqllite for testing purposes
     public class CoreDbContext : DbContext
     {
         #region write models

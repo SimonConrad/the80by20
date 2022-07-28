@@ -1,4 +1,5 @@
-﻿using Core.Domain.SharedKernel;
+﻿using Core.App.Administration;
+using Core.Domain.SharedKernel;
 using Core.Infrastructure.DAL.Administration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,7 @@ namespace Core.Infrastructure.DAL;
 
 public class DatabaseInitializer : IHostedService
 {
-    // Service locator "anti-pattern" (but it depends)
+    // Service locator "anti-pattern" however needs to be there
     private readonly IServiceProvider _serviceProvider;
     private readonly IClock _clock;
     private readonly IOptions<DatabaseOptions> _options;
@@ -26,11 +27,8 @@ public class DatabaseInitializer : IHostedService
         using var scope = _serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
 
-        if (!_options.Value.SqlLiteEnabled)
-        {
-            // todo https://makolyte.com/ef-core-apply-migrations-programmatically/
-            await dbContext.Database.MigrateAsync(cancellationToken);
-        }
+        // todo https://makolyte.com/ef-core-apply-migrations-programmatically/
+        await dbContext.Database.MigrateAsync(cancellationToken);
 
         if (await dbContext.Category.AnyAsync(cancellationToken))
         {

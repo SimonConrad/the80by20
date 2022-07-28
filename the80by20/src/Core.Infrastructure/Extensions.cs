@@ -64,12 +64,6 @@ public static class Extensions
 
         app.MapControllers();
 
-        if (!configuration.GetOptions<DatabaseOptions>(OptionsDataBaseName).SqlLiteEnabled)
-            return app;
-        
-        using var serviceScope = app.Services.CreateScope();
-        var context = serviceScope.ServiceProvider.GetRequiredService<CoreDbContext>();
-        await context.Database.EnsureCreatedAsync();
 
         return app;
     }

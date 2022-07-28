@@ -1,4 +1,6 @@
 ﻿using Common.DDD;
+using Core.App.Administration;
+using Core.Domain.SharedKernel.Capabilities;
 using Core.Domain.SolutionToProblem.Operations;
 
 namespace Core.App.SolutionToProblem.ReadModel;
@@ -7,11 +9,13 @@ namespace Core.App.SolutionToProblem.ReadModel;
 [ReadModelDdd]
 public interface ISolutionToProblemReadModelRepository
 {
+    Task<Category[]> GetProblemsCategories();
+
+    IEnumerable<SolutionElementType> GetSolutionElementTypes();
+
+    public Task Create(SolutionToProblemReadModel readModel);
+
+    public Task Update(SolutionToProblemReadModel readModel);
+
     Task<SolutionToProblemReadModel> Get(SolutionToProblemId id);
-
-    Task Create(SolutionToProblemReadModel readModel);
-
-    Task Update(SolutionToProblemReadModel model);
-    Task<SolutionToProblemAggregate> GetAggregate(SolutionToProblemId id);
-    Task<SolutionToProblemCrudData> GetAggregateCrudData(SolutionToProblemId id);
 }
