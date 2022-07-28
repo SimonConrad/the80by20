@@ -1,5 +1,6 @@
 ﻿using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
+using Core.Infrastructure.DAL.Administration;
 using Core.Infrastructure.DAL.SolutionToProblem;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,8 +34,11 @@ namespace Core.Infrastructure.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // TODO think if needed
             base.OnModelCreating(modelBuilder);
+            
             SolutionToProblemSchema.MapUsing(modelBuilder);
+            AdministrationSchema.MapUsing(modelBuilder);
         }
     }
 }

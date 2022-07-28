@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    // INFO Use helper methods like Created with id or Ok, or Bad Request
     [ApiController]
     [Route("api/[controller]")]
     public class SolutionToProblemController : ControllerBase

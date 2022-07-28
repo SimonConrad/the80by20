@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C19979BE-8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{DBC8B925-6625-4ACB-9D4A-3D98999821CB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Administration", "Administration", "{AF8731F1-7BBF-4904-B95E-E240414ADB13}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.App", "src\Core.App\Core.App.csproj", "{01EE084A-E91D-4214-B489-35C430309C7B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "src\Common\Common.csproj", "{8C2BF58A-0B6E-453F-A08D-AA932F378A54}"

@@ -1,5 +1,8 @@
-﻿using Core.App.SolutionToProblem.ReadModel;
+﻿using Common;
+using Core.App.Administration;
+using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
+using Core.Infrastructure.DAL.Administration;
 using Core.Infrastructure.DAL.SolutionToProblem;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,8 +33,12 @@ public static class Extensions
             services.AddDbContext<CoreDbContext>(x => x.UseSqlServer(dataBaseOptions.ConnectionString));
         }
 
-        services.AddTransient<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
-        services.AddTransient<ISolutionToProblemReadModelRepository, EfSolutionToProblemReadModelRepository>();
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IUnitOfWorkOfAdministrationCrud, UnitOfWorkOfAdministrationCrud>();
+
+        services.AddScoped<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
+        services.AddScoped<ISolutionToProblemReadModelRepository, EfSolutionToProblemReadModelRepository>();
 
         return services;
     }
