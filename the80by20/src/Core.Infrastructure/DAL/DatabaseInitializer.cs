@@ -1,12 +1,11 @@
 ﻿using Core.Domain.SharedKernel;
-using Core.Infrastructure.DAL;
 using Core.Infrastructure.DAL.Administration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace Core.Infrastructure;
+namespace Core.Infrastructure.DAL;
 
 public class DatabaseInitializer : IHostedService
 {
@@ -29,9 +28,9 @@ public class DatabaseInitializer : IHostedService
 
         if (!_options.Value.SqlLiteEnabled)
         {
+            // todo https://makolyte.com/ef-core-apply-migrations-programmatically/
             await dbContext.Database.MigrateAsync(cancellationToken);
         }
-
 
         if (await dbContext.Category.AnyAsync(cancellationToken))
         {
