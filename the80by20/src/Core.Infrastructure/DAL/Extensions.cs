@@ -2,6 +2,8 @@
 using Core.Domain.SolutionToProblem.Operations;
 using Core.Infrastructure.DAL.Repositories.SolutionToProblem;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Infrastructure.DAL;
 

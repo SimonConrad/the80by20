@@ -1,6 +1,9 @@
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Infrastructure.DAL;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 namespace Core.Infrastructure;
