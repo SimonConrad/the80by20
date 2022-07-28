@@ -1,5 +1,5 @@
 ﻿using Common;
-using Core.App.Administration;
+using Core.Infrastructure.DAL.Administration;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
@@ -9,10 +9,10 @@ namespace WebApi.Controllers;
 public class AdministrationController : ControllerBase
 {
     private readonly ILogger<AdministrationController> _logger;
-    private readonly ICategoryRepository _categoryCrud;
+    private readonly IGenericRepository<Category> _categoryCrud;
 
     public AdministrationController(ILogger<AdministrationController> logger,
-        ICategoryRepository categoryCrud)
+        IGenericRepository<Category> categoryCrud)
     {
         _logger = logger;
         _categoryCrud = categoryCrud;

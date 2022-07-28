@@ -13,7 +13,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         Context = context;
     }
-
     public async Task Add(T entity)
     {
         await Context.Set<T>().AddAsync(entity);

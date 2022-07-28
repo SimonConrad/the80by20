@@ -1,5 +1,4 @@
 ﻿using Common;
-using Core.App.Administration;
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Core.Infrastructure.DAL.Administration;
@@ -34,7 +33,6 @@ public static class Extensions
         }
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddScoped<ICategoryRepository, CategoryRepository>(); // info think if need if injecting IGenericRepository<Category> not enough>
 
         services.AddScoped<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
         services.AddScoped<ISolutionToProblemReadModelRepository, EfSolutionToProblemReadModelRepository>();

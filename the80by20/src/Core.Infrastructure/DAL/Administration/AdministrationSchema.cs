@@ -1,5 +1,4 @@
-﻿using Core.App.Administration;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.DAL.Administration;
 
