@@ -1,6 +1,6 @@
 ﻿using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
-using Core.Infrastructure.DAL.Repositories.SolutionToProblem;
+using Core.Infrastructure.DAL.SolutionToProblem;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.DAL

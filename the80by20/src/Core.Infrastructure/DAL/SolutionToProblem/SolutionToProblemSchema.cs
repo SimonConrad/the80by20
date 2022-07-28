@@ -5,7 +5,7 @@ using Core.Domain.SolutionToProblem.Capabilities;
 using Core.Domain.SolutionToProblem.Operations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Infrastructure.DAL.Repositories.SolutionToProblem
+namespace Core.Infrastructure.DAL.SolutionToProblem
 {
     public static class SolutionToProblemSchema
     {
