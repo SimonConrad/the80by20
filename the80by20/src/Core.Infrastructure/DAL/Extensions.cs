@@ -34,8 +34,7 @@ public static class Extensions
         }
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<IUnitOfWorkOfAdministrationCrud, UnitOfWorkOfAdministrationCrud>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>(); // info think if need if injecting IGenericRepository<Category> not enough>
 
         services.AddScoped<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
         services.AddScoped<ISolutionToProblemReadModelRepository, EfSolutionToProblemReadModelRepository>();
