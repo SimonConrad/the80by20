@@ -1,6 +1,6 @@
 ﻿namespace Common.DDD;
 
-public class DomainException : Exception
+public class DomainException : CustomException
 {
     public DomainException(string msg) : base(msg)
     {

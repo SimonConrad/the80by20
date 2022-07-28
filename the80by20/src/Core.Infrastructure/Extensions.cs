@@ -1,5 +1,6 @@
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Infrastructure.DAL;
+using Core.Infrastructure.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -17,10 +18,8 @@ public static class Extensions
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers();
-
         services.Configure<AppOptions>(configuration.GetRequiredSection("app"));
-
-        //services.AddSingleton<ExceptionMiddleware>();
+        services.AddSingleton<ExceptionMiddleware>();
         //services.AddHttpContextAccessor();
 
         // todo
@@ -41,7 +40,7 @@ public static class Extensions
     public static async Task<WebApplication> UseInfrastructure(this WebApplication app, IConfiguration configuration)
     {
         // todo
-        //app.UseMiddleware<ExceptionMiddleware>();
+        app.UseMiddleware<ExceptionMiddleware>();
         
         app.UseSwagger();
         app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));
