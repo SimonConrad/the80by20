@@ -1,8 +1,10 @@
-﻿using Core.Domain.SharedKernel.Capabilities;
+﻿using Common.DDD;
+using Core.Domain.SharedKernel.Capabilities;
 
 namespace Core.App.SolutionToProblem.Commands;
 
 // todo make record
+[CommandDdd]
 public class CreateProblemCommand
 {
     public string Description { get; set; }

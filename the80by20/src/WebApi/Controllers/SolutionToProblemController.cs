@@ -23,6 +23,15 @@ namespace WebApi.Controllers
             _solutionToProblemReadModelRepository = solutionToProblemReadModelRepository;
         }
 
+        [HttpGet("/categoriesandsolutiontypes")]
+        public async Task<IActionResult> GetCategoriesAndSolutionTypes()
+        {
+            var categories = await _solutionToProblemReadModelRepository.GetProblemsCategories();
+            var solutionTypes =  _solutionToProblemReadModelRepository.GetSolutionElementTypes();
+
+            return Ok(new{categories, solutionTypes});
+        }
+
         [HttpPost("/problem")]
         public async Task<IActionResult> Create(CreateProblemCommand createProblemCommand)
         {
