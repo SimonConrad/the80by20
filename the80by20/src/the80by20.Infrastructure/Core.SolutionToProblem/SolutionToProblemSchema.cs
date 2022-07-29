@@ -2,6 +2,8 @@
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.Domain.Core.SolutionToProblem.Capabilities;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Domain.SharedKernel.Capabilities;
 using the80by20.Infrastructure.DAL;
 using the80by20.Infrastructure.DAL.Misc;
@@ -21,6 +23,11 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
                     .HasConversion(
                         a => a.Value,
                         a => new SolutionToProblemId(a));
+
+                e.Property(a => a.ProblemId)
+                    .HasConversion(
+                        a => a.Value,
+                        a => new ProblemId(a));
 
                 e.Property(a => a.SolutionAbstract)
                     .HasConversion(
@@ -43,7 +50,25 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
                         a => SolutionElements.FromSnapshotInJson(a));
             });
 
-            modelBuilder.Entity<SolutionToProblemCrudData>(e =>
+
+            modelBuilder.Entity<ProblemAggregate>(e =>
+            {
+                e.MapTechnicalProperties();
+
+                e.HasKey(a => a.Id);
+                e.Property(a => a.Id)
+                    .HasConversion(
+                        a => a.Value,
+                        a => new ProblemId(a));
+
+                e.Property(a => a.RequiredSolutionElementTypes)
+                    .HasConversion(
+                        a => a.ToSnapshotInJson(),
+                        a => RequiredSolutionElementTypes.FromSnapshotInJson(a));
+            });
+
+
+            modelBuilder.Entity<ProblemCrudData>(e =>
             {
                 e.MapTechnicalProperties();
 
@@ -53,7 +78,7 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
 
             modelBuilder.Entity<SolutionToProblemReadModel>(e =>
             {
-                e.HasKey(r => r.SolutionToProblemId);
+                e.HasKey(r => r.ProblemId);
             });
         }
     }

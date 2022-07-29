@@ -1,6 +1,6 @@
 ﻿using the80by20.Domain.ArchitectureBuildingBlocks;
 
-namespace the80by20.Domain.Core.SolutionToProblem.Operations;
+namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 
 [ValueObjectDdd]
 // INFO record gives out of the box, following value objects characteristics:

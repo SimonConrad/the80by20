@@ -2,6 +2,8 @@
 using the80by20.App.Administration.MasterData;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Domain.SharedKernel.Capabilities;
 using the80by20.Infrastructure.DAL;
 using the80by20.Infrastructure.DAL.DbContext;
@@ -31,10 +33,17 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
             return res;
         }
 
-        public async Task<SolutionToProblemReadModel> Get(SolutionToProblemId id)
+        public async Task<SolutionToProblemReadModel> GetBySolutionId(SolutionToProblemId id)
         {
             var readModel  = await _coreDbContext.SolutionsToProblemsReadModel
                 .FirstOrDefaultAsync(r => r.SolutionToProblemId == id.Value);
+            return readModel;
+        }
+
+        public async Task<SolutionToProblemReadModel> GetByProblemId(ProblemId id)
+        {
+            var readModel  = await _coreDbContext.SolutionsToProblemsReadModel
+                .FirstOrDefaultAsync(r => r.ProblemId == id.Value);
             return readModel;
         }
 

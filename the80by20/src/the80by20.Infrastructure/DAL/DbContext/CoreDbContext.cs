@@ -3,6 +3,8 @@ using the80by20.App.Administration.MasterData;
 using the80by20.App.Administration.Security.User;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Infrastructure.Administration;
 using the80by20.Infrastructure.Core.SolutionToProblem;
 
@@ -13,7 +15,8 @@ namespace the80by20.Infrastructure.DAL.DbContext
     {
         #region write models
         public DbSet<SolutionToProblemAggregate> SolutionsToProblemsAggregates { get; set; }
-        public DbSet<SolutionToProblemCrudData> SolutionsToProblemsCrudData { get; set; }
+        public DbSet<ProblemAggregate> ProblemsAggregates { get; set; }
+        public DbSet<ProblemCrudData> ProblemsCrudData { get; set; }
         #endregion
 
         #region read models

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Core.Infrastructure.DAL.Migrations
+namespace the80by20.Infrastructure.DAL.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -22,13 +22,43 @@ namespace Core.Infrastructure.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SolutionsToProblemsAggregates",
+                name: "ProblemsAggregates",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RequiredSolutionElementTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Confirmed = table.Column<bool>(type: "bit", nullable: false),
                     Rejected = table.Column<bool>(type: "bit", nullable: false),
+                    Version = table.Column<int>(type: "int", rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProblemsAggregates", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProblemsCrudData",
+                columns: table => new
+                {
+                    AggregateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Version = table.Column<int>(type: "int", rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProblemsCrudData", x => x.AggregateId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SolutionsToProblemsAggregates",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProblemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RequiredSolutionElementTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WorkingOnSolutionStarted = table.Column<bool>(type: "bit", nullable: false),
                     WorkingOnSolutionEnded = table.Column<bool>(type: "bit", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -42,30 +72,14 @@ namespace Core.Infrastructure.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SolutionsToProblemsCrudData",
-                columns: table => new
-                {
-                    AggregateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DescriptionLinks = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Category = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Version = table.Column<int>(type: "int", rowVersion: true, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SolutionsToProblemsCrudData", x => x.AggregateId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SolutionsToProblemsReadModel",
                 columns: table => new
                 {
+                    ProblemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SolutionToProblemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RequiredSolutionElementTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DescriptionLinks = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     IsRejected = table.Column<bool>(type: "bit", nullable: false),
@@ -78,7 +92,7 @@ namespace Core.Infrastructure.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SolutionsToProblemsReadModel", x => x.SolutionToProblemId);
+                    table.PrimaryKey("PK_SolutionsToProblemsReadModel", x => x.ProblemId);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,10 +131,13 @@ namespace Core.Infrastructure.DAL.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "SolutionsToProblemsAggregates");
+                name: "ProblemsAggregates");
 
             migrationBuilder.DropTable(
-                name: "SolutionsToProblemsCrudData");
+                name: "ProblemsCrudData");
+
+            migrationBuilder.DropTable(
+                name: "SolutionsToProblemsAggregates");
 
             migrationBuilder.DropTable(
                 name: "SolutionsToProblemsReadModel");

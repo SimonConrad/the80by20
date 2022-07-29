@@ -38,9 +38,17 @@ namespace the80by20.WebApi.Controllers
             // TODO security
             // TODO fetch user and set in command
 
-            var solutionToProblemId = await _mediator.Send(createProblemCommand, token);
+            var problemId = await _mediator.Send(createProblemCommand, token);
 
-            return Ok(new { id = solutionToProblemId });
+            return Ok(new { id = problemId });
+        }
+
+        [HttpGet("problems/{problemId}")]
+        public async Task<IActionResult> Get(Guid problemId)
+        {
+            var res = await _solutionToProblemReadModelQueries.GetByProblemId(problemId);
+
+            return Ok(res);
         }
     }
 }

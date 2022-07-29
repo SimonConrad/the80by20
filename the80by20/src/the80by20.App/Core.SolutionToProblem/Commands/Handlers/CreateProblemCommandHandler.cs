@@ -2,15 +2,17 @@
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.App.Core.SolutionToProblem.Events;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
 namespace the80by20.App.Core.SolutionToProblem.Commands.Handlers;
 
-public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand, SolutionToProblemId>
+public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand, ProblemId>
 {
-    private readonly ISolutionToProblemAggregateRepository _repository;
+    private readonly IProblemAggregateRepository _repository;
     private readonly IServiceScopeFactory _servicesScopeFactory;
 
-    public CreateProblemCommandHandler(ISolutionToProblemAggregateRepository repository,
+    public CreateProblemCommandHandler(
+        IProblemAggregateRepository repository,
         IServiceScopeFactory servicesScopeFactory)
     {
         _repository = repository;
@@ -20,36 +22,32 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
     // INFO application logic - coordinates flow + cross cuttings:
     // wrap with db transaction - handler decorator or aspect oriented
     // wrap with try catch logger
-    public async Task<SolutionToProblemId> Handle(CreateProblemCommand command, CancellationToken cancellationToken)
+    public async Task<ProblemId> Handle(CreateProblemCommand command, CancellationToken cancellationToken)
     {
         // INFO input validation logic
         // TODO FluentValidator on command
 
-        var solutionToProblemAggregate = SolutionToProblemAggregate.New(
-            RequiredSolutionElementTypes.From(command.SolutionElementTypes));
-
-        SolutionToProblemCrudData solutionToProblemCrudData = new()
-        {
-            AggregateId = solutionToProblemAggregate.Id,
-            Category = command.Category,
-            Description = command.Description,
-            DescriptionLinks = command.DescriptionLinks
-        };
+        var problemAggregate = ProblemAggregate.New(
+            RequiredSolutionElementTypes.From(command.SolutionElementTypes),
+            command.Description, 
+            command.Category);
 
         // todo retrieve from current user and do in more sophisticated way, like in ef on save like readonly property
-        solutionToProblemCrudData.SetUser(Guid.NewGuid());
+        var userId = Guid.NewGuid();
+        ProblemCrudData problemCrudData =
+            new(problemAggregate.Id, userId, DateTime.Now, command.Description, command.Category);
 
-        await _repository.Create(solutionToProblemAggregate, solutionToProblemCrudData);
+        await _repository.Create(problemAggregate, problemCrudData);
 
         // INFO done in FireAndForget way to present updating flow of CQRS read-model,
         // after command chnaged state of the system, read-model is updated in the background,
         // in future apply message queue (ex rabbit mq)
-        UpdateReadModel(_servicesScopeFactory, solutionToProblemAggregate.Id);
+        UpdateReadModel(_servicesScopeFactory, problemAggregate.Id);
 
-        return solutionToProblemAggregate.Id;
+        return problemAggregate.Id;
     }
 
-    public void UpdateReadModel(IServiceScopeFactory servicesScopeFactory, SolutionToProblemId id)
+    public void UpdateReadModel(IServiceScopeFactory servicesScopeFactory, ProblemId id)
     {
         _ = Task.Run(async () =>
         {

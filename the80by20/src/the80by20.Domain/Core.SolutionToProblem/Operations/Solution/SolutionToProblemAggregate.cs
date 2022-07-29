@@ -1,8 +1,9 @@
 ﻿using the80by20.Domain.ArchitectureBuildingBlocks;
 using the80by20.Domain.Core.SolutionToProblem.Capabilities;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.SharedKernel.Capabilities;
 
-namespace the80by20.Domain.Core.SolutionToProblem.Operations
+namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
 {
 
     // TODO przemysleć refactor, w którym mamy dwa agregaty: problem i solution
@@ -23,64 +24,50 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations
         }
 
         public SolutionToProblemId Id { get; private set; }
+        public ProblemId ProblemId { get; private set; }
 
         public RequiredSolutionElementTypes RequiredSolutionElementTypes { get; private set; } = RequiredSolutionElementTypes.Empty();
-        
-
-        public bool Confirmed { get; private set; }
-        public bool Rejected { get; private set; }
+       
         public bool WorkingOnSolutionStarted { get; private set; }
         public bool WorkingOnSolutionEnded { get; private set; }
 
         public Money Price { get; private set; } = Money.Zero();
         public SolutionAbstract SolutionAbstract { get; private set; } = SolutionAbstract.Empty();
-
         public SolutionElements SolutionElements { get; private set; } = SolutionElements.Empty();
 
-        public static SolutionToProblemAggregate New(RequiredSolutionElementTypes requiredSolutionElementTypes) 
-            => new(SolutionToProblemId.New(), requiredSolutionElementTypes);
+        public static SolutionToProblemAggregate New(ProblemId problemId,
+            RequiredSolutionElementTypes requiredSolutionElementTypes) 
+            => new(SolutionToProblemId.New(), problemId, requiredSolutionElementTypes);
 
-        private SolutionToProblemAggregate(Guid id, RequiredSolutionElementTypes requiredSolutionElementTypes)
+        private SolutionToProblemAggregate(SolutionToProblemId id,
+            ProblemId problemId,
+            RequiredSolutionElementTypes requiredSolutionElementTypes)
         {
             Id = id;
+            ProblemId = problemId;
             RequiredSolutionElementTypes = requiredSolutionElementTypes;
 
             MockStateDataToTestIfEfConverionsWork();
         }
 
         // INFO only for testing purpose
+        // todo
         private void MockStateDataToTestIfEfConverionsWork()
         {
-            SolutionAbstract = SolutionAbstract.FromContent("raz, dwa, trzy");
-            Price = Money.FromValue(123.45m);
+            //SolutionAbstract = SolutionAbstract.FromContent("raz, dwa, trzy");
+            //Price = Money.FromValue(123.45m);
 
-            Confirmed = true;
-            Rejected = true;
-            WorkingOnSolutionStarted = true;
-            WorkingOnSolutionEnded = true;
+            //WorkingOnSolutionStarted = true;
+            //WorkingOnSolutionEnded = true;
 
-            SolutionElements = SolutionElements.Empty()
-                .Add(SolutionElement.From(SolutionElementType.TheoryOfConceptWithExample, "gdrive-link1"))
-                .Add(SolutionElement.From(SolutionElementType.PocInCode, "gdrive-link2"));
+            //SolutionElements = SolutionElements.Empty()
+            //    .Add(SolutionElement.From(SolutionElementType.TheoryOfConceptWithExample, "gdrive-link1"))
+            //    .Add(SolutionElement.From(SolutionElementType.PocInCode, "gdrive-link2"));
         }
 
-        public void ConfirmProblem()
-        {
-            Confirmed = true;
-        }
-
-        public void RejectProblem()
-        {
-            Rejected = true;
-        }
 
         public void StartWorkingOnProblemSolution()
         {
-            if (!Confirmed)
-            {
-                throw new SolutionToProblemException("Cannot start working on not confirmed problem");
-            }
-
             WorkingOnSolutionStarted = true;
         }
 

@@ -5,6 +5,8 @@ using the80by20.App.Administration.MasterData;
 using the80by20.App.Administration.Security;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Infrastructure.Administration.MasterData;
 using the80by20.Infrastructure.Administration.Security;
 using the80by20.Infrastructure.Core.SolutionToProblem;
@@ -39,6 +41,7 @@ public static class DalExtensions
     public static IServiceCollection AddSolutionToProblem(this IServiceCollection services)
     {
         services.AddScoped<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
+        services.AddScoped<IProblemAggregateRepository, EfProblemAggregateRepository>();
         services.AddScoped<ISolutionToProblemReadModelUpdates, EfSolutionToProblemReadModelRepository>();
         services.AddScoped<ISolutionToProblemReadModelQueries, EfSolutionToProblemReadModelRepository>();
         return services;

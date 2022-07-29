@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Infrastructure.DAL;
 using the80by20.Infrastructure.DAL.DbContext;
 
@@ -14,10 +16,9 @@ public class EfSolutionToProblemAggregateRepository : ISolutionToProblemAggregat
         _context = context;
     }
 
-    public async Task Create(SolutionToProblemAggregate aggregate, SolutionToProblemCrudData crudData)
+    public async Task Create(SolutionToProblemAggregate aggregate)
     {
         _context.SolutionsToProblemsAggregates.Add(aggregate);
-        _context.SolutionsToProblemsCrudData.Add(crudData);
         await _context.SaveChangesAsync();
     }
 
@@ -27,21 +28,14 @@ public class EfSolutionToProblemAggregateRepository : ISolutionToProblemAggregat
         return res;
     }
 
-    public async Task<SolutionToProblemCrudData> GetCrudData(SolutionToProblemId id)
-    {
-        var res = await _context.SolutionsToProblemsCrudData.FirstOrDefaultAsync(x => x.AggregateId == id.Value);
-        return res;
-    }
-
     public async Task SaveAggragate(SolutionToProblemAggregate aggregate)
     {
         _context.SolutionsToProblemsAggregates.Update(aggregate);
         await _context.SaveChangesAsync();
     }
 
-    public async Task SaveData(SolutionToProblemCrudData crudData)
+    public async Task<bool> IsTheSolutionAssignedToProblem(ProblemId problemId)
     {
-        _context.SolutionsToProblemsCrudData.Update(crudData);
-        await _context.SaveChangesAsync();
+        return await _context.SolutionsToProblemsAggregates.AnyAsync(a => a.ProblemId == problemId);
     }
 }

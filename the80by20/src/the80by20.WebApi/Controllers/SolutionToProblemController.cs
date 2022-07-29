@@ -22,10 +22,11 @@ namespace the80by20.WebApi.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("solutions-to-problems/{id}")]
-        public async Task<IActionResult> Get(Guid id)
+        // todo swagger attributes and proper methods like notfound etc
+        [HttpGet("solutions-to-problems/{solutionId}")]
+        public async Task<IActionResult> Get(Guid solutionId)
         {
-            var res = await _solutionToProblemReadModelQueries.Get(id);
+            var res = await _solutionToProblemReadModelQueries.GetBySolutionId(solutionId);
 
             return Ok(res);
         }

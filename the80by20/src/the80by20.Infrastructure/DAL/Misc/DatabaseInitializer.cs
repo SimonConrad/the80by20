@@ -52,7 +52,8 @@ public class DatabaseInitializer : IHostedService
             Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000013"), "azure"),
             Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000014"), "aws"),
             Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000015"), "monitoring"),
-            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000016"), "support")
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000016"), "support"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000017"), ".net and c#")
         };
 
         await dbContext.Categories.AddRangeAsync(categories, cancellationToken);

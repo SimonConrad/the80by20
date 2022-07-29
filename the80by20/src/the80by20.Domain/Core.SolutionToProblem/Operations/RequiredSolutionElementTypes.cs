@@ -21,6 +21,11 @@ public sealed class RequiredSolutionElementTypes : IEquatable<RequiredSolutionEl
         return new(ihs);
     }
 
+    public  RequiredSolutionElementTypes Copy()
+    {
+        return new(Elements.ToImmutableHashSet());
+    }
+
     public static RequiredSolutionElementTypes Empty() => new(ImmutableHashSet.Create<SolutionElementType>());
 
     public static RequiredSolutionElementTypes FromSnapshotInJson(string snapshotInJson)

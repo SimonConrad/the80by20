@@ -1,6 +1,7 @@
 ﻿using the80by20.Domain.ArchitectureBuildingBlocks;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
-namespace the80by20.Domain.Core.SolutionToProblem.Operations
+namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
 {
     /// <summary>
     /// INFO save and restore always via aggregate
@@ -17,10 +18,9 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations
     [AggregateRepositoryDdd]
     public interface ISolutionToProblemAggregateRepository
     {
-        Task Create(SolutionToProblemAggregate aggregate, SolutionToProblemCrudData crudData);
+        Task Create(SolutionToProblemAggregate aggregate);
         Task<SolutionToProblemAggregate> Get(SolutionToProblemId id);
-        Task<SolutionToProblemCrudData> GetCrudData(SolutionToProblemId id);
         Task SaveAggragate(SolutionToProblemAggregate aggregate);
-        Task SaveData(SolutionToProblemCrudData crudData);
+        Task<bool> IsTheSolutionAssignedToProblem(ProblemId problemId);
     }
 }

@@ -15,17 +15,18 @@ namespace the80by20.App.Core.SolutionToProblem.ReadModel;
 [ReadModelDdd]
 public class SolutionToProblemReadModel
 {
-    public Guid SolutionToProblemId { get; set; }
+    public Guid ProblemId { get; set; }
+
+    public Guid? SolutionToProblemId { get; set; }
 
     public Guid UserId { get; set; }
 
     public string RequiredSolutionElementTypes { get; set; }
 
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
-    public string DescriptionLinks { get; set; }
 
-    public string Category { get; set; }
+    public string? Category { get; set; }
     
     public bool IsConfirmed { get; set; }
 
@@ -35,11 +36,11 @@ public class SolutionToProblemReadModel
 
     public bool WorkingOnSolutionEnded { get; set; }
 
-    public decimal Price { get; set; }
+    public decimal? Price { get; set; }
 
-    public string SolutionAbstract { get; set; }
+    public string? SolutionAbstract { get; set; }
 
-    public string SolutionElementTypes { get; set; }
+    public string? SolutionElementTypes { get; set; }
 
     public DateTime CreatedAt { get; set; }
 }
