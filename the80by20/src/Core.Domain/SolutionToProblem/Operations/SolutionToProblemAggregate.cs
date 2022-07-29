@@ -4,8 +4,19 @@ using Core.Domain.SolutionToProblem.Capabilities;
 
 namespace Core.Domain.SolutionToProblem.Operations
 {
+
+    // TODO przemysleć refactor, w którym mamy dwa agregaty: problem i solution
+    // to serwis domenowy decyduje, czy:
+    //  - można utworzyć rozwiązanie poprzez sprawdzenie stanu agregatu problemu - rozpcznij prace nad rozwiązaniem
+    //  - odrzucenie problemu sktkuje odrzuceniem rozwiązania jeśli takie isnitje
+    //  - aby w/w było mozliwe aggregat rozw. musi mieć id problemu 
+
+    // dodatkowo można by trzymać id problemu w agregacie rozwiązania
+    // podział na dwa agregaty sprawie, że będą mniejsze
+    // serwis domenowy to czytas funkcja dostaje dwa eagregaty i zwraca je ze zmienionym stanem lub rzuć excpetion
+    // readmodel nadal solution-to-problem agregaujący zdenormalizowane na cele readmodeli
     [AggregateDdd]
-    public class SolutionToProblemAggregate : BaseEntity, IEquatable<SolutionToProblemAggregate>
+    public class SolutionToProblemAggregate : Versionable, IEquatable<SolutionToProblemAggregate>
     {
         protected SolutionToProblemAggregate() // INFO for EF purpose
         {
