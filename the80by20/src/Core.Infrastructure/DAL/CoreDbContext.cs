@@ -1,9 +1,9 @@
 ﻿using Core.App.Administration.MasterData;
-using Core.App.Administration.Users;
-using Core.App.SolutionToProblem.ReadModel;
-using Core.Domain.SolutionToProblem.Operations;
-using Core.Infrastructure.DAL.Administration;
-using Core.Infrastructure.DAL.SolutionToProblem;
+using Core.App.Administration.Security.User;
+using Core.App.Core.SolutionToProblem.ReadModel;
+using Core.Domain.Core.SolutionToProblem.Operations;
+using Core.Infrastructure.Administration;
+using Core.Infrastructure.Core.SolutionToProblem;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.DAL

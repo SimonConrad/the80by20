@@ -38,6 +38,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Exceptions\" />
+	  <Folder Include="Core.SolutionSale\" />
 	  <Folder Include="Time\" />
 	</ItemGroup>
 

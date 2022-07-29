@@ -1,5 +1,4 @@
-﻿using Core.App.SolutionToProblem.Commands;
-using Core.App.SolutionToProblem.Commands.Handlers;
+﻿using Core.App.Core.SolutionToProblem.Commands.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.App
@@ -15,8 +14,6 @@ namespace Core.App
             //    .AsImplementedInterfaces()
             //    .WithScopedLifetime());
 
-            services.AddTransient<CreateProblemCommandHandler>();
-        
             return services;
         }
     }

@@ -1,6 +1,5 @@
 ﻿using Core.App.Administration.MasterData;
 using Core.Domain.SharedKernel;
-using Core.Infrastructure.DAL.Administration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

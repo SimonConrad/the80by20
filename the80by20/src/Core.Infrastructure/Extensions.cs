@@ -1,4 +1,4 @@
-using Core.App.SolutionToProblem.ReadModel;
+using Core.App.Core.SolutionToProblem.ReadModel;
 using Core.Domain.SharedKernel;
 using Core.Infrastructure.DAL;
 using Core.Infrastructure.Exceptions;
@@ -29,21 +29,29 @@ public static class Extensions
             .AddDatabase(configuration)
             .AddSingleton<IClock, Clock>();;
         
-        //todo
-        services.AddSwaggerGen(c =>
+        //services.AddCustomLogging();
+        //services.AddSecurity();
+        
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen(swagger =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "The 80 by 20", Version = "v1" });
+            //swagger.EnableAnnotations();
+            swagger.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "the-80-by-20 API",
+                Version = "v1"
+            });
         });
 
-        // todo
         services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler));
+
+        //services.AddAuth(configuration);
 
         return services;
     }
 
     public static async Task<WebApplication> UseInfrastructure(this WebApplication app, IConfiguration configuration)
     {
-        // todo
         app.UseMiddleware<ExceptionMiddleware>();
         
         app.UseSwagger();
@@ -58,10 +66,8 @@ public static class Extensions
         //});
         //app.UseAuthentication();
         
-        app.UseHttpsRedirection();
-
+        app.UseAuthentication();
         app.UseAuthorization();
-
         app.MapControllers();
 
 
