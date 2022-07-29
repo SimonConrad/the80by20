@@ -1,6 +1,6 @@
 ﻿using Common.DDD;
 
-namespace Core.App.Administration;
+namespace Core.App.Administration.MasterData;
 
 [CrudEntity]
 public class Category

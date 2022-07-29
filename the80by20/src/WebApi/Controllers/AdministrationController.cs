@@ -1,5 +1,5 @@
 ﻿using Common;
-using Core.App.Administration;
+using Core.App.Administration.MasterData;
 using Core.Infrastructure.DAL.Administration;
 using Microsoft.AspNetCore.Mvc;
 

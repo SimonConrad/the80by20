@@ -1,4 +1,4 @@
-﻿using Core.App.Administration;
+﻿using Core.App.Administration.MasterData;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.DAL.Administration;

@@ -1,5 +1,5 @@
 ﻿using Common;
-using Core.App.Administration;
+using Core.App.Administration.MasterData;
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Core.Infrastructure.DAL.Administration;
@@ -35,7 +35,8 @@ public static class Extensions
     public static IServiceCollection AddSolutionToProblem(this IServiceCollection services)
     {
         services.AddScoped<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
-        services.AddScoped<ISolutionToProblemReadModelRepository, EfSolutionToProblemReadModelRepository>();
+        services.AddScoped<ISolutionToProblemReadModelUpdates, EfSolutionToProblemReadModelRepository>();
+        services.AddScoped<ISolutionToProblemReadModelQueries, EfSolutionToProblemReadModelRepository>();
         return services;
     }
 

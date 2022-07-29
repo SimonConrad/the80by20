@@ -1,4 +1,4 @@
-﻿using Core.App.Administration;
+﻿using Core.App.Administration.MasterData;
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Core.Infrastructure.DAL.Administration;

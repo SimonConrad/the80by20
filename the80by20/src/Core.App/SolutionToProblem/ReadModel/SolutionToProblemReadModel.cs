@@ -15,7 +15,7 @@ namespace Core.App.SolutionToProblem.ReadModel;
 /// </summary>
 
 [ReadModelDdd]
-public class SolutionToProblemReadModel : IRequest<SolutionToProblemId>
+public class SolutionToProblemReadModel
 {
     public Guid SolutionToProblemId { get; set; }
 

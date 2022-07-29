@@ -1,4 +1,4 @@
-﻿using Core.App.Administration;
+﻿using Core.App.Administration.MasterData;
 using Core.Domain.SharedKernel;
 using Core.Infrastructure.DAL.Administration;
 using Microsoft.EntityFrameworkCore;

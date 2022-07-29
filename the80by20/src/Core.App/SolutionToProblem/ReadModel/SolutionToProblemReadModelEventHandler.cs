@@ -1,5 +1,5 @@
 ﻿using Common.DDD;
-using Core.App.Administration;
+using Core.App.Administration.MasterData;
 using Core.App.SolutionToProblem.Events;
 using Core.Domain.SolutionToProblem.Operations;
 using MediatR;
@@ -9,12 +9,12 @@ namespace Core.App.SolutionToProblem.ReadModel;
 [ReadModelDdd]
 public class SolutionToProblemReadModelEventHandler : INotificationHandler<ProblemCreated>, INotificationHandler<ProblemUpdated>
 {
-    private readonly ISolutionToProblemReadModelRepository _readModelRepository;
+    private readonly ISolutionToProblemReadModelUpdates _readModelRepository;
     private readonly ISolutionToProblemAggregateRepository _aggregateRepository;
     private readonly ICategoryCrudRepository _categoryCrudRepository;
 
     public SolutionToProblemReadModelEventHandler(
-        ISolutionToProblemReadModelRepository readModelRepository,
+        ISolutionToProblemReadModelUpdates readModelRepository,
         ISolutionToProblemAggregateRepository aggregateRepository,
         ICategoryCrudRepository categoryCrudRepository)
     {

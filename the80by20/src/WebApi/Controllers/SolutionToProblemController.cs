@@ -12,26 +12,26 @@ namespace WebApi.Controllers
     {
         private readonly ILogger<SolutionToProblemController> _logger;
         private readonly CreateProblemCommandHandler _createProblemCommandHandler;
-        private readonly ISolutionToProblemReadModelRepository _solutionToProblemReadModelRepository;
+        private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
         private readonly IMediator _mediator;
 
         public SolutionToProblemController(ILogger<SolutionToProblemController> logger, 
             CreateProblemCommandHandler createProblemCommandHandler,
-            ISolutionToProblemReadModelRepository solutionToProblemReadModelRepository,
+            ISolutionToProblemReadModelQueries solutionToProblemReadModelQueries,
             IMediator mediator)
         {
             _logger = logger;
 
             _createProblemCommandHandler = createProblemCommandHandler;
-            _solutionToProblemReadModelRepository = solutionToProblemReadModelRepository;
+            _solutionToProblemReadModelQueries = solutionToProblemReadModelQueries;
             _mediator = mediator;
         }
 
         [HttpGet("/categoriesandsolutiontypes")]
         public async Task<IActionResult> GetCategoriesAndSolutionTypes()
         {
-            var categories = await _solutionToProblemReadModelRepository.GetProblemsCategories();
-            var solutionTypes =  _solutionToProblemReadModelRepository.GetSolutionElementTypes();
+            var categories = await _solutionToProblemReadModelQueries.GetProblemsCategories();
+            var solutionTypes =  _solutionToProblemReadModelQueries.GetSolutionElementTypes();
 
             return Ok(new{categories, solutionTypes});
         }
@@ -50,7 +50,7 @@ namespace WebApi.Controllers
         [HttpGet("/solutionstoproblems/{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var res = await _solutionToProblemReadModelRepository.Get(id);
+            var res = await _solutionToProblemReadModelQueries.Get(id);
 
             return Ok(res);
         }

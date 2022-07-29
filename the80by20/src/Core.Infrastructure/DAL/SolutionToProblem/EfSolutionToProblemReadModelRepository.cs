@@ -1,4 +1,4 @@
-﻿using Core.App.Administration;
+﻿using Core.App.Administration.MasterData;
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SharedKernel.Capabilities;
 using Core.Domain.SolutionToProblem.Operations;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 namespace Core.Infrastructure.DAL.SolutionToProblem
 {
     // TODO pass cancelationtoken
-    public class EfSolutionToProblemReadModelRepository : ISolutionToProblemReadModelRepository
+    public class EfSolutionToProblemReadModelRepository : ISolutionToProblemReadModelQueries, ISolutionToProblemReadModelUpdates
     {
         private readonly CoreDbContext _coreDbContext;
 
