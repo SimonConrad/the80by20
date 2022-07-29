@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.App.SolutionToProblem.Commands.Handlers;
 
-public class CreateProblemCommandHandler
+public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand, SolutionToProblemId>
 {
     private readonly ISolutionToProblemAggregateRepository _repository;
     private readonly IServiceScopeFactory _servicesScopeFactory;
@@ -20,7 +20,7 @@ public class CreateProblemCommandHandler
     // INFO application logic - coordinates flow + cross cuttings:
     // wrap with db transaction - handler decorator or aspect oriented
     // wrap with try catch logger
-    public async Task<Guid> Handle(CreateProblemCommand command)
+    public async Task<SolutionToProblemId> Handle(CreateProblemCommand command, CancellationToken cancellationToken)
     {
         // INFO input validation logic
         // TODO FluentValidator on command
@@ -36,13 +36,14 @@ public class CreateProblemCommandHandler
             DescriptionLinks = command.DescriptionLinks
         };
 
-        solutionToProblemCrudData
-            .SetUser(Guid
-                .NewGuid()); // todo retrieve from current user and do in more sophisticated way, like in ef on save like readonly property
+        // todo retrieve from current user and do in more sophisticated way, like in ef on save like readonly property
+        solutionToProblemCrudData.SetUser(Guid.NewGuid());
 
         await _repository.Create(solutionToProblemAggregate, solutionToProblemCrudData);
 
-        // info done in FireAndForget way to present updating flow of CQRS read-model, in future apply message queue (ex rabbit mq)
+        // INFO done in FireAndForget way to present updating flow of CQRS read-model,
+        // after command chnaged state of the system, read-model is updated in the background,
+        // in future apply message queue (ex rabbit mq)
         UpdateReadModel(_servicesScopeFactory, solutionToProblemAggregate.Id);
 
         return solutionToProblemAggregate.Id;

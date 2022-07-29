@@ -36,7 +36,7 @@ public static class Extensions
         });
 
         // todo
-        services.AddMediatR(typeof(SolutionToProblemReadModelHandler));
+        services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler));
 
         return services;
     }

@@ -6,6 +6,7 @@ namespace Core.Domain.SolutionToProblem.Operations
     /// it is not completely separate from aggregate, like anemic entity
     /// </summary>
     [AggregateDataDdd]
+    [EntityDdd]
     public class SolutionToProblemCrudData : AggergateData
     {
         public Guid UserId { get; private set; }

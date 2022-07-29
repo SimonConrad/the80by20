@@ -1,6 +1,7 @@
 using Core.App.SolutionToProblem.Commands;
 using Core.App.SolutionToProblem.Commands.Handlers;
 using Core.App.SolutionToProblem.ReadModel;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -12,15 +13,18 @@ namespace WebApi.Controllers
         private readonly ILogger<SolutionToProblemController> _logger;
         private readonly CreateProblemCommandHandler _createProblemCommandHandler;
         private readonly ISolutionToProblemReadModelRepository _solutionToProblemReadModelRepository;
+        private readonly IMediator _mediator;
 
         public SolutionToProblemController(ILogger<SolutionToProblemController> logger, 
             CreateProblemCommandHandler createProblemCommandHandler,
-            ISolutionToProblemReadModelRepository solutionToProblemReadModelRepository)
+            ISolutionToProblemReadModelRepository solutionToProblemReadModelRepository,
+            IMediator mediator)
         {
             _logger = logger;
 
             _createProblemCommandHandler = createProblemCommandHandler;
             _solutionToProblemReadModelRepository = solutionToProblemReadModelRepository;
+            _mediator = mediator;
         }
 
         [HttpGet("/categoriesandsolutiontypes")]
@@ -33,12 +37,12 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("/problem")]
-        public async Task<IActionResult> Create(CreateProblemCommand createProblemCommand)
+        public async Task<IActionResult> Create(CreateProblemCommand createProblemCommand, CancellationToken token)
         {
             // TODO security
             // TODO fetch user and set in command
 
-            var solutionToProblemId = await _createProblemCommandHandler.Handle(createProblemCommand);
+            var solutionToProblemId = await _mediator.Send(createProblemCommand, token);
 
             return Ok(new { id = solutionToProblemId });
         }
