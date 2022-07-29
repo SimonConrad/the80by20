@@ -1,4 +1,5 @@
 ﻿using Core.App.Administration.MasterData;
+using Core.App.Administration.Users;
 using Core.App.SolutionToProblem.ReadModel;
 using Core.Domain.SolutionToProblem.Operations;
 using Core.Infrastructure.DAL.Administration;
@@ -11,16 +12,17 @@ namespace Core.Infrastructure.DAL
     public class CoreDbContext : DbContext
     {
         #region write models
-        public DbSet<SolutionToProblemAggregate> SolutionToProblemAggregate { get; set; }
-        public DbSet<SolutionToProblemCrudData> SolutionToProblemCrudData { get; set; }
+        public DbSet<SolutionToProblemAggregate> SolutionsToProblemsAggregates { get; set; }
+        public DbSet<SolutionToProblemCrudData> SolutionsToProblemsCrudData { get; set; }
         #endregion
 
         #region read models
-        public DbSet<SolutionToProblemReadModel> SolutionToProblemReadModel { get; set; }
+        public DbSet<SolutionToProblemReadModel> SolutionsToProblemsReadModel { get; set; }
         #endregion
 
         #region crud models
-        public DbSet<Category> Category { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<User> Users { get; set; }
         #endregion
 
         public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)

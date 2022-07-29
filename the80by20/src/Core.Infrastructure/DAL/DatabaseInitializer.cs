@@ -30,7 +30,7 @@ public class DatabaseInitializer : IHostedService
         // todo https://makolyte.com/ef-core-apply-migrations-programmatically/
         await dbContext.Database.MigrateAsync(cancellationToken);
 
-        if (await dbContext.Category.AnyAsync(cancellationToken))
+        if (await dbContext.Categories.AnyAsync(cancellationToken))
         {
             return;
         }
@@ -55,7 +55,7 @@ public class DatabaseInitializer : IHostedService
             Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000016"), "support")
         };
 
-        await dbContext.Category.AddRangeAsync(categories, cancellationToken);
+        await dbContext.Categories.AddRangeAsync(categories, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 

@@ -19,7 +19,7 @@ namespace Core.Infrastructure.DAL.SolutionToProblem
 
         public async Task<Category[]> GetProblemsCategories()
         {
-            var res = await _coreDbContext.Category.ToArrayAsync();
+            var res = await _coreDbContext.Categories.ToArrayAsync();
 
             return res;
         }
@@ -32,20 +32,20 @@ namespace Core.Infrastructure.DAL.SolutionToProblem
 
         public async Task<SolutionToProblemReadModel> Get(SolutionToProblemId id)
         {
-            var readModel  = await _coreDbContext.SolutionToProblemReadModel
+            var readModel  = await _coreDbContext.SolutionsToProblemsReadModel
                 .FirstOrDefaultAsync(r => r.SolutionToProblemId == id.Value);
             return readModel;
         }
 
         public async Task Create(SolutionToProblemReadModel readModel)
         {
-            _coreDbContext.SolutionToProblemReadModel.Add(readModel);
+            _coreDbContext.SolutionsToProblemsReadModel.Add(readModel);
             await _coreDbContext.SaveChangesAsync();
         }
 
         public async Task Update(SolutionToProblemReadModel readModel)
         {
-            _coreDbContext.SolutionToProblemReadModel.Update(readModel);
+            _coreDbContext.SolutionsToProblemsReadModel.Update(readModel);
             await _coreDbContext.SaveChangesAsync();
         }
     }

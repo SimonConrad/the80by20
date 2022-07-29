@@ -10,7 +10,7 @@ namespace Core.Infrastructure.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -18,11 +18,11 @@ namespace Core.Infrastructure.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SolutionToProblemAggregate",
+                name: "SolutionsToProblemsAggregates",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -38,11 +38,11 @@ namespace Core.Infrastructure.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SolutionToProblemAggregate", x => x.Id);
+                    table.PrimaryKey("PK_SolutionsToProblemsAggregates", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SolutionToProblemCrudData",
+                name: "SolutionsToProblemsCrudData",
                 columns: table => new
                 {
                     AggregateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -54,11 +54,11 @@ namespace Core.Infrastructure.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SolutionToProblemCrudData", x => x.AggregateId);
+                    table.PrimaryKey("PK_SolutionsToProblemsCrudData", x => x.AggregateId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SolutionToProblemReadModel",
+                name: "SolutionsToProblemsReadModel",
                 columns: table => new
                 {
                     SolutionToProblemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -78,23 +78,55 @@ namespace Core.Infrastructure.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SolutionToProblemReadModel", x => x.SolutionToProblemId);
+                    table.PrimaryKey("PK_SolutionsToProblemsReadModel", x => x.SolutionToProblemId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Username",
+                table: "Users",
+                column: "Username",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "SolutionToProblemAggregate");
+                name: "SolutionsToProblemsAggregates");
 
             migrationBuilder.DropTable(
-                name: "SolutionToProblemCrudData");
+                name: "SolutionsToProblemsCrudData");
 
             migrationBuilder.DropTable(
-                name: "SolutionToProblemReadModel");
+                name: "SolutionsToProblemsReadModel");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

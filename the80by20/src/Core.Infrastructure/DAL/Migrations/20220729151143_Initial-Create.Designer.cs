@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20220729144626_user")]
-    partial class user
+    [Migration("20220729151143_Initial-Create")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace Core.Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Core.App.Administration.Users.User", b =>
@@ -80,7 +80,7 @@ namespace Core.Infrastructure.DAL.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Core.App.SolutionToProblem.ReadModel.SolutionToProblemReadModel", b =>
@@ -136,7 +136,7 @@ namespace Core.Infrastructure.DAL.Migrations
 
                     b.HasKey("SolutionToProblemId");
 
-                    b.ToTable("SolutionToProblemReadModel");
+                    b.ToTable("SolutionsToProblemsReadModel");
                 });
 
             modelBuilder.Entity("Core.Domain.SolutionToProblem.Operations.SolutionToProblemAggregate", b =>
@@ -178,7 +178,7 @@ namespace Core.Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SolutionToProblemAggregate");
+                    b.ToTable("SolutionsToProblemsAggregates");
                 });
 
             modelBuilder.Entity("Core.Domain.SolutionToProblem.Operations.SolutionToProblemCrudData", b =>
@@ -208,7 +208,7 @@ namespace Core.Infrastructure.DAL.Migrations
 
                     b.HasKey("AggregateId");
 
-                    b.ToTable("SolutionToProblemCrudData");
+                    b.ToTable("SolutionsToProblemsCrudData");
                 });
 #pragma warning restore 612, 618
         }
