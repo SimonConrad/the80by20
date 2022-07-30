@@ -12,7 +12,7 @@ public class ProblemRejectionDomainService
         if (await solutionToProblemAggregateRepository.IsTheSolutionAssignedToProblem(problemAggregate.Id))
             throw new DomainException("Cannot reject problem to which solution is assigned");
 
-        problemAggregate.RejectProblem();
+        problemAggregate.Reject();
 
         return problemAggregate;
     }

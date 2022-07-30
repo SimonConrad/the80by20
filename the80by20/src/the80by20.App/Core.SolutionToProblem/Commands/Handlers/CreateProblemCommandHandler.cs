@@ -1,11 +1,13 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.App.Core.SolutionToProblem.Events;
+using the80by20.Domain.ArchitectureBuildingBlocks;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
 namespace the80by20.App.Core.SolutionToProblem.Commands.Handlers;
 
+[CommandDdd]
 public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand, ProblemId>
 {
     private readonly IProblemAggregateRepository _repository;
@@ -21,7 +23,7 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
 
     // INFO application logic - coordinates flow + cross cuttings:
     // todo wrap with db transaction - handler decorator or aspect oriented - but maybe problem with fire and forget updatereadmodel
-    // todo wrap with try catch logger
+    // todo wrap with try catch logger, and logger informaing about command received
     public async Task<ProblemId> Handle(CreateProblemCommand command, CancellationToken cancellationToken)
     {
         // INFO input validation logic

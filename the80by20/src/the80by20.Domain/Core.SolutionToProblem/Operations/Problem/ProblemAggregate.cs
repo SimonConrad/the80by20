@@ -32,7 +32,7 @@ public class ProblemAggregate : Versionable, IEquatable<ProblemAggregate>
         RequiredSolutionTypes = requiredSolutionTypes;
     }
 
-    public void ConfirmProblem()
+    public void Confirm()
     {
         if (!RequiredSolutionTypes.Elements.Any())
             throw new DomainException("Cannot confirm");
@@ -41,7 +41,7 @@ public class ProblemAggregate : Versionable, IEquatable<ProblemAggregate>
         Rejected = false;
     }
 
-    public void RejectProblem()
+    public void Reject()
     {
         Rejected = true;
         Confirmed = false;
