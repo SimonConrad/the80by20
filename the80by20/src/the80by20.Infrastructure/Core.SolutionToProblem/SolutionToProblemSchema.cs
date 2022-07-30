@@ -13,6 +13,23 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
     {
         public static void MapUsing(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ProblemAggregate>(e =>
+            {
+                e.MapTechnicalProperties();
+
+                e.HasKey(a => a.Id);
+                e.Property(a => a.Id)
+                    .HasConversion(
+                        a => a.Value,
+                        a => new ProblemId(a));
+
+                e.Property(a => a.RequiredSolutionTypes)
+                    .HasConversion(
+                        a => a.ToSnapshotInJson(),
+                        a => RequiredSolutionTypes.FromSnapshotInJson(a));
+            });
+
+
             modelBuilder.Entity<SolutionToProblemAggregate>(e =>
             {
                 e.MapTechnicalProperties();
@@ -33,6 +50,11 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
                         a => a.Content,
                         a => SolutionSummary.FromContent(a));
 
+                e.Property(a => a.BasePrice)
+                    .HasConversion(
+                        a => a.Value,
+                        a => Money.FromValue(a));
+
                 e.Property(a => a.AddtionalPrice)
                     .HasConversion(
                         a => a.Value,
@@ -47,23 +69,6 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
                     .HasConversion(
                         a => a.ToSnapshotInJson(),
                         a => SolutionElements.FromSnapshotInJson(a));
-            });
-
-
-            modelBuilder.Entity<ProblemAggregate>(e =>
-            {
-                e.MapTechnicalProperties();
-
-                e.HasKey(a => a.Id);
-                e.Property(a => a.Id)
-                    .HasConversion(
-                        a => a.Value,
-                        a => new ProblemId(a));
-
-                e.Property(a => a.RequiredSolutionTypes)
-                    .HasConversion(
-                        a => a.ToSnapshotInJson(),
-                        a => RequiredSolutionTypes.FromSnapshotInJson(a));
             });
 
 
