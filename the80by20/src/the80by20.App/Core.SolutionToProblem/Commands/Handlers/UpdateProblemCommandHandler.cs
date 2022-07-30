@@ -36,6 +36,7 @@ public class UpdateProblemCommandHandler : IRequestHandler<UpdatProblemCommand, 
         var problem = await _problemAggregateRepository.Get(command.ProblemId);
         var requiredSolutionTypes = RequiredSolutionTypes.From(command.SolutionTypes);
         problem.Update(requiredSolutionTypes);
+        await _problemAggregateRepository.SaveAggragate(problem);
 
         UpdateReadModel(_servicesScopeFactory, problem.Id);
 

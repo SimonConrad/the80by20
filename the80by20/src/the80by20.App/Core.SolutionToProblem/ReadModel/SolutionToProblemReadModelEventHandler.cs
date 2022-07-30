@@ -58,7 +58,6 @@ public class SolutionToProblemReadModelEventHandler : INotificationHandler<Probl
         await _readModelUpdates.Create(readmodel);
     }
 
-
     public async Task Handle(ProblemUpdated problemUpdated, CancellationToken cancellationToken)
     {
         var problem = await _problemAggregateRepository.Get(problemUpdated.ProblemId);
@@ -74,4 +73,7 @@ public class SolutionToProblemReadModelEventHandler : INotificationHandler<Probl
         rm.Description = problemData.Description;
         rm.Category = category.Name;
     }
+
+    // todo solutioncreated - pobierze po problem id readmodel i doda wartości w nowego garegat solution
+    // todo solution updated - zaktualizuje readmodel analogicznie jak dla problemupdated, ale danymi solution
 }
