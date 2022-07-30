@@ -43,6 +43,14 @@ namespace the80by20.WebApi.Controllers
             return Ok(new { id = problemId });
         }
 
+        [HttpPut("problem")]
+        public async Task<IActionResult> Update(UpdatProblemCommand updateProblemCommand, CancellationToken token)
+        {
+            var problemId = await _mediator.Send(updateProblemCommand, token);
+
+            return Ok(new { id = problemId });
+        }
+
         [HttpGet("problems/{problemId}")]
         public async Task<IActionResult> Get(Guid problemId)
         {

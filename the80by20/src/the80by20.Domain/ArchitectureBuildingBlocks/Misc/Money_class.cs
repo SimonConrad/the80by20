@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
-using the80by20.Domain.ArchitectureBuildingBlocks;
 
-namespace the80by20.Domain.SharedKernel.Capabilities;
+namespace the80by20.Domain.ArchitectureBuildingBlocks.Misc;
 
+// example of value object done using class, currently can be done more elegantly with record
 [ValueObjectDdd]
 public class Money_class : IEquatable<Money_class>
 {

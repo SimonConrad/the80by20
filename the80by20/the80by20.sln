@@ -5,26 +5,6 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{DBC8B925-6625-4ACB-9D4A-3D98999821CB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ES model", "ES model", "{1F6A770D-C8AA-4642-9256-83F3118E9D68}"
-	ProjectSection(SolutionItems) = preProject
-		__\ES model\the80by20 - core.pdf = __\ES model\the80by20 - core.pdf
-		__\ES model\the80by20 - modelowanie agregatu opiera się na wyznaczanie granicy spójności transakcji bizneswoej, natychmiastowej.pdf = __\ES model\the80by20 - modelowanie agregatu opiera się na wyznaczanie granicy spójności transakcji bizneswoej, natychmiastowej.pdf
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "materials", "materials", "{A4EEEE70-7AD6-4BAA-A916-83F7844E76CF}"
-	ProjectSection(SolutionItems) = preProject
-		__\materials\aggregate-model-true-invariants-in-consitancy-boundaries.jpg = __\materials\aggregate-model-true-invariants-in-consitancy-boundaries.jpg
-		__\materials\cqrs-evetsourcing-ddd.png = __\materials\cqrs-evetsourcing-ddd.png
-		__\materials\cqrs_documents.pdf = __\materials\cqrs_documents.pdf
-		__\materials\ddd-bulding-blocks.png = __\materials\ddd-bulding-blocks.png
-		__\materials\es-picture-that-explains-everything.png = __\materials\es-picture-that-explains-everything.png
-		__\materials\implementing ddd-aggregates-vaughn vernon.pdf = __\materials\implementing ddd-aggregates-vaughn vernon.pdf
-		__\materials\migrations-and-eddbcontext.md = __\materials\migrations-and-eddbcontext.md
-		__\materials\readme.md = __\materials\readme.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__", "__", "{B24543F1-EB07-45AC-B795-CE02CF4D12C6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.App", "src\the80by20.App\the80by20.App.csproj", "{17E03AC9-1103-4088-89D3-D14412A1CC58}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Domain", "src\the80by20.Domain\the80by20.Domain.csproj", "{26B05821-600B-4FF8-99CE-BC5CCC744F5E}"
@@ -66,8 +46,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1F6A770D-C8AA-4642-9256-83F3118E9D68} = {B24543F1-EB07-45AC-B795-CE02CF4D12C6}
-		{A4EEEE70-7AD6-4BAA-A916-83F7844E76CF} = {B24543F1-EB07-45AC-B795-CE02CF4D12C6}
 		{ED762F98-D9D0-4C42-8D74-22D1B8C7719F} = {DBC8B925-6625-4ACB-9D4A-3D98999821CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

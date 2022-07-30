@@ -9,7 +9,8 @@ namespace the80by20.Domain.Core.SolutionToProblem.Capabilities;
 [ValueObjectDdd]
 public sealed class SolutionElements
 {
-    public ImmutableHashSet<SolutionElement> Elements { get; init; } // immutability by init, and collection and SolutionElement as record
+    // immutability achieved by init, and collection and SolutionElement as record
+    public ImmutableHashSet<SolutionElement> Elements { get; init; }
 
     private SolutionElements(ImmutableHashSet<SolutionElement> elements)
     {
@@ -61,7 +62,7 @@ public sealed class SolutionElements
     // todo think if this class can be private
     public class SolutionElementSnapshot
     {
-        public SolutionElementType Type { get; set; }
+        public SolutionType Type { get; set; }
         public  string Link { get; set; }
     }
     

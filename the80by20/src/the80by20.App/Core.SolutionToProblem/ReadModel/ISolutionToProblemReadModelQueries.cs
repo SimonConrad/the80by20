@@ -13,7 +13,7 @@ public interface ISolutionToProblemReadModelQueries
 {
     Task<Category[]> GetProblemsCategories();
 
-    IEnumerable<SolutionElementType> GetSolutionElementTypes();
+    IEnumerable<SolutionType> GetSolutionElementTypes();
 
     Task<SolutionToProblemReadModel> GetBySolutionId(SolutionToProblemId id);
 

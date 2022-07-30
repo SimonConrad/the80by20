@@ -8,14 +8,14 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations;
 [ValueObjectDdd]
 public sealed class RequiredSolutionElementTypes : IEquatable<RequiredSolutionElementTypes>
 {
-    public ImmutableHashSet<SolutionElementType> Elements { get; init; }
+    public ImmutableHashSet<SolutionType> Elements { get; init; }
 
-    private RequiredSolutionElementTypes(ImmutableHashSet<SolutionElementType> ihs)
+    private RequiredSolutionElementTypes(ImmutableHashSet<SolutionType> ihs)
     {
         Elements = ihs;
     }
 
-    public static RequiredSolutionElementTypes From(params SolutionElementType[] elements)
+    public static RequiredSolutionElementTypes From(params SolutionType[] elements)
     {
         var ihs = elements.Distinct().ToImmutableHashSet();
         return new(ihs);
@@ -26,11 +26,11 @@ public sealed class RequiredSolutionElementTypes : IEquatable<RequiredSolutionEl
         return new(Elements.ToImmutableHashSet());
     }
 
-    public static RequiredSolutionElementTypes Empty() => new(ImmutableHashSet.Create<SolutionElementType>());
+    public static RequiredSolutionElementTypes Empty() => new(ImmutableHashSet.Create<SolutionType>());
 
     public static RequiredSolutionElementTypes FromSnapshotInJson(string snapshotInJson)
     {
-        var elements = JsonSerializer.Deserialize<SolutionElementType[]>(snapshotInJson);
+        var elements = JsonSerializer.Deserialize<SolutionType[]>(snapshotInJson);
 
         if (elements == null)
         {

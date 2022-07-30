@@ -14,5 +14,5 @@ public class CreateProblemCommand : IRequest<ProblemId>
     
     public Guid Category { get; set; }
 
-    public SolutionElementType[] SolutionElementTypes { get; set; }
+    public SolutionType[] SolutionElementTypes { get; set; }
 }

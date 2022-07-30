@@ -27,9 +27,9 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
             return res;
         }
 
-        public IEnumerable<SolutionElementType> GetSolutionElementTypes()
+        public IEnumerable<SolutionType> GetSolutionElementTypes()
         {
-            IEnumerable<SolutionElementType> res =  Enum.GetValues(typeof(SolutionElementType)).Cast<SolutionElementType>();
+            IEnumerable<SolutionType> res =  Enum.GetValues(typeof(SolutionType)).Cast<SolutionType>();
             return res;
         }
 

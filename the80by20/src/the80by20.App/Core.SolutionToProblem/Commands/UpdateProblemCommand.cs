@@ -1,13 +1,17 @@
-﻿using the80by20.Domain.SharedKernel.Capabilities;
+﻿using MediatR;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
+using the80by20.Domain.SharedKernel.Capabilities;
 
 namespace the80by20.App.Core.SolutionToProblem.Commands
 {
-    public class UpdatProblemCommand
+    public class UpdatProblemCommand  : IRequest<ProblemId>
     {
+        public Guid ProblemId { get; set; }
+
         public string Description { get; set; }
     
         public Guid Category { get; set; }
 
-        public SolutionElementType[] SolutionElementTypes { get; set; }
+        public SolutionType[] SolutionElementTypes { get; set; }
     }
 }
