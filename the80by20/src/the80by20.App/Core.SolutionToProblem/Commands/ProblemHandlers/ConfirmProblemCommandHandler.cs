@@ -31,13 +31,6 @@ public class ConfirmProblemCommandHandler : IRequestHandler<ConfirmProblemComman
         return problem.Id;
     }
 
-    private async Task UpdateData(UpdatProblemCommand command)
-    {
-        var data = await _problemAggregateRepository.GetCrudData(command.ProblemId);
-        data.Update(command.Description, command.Category);
-        await _problemAggregateRepository.SaveData(data);
-    }
-
     public void UpdateReadModel(IServiceScopeFactory servicesScopeFactory, ProblemId id)
     {
         _ = Task.Run(async () =>
