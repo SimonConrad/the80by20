@@ -15,24 +15,21 @@ public sealed record StartWorkingOnSolutionCommand(ProblemId ProblemId)
 public sealed record SetBasePriceOfSolutionCommand(SolutionToProblemId SolutionToProblemId) 
     : IRequest<SolutionToProblemId>;
 
-// todo handler
 [CommandDdd]
 public sealed record AddSolutionElementCommand(SolutionToProblemId SolutionToProblemId, SolutionElement SolutionElement) 
     : IRequest<SolutionToProblemId>;
 
-// todo handler
 [CommandDdd]
 public sealed record RemoveSolutionElementCommand(SolutionToProblemId SolutionToProblemId, SolutionElement SolutionElement) 
     : IRequest<SolutionToProblemId>;
 
-// todo handler
 [CommandDdd]
-public sealed record SetSummaryCommand(SolutionToProblemId SolutionToProblemId, SolutionSummary SolutionSummary) 
+public sealed record SetSolutionSummaryCommand(SolutionToProblemId SolutionToProblemId, SolutionSummary SolutionSummary) 
     : IRequest<SolutionToProblemId>;
 
 // todo handler
 [CommandDdd]
-public sealed record SetAdditionalPriceCommand(SolutionToProblemId SolutionToProblemId, Money additionalPrice) 
+public sealed record SetAdditionalPriceCommand(SolutionToProblemId SolutionToProblemId, Money AdditionalPrice) 
     : IRequest<SolutionToProblemId>;
 
 // todo handler

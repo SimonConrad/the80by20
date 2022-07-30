@@ -8,28 +8,25 @@ using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 namespace the80by20.App.Core.SolutionToProblem.Commands.SolutionHandlers;
 
 [CommandDdd]
-public class SetBasePriceOfSolutionCommandHandler 
-    : IRequestHandler<SetBasePriceOfSolutionCommand, SolutionToProblemId>
+public class SetAdditionalPriceCommandHandler 
+    : IRequestHandler<SetAdditionalPriceCommand, SolutionToProblemId>
 {
-    private readonly SetBasePriceForSolutionToProblemDomainService _domainService;
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
     private readonly IServiceScopeFactory _serviceScopeFactory;
 
 
-    public SetBasePriceOfSolutionCommandHandler(SetBasePriceForSolutionToProblemDomainService domainService,
-        ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
+    public SetAdditionalPriceCommandHandler(ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
         IServiceScopeFactory serviceScopeFactory)
     {
-        _domainService = domainService;
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
         _serviceScopeFactory = serviceScopeFactory;
     }
 
-    public async Task<SolutionToProblemId> Handle(SetBasePriceOfSolutionCommand command, 
+    public async Task<SolutionToProblemId> Handle(SetAdditionalPriceCommand command, 
         CancellationToken cancellationToken)
     {
         var solution = await _solutionToProblemAggregateRepository.Get(command.SolutionToProblemId);
-        _domainService.SetBasePrice(solution);
+        solution.SetAdditionalPrice(command.AdditionalPrice);
 
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
 

@@ -43,7 +43,7 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
             BasePrice = price;
         }
 
-        public void SetDescription(SolutionSummary solutionSummary)
+        public void SetSummary(SolutionSummary solutionSummary)
         {
             SolutionSummary = solutionSummary;
         }
@@ -63,7 +63,7 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
             SolutionElements = SolutionElements.Remove(solutionElement);
         }
 
-        public void EndWorkingOnSolutionToProblem()
+        public void FinishWorkOnSolutionToProblem()
         {
             if (!BasePrice.HasValue())
             {

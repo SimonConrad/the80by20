@@ -2,34 +2,30 @@
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.App.Core.SolutionToProblem.Events;
 using the80by20.Domain.ArchitectureBuildingBlocks;
-using the80by20.Domain.Core.SolutionToProblem.Operations.DomainServices;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 
 namespace the80by20.App.Core.SolutionToProblem.Commands.SolutionHandlers;
 
 [CommandDdd]
-public class SetBasePriceOfSolutionCommandHandler 
-    : IRequestHandler<SetBasePriceOfSolutionCommand, SolutionToProblemId>
+public class RemoveSolutionElementCommandHandler 
+    : IRequestHandler<RemoveSolutionElementCommand, SolutionToProblemId>
 {
-    private readonly SetBasePriceForSolutionToProblemDomainService _domainService;
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
     private readonly IServiceScopeFactory _serviceScopeFactory;
 
 
-    public SetBasePriceOfSolutionCommandHandler(SetBasePriceForSolutionToProblemDomainService domainService,
-        ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
+    public RemoveSolutionElementCommandHandler(ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
         IServiceScopeFactory serviceScopeFactory)
     {
-        _domainService = domainService;
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
         _serviceScopeFactory = serviceScopeFactory;
     }
 
-    public async Task<SolutionToProblemId> Handle(SetBasePriceOfSolutionCommand command, 
+    public async Task<SolutionToProblemId> Handle(RemoveSolutionElementCommand command, 
         CancellationToken cancellationToken)
     {
         var solution = await _solutionToProblemAggregateRepository.Get(command.SolutionToProblemId);
-        _domainService.SetBasePrice(solution);
+        solution.RemoveSolutionElement(command.SolutionElement);
 
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
 
