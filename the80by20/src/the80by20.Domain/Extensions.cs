@@ -8,6 +8,7 @@ public static class Extensions
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
         services.AddSingleton<ProblemRejectionDomainService>();
+        services.AddSingleton<StartWorkingOnSolutionToProblemDomainService>();
 
         return services;
     }

@@ -28,12 +28,12 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
                         a => a.Value,
                         a => new ProblemId(a));
 
-                e.Property(a => a.SolutionAbstract)
+                e.Property(a => a.SolutionSummary)
                     .HasConversion(
                         a => a.Content,
-                        a => SolutionAbstract.FromContent(a));
+                        a => SolutionSummary.FromContent(a));
 
-                e.Property(a => a.Price)
+                e.Property(a => a.AddtionalPrice)
                     .HasConversion(
                         a => a.Value,
                         a => Money.FromValue(a));

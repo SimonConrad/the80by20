@@ -5,7 +5,7 @@ using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 namespace the80by20.Domain.Core.SolutionToProblem.Operations;
 
 [DomainServiceDdd]
-public class SolutionToProblemDomainService
+public class StartWorkingOnSolutionToProblemDomainService
 {
     public SolutionToProblemAggregate StartWorkingOnSolutionToProblem(ProblemAggregate problemAggregate)
     {
@@ -16,13 +16,13 @@ public class SolutionToProblemDomainService
             throw new DomainException("Cannot start working on not rejected problem");
 
         if (!problemAggregate.RequiredSolutionTypes.Elements.Any())
-            throw new DomainException("Cannot start working on solution, when problem have none defined req solution element types");
+            throw new DomainException("Cannot start working on solution, " +
+                                      "when problem have no defined requirmed solution types");
 
 
         var solutionToProblemAggregate =  SolutionToProblemAggregate.New(problemAggregate.Id,
             problemAggregate.RequiredSolutionTypes.Copy());
 
-        solutionToProblemAggregate.StartWorkingOnProblemSolution();
 
         return solutionToProblemAggregate;
     }

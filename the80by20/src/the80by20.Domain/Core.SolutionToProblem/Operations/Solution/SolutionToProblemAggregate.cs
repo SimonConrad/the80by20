@@ -5,17 +5,6 @@ using the80by20.Domain.SharedKernel.Capabilities;
 
 namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
 {
-
-    // TODO przemysleć refactor, w którym mamy dwa agregaty: problem i solution
-    // to serwis domenowy decyduje, czy:
-    //  - można utworzyć rozwiązanie poprzez sprawdzenie stanu agregatu problemu - rozpcznij prace nad rozwiązaniem
-    //  - odrzucenie problemu sktkuje odrzuceniem rozwiązania jeśli takie isnitje
-    //  - aby w/w było mozliwe aggregat rozw. musi mieć id problemu 
-
-    // dodatkowo można by trzymać id problemu w agregacie rozwiązania
-    // podział na dwa agregaty sprawie, że będą mniejsze
-    // serwis domenowy to czytas funkcja dostaje dwa eagregaty i zwraca je ze zmienionym stanem lub rzuć excpetion
-    // readmodel nadal solution-to-problem agregaujący zdenormalizowane na cele readmodeli
     [AggregateDdd]
     public class SolutionToProblemAggregate : Versionable, IEquatable<SolutionToProblemAggregate>
     {
@@ -25,18 +14,16 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
 
         public SolutionToProblemId Id { get; private set; }
         public ProblemId ProblemId { get; private set; }
-
         public RequiredSolutionTypes RequiredSolutionTypes { get; private set; } = RequiredSolutionTypes.Empty();
-       
-        public bool WorkingOnSolutionStarted { get; private set; }
+
+        public SolutionSummary SolutionSummary { get; private set; } = SolutionSummary.Empty();
+        public SolutionElements SolutionElements { get; private set; } = SolutionElements.Empty();
+        public Money AddtionalPrice { get; private set; } = Money.Zero();
+        public Money BasePrice { get; private set; } = Money.Zero();
+        public Money Price => BasePrice + AddtionalPrice;
         public bool WorkingOnSolutionEnded { get; private set; }
 
-        public Money Price { get; private set; } = Money.Zero();
-        public SolutionAbstract SolutionAbstract { get; private set; } = SolutionAbstract.Empty();
-        public SolutionElements SolutionElements { get; private set; } = SolutionElements.Empty();
-
-        public static SolutionToProblemAggregate New(ProblemId problemId,
-            RequiredSolutionTypes requiredSolutionTypes) 
+        public static SolutionToProblemAggregate New(ProblemId problemId, RequiredSolutionTypes requiredSolutionTypes) 
             => new(SolutionToProblemId.New(), problemId, requiredSolutionTypes);
 
         private SolutionToProblemAggregate(SolutionToProblemId id,
@@ -47,38 +34,23 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
             ProblemId = problemId;
             RequiredSolutionTypes = requiredSolutionTypes;
 
+            
             MockStateDataToTestIfEfConverionsWork();
         }
 
-        // INFO only for testing purpose
-        // todo
-        private void MockStateDataToTestIfEfConverionsWork()
+        public void SetBasePrice(Money price)
         {
-            //SolutionAbstract = SolutionAbstract.FromContent("raz, dwa, trzy");
-            //Price = Money.FromValue(123.45m);
-
-            //WorkingOnSolutionStarted = true;
-            //WorkingOnSolutionEnded = true;
-
-            //SolutionElements = SolutionElements.Empty()
-            //    .Add(SolutionElement.From(SolutionElementType.TheoryOfConceptWithExample, "gdrive-link1"))
-            //    .Add(SolutionElement.From(SolutionElementType.PocInCode, "gdrive-link2"));
+            BasePrice = price;
         }
 
-
-        public void StartWorkingOnProblemSolution()
+        public void SetDescription(SolutionSummary solutionSummary)
         {
-            WorkingOnSolutionStarted = true;
+            SolutionSummary = solutionSummary;
         }
 
-        public void SetAbstract(SolutionAbstract solutionAbstract)
+        public void SetAdditionalPrice(Money price)
         {
-            SolutionAbstract = solutionAbstract;
-        }
-
-        public void SetPrice(Money price)
-        {
-            Price = price;
+            AddtionalPrice = price;
         }
 
         public void AddSolutionElement(SolutionElement solutionElement)
@@ -91,29 +63,37 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
             SolutionElements = SolutionElements.Remove(solutionElement);
         }
 
-        public void EndWorkingOnProblemSolution()
+        public void EndWorkingOnSolutionToProblem()
         {
-            if (!WorkingOnSolutionStarted)
+            if (!BasePrice.HasValue())
             {
-                throw new SolutionToProblemException("Cannot end not started solution");
+                // TODO think about dedidicates exception or pass namoef() so that it cab be testes properly
+                throw new SolutionToProblemException("Cannot end solution to problem without price");
             }
 
-            if (!Price.HasValue())
+            if (SolutionSummary.IsEmpty())
             {
-                throw new SolutionToProblemException("Cannot end solution without price");
-            }
-
-            if (!SolutionAbstract.NotEmpty())
-            {
-                throw new SolutionToProblemException("Cannot end solution without abstract");
+                throw new SolutionToProblemException("Cannot end solution to problem without abstract");
             }
 
             if (!SolutionElements.HaveAllRequiredElementTypes(RequiredSolutionTypes))
             {
-                throw new SolutionToProblemException("Cannot end solution without required elment types");
+                throw new SolutionToProblemException("Cannot end solution to problem without required elment types");
             }
 
             WorkingOnSolutionEnded = true;
+        }
+
+        // TODO remove in future and write intgrations test for testing mapping purposes
+        private void MockStateDataToTestIfEfConverionsWork()
+        {
+            //SolutionAbstract = SolutionAbstract.FromContent("raz, dwa, trzy");
+            //Price = Money.FromValue(123.45m);
+            //WorkingOnSolutionEnded = true;
+
+            //SolutionElements = SolutionElements.Empty()
+            //    .Add(SolutionElement.From(SolutionElementType.TheoryOfConceptWithExample, "gdrive-link1"))
+            //    .Add(SolutionElement.From(SolutionElementType.PocInCode, "gdrive-link2"));
         }
 
         public bool Equals(SolutionToProblemAggregate? other)

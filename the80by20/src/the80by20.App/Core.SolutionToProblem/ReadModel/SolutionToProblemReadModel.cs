@@ -17,14 +17,11 @@ public class SolutionToProblemReadModel
 {
     public Guid ProblemId { get; set; }
 
-    public Guid? SolutionToProblemId { get; set; }
-
     public Guid UserId { get; set; }
 
-    public string RequiredSolutionElementTypes { get; set; }
+    public string RequiredSolutionTypes { get; set; }
 
     public string? Description { get; set; }
-
 
     public string? Category { get; set; }
     
@@ -32,15 +29,15 @@ public class SolutionToProblemReadModel
 
     public bool IsRejected { get; set; }
 
-    public bool WorkingOnSolutionStarted { get; set; }
-
-    public bool WorkingOnSolutionEnded { get; set; }
+    public Guid? SolutionToProblemId { get; set; }
 
     public decimal? Price { get; set; }
 
-    public string? SolutionAbstract { get; set; }
+    public string? SolutionSummary { get; set; }
 
-    public string? SolutionElementTypes { get; set; }
+    public string? SolutionElements { get; set; }
+
+    public bool WorkingOnSolutionEnded { get; set; }
 
     public DateTime CreatedAt { get; set; }
 }

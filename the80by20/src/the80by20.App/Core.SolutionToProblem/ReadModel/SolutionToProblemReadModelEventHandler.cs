@@ -13,7 +13,10 @@ namespace the80by20.App.Core.SolutionToProblem.ReadModel;
 /// aggregate repos and administration category crud
 /// </summary>
 [ReadModelDdd]
-public class SolutionToProblemReadModelEventHandler : INotificationHandler<ProblemCreated>, INotificationHandler<ProblemUpdated>
+public class SolutionToProblemReadModelEventHandler : 
+    INotificationHandler<ProblemCreated>,
+    INotificationHandler<ProblemUpdated>,
+    INotificationHandler<StartedWorkingOnSolutionToProblem>
 {
     private readonly ISolutionToProblemReadModelUpdates _readModelUpdates;
     private readonly ISolutionToProblemReadModelQueries _readModelQueries;
@@ -36,16 +39,16 @@ public class SolutionToProblemReadModelEventHandler : INotificationHandler<Probl
         _categoryCrudRepository = categoryCrudRepository;
     }
 
-    public async Task Handle(ProblemCreated problemCreated, CancellationToken cancellationToken)
+    public async Task Handle(ProblemCreated @event, CancellationToken cancellationToken)
     {
-        var problem = await _problemAggregateRepository.Get(problemCreated.ProblemId);
-        var problemData = await _problemAggregateRepository.GetCrudData(problemCreated.ProblemId);
+        var problem = await _problemAggregateRepository.Get(@event.ProblemId);
+        var problemData = await _problemAggregateRepository.GetCrudData(@event.ProblemId);
         var category = await _categoryCrudRepository.GetById(problemData.Category);
 
         var readmodel = new SolutionToProblemReadModel()
         {
             ProblemId = problem.Id,
-            RequiredSolutionElementTypes = string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray()),
+            RequiredSolutionTypes = string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray()),
             IsConfirmed = problem.Confirmed,
             IsRejected = problem.Rejected,
 
@@ -58,15 +61,15 @@ public class SolutionToProblemReadModelEventHandler : INotificationHandler<Probl
         await _readModelUpdates.Create(readmodel);
     }
 
-    public async Task Handle(ProblemUpdated problemUpdated, CancellationToken cancellationToken)
+    public async Task Handle(ProblemUpdated @event, CancellationToken cancellationToken)
     {
-        var problem = await _problemAggregateRepository.Get(problemUpdated.ProblemId);
-        var problemData = await _problemAggregateRepository.GetCrudData(problemUpdated.ProblemId);
+        var problem = await _problemAggregateRepository.Get(@event.ProblemId);
+        var problemData = await _problemAggregateRepository.GetCrudData(@event.ProblemId);
         var category = await _categoryCrudRepository.GetById(problemData.Category);
 
-        var rm = await _readModelQueries.GetByProblemId(problemUpdated.ProblemId);
+        var rm = await _readModelQueries.GetByProblemId(@event.ProblemId);
 
-        rm.RequiredSolutionElementTypes =
+        rm.RequiredSolutionTypes =
             string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray());
         rm.IsConfirmed = problem.Confirmed;
         rm.IsRejected = problem.Rejected;
@@ -74,6 +77,19 @@ public class SolutionToProblemReadModelEventHandler : INotificationHandler<Probl
         rm.Category = category.Name;
     }
 
-    // todo solutioncreated - pobierze po problem id readmodel i doda wartości w nowego garegat solution
-    // todo solution updated - zaktualizuje readmodel analogicznie jak dla problemupdated, ale danymi solution
+    public async Task Handle(StartedWorkingOnSolutionToProblem @event, CancellationToken cancellationToken)
+    {
+        var solution = await _solutionToProblemAggregateRepository.Get(@event.SolutionToProblemId);
+
+        var rm = await _readModelQueries.GetByProblemId(solution.ProblemId);
+
+        rm.SolutionToProblemId = solution.Id;
+        rm.Price = solution.Price;
+        rm.SolutionSummary = solution.SolutionSummary.Content;
+        rm.SolutionElements = solution.SolutionElements.ToSnapshotInJson();
+        rm.WorkingOnSolutionEnded = solution.WorkingOnSolutionEnded;
+
+        await _readModelUpdates.Update(rm);
+
+    }
 }
