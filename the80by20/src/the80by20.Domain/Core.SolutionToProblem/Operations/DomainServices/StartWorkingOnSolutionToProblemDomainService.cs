@@ -2,11 +2,12 @@
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 
-namespace the80by20.Domain.Core.SolutionToProblem.Operations;
+namespace the80by20.Domain.Core.SolutionToProblem.Operations.DomainServices;
 
 [DomainServiceDdd]
 public class StartWorkingOnSolutionToProblemDomainService
 {
+    [DomainServiceDdd]
     public SolutionToProblemAggregate StartWorkingOnSolutionToProblem(ProblemAggregate problemAggregate)
     {
         if (!problemAggregate.Confirmed)

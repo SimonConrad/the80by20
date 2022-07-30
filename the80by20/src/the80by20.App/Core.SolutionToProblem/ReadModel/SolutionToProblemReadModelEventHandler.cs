@@ -16,7 +16,8 @@ namespace the80by20.App.Core.SolutionToProblem.ReadModel;
 public class SolutionToProblemReadModelEventHandler : 
     INotificationHandler<ProblemCreated>,
     INotificationHandler<ProblemUpdated>,
-    INotificationHandler<StartedWorkingOnSolutionToProblem>
+    INotificationHandler<StartedWorkingOnSolution>,
+    INotificationHandler<UpdatedSolution>
 {
     private readonly ISolutionToProblemReadModelUpdates _readModelUpdates;
     private readonly ISolutionToProblemReadModelQueries _readModelQueries;
@@ -77,7 +78,7 @@ public class SolutionToProblemReadModelEventHandler :
         rm.Category = category.Name;
     }
 
-    public async Task Handle(StartedWorkingOnSolutionToProblem @event, CancellationToken cancellationToken)
+    public async Task Handle(StartedWorkingOnSolution @event, CancellationToken cancellationToken)
     {
         var solution = await _solutionToProblemAggregateRepository.Get(@event.SolutionToProblemId);
 
@@ -90,6 +91,19 @@ public class SolutionToProblemReadModelEventHandler :
         rm.WorkingOnSolutionEnded = solution.WorkingOnSolutionEnded;
 
         await _readModelUpdates.Update(rm);
+    }
 
+    public async Task Handle(UpdatedSolution @event, CancellationToken cancellationToken)
+    {
+        var solution = await _solutionToProblemAggregateRepository.Get(@event.SolutionToProblemId);
+
+        var rm = await _readModelQueries.GetBySolutionId(solution.Id);
+
+        rm.Price = solution.Price;
+        rm.SolutionSummary = solution.SolutionSummary.Content;
+        rm.SolutionElements = solution.SolutionElements.ToSnapshotInJson();
+        rm.WorkingOnSolutionEnded = solution.WorkingOnSolutionEnded;
+
+        await _readModelUpdates.Update(rm);
     }
 }

@@ -2,11 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.App.Core.SolutionToProblem.Events;
 using the80by20.Domain.ArchitectureBuildingBlocks;
-using the80by20.Domain.Core.SolutionToProblem.Operations;
+using the80by20.Domain.Core.SolutionToProblem.Operations.DomainServices;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 
-namespace the80by20.App.Core.SolutionToProblem.Commands.Handlers;
+namespace the80by20.App.Core.SolutionToProblem.Commands.ProblemHandlers;
 
 [CommandDdd]
 public class RejectProblemCommandHandler : IRequestHandler<RejectProblemCommand, ProblemId>

@@ -2,41 +2,29 @@
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.App.Core.SolutionToProblem.Events;
 using the80by20.Domain.ArchitectureBuildingBlocks;
-using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
-namespace the80by20.App.Core.SolutionToProblem.Commands.Handlers;
+namespace the80by20.App.Core.SolutionToProblem.Commands.ProblemHandlers;
 
 [CommandDdd]
-public class UpdateProblemCommandHandler : IRequestHandler<UpdatProblemCommand, ProblemId>
+public class ConfirmProblemCommandHandler : IRequestHandler<ConfirmProblemCommand, ProblemId>
 {
     private readonly IProblemAggregateRepository _problemAggregateRepository;
     private readonly IServiceScopeFactory _servicesScopeFactory;
 
-    public UpdateProblemCommandHandler(
+    public ConfirmProblemCommandHandler(
         IProblemAggregateRepository problemAggregateRepository,
         IServiceScopeFactory servicesScopeFactory)
     {
         _problemAggregateRepository = problemAggregateRepository;
         _servicesScopeFactory = servicesScopeFactory;
     }
-    public async Task<ProblemId> Handle(UpdatProblemCommand command, CancellationToken cancellationToken)
+    public async Task<ProblemId> Handle(ConfirmProblemCommand command, CancellationToken cancellationToken)
     {
-        if (command.UpdateScope == UpdateDataScope.OnlyData)
-        {
-            await UpdateData(command);
-            return command.ProblemId;
-        }
-
-        if (command.UpdateScope == UpdateDataScope.All)
-        {
-            await UpdateData(command);
-        }
-
         var problem = await _problemAggregateRepository.Get(command.ProblemId);
-        var requiredSolutionTypes = RequiredSolutionTypes.From(command.SolutionTypes);
-        problem.Update(requiredSolutionTypes);
+        problem.Confirm();
         await _problemAggregateRepository.SaveAggragate(problem);
+
 
         UpdateReadModel(_servicesScopeFactory, problem.Id);
 

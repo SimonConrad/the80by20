@@ -5,27 +5,38 @@ using the80by20.Domain.ArchitectureBuildingBlocks;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
-namespace the80by20.App.Core.SolutionToProblem.Commands.Handlers;
+namespace the80by20.App.Core.SolutionToProblem.Commands.ProblemHandlers;
 
 [CommandDdd]
-public class ConfirmProblemCommandHandler : IRequestHandler<ConfirmProblemCommand, ProblemId>
+public class UpdateProblemCommandHandler : IRequestHandler<UpdatProblemCommand, ProblemId>
 {
     private readonly IProblemAggregateRepository _problemAggregateRepository;
     private readonly IServiceScopeFactory _servicesScopeFactory;
 
-    public ConfirmProblemCommandHandler(
+    public UpdateProblemCommandHandler(
         IProblemAggregateRepository problemAggregateRepository,
         IServiceScopeFactory servicesScopeFactory)
     {
         _problemAggregateRepository = problemAggregateRepository;
         _servicesScopeFactory = servicesScopeFactory;
     }
-    public async Task<ProblemId> Handle(ConfirmProblemCommand command, CancellationToken cancellationToken)
+    public async Task<ProblemId> Handle(UpdatProblemCommand command, CancellationToken cancellationToken)
     {
-        var problem = await _problemAggregateRepository.Get(command.ProblemId);
-        problem.Confirm();
-        await _problemAggregateRepository.SaveAggragate(problem);
+        if (command.UpdateScope == UpdateDataScope.OnlyData)
+        {
+            await UpdateData(command);
+            return command.ProblemId;
+        }
 
+        if (command.UpdateScope == UpdateDataScope.All)
+        {
+            await UpdateData(command);
+        }
+
+        var problem = await _problemAggregateRepository.Get(command.ProblemId);
+        var requiredSolutionTypes = RequiredSolutionTypes.From(command.SolutionTypes);
+        problem.Update(requiredSolutionTypes);
+        await _problemAggregateRepository.SaveAggragate(problem);
 
         UpdateReadModel(_servicesScopeFactory, problem.Id);
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
+using the80by20.Domain.Core.SolutionToProblem.Operations.DomainServices;
 
 namespace the80by20.Domain;
 
@@ -9,6 +10,7 @@ public static class Extensions
     {
         services.AddSingleton<ProblemRejectionDomainService>();
         services.AddSingleton<StartWorkingOnSolutionToProblemDomainService>();
+        services.AddSingleton<SetBasePriceForSolutionToProblemDomainService>();
 
         return services;
     }

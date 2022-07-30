@@ -6,4 +6,7 @@ using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 namespace the80by20.App.Core.SolutionToProblem.Commands;
 
 [CommandDdd]
-public sealed record StartWorkingOnSolutionToProblemCommand(ProblemId ProblemId) : IRequest<SolutionToProblemId>;
+public sealed record StartWorkingOnSolutionCommand(ProblemId ProblemId) : IRequest<SolutionToProblemId>;
+
+[CommandDdd]
+public sealed record SetBasePriceOfSolutionCommand(SolutionToProblemId SolutionToProblemId) : IRequest<SolutionToProblemId>;
