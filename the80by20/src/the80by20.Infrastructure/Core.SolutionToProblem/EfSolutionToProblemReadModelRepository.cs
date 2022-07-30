@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.App.Administration.MasterData;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
-using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Domain.SharedKernel.Capabilities;
-using the80by20.Infrastructure.DAL;
 using the80by20.Infrastructure.DAL.DbContext;
 
 namespace the80by20.Infrastructure.Core.SolutionToProblem

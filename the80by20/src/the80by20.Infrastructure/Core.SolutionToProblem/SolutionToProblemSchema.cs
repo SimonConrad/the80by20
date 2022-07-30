@@ -5,7 +5,6 @@ using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Domain.SharedKernel.Capabilities;
-using the80by20.Infrastructure.DAL;
 using the80by20.Infrastructure.DAL.Misc;
 
 namespace the80by20.Infrastructure.Core.SolutionToProblem
@@ -39,10 +38,10 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
                         a => a.Value,
                         a => Money.FromValue(a));
 
-                e.Property(a => a.RequiredSolutionElementTypes)
+                e.Property(a => a.RequiredSolutionTypes)
                     .HasConversion(
                         a => a.ToSnapshotInJson(),
-                        a => RequiredSolutionElementTypes.FromSnapshotInJson(a));
+                        a => RequiredSolutionTypes.FromSnapshotInJson(a));
 
                 e.Property(a => a.SolutionElements)
                     .HasConversion(
@@ -61,10 +60,10 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem
                         a => a.Value,
                         a => new ProblemId(a));
 
-                e.Property(a => a.RequiredSolutionElementTypes)
+                e.Property(a => a.RequiredSolutionTypes)
                     .HasConversion(
                         a => a.ToSnapshotInJson(),
-                        a => RequiredSolutionElementTypes.FromSnapshotInJson(a));
+                        a => RequiredSolutionTypes.FromSnapshotInJson(a));
             });
 
 

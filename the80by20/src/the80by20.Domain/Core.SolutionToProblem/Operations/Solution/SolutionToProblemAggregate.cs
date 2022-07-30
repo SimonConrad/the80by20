@@ -26,7 +26,7 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
         public SolutionToProblemId Id { get; private set; }
         public ProblemId ProblemId { get; private set; }
 
-        public RequiredSolutionElementTypes RequiredSolutionElementTypes { get; private set; } = RequiredSolutionElementTypes.Empty();
+        public RequiredSolutionTypes RequiredSolutionTypes { get; private set; } = RequiredSolutionTypes.Empty();
        
         public bool WorkingOnSolutionStarted { get; private set; }
         public bool WorkingOnSolutionEnded { get; private set; }
@@ -36,16 +36,16 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
         public SolutionElements SolutionElements { get; private set; } = SolutionElements.Empty();
 
         public static SolutionToProblemAggregate New(ProblemId problemId,
-            RequiredSolutionElementTypes requiredSolutionElementTypes) 
-            => new(SolutionToProblemId.New(), problemId, requiredSolutionElementTypes);
+            RequiredSolutionTypes requiredSolutionTypes) 
+            => new(SolutionToProblemId.New(), problemId, requiredSolutionTypes);
 
         private SolutionToProblemAggregate(SolutionToProblemId id,
             ProblemId problemId,
-            RequiredSolutionElementTypes requiredSolutionElementTypes)
+            RequiredSolutionTypes requiredSolutionTypes)
         {
             Id = id;
             ProblemId = problemId;
-            RequiredSolutionElementTypes = requiredSolutionElementTypes;
+            RequiredSolutionTypes = requiredSolutionTypes;
 
             MockStateDataToTestIfEfConverionsWork();
         }
@@ -108,7 +108,7 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
                 throw new SolutionToProblemException("Cannot end solution without abstract");
             }
 
-            if (!SolutionElements.HaveAllRequiredElementTypes(RequiredSolutionElementTypes))
+            if (!SolutionElements.HaveAllRequiredElementTypes(RequiredSolutionTypes))
             {
                 throw new SolutionToProblemException("Cannot end solution without required elment types");
             }

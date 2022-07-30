@@ -4,13 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using the80by20.App.Administration.MasterData;
 using the80by20.App.Administration.Security;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
-using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Infrastructure.Administration.MasterData;
 using the80by20.Infrastructure.Administration.Security;
 using the80by20.Infrastructure.Core.SolutionToProblem;
-using the80by20.Infrastructure.DAL;
 using the80by20.Infrastructure.DAL.DbContext;
 using the80by20.Infrastructure.DAL.Misc;
 

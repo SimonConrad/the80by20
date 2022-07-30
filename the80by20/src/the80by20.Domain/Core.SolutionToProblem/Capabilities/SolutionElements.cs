@@ -48,7 +48,7 @@ public sealed class SolutionElements
         return new(Elements.Remove(element)); // immutability
     }
 
-    public bool HaveAllRequiredElementTypes(RequiredSolutionElementTypes req) => 
+    public bool HaveAllRequiredElementTypes(RequiredSolutionTypes req) => 
         req.Elements.All(r => Elements.Select(x => x.Type).Contains(r));
 
 

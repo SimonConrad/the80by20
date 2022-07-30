@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Infrastructure.DAL.DbContext;
 

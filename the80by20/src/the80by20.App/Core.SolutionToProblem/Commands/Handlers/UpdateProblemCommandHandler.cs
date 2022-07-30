@@ -1,0 +1,62 @@
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using the80by20.App.Core.SolutionToProblem.Events;
+using the80by20.Domain.Core.SolutionToProblem.Operations;
+using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
+
+namespace the80by20.App.Core.SolutionToProblem.Commands.Handlers;
+
+public class UpdateProblemCommandHandler : IRequestHandler<UpdatProblemCommand, ProblemId>
+{
+    private readonly IProblemAggregateRepository _problemAggregateRepository;
+    private readonly ProblemRejectionDomainService _rejectionDomainService;
+    private readonly IServiceScopeFactory _servicesScopeFactory;
+
+    public UpdateProblemCommandHandler(
+        IProblemAggregateRepository problemAggregateRepository,
+        ProblemRejectionDomainService rejectionDomainService,
+        IServiceScopeFactory servicesScopeFactory)
+    {
+        _problemAggregateRepository = problemAggregateRepository;
+        _rejectionDomainService = rejectionDomainService;
+        _servicesScopeFactory = servicesScopeFactory;
+    }
+    public async Task<ProblemId> Handle(UpdatProblemCommand command, CancellationToken cancellationToken)
+    {
+        if (command.UpdateScope == UpdateDataScope.OnlyData)
+        {
+            await UpdateData(command);
+            return command.ProblemId;
+        }
+
+        if (command.UpdateScope == UpdateDataScope.All)
+        {
+            await UpdateData(command);
+        }
+
+        var problem = await _problemAggregateRepository.Get(command.ProblemId);
+        var requiredSolutionTypes = RequiredSolutionTypes.From(command.SolutionTypes);
+        problem.Update(requiredSolutionTypes);
+
+        UpdateReadModel(_servicesScopeFactory, problem.Id);
+
+        return problem.Id;
+    }
+
+    private async Task UpdateData(UpdatProblemCommand command)
+    {
+        var data = await _problemAggregateRepository.GetCrudData(command.ProblemId);
+        data.Update(command.Description, command.Category);
+        await _problemAggregateRepository.SaveData(data);
+    }
+
+    public void UpdateReadModel(IServiceScopeFactory servicesScopeFactory, ProblemId id)
+    {
+        _ = Task.Run(async () =>
+        {
+            using var scope = servicesScopeFactory.CreateScope();
+            var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+            await mediator.Publish(new ProblemCreated(id));
+        });
+    }
+}

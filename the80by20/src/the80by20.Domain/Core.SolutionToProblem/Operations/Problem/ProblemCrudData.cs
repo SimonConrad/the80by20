@@ -26,5 +26,11 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Problem
             Description = description;
             Category = category;
         }
+
+        public void Update(string description, Guid category)
+        {
+            Description = description;
+            Category = category;
+        }
     }
 }

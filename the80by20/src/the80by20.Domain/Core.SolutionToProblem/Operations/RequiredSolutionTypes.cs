@@ -6,38 +6,38 @@ using the80by20.Domain.SharedKernel.Capabilities;
 namespace the80by20.Domain.Core.SolutionToProblem.Operations;
 
 [ValueObjectDdd]
-public sealed class RequiredSolutionElementTypes : IEquatable<RequiredSolutionElementTypes>
+public sealed class RequiredSolutionTypes : IEquatable<RequiredSolutionTypes>
 {
     public ImmutableHashSet<SolutionType> Elements { get; init; }
 
-    private RequiredSolutionElementTypes(ImmutableHashSet<SolutionType> ihs)
+    private RequiredSolutionTypes(ImmutableHashSet<SolutionType> ihs)
     {
         Elements = ihs;
     }
 
-    public static RequiredSolutionElementTypes From(params SolutionType[] elements)
+    public static RequiredSolutionTypes From(params SolutionType[] elements)
     {
         var ihs = elements.Distinct().ToImmutableHashSet();
         return new(ihs);
     }
 
-    public  RequiredSolutionElementTypes Copy()
+    public  RequiredSolutionTypes Copy()
     {
         return new(Elements.ToImmutableHashSet());
     }
 
-    public static RequiredSolutionElementTypes Empty() => new(ImmutableHashSet.Create<SolutionType>());
+    public static RequiredSolutionTypes Empty() => new(ImmutableHashSet.Create<SolutionType>());
 
-    public static RequiredSolutionElementTypes FromSnapshotInJson(string snapshotInJson)
+    public static RequiredSolutionTypes FromSnapshotInJson(string snapshotInJson)
     {
         var elements = JsonSerializer.Deserialize<SolutionType[]>(snapshotInJson);
 
         if (elements == null)
         {
-            throw new DomainException(nameof(RequiredSolutionElementTypes));
+            throw new DomainException(nameof(RequiredSolutionTypes));
         }
 
-        return RequiredSolutionElementTypes.From(elements);
+        return RequiredSolutionTypes.From(elements);
     }
 
     public string ToSnapshotInJson()
@@ -46,7 +46,7 @@ public sealed class RequiredSolutionElementTypes : IEquatable<RequiredSolutionEl
         return snapshotInJson;
     }
 
-    public bool Equals(RequiredSolutionElementTypes? other)
+    public bool Equals(RequiredSolutionTypes? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -67,7 +67,7 @@ public sealed class RequiredSolutionElementTypes : IEquatable<RequiredSolutionEl
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
-        return Equals((RequiredSolutionElementTypes)obj);
+        return Equals((RequiredSolutionTypes)obj);
     }
 
     public override int GetHashCode()

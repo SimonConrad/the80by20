@@ -2,12 +2,13 @@
 using Microsoft.Extensions.Options;
 using Serilog;
 using the80by20.App;
+using the80by20.Domain;
 using the80by20.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    //.AddCore() // todo policy for example
+    .AddDomain()
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 

@@ -10,39 +10,37 @@ public class ProblemAggregate : Versionable, IEquatable<ProblemAggregate>
     }
 
     public ProblemId Id { get; private set; }
-    public RequiredSolutionElementTypes RequiredSolutionElementTypes { get; private set; } = RequiredSolutionElementTypes.Empty();
+    public RequiredSolutionTypes RequiredSolutionTypes { get; private set; } = RequiredSolutionTypes.Empty();
     public bool Confirmed { get; private set; }
     public bool Rejected { get; private set; }
 
 
-    private ProblemAggregate(ProblemId id, 
-        RequiredSolutionElementTypes requiredSolutionElementTypes)
+    private ProblemAggregate(ProblemId id, RequiredSolutionTypes requiredSolutionTypes)
     {
         Id = id;
-        RequiredSolutionElementTypes = requiredSolutionElementTypes;
+        RequiredSolutionTypes = requiredSolutionTypes;
     }
 
-    public static ProblemAggregate New(
-        RequiredSolutionElementTypes requiredSolutionElementTypes,
-        string description,
-        Guid category) => new ProblemAggregate(ProblemId.New(), 
-        requiredSolutionElementTypes);
+    public static ProblemAggregate New(RequiredSolutionTypes requiredSolutionTypes) 
+        => new ProblemAggregate(ProblemId.New(), requiredSolutionTypes);
 
-    public void Update(RequiredSolutionElementTypes requiredSolutionElementTypes,
-        string description,
-        Guid category)
+    public void Update(RequiredSolutionTypes requiredSolutionTypes)
     {
         if (Confirmed)
             throw new DomainException("Cannot update confirmed problem");
 
-        RequiredSolutionElementTypes = requiredSolutionElementTypes;
+        RequiredSolutionTypes = requiredSolutionTypes;
     }
 
     public void ConfirmProblem()
     {
+        if (!RequiredSolutionTypes.Elements.Any())
+            throw new DomainException("Cannot confirm");
+        
         Confirmed = true;
         Rejected = false;
     }
+
     public void RejectProblem()
     {
         Rejected = true;

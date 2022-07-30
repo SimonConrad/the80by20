@@ -20,17 +20,14 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
     }
 
     // INFO application logic - coordinates flow + cross cuttings:
-    // wrap with db transaction - handler decorator or aspect oriented
-    // wrap with try catch logger
+    // todo wrap with db transaction - handler decorator or aspect oriented - but maybe problem with fire and forget updatereadmodel
+    // todo wrap with try catch logger
     public async Task<ProblemId> Handle(CreateProblemCommand command, CancellationToken cancellationToken)
     {
         // INFO input validation logic
         // TODO FluentValidator on command
 
-        var problemAggregate = ProblemAggregate.New(
-            RequiredSolutionElementTypes.From(command.SolutionElementTypes),
-            command.Description, 
-            command.Category);
+        var problemAggregate = ProblemAggregate.New(RequiredSolutionTypes.From(command.SolutionElementTypes));
 
         // todo retrieve from current user and do in more sophisticated way, like in ef on save like readonly property
         var userId = Guid.NewGuid();

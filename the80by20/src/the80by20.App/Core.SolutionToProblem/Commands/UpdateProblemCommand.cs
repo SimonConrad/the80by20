@@ -12,6 +12,16 @@ namespace the80by20.App.Core.SolutionToProblem.Commands
     
         public Guid Category { get; set; }
 
-        public SolutionType[] SolutionElementTypes { get; set; }
+        public SolutionType[] SolutionTypes { get; set; }
+
+        public UpdateDataScope UpdateScope { get; set; }
+
+    }
+
+    public enum UpdateDataScope
+    {
+        All,
+        OnlyData,
+        OnlySolutionTypes
     }
 }
