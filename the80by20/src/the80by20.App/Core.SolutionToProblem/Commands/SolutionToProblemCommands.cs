@@ -27,12 +27,14 @@ public sealed record RemoveSolutionElementCommand(SolutionToProblemId SolutionTo
 public sealed record SetSolutionSummaryCommand(SolutionToProblemId SolutionToProblemId, SolutionSummary SolutionSummary) 
     : IRequest<SolutionToProblemId>;
 
-// todo handler
 [CommandDdd]
 public sealed record SetAdditionalPriceCommand(SolutionToProblemId SolutionToProblemId, Money AdditionalPrice) 
     : IRequest<SolutionToProblemId>;
 
-// todo handler
 [CommandDdd]
 public sealed record FinishSolutionCommand(SolutionToProblemId SolutionToProblemId) 
     : IRequest<SolutionToProblemId>;
+
+
+// //info if we want to send 3 commands at once from ui (example: AddSolutionElementCommand, SetSolutionSummaryCommand, SetAdditionalPriceCommand)
+// //then such http web api post endpoint can be expposed wiitch transfer above coammnd data in its payload, then application service will handle it properly
