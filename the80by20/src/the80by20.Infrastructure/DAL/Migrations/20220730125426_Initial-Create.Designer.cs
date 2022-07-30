@@ -12,7 +12,7 @@ using the80by20.Infrastructure.DAL.DbContext;
 namespace the80by20.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20220729220926_Initial-Create")]
+    [Migration("20220730125426_Initial-Create")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,14 +90,12 @@ namespace the80by20.Infrastructure.DAL.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsConfirmed")
@@ -106,31 +104,26 @@ namespace the80by20.Infrastructure.DAL.Migrations
                     b.Property<bool>("IsRejected")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("RequiredSolutionElementTypes")
+                    b.Property<string>("RequiredSolutionTypes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SolutionAbstract")
-                        .IsRequired()
+                    b.Property<string>("SolutionElements")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SolutionElementTypes")
-                        .IsRequired()
+                    b.Property<string>("SolutionSummary")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("SolutionToProblemId")
+                    b.Property<Guid?>("SolutionToProblemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("WorkingOnSolutionEnded")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("WorkingOnSolutionStarted")
                         .HasColumnType("bit");
 
                     b.HasKey("ProblemId");
@@ -149,7 +142,7 @@ namespace the80by20.Infrastructure.DAL.Migrations
                     b.Property<bool>("Rejected")
                         .HasColumnType("bit");
 
-                    b.Property<string>("RequiredSolutionElementTypes")
+                    b.Property<string>("RequiredSolutionTypes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -197,21 +190,24 @@ namespace the80by20.Infrastructure.DAL.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal>("AddtionalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("BasePrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("ProblemId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RequiredSolutionElementTypes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SolutionAbstract")
+                    b.Property<string>("RequiredSolutionTypes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SolutionElements")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SolutionSummary")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -221,9 +217,6 @@ namespace the80by20.Infrastructure.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("WorkingOnSolutionEnded")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("WorkingOnSolutionStarted")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

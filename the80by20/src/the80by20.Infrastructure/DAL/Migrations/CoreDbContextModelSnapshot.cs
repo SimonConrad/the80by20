@@ -105,14 +105,14 @@ namespace the80by20.Infrastructure.DAL.Migrations
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("RequiredSolutionElementTypes")
+                    b.Property<string>("RequiredSolutionTypes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SolutionAbstract")
+                    b.Property<string>("SolutionElements")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SolutionElementTypes")
+                    b.Property<string>("SolutionSummary")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("SolutionToProblemId")
@@ -122,9 +122,6 @@ namespace the80by20.Infrastructure.DAL.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("WorkingOnSolutionEnded")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("WorkingOnSolutionStarted")
                         .HasColumnType("bit");
 
                     b.HasKey("ProblemId");
@@ -143,7 +140,7 @@ namespace the80by20.Infrastructure.DAL.Migrations
                     b.Property<bool>("Rejected")
                         .HasColumnType("bit");
 
-                    b.Property<string>("RequiredSolutionElementTypes")
+                    b.Property<string>("RequiredSolutionTypes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -191,21 +188,24 @@ namespace the80by20.Infrastructure.DAL.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal>("AddtionalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("BasePrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("ProblemId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RequiredSolutionElementTypes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SolutionAbstract")
+                    b.Property<string>("RequiredSolutionTypes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SolutionElements")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SolutionSummary")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -215,9 +215,6 @@ namespace the80by20.Infrastructure.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("WorkingOnSolutionEnded")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("WorkingOnSolutionStarted")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

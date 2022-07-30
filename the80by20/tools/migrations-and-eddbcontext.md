@@ -1,7 +1,7 @@
 https://docs.microsoft.com/en-us/ef/core/cli/powershell
 https://docs.microsoft.com/en-us/ef/core/cli/dbcontext-creation?tabs=dotnet-core-cli
 
-package manage console
+package manager console
 default project core\core.infrastructure
 nuget package Microsoft.EntityFrameworkCore.Design
 

@@ -26,7 +26,7 @@ namespace the80by20.Infrastructure.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RequiredSolutionElementTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RequiredSolutionTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Confirmed = table.Column<bool>(type: "bit", nullable: false),
                     Rejected = table.Column<bool>(type: "bit", nullable: false),
                     Version = table.Column<int>(type: "int", rowVersion: true, nullable: true)
@@ -58,12 +58,12 @@ namespace the80by20.Infrastructure.DAL.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProblemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RequiredSolutionElementTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WorkingOnSolutionStarted = table.Column<bool>(type: "bit", nullable: false),
-                    WorkingOnSolutionEnded = table.Column<bool>(type: "bit", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SolutionAbstract = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RequiredSolutionTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SolutionSummary = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SolutionElements = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AddtionalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    BasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    WorkingOnSolutionEnded = table.Column<bool>(type: "bit", nullable: false),
                     Version = table.Column<int>(type: "int", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
@@ -76,18 +76,17 @@ namespace the80by20.Infrastructure.DAL.Migrations
                 columns: table => new
                 {
                     ProblemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SolutionToProblemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RequiredSolutionElementTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RequiredSolutionTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     IsRejected = table.Column<bool>(type: "bit", nullable: false),
-                    WorkingOnSolutionStarted = table.Column<bool>(type: "bit", nullable: false),
+                    SolutionToProblemId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    SolutionSummary = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SolutionElements = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WorkingOnSolutionEnded = table.Column<bool>(type: "bit", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SolutionAbstract = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SolutionElementTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
