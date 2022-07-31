@@ -9,6 +9,8 @@ using the80by20.Infrastructure.Core.SolutionToProblem.Adapters;
 using the80by20.Infrastructure.MasterData.Adapters;
 using the80by20.Infrastructure.Security.Adapters.Users;
 
+// todo do command handler decorator that wrpas into unit of worka transaction - like in my-spot
+
 namespace the80by20.Infrastructure.DAL.DbContext
 {
     // in future do some in memory or not in memopry sqllite for testing purposes
