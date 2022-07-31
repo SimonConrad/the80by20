@@ -10,6 +10,7 @@ using the80by20.Infrastructure.Security;
 using the80by20.Infrastructure.Security.Adapters;
 using the80by20.Infrastructure.Security.Adapters.Auth;
 using the80by20.Infrastructure.Security.Adapters.Security;
+using the80by20.Infrastructure.Security.Adapters.Users;
 using the80by20.Infrastructure.Time;
 
 namespace the80by20.Infrastructure;
@@ -43,7 +44,11 @@ public static class Extensions
             });
         });
 
-        services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler));
+        // todo tothink
+        services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler), typeof(GetUserQueryHandler));
+        
+        
+       
         //services.Scan(s => s.FromAssemblies(infrastructureAssembly)
         //    .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
         //    .AsImplementedInterfaces()

@@ -6,7 +6,7 @@ using the80by20.Domain.SharedKernel;
 
 namespace the80by20.App.Security.Commands;
 
-internal sealed class SignUpCommandHandler : IRequest<SignUpCommand>
+internal sealed class SignUpCommandHandler : IRequestHandler<SignUpCommand>
 {
     private readonly IUserRepository _userRepository;
     private readonly IPasswordManager _passwordManager;
@@ -20,8 +20,7 @@ internal sealed class SignUpCommandHandler : IRequest<SignUpCommand>
         _passwordManager = passwordManager;
         _clock = clock;
     }
-
-    public async Task HandleAsync(SignUpCommand command)
+    public async Task<Unit> Handle(SignUpCommand command, CancellationToken cancellationToken)
     {
         var userId = new UserId(command.UserId);
         var email = new Email(command.Email);
@@ -43,5 +42,7 @@ internal sealed class SignUpCommandHandler : IRequest<SignUpCommand>
         var securedPassword = _passwordManager.Secure(password);
         var user = new User(userId, email, username, securedPassword, fullName, role, _clock.Current());
         await _userRepository.AddAsync(user);
+        
+        return Unit.Value;
     }
 }

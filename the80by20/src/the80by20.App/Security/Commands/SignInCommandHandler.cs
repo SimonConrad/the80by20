@@ -4,7 +4,7 @@ using the80by20.App.Security.Ports;
 
 namespace the80by20.App.Security.Commands;
 
-public class SignInCommandHandler : IRequest<SignInCommand>
+public class SignInCommandHandler : IRequestHandler<SignInCommand>
 {
     private readonly IUserRepository _userRepository;
     private readonly IAuthenticator _authenticator;
@@ -22,7 +22,7 @@ public class SignInCommandHandler : IRequest<SignInCommand>
         _tokenStorage = tokenStorage;
     }
     
-    public async Task HandleAsync(SignInCommand command)
+    public async Task<Unit> Handle(SignInCommand command, CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetByEmailAsync(command.Email);
         if (user is null)
@@ -37,5 +37,7 @@ public class SignInCommandHandler : IRequest<SignInCommand>
 
         var jwt = _authenticator.CreateToken(user.Id, user.Role);
         _tokenStorage.Set(jwt);
+
+        return Unit.Value;
     }
 }
