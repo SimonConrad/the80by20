@@ -20,6 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{2304AB52
 		tools\migrations-and-eddbcontext.md = tools\migrations-and-eddbcontext.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExperimentsWithcode", "ExperimentsWithcode", "{6ACA73C9-0603-4B3D-87E7-17E1444FEC1B}"
+	ProjectSection(SolutionItems) = preProject
+		PassingActions.cs = PassingActions.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +57,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ED762F98-D9D0-4C42-8D74-22D1B8C7719F} = {DBC8B925-6625-4ACB-9D4A-3D98999821CB}
+		{6ACA73C9-0603-4B3D-87E7-17E1444FEC1B} = {2304AB52-C945-426E-931F-02DCA0445F18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EF83377-9D3D-407D-89DA-82A9D7E6B66C}

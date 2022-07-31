@@ -7,22 +7,25 @@ namespace the80by20.Infrastructure.Administration.Security;
 
 public sealed class UserRepository : IUserRepository
 {
-    private readonly DbSet<User> _users;
+    private readonly CoreDbContext _dbContext;
 
     public UserRepository(CoreDbContext dbContext)
     {
-        _users = dbContext.Users;
+        _dbContext = dbContext;
     }
 
-    public Task<User> GetByIdAsync(UserId id)
-        => _users.SingleOrDefaultAsync(x => x.Id == id);
+    public Task<User> GetByIdAsync(UserId id) 
+        => _dbContext.Users.SingleOrDefaultAsync(x => x.Id == id);
 
-    public Task<User> GetByEmailAsync(Email email)
-        => _users.SingleOrDefaultAsync(x => x.Email == email);
+    public Task<User> GetByEmailAsync(Email email) 
+        => _dbContext.Users.SingleOrDefaultAsync(x => x.Email == email);
 
-    public Task<User> GetByUsernameAsync(Username username)
-        => _users.SingleOrDefaultAsync(x => x.Username == username);
+    public Task<User> GetByUsernameAsync(Username username) 
+        => _dbContext.Users.SingleOrDefaultAsync(x => x.Username == username);
 
     public async Task AddAsync(User user)
-        => await _users.AddAsync(user);
+    {
+        await _dbContext.Users.AddAsync(user);
+        await _dbContext.SaveChangesAsync();
+    }
 }
