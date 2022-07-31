@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.Domain.SharedKernel;
+using the80by20.Infrastructure.Auth;
 using the80by20.Infrastructure.Exceptions;
+using the80by20.Infrastructure.Security;
 using the80by20.Infrastructure.Time;
 
 namespace the80by20.Infrastructure;
@@ -21,20 +23,20 @@ public static class Extensions
         services.AddControllers();
         services.Configure<AppOptions>(configuration.GetRequiredSection("app"));
         services.AddSingleton<ExceptionMiddleware>();
-        //services.AddHttpContextAccessor();
+        services.AddHttpContextAccessor();
 
         // todo
         services
             .AddDatabase(configuration)
             .AddSingleton<IClock, Clock>();;
         
-        //services.AddCustomLogging();
-        //services.AddSecurity();
+        //services.AddCustomLogging(); // todo
+        services.AddSecurity();
         
-        services.AddEndpointsApiExplorer();
+        services.AddEndpointsApiExplorer(); // todo
         services.AddSwaggerGen(swagger =>
         {
-            //swagger.EnableAnnotations();
+            //swagger.EnableAnnotations(); // todo
             swagger.SwaggerDoc("v1", new OpenApiInfo
             {
                 Title = "the-80-by-20 API",
@@ -43,8 +45,12 @@ public static class Extensions
         });
 
         services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler));
+        //services.Scan(s => s.FromAssemblies(infrastructureAssembly)
+        //    .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
+        //    .AsImplementedInterfaces()
+        //    .WithScopedLifetime());
 
-        //services.AddAuth(configuration);
+        services.AddAuth(configuration);
 
         return services;
     }
@@ -68,7 +74,6 @@ public static class Extensions
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
-
 
         return app;
     }
