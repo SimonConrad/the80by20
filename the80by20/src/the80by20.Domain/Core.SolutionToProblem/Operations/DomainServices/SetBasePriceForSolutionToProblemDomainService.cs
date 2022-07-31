@@ -1,10 +1,11 @@
-﻿using the80by20.Domain.ArchitectureBuildingBlocks;
+﻿using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Domain.SharedKernel;
 using the80by20.Domain.SharedKernel.Capabilities;
 
 namespace the80by20.Domain.Core.SolutionToProblem.Operations.DomainServices;
 
+[DomainServiceDdd]
 public sealed class SetBasePriceForSolutionToProblemDomainService
 {
     private readonly IClock _clock; // whentesting register own clock in ioc for tests

@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "the80by20.EventsSubsrciber": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

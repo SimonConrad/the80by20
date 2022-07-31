@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using the80by20.App.Administration.MasterData;
+using the80by20.App;
+using the80by20.App.MasterData;
+using the80by20.App.MasterData.CategoryCrud;
 
-// todo podzaił kontrolerów jak modułó
+// todo podzaił kontrolerów jak modułów
 
 namespace the80by20.WebApi.Controllers;
 // info CancellationToken can be passed in controller action method, passed down to async/await ef methods
 [ApiController]
-[Route("administration")]
+[Route("master-data")]
 public class CategoryController : ControllerBase
 {
     private readonly ILogger<CategoryController> _logger;

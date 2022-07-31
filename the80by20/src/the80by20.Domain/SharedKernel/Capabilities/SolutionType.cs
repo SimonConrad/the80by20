@@ -1,4 +1,4 @@
-﻿using the80by20.Domain.ArchitectureBuildingBlocks;
+﻿using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.Domain.SharedKernel.Capabilities;
 

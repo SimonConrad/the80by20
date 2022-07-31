@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\the80by20.Common\the80by20.Common.csproj" />
     <ProjectReference Include="..\the80by20.Domain\the80by20.Domain.csproj" />
   </ItemGroup>
 

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using the80by20.App.Administration.MasterData;
+using the80by20.App.MasterData.CategoryCrud;
 using the80by20.Domain.SharedKernel;
 using the80by20.Infrastructure.DAL.DbContext;
 

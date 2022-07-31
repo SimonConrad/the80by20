@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.App.Core.SolutionToProblem.Events;
-using the80by20.Domain.ArchitectureBuildingBlocks;
+using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
@@ -46,6 +46,8 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
         return problemAggregate.Id;
     }
 
+    // TODO found solution on .net docs
+    // https://stackoverflow.com/a/65577936
     public void UpdateReadModel(IServiceScopeFactory servicesScopeFactory, ProblemId id)
     {
         _ = Task.Run(async () =>

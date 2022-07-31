@@ -1,12 +1,14 @@
-﻿using the80by20.App.Administration.MasterData;
-using the80by20.Domain.ArchitectureBuildingBlocks;
+﻿using the80by20.App.MasterData.CategoryCrud;
+using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Domain.SharedKernel.Capabilities;
 
 namespace the80by20.App.Core.SolutionToProblem.ReadModel;
 
+// port
 // INFO port in hexagon arch, its adapter in dal, IoC - so that app layer do not relay on dal
+[Port]
 [ReadModelDdd]
 public interface ISolutionToProblemReadModelQueries
 {

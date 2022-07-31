@@ -1,4 +1,4 @@
-﻿using the80by20.Domain.ArchitectureBuildingBlocks;
+﻿using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
 namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
@@ -16,6 +16,7 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
     /// when we retrieve aggregate from repository aggregate-data class don't not to be retrieved
     /// </summary>
     [AggregateRepositoryDdd]
+    [Port]
     public interface ISolutionToProblemAggregateRepository
     {
         Task Create(SolutionToProblemAggregate aggregate);

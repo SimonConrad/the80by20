@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.App.Core.SolutionToProblem.Events;
-using the80by20.Domain.ArchitectureBuildingBlocks;
+using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations.DomainServices;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 

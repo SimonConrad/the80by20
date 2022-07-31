@@ -5,9 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.Domain.SharedKernel;
-using the80by20.Infrastructure.Auth;
 using the80by20.Infrastructure.Exceptions;
 using the80by20.Infrastructure.Security;
+using the80by20.Infrastructure.Security.Adapters;
+using the80by20.Infrastructure.Security.Adapters.Auth;
+using the80by20.Infrastructure.Security.Adapters.Security;
 using the80by20.Infrastructure.Time;
 
 namespace the80by20.Infrastructure;
@@ -17,7 +19,6 @@ public static class Extensions
     public const string OptionsSectionAppName = "app";
     private const string OptionsDataBaseName = "dataBase";
 
-
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers();
@@ -25,13 +26,11 @@ public static class Extensions
         services.AddSingleton<ExceptionMiddleware>();
         services.AddHttpContextAccessor();
 
-        // todo
-        services
-            .AddDatabase(configuration)
-            .AddSingleton<IClock, Clock>();;
+        services.AddDal(configuration);
+
+        services.AddSingleton<IClock, Clock>();
         
         //services.AddCustomLogging(); // todo
-        services.AddSecurity();
         
         services.AddEndpointsApiExplorer(); // todo
         services.AddSwaggerGen(swagger =>
@@ -51,6 +50,7 @@ public static class Extensions
         //    .WithScopedLifetime());
 
         services.AddAuth(configuration);
+        services.AddSecurity();
 
         return services;
     }

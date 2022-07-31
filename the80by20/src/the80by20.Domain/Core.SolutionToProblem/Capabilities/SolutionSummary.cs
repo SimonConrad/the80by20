@@ -1,4 +1,6 @@
-﻿using the80by20.Domain.ArchitectureBuildingBlocks;
+﻿using the80by20.Common.ArchitectureBuildingBlocks;
+using the80by20.Common.ArchitectureBuildingBlocks.Exceptions;
+using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.Domain.Core.SolutionToProblem.Capabilities;
 

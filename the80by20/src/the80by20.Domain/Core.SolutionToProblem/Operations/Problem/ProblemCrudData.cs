@@ -1,4 +1,5 @@
-﻿using the80by20.Domain.ArchitectureBuildingBlocks;
+﻿using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Domain.SharedKernel;
 
 namespace the80by20.Domain.Core.SolutionToProblem.Operations.Problem
 {

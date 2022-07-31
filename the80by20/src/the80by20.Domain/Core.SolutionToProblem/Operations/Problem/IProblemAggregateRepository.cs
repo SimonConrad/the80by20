@@ -1,7 +1,8 @@
-﻿using the80by20.Domain.ArchitectureBuildingBlocks;
+﻿using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
+[Port]
 [AggregateRepositoryDdd]
 public interface IProblemAggregateRepository
 {
