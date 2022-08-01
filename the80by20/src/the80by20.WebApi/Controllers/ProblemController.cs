@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using the80by20.App.Core.SolutionToProblem.Commands;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
@@ -7,6 +8,7 @@ namespace the80by20.WebApi.Controllers
 {
     [ApiController]
     [Route("solution-to-problem")]
+    [Authorize]
     public class ProblemController : ControllerBase
     {
         private readonly ILogger<ProblemController> _logger;
@@ -52,6 +54,7 @@ namespace the80by20.WebApi.Controllers
         [HttpGet("problems/{problemId}")]
         public async Task<IActionResult> Get(Guid problemId)
         {
+            // todo do not return whole scope of this readmodel to users, caouse thers is solutions-elemnts there 
             var res = await _solutionToProblemReadModelQueries.GetByProblemId(problemId);
 
             return Ok(res);

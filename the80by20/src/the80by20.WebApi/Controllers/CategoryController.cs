@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using the80by20.App;
 using the80by20.App.MasterData;
 using the80by20.App.MasterData.CategoryCrud;
@@ -8,6 +9,7 @@ using the80by20.App.MasterData.CategoryCrud;
 namespace the80by20.WebApi.Controllers;
 // info CancellationToken can be passed in controller action method, passed down to async/await ef methods
 [ApiController]
+[Authorize(Policy = "is-admin")]
 [Route("master-data")]
 public class CategoryController : ControllerBase
 {
