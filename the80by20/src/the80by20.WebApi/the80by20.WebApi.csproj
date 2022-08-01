@@ -12,4 +12,10 @@
     <ProjectReference Include="..\the80by20.Infrastructure\the80by20.Infrastructure.csproj" />
   </ItemGroup>
 
+
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="the80by20.Tests.Integration" />
+	</ItemGroup>
+
 </Project>

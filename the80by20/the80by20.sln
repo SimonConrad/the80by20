@@ -28,6 +28,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project-know-how", "project
 		tools\migrations-and-eddbcontext.md = tools\migrations-and-eddbcontext.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EF6A215E-AE67-49EC-A86F-2FE520D3D178}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Tests.Integration", "tests\the80by20.Tests.Integration\the80by20.Tests.Integration.csproj", "{082CB038-E895-44BB-8E8B-A25206C676BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +70,10 @@ Global
 		{84672A1C-B2C2-4A33-8619-4C80C98104AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84672A1C-B2C2-4A33-8619-4C80C98104AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84672A1C-B2C2-4A33-8619-4C80C98104AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{082CB038-E895-44BB-8E8B-A25206C676BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{082CB038-E895-44BB-8E8B-A25206C676BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{082CB038-E895-44BB-8E8B-A25206C676BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{082CB038-E895-44BB-8E8B-A25206C676BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +83,7 @@ Global
 		{C2794FE6-6845-4B76-A074-4DAB3D367AA2} = {DBC8B925-6625-4ACB-9D4A-3D98999821CB}
 		{84672A1C-B2C2-4A33-8619-4C80C98104AA} = {2304AB52-C945-426E-931F-02DCA0445F18}
 		{1ED5205A-C3C9-43A2-80A9-BB21513AC35F} = {2304AB52-C945-426E-931F-02DCA0445F18}
+		{082CB038-E895-44BB-8E8B-A25206C676BC} = {EF6A215E-AE67-49EC-A86F-2FE520D3D178}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EF83377-9D3D-407D-89DA-82A9D7E6B66C}

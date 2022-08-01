@@ -8,7 +8,7 @@ using the80by20.Domain.SharedKernel;
 
 namespace the80by20.Infrastructure.Security.Adapters.Auth;
 
-internal sealed class Authenticator : IAuthenticator
+public sealed class Authenticator : IAuthenticator
 {
     private readonly IClock _clock;
     private readonly string _issuer;
