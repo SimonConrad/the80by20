@@ -7,6 +7,10 @@ internal sealed class TestDatabase : IDisposable
 {
     public CoreDbContext Context { get; }
 
+    // todo check in memory sqllite
+    // todo run tests against db in ci
+    // - inmemory
+    // - using docker image with sql server
     public TestDatabase()
     {
         var options = new OptionsProvider().Get<DatabaseOptions>("dataBase");
