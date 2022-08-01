@@ -31,10 +31,8 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
 
         var problemAggregate = ProblemAggregate.New(RequiredSolutionTypes.From(command.SolutionElementTypes));
 
-        // todo retrieve from current user and do in more sophisticated way, like in ef on save like readonly property
-        var userId = Guid.NewGuid();
         ProblemCrudData problemCrudData =
-            new(problemAggregate.Id, userId, DateTime.Now, command.Description, command.Category);
+            new(problemAggregate.Id, command.UserId, DateTime.Now, command.Description, command.Category);
 
         await _repository.Create(problemAggregate, problemCrudData);
 

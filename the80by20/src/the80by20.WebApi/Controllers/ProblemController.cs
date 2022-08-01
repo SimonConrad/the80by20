@@ -35,9 +35,7 @@ namespace the80by20.WebApi.Controllers
         [HttpPost("problem")]
         public async Task<IActionResult> Create(CreateProblemCommand createProblemCommand, CancellationToken token)
         {
-            // TODO security
-            // TODO fetch user and set in command
-
+            createProblemCommand = createProblemCommand with { UserId = Guid.Parse(User.Identity?.Name) };
             var problemId = await _mediator.Send(createProblemCommand, token);
 
             return Ok(new { id = problemId });

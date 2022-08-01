@@ -8,7 +8,8 @@ namespace the80by20.App.Core.SolutionToProblem.Commands
 
     [CommandDdd]
     public sealed record CreateProblemCommand(string Description, 
-        Guid Category, 
+        Guid Category,
+        Guid UserId,
         SolutionType[] SolutionElementTypes) : IRequest<ProblemId>;
 
     [CommandDdd]

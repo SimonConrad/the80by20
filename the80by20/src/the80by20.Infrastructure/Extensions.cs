@@ -34,15 +34,42 @@ public static class Extensions
         //services.AddCustomLogging(); // todo
         
         services.AddEndpointsApiExplorer(); // todo
+
         services.AddSwaggerGen(swagger =>
         {
-            //swagger.EnableAnnotations(); // todo
             swagger.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "the-80-by-20 API",
-                Version = "v1"
+                Version = "v1",
+                Title = "The 80 by 20",
+                Description = "system created from model to implementaion; model done used event storming, implemntaion done with ddd (strategic, tactical), architectural patterns based on modules drivers; high cohesion low coupling; tests; infrastructure"
+            });
+            swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description =
+                    "Enter 'Bearer' [space] and then your valid token in the text input below." +
+                    "\r\n\r\nExample: \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\""
+            });
+            swagger.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] { }
+                }
             });
         });
+
 
         // todo tothink
         services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler), typeof(GetUserQueryHandler));
