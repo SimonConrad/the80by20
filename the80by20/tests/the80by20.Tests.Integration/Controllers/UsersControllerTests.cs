@@ -4,11 +4,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Shouldly;
 using the80by20.App.Security.Commands;
 using the80by20.App.Security.Ports;
 using the80by20.App.Security.Queries;
 using the80by20.Domain.Security.UserEntity;
+using the80by20.Infrastructure.DAL.DbContext;
+using the80by20.Infrastructure.DAL.Misc;
 using the80by20.Infrastructure.Security.Adapters.Security;
 using the80by20.Infrastructure.Time;
 using Xunit;
@@ -20,7 +23,7 @@ public class UsersControllerTests : ControllerTests, IDisposable
     [Fact]
     public async Task post_users_should_return_created_201_status_code()
     {
-        await _testDatabase.Context.Database.MigrateAsync();
+        await ApplyMigrations();
         var command = new SignUpCommand(Guid.Empty, "test-user1@wp.pl", "test-user1", "secret",
             "Test Jon", "user");
         var response = await Client.PostAsJsonAsync("security/users", command);
@@ -63,7 +66,9 @@ public class UsersControllerTests : ControllerTests, IDisposable
         
         var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
             "test-user1", passwordManager.Secure(password), "Test Jon", Role.User(), clock.Current());
-        await _testDatabase.Context.Database.MigrateAsync();
+
+
+        await ApplyMigrations();
         await _testDatabase.Context.Users.AddAsync(user);
         await _testDatabase.Context.SaveChangesAsync();
 
@@ -76,24 +81,62 @@ public class UsersControllerTests : ControllerTests, IDisposable
         userDto.Id.ShouldBe(user.Id.Value);
     }
 
+    private async Task ApplyMigrations()
+    {
+        if (!_testDatabase.Context.Database.GetPendingMigrations().Any())
+        {
+            await _testDatabase.Context.Database.MigrateAsync();
+        }
+    }
+
     private IUserRepository _userRepository;
-    private readonly IWithCoreDbContext _testDatabase;
-    //private readonly SqliteConnection _connection;
+    
+    private IWithCoreDbContext _testDatabase;
+    private SqliteConnection _connection;
 
     public UsersControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
     {
         _testDatabase = new TestDatabase();
 
-        // do not work with migrateasync
-        //_connection = new SqliteConnection("Filename=:memory:");
-        //_connection.Open();
-        //_testDatabase = new TestSqlLiteInMemoryDatabase(_connection);
+        // todo steer using appsetting - use options provider to access setting then ocmment:
+        // _testDatabase = new TestDatabase();
     }
 
     protected override void ConfigureServices(IServiceCollection services)
     {
         _userRepository = new TestUserRepository();
         services.AddSingleton(_userRepository);
+
+        // todo steer using appsetting - use options provider to access setting
+        //ApplySqlLite(services);
+    }
+
+    private void ApplySqlLite(IServiceCollection services)
+    {
+        // for sqllite
+        var descriptor1 = services.SingleOrDefault(
+            d => d.ServiceType ==
+                 typeof(DbContextOptions<CoreDbContext>));
+
+        if (descriptor1 != null)
+        {
+            services.Remove(descriptor1);
+        }
+
+        //DatabaseInitializer
+        var descriptor2 = services.SingleOrDefault(
+            d => d.ServiceType ==
+                typeof(IHostedService) && d.ImplementationType == typeof(DatabaseInitializer));
+        if (descriptor2 != null)
+        {
+            services.Remove(descriptor2);
+        }
+
+        _connection = new SqliteConnection("Filename=:memory:");
+        _connection.Open();
+        _testDatabase = new TestSqlLiteInMemoryDatabase(_connection);
+
+        services.AddDbContext<CoreDbContext>(x => x.UseSqlite(_connection));
     }
 
     public void Dispose()

@@ -40,6 +40,7 @@ internal sealed class TestSqlLiteInMemoryDatabase : IWithCoreDbContext
     public TestSqlLiteInMemoryDatabase(SqliteConnection connection)
     {
         //https://docs.microsoft.com/en-us/ef/core/testing/testing-without-the-database#sqlite-in-memory
+        //https://stackoverflow.com/questions/58375527/override-ef-core-dbcontext-in-asp-net-core-webapplicationfactory
         Context = new CoreDbContext(new DbContextOptionsBuilder<CoreDbContext>().UseSqlite(connection).Options);
         Context.Database.EnsureCreated();
     }
