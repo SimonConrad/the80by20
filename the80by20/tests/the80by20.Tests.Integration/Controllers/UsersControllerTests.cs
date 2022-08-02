@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
@@ -76,11 +77,17 @@ public class UsersControllerTests : ControllerTests, IDisposable
     }
 
     private IUserRepository _userRepository;
-    private readonly TestDatabase _testDatabase;
+    private readonly IWithCoreDbContext _testDatabase;
+    //private readonly SqliteConnection _connection;
 
     public UsersControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
     {
         _testDatabase = new TestDatabase();
+
+        // do not work with migrateasync
+        //_connection = new SqliteConnection("Filename=:memory:");
+        //_connection.Open();
+        //_testDatabase = new TestSqlLiteInMemoryDatabase(_connection);
     }
 
     protected override void ConfigureServices(IServiceCollection services)
