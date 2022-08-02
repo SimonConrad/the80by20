@@ -40,7 +40,7 @@ namespace the80by20.WebApi.Controllers
             createProblemCommand = createProblemCommand with { UserId = Guid.Parse(User.Identity?.Name) };
             var problemId = await _mediator.Send(createProblemCommand, token);
 
-            return Ok(new { id = problemId });
+            return CreatedAtAction(nameof(Get), new {problemId}, null);
         }
 
         [HttpPut("problem")]
