@@ -6,7 +6,7 @@ namespace the80by20.Sandbox;
 
 // TODO do design patterns tests fpor exercising their usage, include spcification desgin pattern
 
-public class ExtensionPointUsingDelegate
+public class ExtendableButClosedToModificationDoneWithDelegatePassedAsArgument
 {
     [Fact]
     void Do()

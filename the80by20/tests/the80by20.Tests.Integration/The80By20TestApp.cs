@@ -13,7 +13,7 @@ namespace the80by20.Tests.Integration
         {
             Client = WithWebHostBuilder(builder =>
             {
-                if (services is not null)
+                if (services is Action<IServiceCollection>)
                 {
                     builder.ConfigureServices(services);
                 }

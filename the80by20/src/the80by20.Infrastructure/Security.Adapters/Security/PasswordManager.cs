@@ -4,7 +4,9 @@ using the80by20.Domain.Security.UserEntity;
 
 namespace the80by20.Infrastructure.Security.Adapters.Security;
 
-internal sealed class PasswordManager : IPasswordManager
+// todo di internal sealed like in myspot-api
+//internal sealed class PasswordManager : IPasswordManager
+public class PasswordManager : IPasswordManager
 {
     private readonly IPasswordHasher<User> _passwordHasher;
 
