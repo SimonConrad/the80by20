@@ -22,10 +22,9 @@ public class ProblemControllerTests : ControllerTests, IDisposable
         var passwordManager = new PasswordManager(new PasswordHasher<User>());
         var clock = new Clock();
         const string password = "secret";
-        
+
         var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
             "test-user1", passwordManager.Secure(password), "Test Jon", Role.User(), clock.Current());
-
 
         await ApplyMigrations();
         await _testDatabase.Context.Users.AddAsync(user);
@@ -35,19 +34,27 @@ public class ProblemControllerTests : ControllerTests, IDisposable
         Authorize(user.Id, user.Role);
 
         string description = "I need help with creating model of the system, based on which I will do implmentation " +
-                             "I would like to divide into domains, subbdomains and then into bounded context to know modules. " +
+                             "I would like to divide into domains, subbdomains and then into bounded context which can be implemented as modules. " +
                              "I would like to create model by utylising technique of event storming big picture, process and design level" +
-                             "I would like to include in model models of aggregates which secure invariants, communicate using domain services and if neede updates their readmodels" +
-                             "I would like to present on model waht architecture styles to use in each module and what is messaging of them";
-        
+                             "I would like to include in model models of aggregates which secure invariants, " +
+                             "to achive small aggregates I would like to us edomain service to coordinate" +
+                             "based on event of persisted state of aggregate  corresponding readmodels should be updated" +
+                             "I would like to present on model waht architecture styles to use in each module and what kind of  messaging is between them";
+
         var command = new CreateProblemCommand(description,
             Guid.Parse("00000000-0000-0000-0000-000000000004"),
-            user.Id, 
+            user.Id,
             new SolutionType[] { SolutionType.TheoryOfConceptWithExample });
 
         // todo dont know how to test due to in CreateProblemCommandHandler which creates new scope _ = Task.Run(async () =>
-        //var response = await Client.PostAsJsonAsync("solution-to-problem/problem", command);
-        //response.StatusCode.ShouldBe(HttpStatusCode.Created);
+        var response = await Client.PostAsJsonAsync("solution-to-problem/problem", command);
+        response.StatusCode.ShouldBe(HttpStatusCode.Created);
+
+        var problemAggregateId = Guid.Parse(response.Headers.Location.Segments.Last());
+
+        _testDatabase.Context.ProblemsAggregates.ShouldHaveSingleItem();
+        _testDatabase.Context.ProblemsCrudData.ShouldHaveSingleItem();
+        _testDatabase.Context.SolutionsToProblemsReadModel.ShouldHaveSingleItem();
     }
 
     private async Task ApplyMigrations()

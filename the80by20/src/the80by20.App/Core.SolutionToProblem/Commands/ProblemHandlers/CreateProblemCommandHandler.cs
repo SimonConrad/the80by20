@@ -11,13 +11,16 @@ namespace the80by20.App.Core.SolutionToProblem.Commands.ProblemHandlers;
 public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand, ProblemId>
 {
     private readonly IProblemAggregateRepository _repository;
+    private readonly IMediator _mediator;
     private readonly IServiceScopeFactory _servicesScopeFactory;
 
     public CreateProblemCommandHandler(
         IProblemAggregateRepository repository,
+        IMediator mediator,
         IServiceScopeFactory servicesScopeFactory)
     {
         _repository = repository;
+        _mediator = mediator;
         _servicesScopeFactory = servicesScopeFactory;
     }
 
@@ -39,16 +42,23 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
         // INFO done in FireAndForget way to present updating flow of CQRS read-model,
         // after command chnaged state of the system, read-model is updated in the background,
         // in future apply message queue (ex rabbit mq)
-        UpdateReadModel(_servicesScopeFactory, problemAggregate.Id);
+        await UpdateReadModel(_servicesScopeFactory, problemAggregate.Id);
 
         return problemAggregate.Id;
     }
 
-    // TODO found solution on .net docs
+    public async Task UpdateReadModel(IServiceScopeFactory servicesScopeFactory, ProblemId id)
+    { 
+        await _mediator.Publish(new ProblemCreated(id));
+    }
+
+    // TODO found solution on .net docs that to do fire and forget do _ = Task.Run and method is not async,
+    // however beacouse of problem with testing this (test application is disposed) not using this
+    // in future use messagin system on diffrenet process
     // https://stackoverflow.com/a/65577936
-    public void UpdateReadModel(IServiceScopeFactory servicesScopeFactory, ProblemId id)
+    public void UpdateReadModelFireAndForget(IServiceScopeFactory servicesScopeFactory, ProblemId id)
     {
-        _ = Task.Run(async () =>
+        _  = Task.Run(async () =>
         {
             using var scope = servicesScopeFactory.CreateScope();
             var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
