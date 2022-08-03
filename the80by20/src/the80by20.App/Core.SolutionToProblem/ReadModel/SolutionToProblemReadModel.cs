@@ -12,6 +12,8 @@ namespace the80by20.App.Core.SolutionToProblem.ReadModel;
 /// dedicated for command deciding to do, based on es model
 /// </summary>
 
+
+// TODO different readmodel to client and to admin
 [ReadModelDdd]
 public class SolutionToProblemReadModel
 {

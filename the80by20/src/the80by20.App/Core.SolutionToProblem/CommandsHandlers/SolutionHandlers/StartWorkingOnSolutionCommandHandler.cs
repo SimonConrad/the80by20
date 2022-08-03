@@ -1,12 +1,13 @@
 ﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+using the80by20.App.Core.SolutionToProblem.Commands.SolutionCommands;
 using the80by20.App.Core.SolutionToProblem.Events;
+using the80by20.App.Core.SolutionToProblem.Events.SolutionEvents;
 using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations.DomainServices;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 
-namespace the80by20.App.Core.SolutionToProblem.Commands.SolutionHandlers;
+namespace the80by20.App.Core.SolutionToProblem.CommandsHandlers.SolutionHandlers;
 
 [CommandDdd]
 public class StartWorkingOnSolutionCommandHandler 
@@ -15,18 +16,18 @@ public class StartWorkingOnSolutionCommandHandler
     private readonly StartWorkingOnSolutionToProblemDomainService _domainService;
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
     private readonly IProblemAggregateRepository _problemAggregateRepository;
-    private readonly IServiceScopeFactory _serviceScopeFactory;
+    private readonly IMediator _mediator;
 
 
     public StartWorkingOnSolutionCommandHandler(StartWorkingOnSolutionToProblemDomainService domainService,
         ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
         IProblemAggregateRepository problemAggregateRepository,
-        IServiceScopeFactory serviceScopeFactory)
+        IMediator mediator)
     {
         _domainService = domainService;
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
         _problemAggregateRepository = problemAggregateRepository;
-        _serviceScopeFactory = serviceScopeFactory;
+        _mediator = mediator;
     }
 
     public async Task<SolutionToProblemId> Handle(StartWorkingOnSolutionCommand command, 
@@ -37,18 +38,16 @@ public class StartWorkingOnSolutionCommandHandler
 
         await _solutionToProblemAggregateRepository.Create(solution);
 
-        UpdateReadModel(_serviceScopeFactory, solution.Id);
+        await UpdateReadModel(solution.Id, cancellationToken);
 
         return solution.Id;
     }
 
-    public void UpdateReadModel(IServiceScopeFactory servicesScopeFactory, SolutionToProblemId id)
+    public async Task UpdateReadModel(SolutionToProblemId id, CancellationToken ct)
     {
         _ = Task.Run(async () =>
         {
-            using var scope = servicesScopeFactory.CreateScope();
-            var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
-            await mediator.Publish(new StartedWorkingOnSolution(id));
+            await mediator.Publish(new StartedWorkingOnSolution(id), ct);
         });
     }
 }

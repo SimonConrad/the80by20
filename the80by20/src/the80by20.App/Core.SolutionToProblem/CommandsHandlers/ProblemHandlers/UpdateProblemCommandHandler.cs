@@ -1,26 +1,27 @@
 ﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+using the80by20.App.Core.SolutionToProblem.Commands.ProblemCommands;
 using the80by20.App.Core.SolutionToProblem.Events;
+using the80by20.App.Core.SolutionToProblem.Events.ProblemEvents;
 using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
-namespace the80by20.App.Core.SolutionToProblem.Commands.ProblemHandlers;
+namespace the80by20.App.Core.SolutionToProblem.CommandsHandlers.ProblemHandlers;
 
 [CommandDdd]
-public class UpdateProblemCommandHandler : IRequestHandler<UpdatProblemCommand, ProblemId>
+public class UpdateProblemCommandHandler : IRequestHandler<UpdateProblemCommand, ProblemId>
 {
     private readonly IProblemAggregateRepository _problemAggregateRepository;
-    private readonly IServiceScopeFactory _servicesScopeFactory;
+    private readonly IMediator _mediator;
 
-    public UpdateProblemCommandHandler(
-        IProblemAggregateRepository problemAggregateRepository,
-        IServiceScopeFactory servicesScopeFactory)
+    public UpdateProblemCommandHandler(IProblemAggregateRepository problemAggregateRepository,
+        IMediator mediator)
     {
         _problemAggregateRepository = problemAggregateRepository;
-        _servicesScopeFactory = servicesScopeFactory;
+        _mediator = mediator;
     }
-    public async Task<ProblemId> Handle(UpdatProblemCommand command, CancellationToken cancellationToken)
+
+    public async Task<ProblemId> Handle(UpdateProblemCommand command, CancellationToken cancellationToken)
     {
         if (command.UpdateScope == UpdateDataScope.OnlyData)
         {
@@ -38,25 +39,20 @@ public class UpdateProblemCommandHandler : IRequestHandler<UpdatProblemCommand, 
         problem.Update(requiredSolutionTypes);
         await _problemAggregateRepository.SaveAggragate(problem);
 
-        UpdateReadModel(_servicesScopeFactory, problem.Id);
+        await UpdateReadModel(problem.Id, cancellationToken);
 
         return problem.Id;
     }
 
-    private async Task UpdateData(UpdatProblemCommand command)
+    private async Task UpdateData(UpdateProblemCommand command)
     {
         var data = await _problemAggregateRepository.GetCrudData(command.ProblemId);
         data.Update(command.Description, command.Category);
         await _problemAggregateRepository.SaveData(data);
     }
 
-    public void UpdateReadModel(IServiceScopeFactory servicesScopeFactory, ProblemId id)
+    public async Task UpdateReadModel(ProblemId id, CancellationToken ct)
     {
-        _ = Task.Run(async () =>
-        {
-            using var scope = servicesScopeFactory.CreateScope();
-            var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
-            await mediator.Publish(new ProblemUpdated(id));
-        });
+        await _mediator.Publish(new ProblemUpdated(id), ct);
     }
 }

@@ -1,11 +1,13 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using the80by20.App.Core.SolutionToProblem.Commands.ProblemCommands;
 using the80by20.App.Core.SolutionToProblem.Events;
+using the80by20.App.Core.SolutionToProblem.Events.ProblemEvents;
 using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
-namespace the80by20.App.Core.SolutionToProblem.Commands.ProblemHandlers;
+namespace the80by20.App.Core.SolutionToProblem.CommandsHandlers.ProblemHandlers;
 
 [CommandDdd]
 public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand, ProblemId>
@@ -32,6 +34,8 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
         // INFO input validation logic
         // TODO FluentValidator on command
 
+        // INFO Creation of the aggregate
+        // INFO Domain logic (have in mind different levels of domain logic)
         var problemAggregate = ProblemAggregate.New(RequiredSolutionTypes.From(command.SolutionElementTypes));
 
         ProblemCrudData problemCrudData =
@@ -39,23 +43,24 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
 
         await _repository.Create(problemAggregate, problemCrudData);
 
-        // INFO done in FireAndForget way to present updating flow of CQRS read-model,
-        // after command chnaged state of the system, read-model is updated in the background,
-        // in future apply message queue (ex rabbit mq)
-        await UpdateReadModel(_servicesScopeFactory, problemAggregate.Id);
+        await UpdateReadModel(problemAggregate.Id, cancellationToken);
 
         return problemAggregate.Id;
     }
 
-    public async Task UpdateReadModel(IServiceScopeFactory servicesScopeFactory, ProblemId id)
+    public async Task UpdateReadModel(ProblemId id, CancellationToken cancellationToken)
     { 
-        await _mediator.Publish(new ProblemCreated(id));
+        await _mediator.Publish(new ProblemCreated(id), cancellationToken);
     }
 
     // TODO found solution on .net docs that to do fire and forget do _ = Task.Run and method is not async,
-    // however beacouse of problem with testing this (test application is disposed) not using this
-    // in future use messagin system on diffrenet process
+    // however beacouse of problem with testing this (test application created via WebApplicationFactory<Program> is disposed before insides of taks.run) not using this
+    // in future use messaging system on differnet process
     // https://stackoverflow.com/a/65577936
+
+    // INFO done in FireAndForget way to present updating flow of CQRS read-model,
+    // after command chnaged state of the system, read-model is updated in the background,
+    // in future apply message queue (ex rabbit mq + convey wrapper)
     public void UpdateReadModelFireAndForget(IServiceScopeFactory servicesScopeFactory, ProblemId id)
     {
         _  = Task.Run(async () =>
@@ -65,7 +70,6 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
             await mediator.Publish(new ProblemCreated(id));
         });
     }
-
 
     // TODO:
     // info fire event and forget asynchronously using task api, without awaiting result, but this way problem with dbcontext injection

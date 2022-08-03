@@ -1,11 +1,12 @@
 ﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+using the80by20.App.Core.SolutionToProblem.Commands.SolutionCommands;
 using the80by20.App.Core.SolutionToProblem.Events;
+using the80by20.App.Core.SolutionToProblem.Events.SolutionEvents;
 using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations.DomainServices;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 
-namespace the80by20.App.Core.SolutionToProblem.Commands.SolutionHandlers;
+namespace the80by20.App.Core.SolutionToProblem.CommandsHandlers.SolutionHandlers;
 
 [CommandDdd]
 public class SetBasePriceOfSolutionCommandHandler 
@@ -13,16 +14,15 @@ public class SetBasePriceOfSolutionCommandHandler
 {
     private readonly SetBasePriceForSolutionToProblemDomainService _domainService;
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
-    private readonly IServiceScopeFactory _serviceScopeFactory;
-
+    private readonly IMediator _mediator;
 
     public SetBasePriceOfSolutionCommandHandler(SetBasePriceForSolutionToProblemDomainService domainService,
         ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
-        IServiceScopeFactory serviceScopeFactory)
+        IMediator mediator)
     {
         _domainService = domainService;
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
-        _serviceScopeFactory = serviceScopeFactory;
+        _mediator = mediator;
     }
 
     public async Task<SolutionToProblemId> Handle(SetBasePriceOfSolutionCommand command, 
@@ -30,21 +30,15 @@ public class SetBasePriceOfSolutionCommandHandler
     {
         var solution = await _solutionToProblemAggregateRepository.Get(command.SolutionToProblemId);
         _domainService.SetBasePrice(solution);
-
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
 
-        UpdateReadModel(_serviceScopeFactory, solution.Id);
+        await UpdateReadModel(solution.Id, cancellationToken);
 
         return solution.Id;
     }
 
-    public void UpdateReadModel(IServiceScopeFactory servicesScopeFactory, SolutionToProblemId id)
+    public async Task UpdateReadModel(SolutionToProblemId id, CancellationToken ct)
     {
-        _ = Task.Run(async () =>
-        {
-            using var scope = servicesScopeFactory.CreateScope();
-            var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
-            await mediator.Publish(new UpdatedSolution(id));
-        });
+        await _mediator.Publish(new UpdatedSolution(id), ct);
     }
 }

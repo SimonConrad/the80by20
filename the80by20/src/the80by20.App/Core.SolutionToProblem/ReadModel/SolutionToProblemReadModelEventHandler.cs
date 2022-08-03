@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using the80by20.App.Core.SolutionToProblem.Events;
+using the80by20.App.Core.SolutionToProblem.Events.ProblemEvents;
+using the80by20.App.Core.SolutionToProblem.Events.SolutionEvents;
 using the80by20.App.MasterData.CategoryCrud;
 using the80by20.App.MasterData.CategoryCrud.Ports;
 using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
@@ -26,10 +28,8 @@ public class SolutionToProblemReadModelEventHandler :
     private readonly IProblemAggregateRepository _problemAggregateRepository;
     private readonly ICategoryCrudRepository _categoryCrudRepository;
 
-    public SolutionToProblemReadModelEventHandler(
-        ISolutionToProblemReadModelUpdates readModelUpdates,
+    public SolutionToProblemReadModelEventHandler(ISolutionToProblemReadModelUpdates readModelUpdates,
         ISolutionToProblemReadModelQueries readModelQueries,
-
         IProblemAggregateRepository problemAggregateRepository,
         ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
         ICategoryCrudRepository categoryCrudRepository)

@@ -1,43 +1,39 @@
 ﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+using the80by20.App.Core.SolutionToProblem.Commands.ProblemCommands;
 using the80by20.App.Core.SolutionToProblem.Events;
+using the80by20.App.Core.SolutionToProblem.Events.ProblemEvents;
 using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 
-namespace the80by20.App.Core.SolutionToProblem.Commands.ProblemHandlers;
+namespace the80by20.App.Core.SolutionToProblem.CommandsHandlers.ProblemHandlers;
 
 [CommandDdd]
 public class ConfirmProblemCommandHandler : IRequestHandler<ConfirmProblemCommand, ProblemId>
 {
     private readonly IProblemAggregateRepository _problemAggregateRepository;
-    private readonly IServiceScopeFactory _servicesScopeFactory;
+    private readonly IMediator _mediator;
 
     public ConfirmProblemCommandHandler(
-        IProblemAggregateRepository problemAggregateRepository,
-        IServiceScopeFactory servicesScopeFactory)
+        IProblemAggregateRepository problemAggregateRepository, 
+        IMediator mediator)
     {
         _problemAggregateRepository = problemAggregateRepository;
-        _servicesScopeFactory = servicesScopeFactory;
+        _mediator = mediator;
     }
+
     public async Task<ProblemId> Handle(ConfirmProblemCommand command, CancellationToken cancellationToken)
     {
         var problem = await _problemAggregateRepository.Get(command.ProblemId);
         problem.Confirm();
         await _problemAggregateRepository.SaveAggragate(problem);
 
-
-        UpdateReadModel(_servicesScopeFactory, problem.Id);
+        await UpdateReadModel(command.ProblemId, cancellationToken);
 
         return problem.Id;
     }
 
-    public void UpdateReadModel(IServiceScopeFactory servicesScopeFactory, ProblemId id)
+    private async Task UpdateReadModel(ProblemId problemId, CancellationToken cancellationToken1)
     {
-        _ = Task.Run(async () =>
-        {
-            using var scope = servicesScopeFactory.CreateScope();
-            var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
-            await mediator.Publish(new ProblemUpdated(id));
-        });
+        await _mediator.Publish(new ProblemUpdated(problemId), cancellationToken1);
     }
 }

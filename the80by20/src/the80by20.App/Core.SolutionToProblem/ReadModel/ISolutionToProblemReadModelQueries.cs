@@ -16,12 +16,12 @@ public interface ISolutionToProblemReadModelQueries
 
     IEnumerable<SolutionType> GetSolutionElementTypes();
 
-    // todo creates feature switch which disbales readmodel handler and then this query will return projections of
-    // data retrieved straight from aggragtes data-sources and administration data-sources 
+    // todo create feature switch which disbales readmodel handler and then this query will return projections of
+    // data retrieved straight from aggragtes data-sources and master-data data-sources 
     Task<SolutionToProblemReadModel> GetBySolutionId(SolutionToProblemId id);
 
-    // todo creates feature switch which disbales readmodel handler and then this query will return projections of
-    // data retrieved straight from aggragtes data-sources and administration data-sources 
+    // todo create feature switch which disbales readmodel handler and then this query will return projections of
+    // data retrieved straight from aggragtes data-sources and master-data data-sources 
     Task<SolutionToProblemReadModel> GetByProblemId(ProblemId id);
 
 

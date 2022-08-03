@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using the80by20.App.Core.SolutionToProblem.Commands;
+using the80by20.App.Core.SolutionToProblem.Commands.ProblemCommands;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 
 namespace the80by20.WebApi.Controllers
@@ -44,7 +45,7 @@ namespace the80by20.WebApi.Controllers
         }
 
         [HttpPut("problem")]
-        public async Task<IActionResult> Update(UpdatProblemCommand updateProblemCommand, CancellationToken token)
+        public async Task<IActionResult> Update(UpdateProblemCommand updateProblemCommand, CancellationToken token)
         {
             var problemId = await _mediator.Send(updateProblemCommand, token);
 
