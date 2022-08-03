@@ -45,9 +45,6 @@ public class StartWorkingOnSolutionCommandHandler
 
     public async Task UpdateReadModel(SolutionToProblemId id, CancellationToken ct)
     {
-        _ = Task.Run(async () =>
-        {
-            await mediator.Publish(new StartedWorkingOnSolution(id), ct);
-        });
+        await _mediator.Publish(new StartedWorkingOnSolution(id), ct);
     }
 }

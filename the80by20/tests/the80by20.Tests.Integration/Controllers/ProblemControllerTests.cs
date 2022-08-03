@@ -49,6 +49,8 @@ public class ProblemControllerTests : ControllerTests, IDisposable
 
         // todo dont know how to test due to in CreateProblemCommandHandler which creates new scope _ = Task.Run(async () =>
         var response = await Client.PostAsJsonAsync("solution-to-problem/problem", command);
+        
+        // Assert
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
 
         var problemAggregateId = Guid.Parse(response.Headers.Location.Segments.Last());
