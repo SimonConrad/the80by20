@@ -15,3 +15,14 @@
 /// </summary>
 public class AggregateDataDddAttribute : Attribute
 { }
+
+// od mariusza g. odp na w/w podejście:
+// Takie rozwiązanie ma jak najbardziej sens gdy:
+// - danych na potrzeby UI/prezentacji jest sporo,
+// - agregat jest często zmiany, co wymusza jego częsty odczyt i zapis do/z bazy,
+// - potrzebujesz odczytywać te dane i pokazywać je użytkownikom systemu bez potrzeby zmiany agregatu.
+
+// Czasem oczywiście można też zrobić bez tego rozdzielenia.
+// Pragmatycznie, jeśli tych danych odczytowych nie ma dużo, nie ma problemu z wydajnością,
+// to można trochę tych danych dodać do agregatu. Nie trzeba wtedy rozdzielać tabel w systemie, etc. J
+// a z tym wtedy nie mam problemu ;) Ale jak napisałem, to zależy od konkretnego przypadku
