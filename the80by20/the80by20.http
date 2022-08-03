@@ -1,4 +1,38 @@
 @url = http://localhost:5000
+@userId = 00000000-0000-0000-0000-000000000001
 
 ###
 GET {{url}}/api
+
+###
+GET {{url}}/security/users/{{userId}}
+
+###
+POST {{url}}/security/users
+Content-Type: application/json
+
+{
+    "email": "user1@wp.pl",
+    "username": "user1",
+    "password": "secret",
+    "fullName": "Jan Jo",
+    "role": "user"
+}
+
+
+###
+# @name sign_in
+POST {{url}}/security/users/sign-in
+Content-Type: application/json
+
+{
+    "email": "user1@wp.pl",
+    "password": "secret"
+}
+
+###
+@accessToken = {{sign_in.response.body.$.accessToken}}
+
+###
+GET {{url}}/security/users/me
+Authorization: Bearer {{accessToken}}
