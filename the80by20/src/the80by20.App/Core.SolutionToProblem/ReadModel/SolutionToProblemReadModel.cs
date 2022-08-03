@@ -12,6 +12,9 @@ namespace the80by20.App.Core.SolutionToProblem.ReadModel;
 /// dedicated for command deciding to do, based on es model
 /// </summary>
 
+// info przy osobny readmodelu problem z obsluga mechanizmu optimistic concurrency, moze rozwiazaniem jest pdczas
+// pobierania readmodelu pobierac rowniez id-wersji z tabeli agregatu i przy zapisie poronywac?
+// albo zrobic zapis agregata i czytanie z niego danych z tej samej tabeli, ale na czytanie obiekt poco - readmodel zwrocic jsnoem
 
 // TODO different readmodel to client and to admin
 [ReadModelDdd]
