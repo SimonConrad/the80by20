@@ -1,8 +1,11 @@
 ﻿using MediatR;
 using Serilog;
+using the80by20.App;
+using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.Infrastructure.HandlersDecorators;
 
+[HandlerDecorator]
 public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
@@ -16,7 +19,7 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
     {
         _logger.Debug($"before: {request.GetType().Name}");
 
-        var response = await next();
+        TResponse response = await next();
 
         _logger.Debug($"after: {request.GetType().Name}");
 
