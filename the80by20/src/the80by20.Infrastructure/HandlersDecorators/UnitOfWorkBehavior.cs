@@ -5,6 +5,7 @@ using the80by20.Infrastructure.DAL.DbContext;
 namespace the80by20.Infrastructure.HandlersDecorators;
 
 // todo test 
+// https://github.com/jbogard/MediatR/wiki/Behaviors todo check if instead of IPipelineBehavior use preprocessor and posprocessobehavior
 [HandlerDecorator]
 public class UnitOfWorkBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
     where TRequest : IRequest<TResponse>

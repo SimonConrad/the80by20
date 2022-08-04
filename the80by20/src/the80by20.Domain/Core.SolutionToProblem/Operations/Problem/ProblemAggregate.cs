@@ -38,7 +38,7 @@ public class ProblemAggregate : Versionable, IEquatable<ProblemAggregate>
     public void Confirm()
     {
         if (!RequiredSolutionTypes.Elements.Any())
-            throw new DomainException("Cannot confirm");
+            throw new DomainException($"{nameof(Confirm)} Cannot confirm");
         
         Confirmed = true;
         Rejected = false;

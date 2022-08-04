@@ -4,6 +4,7 @@ using the80by20.Common.ArchitectureBuildingBlocks.Exceptions;
 
 namespace the80by20.Infrastructure.Exceptions;
 // todo ipiplinepreprocessor sprawidzic czy nie lepszy niżli IPipelineBehavior
+// https://github.com/jbogard/MediatR/wiki/Behaviors
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
