@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.App.Core.SolutionToProblem.Commands.ProblemCommands;
 using the80by20.App.Core.SolutionToProblem.Events;
@@ -31,9 +32,6 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
     // todo wrap with try catch logger, and logger informaing about command received
     public async Task<ProblemId> Handle(CreateProblemCommand command, CancellationToken cancellationToken)
     {
-        // INFO input validation logic
-        // TODO FluentValidator on command
-
         // INFO Creation of the aggregate
         // INFO Domain logic (have in mind different levels of domain logic)
         var problemAggregate = ProblemAggregate.New(RequiredSolutionTypes.From(command.SolutionElementTypes));
@@ -83,3 +81,18 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
     // it handles special case in which sqllite is used, to make it perisistant its connection is singleton (static field)
     // sqlLiteEnabled in appsettings.json
 }
+
+
+// INFO input validation logic, do not check db there it's reposoibility of application logic
+public sealed class CreateProblemValidator : AbstractValidator<CreateProblemCommand>
+{
+    public CreateProblemValidator()
+    {
+        RuleFor(x => x.Description)
+            .NotEmpty()
+            .WithMessage("Description is required.")
+            .MinimumLength(8)
+            .WithMessage("Min length is 8");
+    }
+}
+

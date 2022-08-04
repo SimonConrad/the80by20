@@ -1,11 +1,14 @@
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using the80by20.App.Core.SolutionToProblem.CommandsHandlers.ProblemHandlers;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.Domain.SharedKernel;
 using the80by20.Infrastructure.Exceptions;
+using the80by20.Infrastructure.HandlersDecorators;
 using the80by20.Infrastructure.Security;
 using the80by20.Infrastructure.Security.Adapters;
 using the80by20.Infrastructure.Security.Adapters.Auth;
@@ -70,10 +73,12 @@ public static class Extensions
             });
         });
 
+        services.AddValidatorsFromAssemblyContaining<CreateProblemValidator>();
 
-        // todo tothink
         services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler), typeof(GetUserQueryHandler));
-        
+
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
         
        
         //services.Scan(s => s.FromAssemblies(infrastructureAssembly)
