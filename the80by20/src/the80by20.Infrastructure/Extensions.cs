@@ -75,6 +75,7 @@ public static class Extensions
 
         services.AddValidatorsFromAssemblyContaining<CreateProblemValidator>();
 
+        // todo w zwi¹zku z tym, ¿e mediator mocno pl¹cze koncpet query i command, nie sa on oddzielone lepiej chyba przpi¹c siê na rozwi¹zanie od devmentors np te w mysport
         services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler), typeof(GetUserQueryHandler));
 
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
