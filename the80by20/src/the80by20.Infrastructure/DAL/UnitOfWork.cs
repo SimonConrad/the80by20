@@ -3,11 +3,11 @@ using the80by20.Infrastructure.DAL.DbContext;
 
 namespace the80by20.Infrastructure.DAL;
 
-public class UnitOfWork : IUnitOfWork
+public class EfUnitOfWork : IUnitOfWork
 {
     private readonly CoreDbContext _coreDbContext;
 
-    public UnitOfWork(CoreDbContext coreDbContext)
+    public EfUnitOfWork(CoreDbContext coreDbContext)
     {
         _coreDbContext = coreDbContext;
     }

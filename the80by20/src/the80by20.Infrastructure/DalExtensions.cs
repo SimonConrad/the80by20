@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using the80by20.App.Abstractions;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.App.MasterData;
 using the80by20.App.MasterData.CategoryCrud.Ports;
@@ -8,6 +9,7 @@ using the80by20.App.Security.Ports;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Infrastructure.Core.SolutionToProblem.Adapters;
+using the80by20.Infrastructure.DAL;
 using the80by20.Infrastructure.DAL.DbContext;
 using the80by20.Infrastructure.DAL.Misc;
 using the80by20.Infrastructure.MasterData.Adapters;
@@ -32,6 +34,10 @@ public static class DalExtensions
             .AddSolutionToProblemDal();
             
         services.AddHostedService<DatabaseInitializer>();
+
+        // info only used in commands done like the80by20.App.Abstractions.ICommand
+        services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+        services.TryDecorate(typeof(ICommandHandler<>), typeof(UnitOfWorkCommandHandlerDecorator<>));
 
         return services;
     }
