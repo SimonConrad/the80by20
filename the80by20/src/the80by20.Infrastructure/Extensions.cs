@@ -10,6 +10,7 @@ using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.Domain.SharedKernel;
 using the80by20.Infrastructure.Exceptions;
 using the80by20.Infrastructure.HandlersDecorators;
+using the80by20.Infrastructure.Logging;
 using the80by20.Infrastructure.Security.Adapters.Auth;
 using the80by20.Infrastructure.Security.Adapters.Security;
 using the80by20.Infrastructure.Security.Adapters.Users;
@@ -33,10 +34,9 @@ public static class Extensions
 
         services.AddSingleton<IClock, Clock>();
         
-        //services.AddCustomLogging(); // todo
-        
+        services.AddCustomLogging();
+        services.AddSecurity();
         services.AddEndpointsApiExplorer(); // todo
-
         services.AddSwaggerGen(swagger =>
         {
             swagger.SwaggerDoc("v1", new OpenApiInfo
@@ -72,15 +72,7 @@ public static class Extensions
             });
         });
 
-        services.AddValidatorsFromAssemblyContaining<CreateProblemValidator>();
-
-        // todo w zwi¹zku z tym, ¿e mediator mocno pl¹cze koncpet query i command, nie sa on oddzielone lepiej chyba przpi¹c siê na rozwi¹zanie od devmentors np te w mysport
-        // albo rozdzielic w ramach mediar jako: https://cezarypiatek.github.io/post/why-i-dont-use-mediatr-for-cqrs/
-        services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler), typeof(GetUserHandler));
-
-        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-        // info more problems with this then pozytku services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkBehavior<,>));
+        AddMediatRStaff(services);
 
         var infrastructureAssembly = typeof(AppOptions).Assembly;
 
@@ -91,9 +83,22 @@ public static class Extensions
 
 
         services.AddAuth(configuration);
-        services.AddSecurity();
+
 
         return services;
+    }
+
+    private static void AddMediatRStaff(IServiceCollection services)
+    {
+        services.AddValidatorsFromAssemblyContaining<CreateProblemValidator>();
+
+        // todo w zwi¹zku z tym, ¿e mediator mocno pl¹cze koncpet query i command, nie sa on oddzielone lepiej chyba przpi¹c siê na rozwi¹zanie od devmentors np te w mysport
+        // albo rozdzielic w ramach mediar jako: https://cezarypiatek.github.io/post/why-i-dont-use-mediatr-for-cqrs/
+        services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler), typeof(GetUserHandler));
+
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+        // info more problems with this then pozytku services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkBehavior<,>));
     }
 
     public static async Task<WebApplication> UseInfrastructure(this WebApplication app, IConfiguration configuration)
