@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
-using the80by20.App.Core.SolutionToProblem.Commands;
 using the80by20.App.Core.SolutionToProblem.Commands.ProblemCommands;
 using the80by20.Domain.Security.UserEntity;
 using the80by20.Domain.SharedKernel.Capabilities;

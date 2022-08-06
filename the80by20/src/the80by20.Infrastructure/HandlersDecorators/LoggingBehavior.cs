@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Serilog;
-using the80by20.App;
 using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.Infrastructure.HandlersDecorators;

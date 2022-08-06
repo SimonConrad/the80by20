@@ -1,6 +1,4 @@
-﻿using System.Security.Authentication.ExtendedProtection;
-using Shouldly;
-using the80by20.Sandbox;
+﻿using Shouldly;
 
 namespace the80by20.Sandbox;
 

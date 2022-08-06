@@ -37,6 +37,11 @@ Content-Type: application/json
 GET {{url}}/security/users/me
 Authorization: Bearer {{accessToken}}
 
+// only-admin
+###
+GET {{url}}/security/users
+Authorization: Bearer {{accessToken}}
+
 ###
 POST {{url}}/solution-to-problem/problem
 Authorization: Bearer {{accessToken}}

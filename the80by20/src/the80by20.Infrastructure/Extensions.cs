@@ -4,13 +4,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using the80by20.App.Abstractions;
 using the80by20.App.Core.SolutionToProblem.CommandsHandlers.ProblemHandlers;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.Domain.SharedKernel;
 using the80by20.Infrastructure.Exceptions;
 using the80by20.Infrastructure.HandlersDecorators;
-using the80by20.Infrastructure.Security;
-using the80by20.Infrastructure.Security.Adapters;
 using the80by20.Infrastructure.Security.Adapters.Auth;
 using the80by20.Infrastructure.Security.Adapters.Security;
 using the80by20.Infrastructure.Security.Adapters.Users;
@@ -82,12 +81,14 @@ public static class Extensions
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
         // info more problems with this then pozytku services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkBehavior<,>));
-        
-       
-        //services.Scan(s => s.FromAssemblies(infrastructureAssembly)
-        //    .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
-        //    .AsImplementedInterfaces()
-        //    .WithScopedLifetime());
+
+        var infrastructureAssembly = typeof(AppOptions).Assembly;
+
+        services.Scan(s => s.FromAssemblies(infrastructureAssembly)
+            .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
+
 
         services.AddAuth(configuration);
         services.AddSecurity();

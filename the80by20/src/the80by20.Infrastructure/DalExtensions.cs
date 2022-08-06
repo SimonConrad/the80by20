@@ -1,20 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using the80by20.App;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.App.MasterData;
-using the80by20.App.MasterData.CategoryCrud;
 using the80by20.App.MasterData.CategoryCrud.Ports;
 using the80by20.App.Security.Ports;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
-using the80by20.Infrastructure.Core.SolutionToProblem;
 using the80by20.Infrastructure.Core.SolutionToProblem.Adapters;
 using the80by20.Infrastructure.DAL.DbContext;
 using the80by20.Infrastructure.DAL.Misc;
 using the80by20.Infrastructure.MasterData.Adapters;
-using the80by20.Infrastructure.Security;
 using the80by20.Infrastructure.Security.Adapters.Users;
 
 namespace the80by20.Infrastructure;

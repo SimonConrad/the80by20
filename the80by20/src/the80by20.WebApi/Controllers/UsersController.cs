@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using the80by20.App.Abstractions;
 using the80by20.App.Security.Commands;
 using the80by20.App.Security.Ports;
 using the80by20.App.Security.Queries;
@@ -12,13 +13,20 @@ namespace the80by20.WebApi.Controllers;
 [Route("security/[controller]")]
 public class UsersController  : ControllerBase
 {
-    private readonly IMediator _mediator;
+    private readonly IQueryHandler<GetUsers, IEnumerable<UserDto>> _getUsersHandler;
+    private readonly IQueryHandler<GetUser, UserDto> _getUserHandler;
     private readonly ITokenStorage _tokenStorage;
+    private readonly IMediator _mediator;
 
-    public UsersController(IMediator mediator, ITokenStorage tokenStorage)
+    public UsersController(IQueryHandler<GetUsers, IEnumerable<UserDto>> getUsersHandler,
+        IQueryHandler<GetUser, UserDto> getUserHandler,
+        ITokenStorage tokenStorage,
+        IMediator mediator)
     {
-        _mediator = mediator;
+        _getUsersHandler = getUsersHandler;
+        _getUserHandler = getUserHandler;
         _tokenStorage = tokenStorage;
+        _mediator = mediator;
     }
 
     [Authorize(Policy = "is-admin")]
@@ -27,7 +35,7 @@ public class UsersController  : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<UserDto>> Get(Guid userId)
     {
-        var user = await _mediator.Send(new GetUserQuery(userId));
+        var user = await _getUserHandler.HandleAsync(new GetUser(userId));
         if (user is null)
         {
             return NotFound();
@@ -47,8 +55,8 @@ public class UsersController  : ControllerBase
             return NotFound();
         }
 
-        var userId = Guid.Parse(User.Identity?.Name); // todo use in create-problem command to set user-id in problem-entity
-        var user = await _mediator.Send(new GetUserQuery(userId));
+        var userId = Guid.Parse(User.Identity?.Name);
+        var user = await _getUserHandler.HandleAsync(new GetUser(userId));
 
         return user;
     }
@@ -59,8 +67,8 @@ public class UsersController  : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [Authorize(Policy = "is-admin")] // todo apply other staff from asp.net identity like requirements etc
-    public async Task<ActionResult<IEnumerable<UserDto>>> Get([FromQuery] GetUsersQuery query)
-        => Ok(await _mediator.Send(new GetUsersQuery()));
+    public async Task<ActionResult<IEnumerable<UserDto>>> Get([FromQuery] GetUsers query)
+        => Ok(await _getUsersHandler.HandleAsync(new GetUsers()));
 
     [HttpPost]
     [SwaggerOperation("Create the user account")]
@@ -68,9 +76,9 @@ public class UsersController  : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> Post(SignUpCommand command)
     {
-        command = command with {UserId = Guid.NewGuid()}; // INFO creating record by copying it and adding UserId
+        command = command with { UserId = Guid.NewGuid() }; // INFO creating record by copying it and adding UserId
         await _mediator.Send(command);
-        return CreatedAtAction(nameof(Get), new {command.UserId}, null);
+        return CreatedAtAction(nameof(Get), new { command.UserId }, null);
     }
 
     [HttpPost("sign-in")]

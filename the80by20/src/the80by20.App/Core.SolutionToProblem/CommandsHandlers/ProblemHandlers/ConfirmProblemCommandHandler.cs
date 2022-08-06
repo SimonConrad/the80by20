@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using the80by20.App.Core.SolutionToProblem.Commands.ProblemCommands;
-using the80by20.App.Core.SolutionToProblem.Events;
 using the80by20.App.Core.SolutionToProblem.Events.ProblemEvents;
 using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;

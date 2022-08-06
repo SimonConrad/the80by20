@@ -4,7 +4,6 @@ using the80by20.App.MasterData.CategoryCrud;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Domain.Security.UserEntity;
-using the80by20.Infrastructure.Core.SolutionToProblem;
 using the80by20.Infrastructure.Core.SolutionToProblem.Adapters;
 using the80by20.Infrastructure.MasterData.Adapters;
 using the80by20.Infrastructure.Security.Adapters.Users;

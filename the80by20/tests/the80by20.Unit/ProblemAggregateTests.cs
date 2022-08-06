@@ -2,7 +2,6 @@ using Shouldly;
 using the80by20.Common.ArchitectureBuildingBlocks.Exceptions;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
-using the80by20.Domain.SharedKernel.Capabilities;
 
 // info look at test from 3 perpsectives
 // 1st testing like pure function give input and verify output
@@ -17,14 +16,14 @@ namespace the80by20.Unit
         [Fact]
         public void GIVEN_problem_without_required_solution_types_WHEN_calling_command_confirm_problem_THEN_should_command_fail()
         {
-            //act
+            // arrange
             var problem =
                 ProblemAggregate.New(RequiredSolutionTypes.Empty());
 
             // act
             var exception = Record.Exception(() => problem.Confirm());
 
-            //assert
+            // assert
             exception.ShouldNotBeNull();
             exception.ShouldBeOfType<DomainException>(); // todo custom exception
         }

@@ -1,4 +1,4 @@
-﻿namespace the80by20.App;
+﻿namespace the80by20.App.Abstractions;
 
 public interface IUnitOfWork
 {

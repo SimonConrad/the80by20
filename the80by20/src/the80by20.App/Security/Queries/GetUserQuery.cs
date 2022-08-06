@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using the80by20.App.Abstractions;
 
 namespace the80by20.App.Security.Queries;
 
-public record GetUserQuery(Guid UserId) : IRequest<UserDto>;
+public record GetUser(Guid UserId) : IQuery<UserDto>;
+
+//public record GetUserQueryMediatr(Guid UserId) : IRequest<UserDto>;

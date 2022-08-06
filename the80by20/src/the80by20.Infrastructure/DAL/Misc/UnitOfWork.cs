@@ -1,4 +1,4 @@
-﻿using the80by20.App;
+﻿using the80by20.App.Abstractions;
 using the80by20.Infrastructure.DAL.DbContext;
 
 namespace the80by20.Infrastructure.DAL.Misc;
