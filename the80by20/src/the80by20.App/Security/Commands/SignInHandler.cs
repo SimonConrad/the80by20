@@ -1,5 +1,4 @@
-﻿using MediatR;
-using the80by20.App.Abstractions;
+﻿using the80by20.App.Abstractions;
 using the80by20.App.Security.Commands.Exceptions;
 using the80by20.App.Security.Ports;
 

@@ -1,5 +1,4 @@
-﻿using MediatR;
-using the80by20.App.Abstractions;
+﻿using the80by20.App.Abstractions;
 
 namespace the80by20.App.Security.Commands;
 
