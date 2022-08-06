@@ -5,7 +5,7 @@ using the80by20.App.MasterData.CategoryCrud;
 
 // todo podzaił kontrolerów jak modułów
 
-namespace the80by20.WebApi.Controllers;
+namespace the80by20.WebApi.MasterData;
 // info CancellationToken can be passed in controller action method, passed down to async/await ef methods
 [ApiController]
 [Authorize(Policy = "is-admin")]

@@ -6,7 +6,7 @@ using the80by20.App.Security.Commands;
 using the80by20.App.Security.Ports;
 using the80by20.App.Security.Queries;
 
-namespace the80by20.WebApi.Controllers;
+namespace the80by20.WebApi.Security;
 
 [ApiController]
 [Route("security/[controller]")]

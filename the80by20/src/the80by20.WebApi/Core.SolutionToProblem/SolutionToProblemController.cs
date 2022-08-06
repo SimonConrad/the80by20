@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 
-namespace the80by20.WebApi.Controllers
+namespace the80by20.WebApi.Core.SolutionToProblem
 {
     [ApiController]
     [Route("solution-to-problem")]
