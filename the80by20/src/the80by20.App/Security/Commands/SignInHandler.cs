@@ -1,17 +1,18 @@
 ﻿using MediatR;
+using the80by20.App.Abstractions;
 using the80by20.App.Security.Commands.Exceptions;
 using the80by20.App.Security.Ports;
 
 namespace the80by20.App.Security.Commands;
 
-public class SignInCommandHandler : IRequestHandler<SignInCommand>
+internal sealed class SignInHandler : ICommandHandler<SignIn>
 {
     private readonly IUserRepository _userRepository;
     private readonly IAuthenticator _authenticator;
     private readonly IPasswordManager _passwordManager;
     private readonly ITokenStorage _tokenStorage;
 
-    public SignInCommandHandler(IUserRepository userRepository, 
+    public SignInHandler(IUserRepository userRepository, 
         IAuthenticator authenticator, 
         IPasswordManager passwordManager,
         ITokenStorage tokenStorage)
@@ -22,7 +23,8 @@ public class SignInCommandHandler : IRequestHandler<SignInCommand>
         _tokenStorage = tokenStorage;
     }
     
-    public async Task<Unit> Handle(SignInCommand command, CancellationToken cancellationToken)
+    // todo version with cancelationtoken
+    public async Task HandleAsync(SignIn command)
     {
         var user = await _userRepository.GetByEmailAsync(command.Email);
         if (user is null)
@@ -37,7 +39,7 @@ public class SignInCommandHandler : IRequestHandler<SignInCommand>
 
         var jwt = _authenticator.CreateToken(user.Id, user.Role);
         _tokenStorage.Set(jwt);
-
-        return Unit.Value;
     }
 }
+
+//public class SignInCommandHandler : IRequestHandler<SignInCommand>

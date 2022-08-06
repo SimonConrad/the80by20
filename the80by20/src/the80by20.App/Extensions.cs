@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using the80by20.App.Abstractions;
 
 namespace the80by20.App
 {
@@ -6,12 +7,12 @@ namespace the80by20.App
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            //var applicationAssembly = typeof(ICommandHandler<>).Assembly;
+            var applicationAssembly = typeof(ICommandHandler<>).Assembly;
 
-            //services.Scan(s => s.FromAssemblies(applicationAssembly)
-            //    .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
-            //    .AsImplementedInterfaces()
-            //    .WithScopedLifetime());
+            services.Scan(s => s.FromAssemblies(applicationAssembly)
+                .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
 
             return services;
         }

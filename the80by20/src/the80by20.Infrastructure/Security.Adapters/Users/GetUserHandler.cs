@@ -6,11 +6,11 @@ using the80by20.Infrastructure.DAL.DbContext;
 
 namespace the80by20.Infrastructure.Security.Adapters.Users;
 
-public sealed class GetUserQueryHandler : IQueryHandler<GetUser, UserDto>
+public sealed class GetUserHandler : IQueryHandler<GetUser, UserDto>
 {
     private readonly CoreDbContext _dbContext;
 
-    public GetUserQueryHandler(CoreDbContext dbContext) 
+    public GetUserHandler(CoreDbContext dbContext) 
         => _dbContext = dbContext;
 
     public async Task<UserDto> HandleAsync(GetUser query)

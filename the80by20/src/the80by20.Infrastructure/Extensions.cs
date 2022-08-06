@@ -76,7 +76,7 @@ public static class Extensions
 
         // todo w zwi¹zku z tym, ¿e mediator mocno pl¹cze koncpet query i command, nie sa on oddzielone lepiej chyba przpi¹c siê na rozwi¹zanie od devmentors np te w mysport
         // albo rozdzielic w ramach mediar jako: https://cezarypiatek.github.io/post/why-i-dont-use-mediatr-for-cqrs/
-        services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler), typeof(GetUserQueryHandler));
+        services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler), typeof(GetUserHandler));
 
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));

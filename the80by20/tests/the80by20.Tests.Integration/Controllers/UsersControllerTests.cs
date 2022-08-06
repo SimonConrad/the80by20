@@ -24,7 +24,7 @@ public class UsersControllerTests : ControllerTests, IDisposable
     public async Task post_users_should_return_created_201_status_code()
     {
         await ApplyMigrations();
-        var command = new SignUpCommand(Guid.Empty, "test-user1@wp.pl", "test-user1", "secret",
+        var command = new SignUp(Guid.Empty, "test-user1@wp.pl", "test-user1", "secret",
             "Test Jon", "user");
         var response = await Client.PostAsJsonAsync("security/users", command);
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
@@ -46,7 +46,7 @@ public class UsersControllerTests : ControllerTests, IDisposable
         // await _testDatabase.Context.SaveChangesAsync();
 
         // Act
-        var command = new SignInCommand(user.Email, password);
+        var command = new SignIn(user.Email, password);
         var response = await Client.PostAsJsonAsync("security/users/sign-in", command);
         var jwt = await response.Content.ReadFromJsonAsync<JwtDto>();
 

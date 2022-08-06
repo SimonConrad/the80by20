@@ -15,18 +15,21 @@ public class UsersController  : ControllerBase
 {
     private readonly IQueryHandler<GetUsers, IEnumerable<UserDto>> _getUsersHandler;
     private readonly IQueryHandler<GetUser, UserDto> _getUserHandler;
+    private readonly ICommandHandler<SignIn> _signInHandler;
+    private readonly ICommandHandler<SignUp> _signUpHandler;
     private readonly ITokenStorage _tokenStorage;
-    private readonly IMediator _mediator;
 
     public UsersController(IQueryHandler<GetUsers, IEnumerable<UserDto>> getUsersHandler,
         IQueryHandler<GetUser, UserDto> getUserHandler,
-        ITokenStorage tokenStorage,
-        IMediator mediator)
+        ICommandHandler<SignIn> signInHandler,
+        ICommandHandler<SignUp> signUpHandler,
+        ITokenStorage tokenStorage)
     {
         _getUsersHandler = getUsersHandler;
         _getUserHandler = getUserHandler;
+        _signInHandler = signInHandler;
+        _signUpHandler = signUpHandler;
         _tokenStorage = tokenStorage;
-        _mediator = mediator;
     }
 
     [Authorize(Policy = "is-admin")]
@@ -74,10 +77,10 @@ public class UsersController  : ControllerBase
     [SwaggerOperation("Create the user account")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Post(SignUpCommand command)
+    public async Task<ActionResult> Post(SignUp command)
     {
         command = command with { UserId = Guid.NewGuid() }; // INFO creating record by copying it and adding UserId
-        await _mediator.Send(command);
+        await _signUpHandler.HandleAsync(command);
         return CreatedAtAction(nameof(Get), new { command.UserId }, null);
     }
 
@@ -85,9 +88,9 @@ public class UsersController  : ControllerBase
     [SwaggerOperation("Sign in the user and return the JSON Web Token")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<JwtDto>> Post(SignInCommand command)
+    public async Task<ActionResult<JwtDto>> Post(SignIn command)
     {
-        await _mediator.Send(command);
+        await _signInHandler.HandleAsync(command);
         var jwt = _tokenStorage.Get();
         return jwt;
     }
