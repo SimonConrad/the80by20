@@ -2,7 +2,7 @@
 using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Infrastructure.DAL.DbContext;
 
-namespace the80by20.Infrastructure.HandlersDecorators;
+namespace the80by20.Infrastructure.DAL;
 
 // todo test 
 // https://github.com/jbogard/MediatR/wiki/Behaviors todo check if instead of IPipelineBehavior use preprocessor and posprocessobehavior

@@ -2,7 +2,7 @@
 using Serilog;
 using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Infrastructure.HandlersDecorators;
+namespace the80by20.Infrastructure.Logging;
 
 [HandlerDecorator]
 public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>

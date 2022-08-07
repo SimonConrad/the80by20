@@ -83,9 +83,9 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
 
 
 // INFO input validation logic, do not check db there it's reposoibility of application logic
-public sealed class CreateProblemValidator : AbstractValidator<CreateProblemCommand>
+public sealed class CreateProblemInputValidator : AbstractValidator<CreateProblemCommand>
 {
-    public CreateProblemValidator()
+    public CreateProblemInputValidator()
     {
         RuleFor(x => x.Description)
             .NotEmpty()

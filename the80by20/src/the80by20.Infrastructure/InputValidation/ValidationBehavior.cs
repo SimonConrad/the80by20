@@ -1,8 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
-using the80by20.Common.ArchitectureBuildingBlocks.Exceptions;
 
-namespace the80by20.Infrastructure.Exceptions;
+namespace the80by20.Infrastructure.InputValidation;
 // todo ipiplinepreprocessor sprawidzic czy nie lepszy niżli IPipelineBehavior
 // https://github.com/jbogard/MediatR/wiki/Behaviors
 
@@ -32,15 +31,8 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
                 .ToList();
 
             if (failures.Any())
-                throw new ValidationException(string.Join("-", failures.Select(x => x.ErrorMessage)));
+                throw new InputValidationException(string.Join("-", failures.Select(x => x.ErrorMessage)));
         }
         return await next();
-    }
-}
-
-public class ValidationException : CustomException
-{
-    public ValidationException(string message) : base(message)
-    {
     }
 }

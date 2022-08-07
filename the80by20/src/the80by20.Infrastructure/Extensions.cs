@@ -7,9 +7,10 @@ using Microsoft.OpenApi.Models;
 using the80by20.App.Abstractions;
 using the80by20.App.Core.SolutionToProblem.CommandsHandlers.ProblemHandlers;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
+using the80by20.App.Security.Commands;
 using the80by20.Domain.SharedKernel;
 using the80by20.Infrastructure.Exceptions;
-using the80by20.Infrastructure.HandlersDecorators;
+using the80by20.Infrastructure.InputValidation;
 using the80by20.Infrastructure.Logging;
 using the80by20.Infrastructure.Security.Adapters.Auth;
 using the80by20.Infrastructure.Security.Adapters.Security;
@@ -36,6 +37,9 @@ public static class Extensions
         
         services.AddCustomLogging();
         services.AddSecurity();
+        services.AddInputValidation();
+        services.AddValidatorsFromAssemblyContaining<SignUpInputValidator>();
+
         services.AddEndpointsApiExplorer(); // todo
         services.AddSwaggerGen(swagger =>
         {
@@ -90,8 +94,6 @@ public static class Extensions
 
     private static void AddMediatRStaff(IServiceCollection services)
     {
-        services.AddValidatorsFromAssemblyContaining<CreateProblemValidator>();
-
         // todo w zwi¹zku z tym, ¿e mediator mocno pl¹cze koncpet query i command, nie sa on oddzielone lepiej chyba przpi¹c siê na rozwi¹zanie od devmentors np te w mysport
         // albo rozdzielic w ramach mediar jako: https://cezarypiatek.github.io/post/why-i-dont-use-mediatr-for-cqrs/
         services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler), typeof(GetUserHandler));

@@ -1,4 +1,5 @@
-﻿using the80by20.App.Abstractions;
+﻿using FluentValidation;
+using the80by20.App.Abstractions;
 using the80by20.App.Security.Commands.Exceptions;
 using the80by20.App.Security.Ports;
 using the80by20.Domain.Security.UserEntity;
@@ -45,6 +46,21 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         var user = new User(userId, email, username, securedPassword, fullName, role, _clock.Current());
         await _userRepository.AddAsync(user);
 
+    }
+}
+
+// INFO input validation logic, do not check db there it's reposoibility of application logic
+public sealed class SignUpInputValidator : AbstractValidator<SignUp>
+{
+    public SignUpInputValidator()
+    {
+        RuleFor(x => x.Username)
+            .NotEmpty()
+            .WithMessage("Username is required.")
+            .MinimumLength(2)
+            .WithMessage("Username min length is 2");
+
+        // todo add rest input validation
     }
 }
 
