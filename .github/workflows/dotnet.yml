@@ -2,6 +2,10 @@
 
 name: .NET
 
+env:
+  AZURE_WEBAPP_NAME: the80by20    # set this to the name of your Azure Web App
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '6.0.x'                 # set this to the .NET Core version to use
 
 on:
   push:
@@ -30,3 +34,52 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     #- name: Test
      # run: dotnet test --no-build --verbosity normal
+
+ 
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+    #substitute production appsettings entries to appsettings json file
+      - name: App Settings Variable Substitution
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: '${{env.WORKING_DIRECTORY}}/src/the80by20.WebApi/appsettings.json'
+        env:
+          dataBase.connectionString: ${{ secrets.connection_string }}
+      - name: dotnet publish
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+  
+  deploy:
+          permissions:
+            contents: none
+          runs-on: ubuntu-latest
+          env:
+            AZURE_WEBAPP_NAME: ${{ env.AZURE_WEBAPP_NAME }}
+          needs: build
+          environment:
+            name: 'Development'       
+            url: "https://the80by20.azurewebsites.net"
+
+          steps:
+            - name: Download artifact from build job
+              uses: actions/download-artifact@v3
+              with:
+                name: .net-app
+
+            - name: Deploy to Azure Web App
+              id: deploy-to-webapp
+              uses: azure/webapps-deploy@v2
+              with:
+                app-name: ${{ env.AZURE_WEBAPP_NAME }}
+                publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+                package: ${{env.DOTNET_ROOT}}/myapp
+     
+      
+
+  
