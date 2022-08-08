@@ -38,10 +38,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     #substitute production appsettings entries to appsettings json file
-      - name: App Settings Variable Substitution
+      ##- name: testt
+        ##run: echo "$GITHUB. REPOSITORY" 
+      - name: App Settings Variable Substitution               
         uses: microsoft/variable-substitution@v1
         with:
-          files: 'appsettings.json'
+          files: '.\the80by20\src\the80by20.WebApi\appsettings.json'
         env:
           dataBase.connectionString: ${{ secrets.connection_string }}
       - name: dotnet publish
