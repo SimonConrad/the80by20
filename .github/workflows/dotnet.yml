@@ -16,45 +16,57 @@ on:
     branches: [ "main" ]
 
 jobs:
-  
+ 
+ ############# BUILD #############
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    
+    - name: App Settings Variable Substitution               
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: './the80by20/src/the80by20.WebApi/appsettings.json'
+      env:
+        dataBase.connectionString: ${{ secrets.connection_string }}
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
+    
     - name: Restore dependencies
       working-directory: ${{env.WORKING_DIRECTORY}}
       run: dotnet restore
+    
     - name: Build
       working-directory: ${{env.WORKING_DIRECTORY}}
       run: dotnet build --configuration Release --no-restore
+    
+    # todo
     #- name: Test
      # run: dotnet test --no-build --verbosity normal
- 
+
+ ############# ARTIFACT #############
   artifact:
     runs-on: ubuntu-latest
     steps:
-    #substitute production appsettings entries to appsettings json file
+
       ##- name: testt
         ##run: echo "$GITHUB. REPOSITORY" 
-      - name: App Settings Variable Substitution               
-        uses: microsoft/variable-substitution@v1
-        with:
-          files: './the80by20/src/the80by20.WebApi/appsettings.json'
-        env:
-          dataBase.connectionString: ${{ secrets.connection_string }}
-      - name: dotnet publish
-        working-directory: ${{env.WORKING_DIRECTORY}}
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
-        with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
-  
+
+    - name: dotnet publish
+      working-directory: ${{env.WORKING_DIRECTORY}}
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+    
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v3
+      with:
+        name: .net-app
+        path: ${{env.DOTNET_ROOT}}/myapp
+
+ ############# DEPLOY #############
+ 
   deploy:
     permissions:
       contents: none
