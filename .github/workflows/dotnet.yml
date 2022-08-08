@@ -24,7 +24,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Restore dependencies
       working-directory: ${{env.WORKING_DIRECTORY}}
       run: dotnet restore
@@ -41,7 +41,7 @@ jobs:
       - name: App Settings Variable Substitution
         uses: microsoft/variable-substitution@v1
         with:
-          files: '${{env.WORKING_DIRECTORY}}/src/the80by20.WebApi/appsettings.json'
+          files: "${{env.WORKING_DIRECTORY}}/**/appsettings.json"
         env:
           dataBase.connectionString: ${{ secrets.connection_string }}
       - name: dotnet publish
