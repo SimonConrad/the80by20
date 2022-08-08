@@ -6,6 +6,7 @@ env:
     AZURE_WEBAPP_NAME: the80by20    # set this to the name of your Azure Web App
     AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
     DOTNET_VERSION: '6.0.x'                 # set this to the .NET Core version to use
+    WORKING_DIRECTORY: the80by20
 
 
 on:
@@ -15,16 +16,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-
-
-
+  
   build:
-
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: the80by20
-
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -39,7 +33,6 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     #- name: Test
      # run: dotnet test --no-build --verbosity normal
-
  
   artifact:
     runs-on: ubuntu-latest
@@ -61,24 +54,24 @@ jobs:
           path: ${{env.DOTNET_ROOT}}/myapp
   
   deploy:
-          permissions:
-            contents: none
-          runs-on: ubuntu-latest
-          needs: build
-          environment:
-            name: 'Development'       
-            url: "https://the80by20.azurewebsites.net"
-          steps:
-            - name: Download artifact from build job
-              uses: actions/download-artifact@v3
-              with:
-                name: .net-app
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Development'       
+      url: "https://the80by20.azurewebsites.net"
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: .net-app
 
-            - name: Deploy to Azure Web App
-              id: deploy-to-webapp
-              uses: azure/webapps-deploy@v2
-              with:
-                app-name: ${{ env.AZURE_WEBAPP_NAME }}
-                publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-                package: ${{env.DOTNET_ROOT}}/myapp
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{env.DOTNET_ROOT}}/myapp
      
