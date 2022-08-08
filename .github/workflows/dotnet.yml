@@ -64,13 +64,10 @@ jobs:
           permissions:
             contents: none
           runs-on: ubuntu-latest
-          env:
-            AZURE_WEBAPP_NAME: ${{ env.AZURE_WEBAPP_NAME }}
           needs: build
           environment:
             name: 'Development'       
             url: "https://the80by20.azurewebsites.net"
-
           steps:
             - name: Download artifact from build job
               uses: actions/download-artifact@v3
@@ -85,6 +82,3 @@ jobs:
                 publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
                 package: ${{env.DOTNET_ROOT}}/myapp
      
-      
-
-  
