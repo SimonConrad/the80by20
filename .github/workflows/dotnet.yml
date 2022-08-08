@@ -1,4 +1,7 @@
+
+
 name: .NET
+
 
 on:
   push:
@@ -10,6 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      WorkingDirectory: the80by20
 
     steps:
     - uses: actions/checkout@v3
@@ -18,9 +23,10 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      working-directory: the80by20
+      working-directory: $WorkingDirectory
       run: dotnet restore
     - name: Build
+      working-directory: $WorkingDirectory
       run: dotnet build --configuration Release --no-restore
     #- name: Test
      # run: dotnet test --no-build --verbosity normal
