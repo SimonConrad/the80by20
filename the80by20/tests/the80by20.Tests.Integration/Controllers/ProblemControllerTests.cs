@@ -17,7 +17,7 @@ namespace the80by20.Tests.Integration.Controllers;
 
 public class ProblemControllerTests : ControllerTests, IDisposable
 {
-    [Fact]
+   // [Fact]
     public async Task post_problem_should_return_201_problem_created_and_data_is_persisted_in_write_and_read_store()
     {
         // Arrange
