@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using the80by20.App.MasterData.CategoryCrud;
 using the80by20.Domain.SharedKernel;
@@ -14,12 +15,17 @@ public class DatabaseInitializer : IHostedService
     private readonly IServiceProvider _serviceProvider;
     private readonly IClock _clock;
     private readonly IOptions<DatabaseOptions> _options;
+    private readonly ILogger<DatabaseInitializer> _logger;
 
-    public DatabaseInitializer(IServiceProvider serviceProvider, IClock clock, IOptions<DatabaseOptions> options)
+    public DatabaseInitializer(IServiceProvider serviceProvider, 
+        IClock clock, 
+        IOptions<DatabaseOptions> options,
+        ILogger<DatabaseInitializer> logger)
     {
         _serviceProvider = serviceProvider;
         _clock = clock;
         _options = options;
+        _logger = logger;
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)

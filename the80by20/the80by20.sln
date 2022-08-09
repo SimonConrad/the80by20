@@ -17,11 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Reports", "src\Re
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{2304AB52-C945-426E-931F-02DCA0445F18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.EventsSubsrciber", "src\Reports\the80by20.EventsSubsrciber\the80by20.EventsSubsrciber.csproj", "{C2794FE6-6845-4B76-A074-4DAB3D367AA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.EventsSubsrciber", "src\Reports\the80by20.EventsSubsrciber\the80by20.EventsSubsrciber.csproj", "{C2794FE6-6845-4B76-A074-4DAB3D367AA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Common", "src\the80by20.Common\the80by20.Common.csproj", "{DD8CF84E-0185-4C37-BCC4-8108D6335591}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Common", "src\the80by20.Common\the80by20.Common.csproj", "{DD8CF84E-0185-4C37-BCC4-8108D6335591}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Sandbox", "tools\the80by20.Sandbox\the80by20.Sandbox.csproj", "{84672A1C-B2C2-4A33-8619-4C80C98104AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Sandbox", "tools\the80by20.Sandbox\the80by20.Sandbox.csproj", "{84672A1C-B2C2-4A33-8619-4C80C98104AA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project-know-how", "project-know-how", "{1ED5205A-C3C9-43A2-80A9-BB21513AC35F}"
 	ProjectSection(SolutionItems) = preProject
@@ -30,9 +30,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project-know-how", "project
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EF6A215E-AE67-49EC-A86F-2FE520D3D178}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Tests.Integration", "tests\the80by20.Tests.Integration\the80by20.Tests.Integration.csproj", "{082CB038-E895-44BB-8E8B-A25206C676BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Tests.Integration", "tests\the80by20.Tests.Integration\the80by20.Tests.Integration.csproj", "{082CB038-E895-44BB-8E8B-A25206C676BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Unit", "tests\the80by20.Unit\the80by20.Unit.csproj", "{B1E9BE2B-BAF9-401F-AACB-8FD9CE3FE145}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Unit", "tests\the80by20.Unit\the80by20.Unit.csproj", "{B1E9BE2B-BAF9-401F-AACB-8FD9CE3FE145}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
