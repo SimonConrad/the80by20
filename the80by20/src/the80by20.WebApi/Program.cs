@@ -16,8 +16,7 @@ builder.Services
 
 builder.Host.UseSerilog((context, loggerConfiguration) =>
 {
-    //todo based on different level environment
-
+    //todo make working thath serilof logging levels are overriden by this what we have in appseetings (this is choden by environment)
     loggerConfiguration
         .MinimumLevel.Information()
         .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information);
@@ -52,8 +51,6 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 var app = builder.Build();
 await app.UseInfrastructure(builder.Configuration);
 
-
-// todo put in appsettings.test.json env name -> Test and based on asp ASPNETCORE_ENVIRONMENT environment
 
 app.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
 
