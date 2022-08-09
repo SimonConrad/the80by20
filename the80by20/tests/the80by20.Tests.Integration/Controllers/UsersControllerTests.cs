@@ -120,5 +120,6 @@ public class UsersControllerTests : ControllerTests, IDisposable
     public void Dispose()
     {
         _testDatabase.Dispose();
+        _connection.Dispose();
     }
 }
