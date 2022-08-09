@@ -10,7 +10,7 @@ public class HomeControllerTests : ControllerTests
     {
         var response = await Client.GetAsync("/api");
         var content = await response.Content.ReadAsStringAsync();
-        content.ShouldContain("\"The 80 by 20 [test]\"");
+        content.ShouldContain("\"The 80 by 20\"");
     }
 
     public HomeControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
