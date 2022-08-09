@@ -17,7 +17,7 @@ namespace the80by20.Tests.Integration
                     builder.ConfigureServices(services);
                 }
             
-                builder.UseEnvironment("test");
+                builder.UseEnvironment("automatictests");
             }).CreateClient();
         }
     }

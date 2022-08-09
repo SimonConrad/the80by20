@@ -16,7 +16,7 @@ public sealed class OptionsProvider
     
     private static IConfigurationRoot GetConfigurationRoot()
         => new ConfigurationBuilder()
-            .AddJsonFile("appsettings.test.json", true)
+            .AddJsonFile("appsettings.automatictests.json", true)
             .AddEnvironmentVariables()
             .Build();
 }

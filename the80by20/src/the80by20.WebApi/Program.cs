@@ -16,7 +16,7 @@ builder.Services
 
 builder.Host.UseSerilog((context, loggerConfiguration) =>
 {
-    //environment
+    //todo based on different level environment
 
     loggerConfiguration
         .MinimumLevel.Information()
@@ -27,6 +27,7 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
     loggerConfiguration
         .WriteTo
         .Console();
+    //info can be output template
 
     loggerConfiguration
         .Enrich.FromLogContext()
@@ -35,9 +36,9 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
             rollOnFileSizeLimit: true,
             retainedFileCountLimit: 10,
             fileSizeLimitBytes: 4194304, // 4MB
-            restrictedToMinimumLevel: LogEventLevel.Information,
+            //restrictedToMinimumLevel: LogEventLevel.Information,
             outputTemplate:
-            "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] ({SourceContext}.{Method}) {Message}{NewLine}{Exception}");
+            "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] (request: {RequestId}) ({SourceContext}.{Method}) {Message}{NewLine}{Exception}");
 
     // todo .{Method} is not logging method name
     //loggerConfiguration.ReadFrom.Configuration(builder.Configuration);
@@ -51,6 +52,8 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 var app = builder.Build();
 await app.UseInfrastructure(builder.Configuration);
 
+
+// todo put in appsettings.test.json env name -> Test and based on asp ASPNETCORE_ENVIRONMENT environment
 
 app.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
 
