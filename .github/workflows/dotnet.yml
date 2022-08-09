@@ -43,6 +43,10 @@ jobs:
       working-directory: ${{env.WORKING_DIRECTORY}}
       run: dotnet build --configuration Release --no-restore
     
+    - name: Test
+      working-directory: ${{env.WORKING_DIRECTORY}}
+      run: dotnet test --no-build --verbosity normal
+    
     - name: dotnet publish
       working-directory: ${{env.WORKING_DIRECTORY}}
       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
@@ -52,10 +56,6 @@ jobs:
       with:
         name: .net-app
         path: ${{env.DOTNET_ROOT}}/myapp
-        
-    - name: Test
-      working-directory: ${{env.WORKING_DIRECTORY}}
-      run: dotnet test --no-build --verbosity normal
 
  ############# ARTIFACT #############
  
