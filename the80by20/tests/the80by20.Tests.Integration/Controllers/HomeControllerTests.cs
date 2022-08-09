@@ -10,7 +10,7 @@ public class HomeControllerTests : ControllerTests
     {
         var response = await Client.GetAsync("/api");
         var content = await response.Content.ReadAsStringAsync();
-        content.ShouldContain("\"The 80 by 20\"");
+        content.ShouldContain("The 80 by 20"); // todo sprawdzic czy testy na ci/cd githubas actoins na pewno używaja appsettings.automatictests
     }
 
     public HomeControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
