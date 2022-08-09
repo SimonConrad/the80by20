@@ -52,10 +52,10 @@ jobs:
       with:
         name: .net-app
         path: ${{env.DOTNET_ROOT}}/myapp
-    
-    # todo
-    #- name: Test
-     # run: dotnet test --no-build --verbosity normal
+        
+    - name: Test
+      working-directory: ${{env.WORKING_DIRECTORY}}
+      run: dotnet test --no-build --verbosity normal
 
  ############# ARTIFACT #############
  
