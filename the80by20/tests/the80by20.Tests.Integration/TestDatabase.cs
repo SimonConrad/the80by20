@@ -36,7 +36,6 @@ internal sealed class TestSqlLiteInMemoryDatabase : IWithCoreDbContext
 {
     public CoreDbContext Context { get; }
 
-    //var connection = new SqliteConnection("Filename=:memory:");
     public TestSqlLiteInMemoryDatabase(SqliteConnection connection)
     {
         //https://docs.microsoft.com/en-us/ef/core/testing/testing-without-the-database#sqlite-in-memory

@@ -9,7 +9,7 @@ using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 // 3rd verify interaction logic how flow goes - especially good for application logic setup mock s to behave properly and veryfy result, calls on mocks
 // more info in the80by20 gdocs documments
 // always try to veryfi stable api
-namespace the80by20.Unit
+namespace the80by20.Tests.Unit
 {
     public class ProblemAggregateTests
     {

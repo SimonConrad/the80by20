@@ -20,7 +20,7 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 
     loggerConfiguration
         .MinimumLevel.Information()
-        .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning);
+        .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information);
     //"Microsoft.EntityFrameworkCore.Database.Command": "Warning",
     //"Microsoft.EntityFrameworkCore.Infrastructure": "Warning"
 
@@ -38,7 +38,7 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
             fileSizeLimitBytes: 4194304, // 4MB
             //restrictedToMinimumLevel: LogEventLevel.Information,
             outputTemplate:
-            "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] (request: {RequestId}) ({SourceContext}.{Method}) {Message}{NewLine}{Exception}");
+            "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] ({SourceContext}.{Method}) {Message}{NewLine}{Exception}");
 
     // todo .{Method} is not logging method name
     //loggerConfiguration.ReadFrom.Configuration(builder.Configuration);
@@ -46,7 +46,7 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
     // .WriteTo
     // .File("logs.txt")
     // .WriteTo
-    // .Seq("http://localhost:5341");
+    // .Seq("http://localhost:5341"); //todo kibana
 });
 
 var app = builder.Build();

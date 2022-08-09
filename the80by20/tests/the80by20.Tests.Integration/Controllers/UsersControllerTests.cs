@@ -96,9 +96,8 @@ public class UsersControllerTests : ControllerTests, IDisposable
 
     public UsersControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
     {
-        _testDatabase = new TestDatabase();
-
         // todo steer using appsetting - use options provider to access setting then ocmment:
+        // uncomment when normal sql for tests from appsettings.tests
         // _testDatabase = new TestDatabase();
     }
 
@@ -108,35 +107,14 @@ public class UsersControllerTests : ControllerTests, IDisposable
         services.AddSingleton(_userRepository);
 
         // todo steer using appsetting - use options provider to access setting
-        //ApplySqlLite(services);
+       ApplySqlLite(services);
     }
 
     private void ApplySqlLite(IServiceCollection services)
     {
-        // for sqllite
-        var descriptor1 = services.SingleOrDefault(
-            d => d.ServiceType ==
-                 typeof(DbContextOptions<CoreDbContext>));
-
-        if (descriptor1 != null)
-        {
-            services.Remove(descriptor1);
-        }
-
-        //DatabaseInitializer
-        var descriptor2 = services.SingleOrDefault(
-            d => d.ServiceType ==
-                typeof(IHostedService) && d.ImplementationType == typeof(DatabaseInitializer));
-        if (descriptor2 != null)
-        {
-            services.Remove(descriptor2);
-        }
-
-        _connection = new SqliteConnection("Filename=:memory:");
-        _connection.Open();
-        _testDatabase = new TestSqlLiteInMemoryDatabase(_connection);
-
-        services.AddDbContext<CoreDbContext>(x => x.UseSqlite(_connection));
+        var components = SqlLiteIneMemoryComponentsSetupper.Setup(services);
+        _connection = components.connection;
+        _testDatabase = components.ctxt;
     }
 
     public void Dispose()
