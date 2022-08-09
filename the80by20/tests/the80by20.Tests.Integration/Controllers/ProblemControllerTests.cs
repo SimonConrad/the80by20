@@ -17,6 +17,10 @@ namespace the80by20.Tests.Integration.Controllers;
 
 public class ProblemControllerTests : ControllerTests, IDisposable
 {
+
+    private IWithCoreDbContext _testDatabase;
+    private SqliteConnection _connection;
+
    // [Fact]
     public async Task post_problem_should_return_201_problem_created_and_data_is_persisted_in_write_and_read_store()
     {
@@ -71,9 +75,7 @@ public class ProblemControllerTests : ControllerTests, IDisposable
         }
     }
 
-    private IWithCoreDbContext _testDatabase;
 
-    private SqliteConnection _connection;
 
     public ProblemControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
     {
