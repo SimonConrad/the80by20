@@ -16,7 +16,8 @@ builder.Services
 
 builder.Host.UseSerilog((context, loggerConfiguration) =>
 {
-    //todo make working thath serilof logging levels are overriden by this what we have in appseetings (this is choden by environment)
+    //todo make working thath serilog read from logging levels are overriden by this what we have in appseetings (this is choden by environment)
+    // todo configure logger to read from appsettings.json
     loggerConfiguration
         .MinimumLevel.Information()
         .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information);

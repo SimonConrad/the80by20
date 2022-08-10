@@ -1,1 +1,1 @@
-current version: https://miro.com/app/board/uXjVOkhNSOs=/
+current version: on miro board
