@@ -15,8 +15,9 @@ Add-Migration newcolumn -Context CoreDbContext
 
 Remove-Migration -Context CoreDbContext
 
-## DELETEs
+## SQL
 
+### delete rows in transaction
 BEGIN TRY
 BEGIN TRANSACTION 
 	DELETE  FROM [The80By20].[dbo].[Users]
@@ -40,3 +41,8 @@ BEGIN CATCH
 
 END CATCH
 GO
+
+### delete test db
+USE master;
+ALTER database [The80By20-test] set offline with ROLLBACK IMMEDIATE;
+DROP database [The80By20-test];

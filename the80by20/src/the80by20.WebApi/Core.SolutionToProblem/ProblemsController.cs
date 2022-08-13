@@ -7,15 +7,15 @@ using the80by20.App.Core.SolutionToProblem.ReadModel;
 namespace the80by20.WebApi.Core.SolutionToProblem
 {
     [ApiController]
-    [Route("solution-to-problem")]
+    [Route("solution-to-problem/[controller]")]
     [Authorize]
-    public class ProblemController : ControllerBase
+    public class ProblemsController : ControllerBase
     {
-        private readonly ILogger<ProblemController> _logger;
+        private readonly ILogger<ProblemsController> _logger;
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
         private readonly IMediator _mediator;
 
-        public ProblemController(ILogger<ProblemController> logger, 
+        public ProblemsController(ILogger<ProblemsController> logger, 
             ISolutionToProblemReadModelQueries solutionToProblemReadModelQueries,
             IMediator mediator)
         {
@@ -34,7 +34,7 @@ namespace the80by20.WebApi.Core.SolutionToProblem
             return Ok(new{categories, solutionElementTypes});
         }
 
-        [HttpPost("problem")]
+        [HttpPost()]
         public async Task<IActionResult> Create(CreateProblemCommand createProblemCommand, CancellationToken token)
         {
             createProblemCommand = createProblemCommand with { UserId = Guid.Parse(User.Identity?.Name) };
@@ -43,7 +43,7 @@ namespace the80by20.WebApi.Core.SolutionToProblem
             return CreatedAtAction(nameof(Get), new {problemId}, null);
         }
 
-        [HttpPut("problem")]
+        [HttpPut()]
         public async Task<IActionResult> Update(UpdateProblemCommand updateProblemCommand, CancellationToken token)
         {
             var problemId = await _mediator.Send(updateProblemCommand, token);
@@ -51,7 +51,7 @@ namespace the80by20.WebApi.Core.SolutionToProblem
             return Ok(new { id = problemId });
         }
 
-        [HttpGet("problems/{problemId}")]
+        [HttpGet("{problemId}")]
         public async Task<IActionResult> Get(Guid problemId)
         {
             // todo do not return whole scope of this readmodel to users, caouse thers is solutions-elemnts there 

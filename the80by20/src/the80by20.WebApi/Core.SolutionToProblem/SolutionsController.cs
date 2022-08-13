@@ -6,15 +6,15 @@ using the80by20.App.Core.SolutionToProblem.ReadModel;
 namespace the80by20.WebApi.Core.SolutionToProblem
 {
     [ApiController]
-    [Route("solution-to-problem")]
+    [Route("solution-to-problem/[controller]")]
     [Authorize]
-    public class SolutionToProblemController : ControllerBase
+    public class SolutionsController : ControllerBase
     {
-        private readonly ILogger<SolutionToProblemController> _logger;
+        private readonly ILogger<SolutionsController> _logger;
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
         private readonly IMediator _mediator;
 
-        public SolutionToProblemController(ILogger<SolutionToProblemController> logger, 
+        public SolutionsController(ILogger<SolutionsController> logger, 
             ISolutionToProblemReadModelQueries solutionToProblemReadModelQueries,
             IMediator mediator)
         {
@@ -25,7 +25,7 @@ namespace the80by20.WebApi.Core.SolutionToProblem
         }
 
         // todo swagger attributes and proper methods like notfound etc
-        [HttpGet("solutions-to-problems/{solutionId}")]
+        [HttpGet("{solutionId}")]
         public async Task<IActionResult> Get(Guid solutionId)
         {
             var res = await _solutionToProblemReadModelQueries.GetBySolutionId(solutionId);

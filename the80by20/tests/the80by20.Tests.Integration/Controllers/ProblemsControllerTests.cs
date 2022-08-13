@@ -15,7 +15,7 @@ using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;
 
-public class ProblemControllerTests : ControllerTests, IDisposable
+public class ProblemsControllerTests : ControllerTests, IDisposable
 {
 
     private IWithCoreDbContext _testDatabase;
@@ -55,7 +55,7 @@ public class ProblemControllerTests : ControllerTests, IDisposable
             new SolutionType[] { SolutionType.TheoryOfConceptWithExample });
 
         // todo dont know how to test due to in CreateProblemCommandHandler which creates new scope _ = Task.Run(async () =>
-        var response = await Client.PostAsJsonAsync("solution-to-problem/problem", command);
+        var response = await Client.PostAsJsonAsync("solution-to-problem/problems", command);
         
         // Assert
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
@@ -77,7 +77,7 @@ public class ProblemControllerTests : ControllerTests, IDisposable
 
 
 
-    public ProblemControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
+    public ProblemsControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
     {
         // uncomment this and comment ApplySqlLite when using sql normal for tests
         //_testDatabase = new TestDatabase();

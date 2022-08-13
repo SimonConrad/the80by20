@@ -27,8 +27,4 @@
     <ProjectReference Include="..\..\src\the80by20.WebApi\the80by20.WebApi.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
