@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Sandbox", "tools\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project-know-how", "project-know-how", "{1ED5205A-C3C9-43A2-80A9-BB21513AC35F}"
 	ProjectSection(SolutionItems) = preProject
-		commands.md = commands.md
+		tools\commands.md = tools\commands.md
 		tools\migrations-ef-sqls.md = tools\migrations-ef-sqls.md
 	EndProjectSection
 EndProject
