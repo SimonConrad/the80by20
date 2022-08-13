@@ -8,6 +8,8 @@ using the80by20.App.Security.Queries;
 
 namespace the80by20.WebApi.Security;
 
+// todo is convention userscontroller vs usercontroller
+
 [ApiController]
 [Route("security/[controller]")]
 public class UsersController  : ControllerBase
