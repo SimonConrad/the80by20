@@ -78,7 +78,7 @@ public class UsersController  : ControllerBase
     [SwaggerOperation("Create the user account")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Post(SignUp command)
+    public async Task<ActionResult> Post([FromBody] SignUp command)
     {
         command = command with { UserId = Guid.NewGuid() }; // INFO creating record by copying it and adding UserId
         await _signUpHandler.HandleAsync(command);
@@ -89,7 +89,7 @@ public class UsersController  : ControllerBase
     [SwaggerOperation("Sign in the user and return the JSON Web Token")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<JwtDto>> Post(SignIn command)
+    public async Task<ActionResult<JwtDto>> Post([FromBody] SignIn command)
     {
         await _signInHandler.HandleAsync(command);
         var jwt = _tokenStorage.Get();

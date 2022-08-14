@@ -35,7 +35,7 @@ namespace the80by20.WebApi.Core.SolutionToProblem
         }
 
         [HttpPost()]
-        public async Task<IActionResult> Create(CreateProblemCommand createProblemCommand, CancellationToken token)
+        public async Task<IActionResult> Create([FromBody] CreateProblemCommand createProblemCommand, CancellationToken token)
         {
             createProblemCommand = createProblemCommand with { UserId = Guid.Parse(User.Identity?.Name) };
             var problemId = await _mediator.Send(createProblemCommand, token);
@@ -44,7 +44,7 @@ namespace the80by20.WebApi.Core.SolutionToProblem
         }
 
         [HttpPut()]
-        public async Task<IActionResult> Update(UpdateProblemCommand updateProblemCommand, CancellationToken token)
+        public async Task<IActionResult> Update([FromBody] UpdateProblemCommand updateProblemCommand, CancellationToken token)
         {
             var problemId = await _mediator.Send(updateProblemCommand, token);
 
