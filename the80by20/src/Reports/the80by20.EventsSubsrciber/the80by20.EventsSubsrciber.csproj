@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-the80by20.EventsSubsrciber-9232D040-9255-4FBE-9A8E-8F25F5BDDF52</UserSecretsId>
   </PropertyGroup>
