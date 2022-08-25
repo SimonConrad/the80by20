@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.App.Core.SolutionToProblem.Commands.ProblemCommands;
 using the80by20.App.Core.SolutionToProblem.Events.ProblemEvents;
@@ -83,15 +82,3 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
 
 
 // INFO input validation logic, do not check db there it's reposoibility of application logic
-public sealed class CreateProblemInputValidator : AbstractValidator<CreateProblemCommand>
-{
-    public CreateProblemInputValidator()
-    {
-        RuleFor(x => x.Description)
-            .NotEmpty()
-            .WithMessage("Description is required.")
-            .MinimumLength(8)
-            .WithMessage("Min length is 8");
-    }
-}
-
