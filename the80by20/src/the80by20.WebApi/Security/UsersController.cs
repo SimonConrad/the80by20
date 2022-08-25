@@ -37,7 +37,7 @@ public class UsersController  : ControllerBase
     [HttpGet("{userId:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)] // todo check what it gives - swagger?
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<UserDto>> Get(Guid userId)
+    public async Task<ActionResult<UserDto>> Get([FromRoute] Guid userId)
     {
         var user = await _getUserHandler.HandleAsync(new GetUser(userId));
         if (user is null)

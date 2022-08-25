@@ -21,6 +21,17 @@ Content-Type: application/json
     "role": "user"
 }
 
+###
+POST {{url}}/security/users
+Content-Type: application/json
+
+{
+    "email": "admin@wp.pl",
+    "username": "admin",
+    "password": "secret",
+    "fullName": "Admin",
+    "role": "admin"
+}
 
 ###
 # @name sign_in
@@ -29,6 +40,16 @@ Content-Type: application/json
 
 {
     "email": "user1@wp.pl",
+    "password": "secret"
+}
+
+###
+# @name sign_in
+POST {{url}}/security/users/sign-in
+Content-Type: application/json
+
+{
+    "email": "admin@wp.pl",
     "password": "secret"
 }
 
@@ -42,6 +63,12 @@ Authorization: Bearer {{accessToken}}
 // only-admin
 ###
 GET {{url}}/security/users
+Authorization: Bearer {{accessToken}}
+
+// only-admin
+###
+@admin-id = a3469e46-fbc5-44a3-8579-b2a7d810cfcb
+GET {{url}}/security/users/{{admin-id}}
 Authorization: Bearer {{accessToken}}
 
 ###
