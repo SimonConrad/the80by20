@@ -26,7 +26,7 @@ namespace the80by20.WebApi.Core.SolutionToProblem
         }
 
         [HttpGet("categories-and-solution-types")]
-        public async Task<IActionResult> GetCategoriesAndSolutionTypes()
+        public async Task<ActionResult> GetCategoriesAndSolutionTypes()
         {
             var categories = await _solutionToProblemReadModelQueries.GetProblemsCategories();
             var solutionElementTypes =  _solutionToProblemReadModelQueries.GetSolutionElementTypes();
@@ -34,8 +34,8 @@ namespace the80by20.WebApi.Core.SolutionToProblem
             return Ok(new{categories, solutionElementTypes});
         }
 
-        [HttpPost()]
-        public async Task<IActionResult> Create([FromBody] CreateProblemCommand createProblemCommand, CancellationToken token)
+        [HttpPost]
+        public async Task<ActionResult> Create([FromBody] CreateProblemCommand createProblemCommand, CancellationToken token)
         {
             createProblemCommand = createProblemCommand with { UserId = Guid.Parse(User.Identity?.Name) };
             var problemId = await _mediator.Send(createProblemCommand, token);
@@ -43,16 +43,21 @@ namespace the80by20.WebApi.Core.SolutionToProblem
             return CreatedAtAction(nameof(Get), new {problemId}, null);
         }
 
-        [HttpPut()]
-        public async Task<IActionResult> Update([FromBody] UpdateProblemCommand updateProblemCommand, CancellationToken token)
+        [HttpPut]
+        public async Task<ActionResult> Update([FromBody] UpdateProblemCommand updateProblemCommand, CancellationToken token)
         {
             var problemId = await _mediator.Send(updateProblemCommand, token);
 
             return Ok(new { id = problemId });
+
+            // info more reststyle will be to:
+            // - add id as action parameter with attribute fromroute
+            // - return baadrequest if not valid and return notcontent if valid
+            // - rename action name to put
         }
 
-        [HttpGet("{problemId}")]
-        public async Task<IActionResult> Get(Guid problemId)
+        [HttpGet("{problemId:guid}")]
+        public async Task<ActionResult<SolutionToProblemReadModel>> Get(Guid problemId)
         {
             // todo do not return whole scope of this readmodel to users, caouse thers is solutions-elemnts there 
             var res = await _solutionToProblemReadModelQueries.GetByProblemId(problemId);

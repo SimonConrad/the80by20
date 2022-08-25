@@ -23,14 +23,14 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] Category category)
+    public async Task<ActionResult> Create([FromBody] Category category)
     {
         await _categoryCrud.Add(category);
         return Ok();
     }
     
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<ActionResult<Category[]>> Get()
     {
         var res = await _categoryCrud.GetAll();
         return Ok(res);

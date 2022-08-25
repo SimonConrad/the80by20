@@ -10,7 +10,7 @@ namespace the80by20.WebApi.Security;
 
 // todo is convention userscontroller vs usercontroller
 
-[ApiController]
+[ApiController] // info bacouse of inheriting from ControllerBase and marking controllre as [ApiController] attributes: FromRoute, FromQuery, FromBody can be removed
 [Route("security/[controller]")]
 public class UsersController  : ControllerBase
 {

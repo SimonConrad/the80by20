@@ -25,8 +25,8 @@ namespace the80by20.WebApi.Core.SolutionToProblem
         }
 
         // todo swagger attributes and proper methods like notfound etc
-        [HttpGet("{solutionId}")]
-        public async Task<IActionResult> Get(Guid solutionId)
+        [HttpGet("{solutionId:guid}")]
+        public async Task<ActionResult<SolutionToProblemReadModel>> Get(Guid solutionId)
         {
             var res = await _solutionToProblemReadModelQueries.GetBySolutionId(solutionId);
 
