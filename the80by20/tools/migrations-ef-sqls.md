@@ -3,6 +3,8 @@ https://docs.microsoft.com/en-us/ef/core/cli/dbcontext-creation?tabs=dotnet-core
 
 ## Migrations
 package manager console
+dotnet tool install --global dotnet-ef
+
 default project core\core.infrastructure
 nuget package Microsoft.EntityFrameworkCore.Design
 
