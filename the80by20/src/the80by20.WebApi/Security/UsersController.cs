@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
 using the80by20.App.Abstractions;
 using the80by20.App.Security.Commands;
 using the80by20.App.Security.Ports;
 using the80by20.App.Security.Queries;
+using the80by20.Infrastructure;
 
 namespace the80by20.WebApi.Security;
 
@@ -19,18 +21,25 @@ public class UsersController  : ControllerBase
     private readonly ICommandHandler<SignIn> _signInHandler;
     private readonly ICommandHandler<SignUp> _signUpHandler;
     private readonly ITokenStorage _tokenStorage;
+    private readonly AppOptions _appOptions;
+    private readonly IOptionsMonitor<AppOptions> _appOptionsMonitor;
 
     public UsersController(IQueryHandler<GetUsers, IEnumerable<UserDto>> getUsersHandler,
         IQueryHandler<GetUser, UserDto> getUserHandler,
         ICommandHandler<SignIn> signInHandler,
         ICommandHandler<SignUp> signUpHandler,
-        ITokenStorage tokenStorage)
+        ITokenStorage tokenStorage,
+        IOptions<AppOptions> appOptions,
+        IOptionsMonitor<AppOptions> appOptionsMonitor)
     {
         _getUsersHandler = getUsersHandler;
         _getUserHandler = getUserHandler;
         _signInHandler = signInHandler;
         _signUpHandler = signUpHandler;
         _tokenStorage = tokenStorage;
+
+        _appOptions = appOptions.Value;
+        _appOptionsMonitor = appOptionsMonitor; // reflect values in json without restarting app
     }
 
     [Authorize(Policy = "is-admin")]

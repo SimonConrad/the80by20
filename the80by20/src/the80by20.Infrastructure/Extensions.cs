@@ -27,7 +27,12 @@ public static class Extensions
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers();
-        services.Configure<AppOptions>(configuration.GetRequiredSection("app"));
+
+        //var appOptions = configuration.GetOptions<AppOptions>(sectionName:"app");
+        //services.AddSingleton(appOptions);
+
+        services.Configure<AppOptions>(configuration.GetRequiredSection(key: "app"));
+
         services.AddSingleton<ExceptionMiddleware>();
         services.AddHttpContextAccessor();
 
