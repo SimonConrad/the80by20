@@ -108,7 +108,7 @@ public static class Extensions
         // info more problems with this then pozytku services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkBehavior<,>));
     }
 
-    public static async Task<WebApplication> UseInfrastructure(this WebApplication app, IConfiguration configuration)
+    public static WebApplication UseInfrastructure(this WebApplication app, IConfiguration configuration)
     {
         app.UseMiddleware<ExceptionMiddleware>();
         

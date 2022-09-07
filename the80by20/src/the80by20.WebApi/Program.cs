@@ -16,7 +16,7 @@ ConfigureLogging(builder);
 
 var app = builder.Build();
 
-await app.UseInfrastructure(builder.Configuration);
+app.UseInfrastructure(builder.Configuration);
 
 app.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
 
