@@ -39,7 +39,8 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
             MockStateDataToTestIfEfConverionsWork();
         }
 
-        public void SetBasePrice(Money price)
+        // infointernal so that domain layer can access this method, called by SetBasePriceForSolutionToProblemDomainService
+        internal void SetBasePrice(Money price)
         {
             BasePrice = price;
         }
