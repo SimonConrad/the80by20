@@ -1,9 +1,11 @@
 ﻿using the80by20.App.Abstractions;
 using the80by20.App.Security.Commands.Exceptions;
 using the80by20.App.Security.Ports;
+using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.App.Security.Commands.Handlers;
 
+[CommandHandlerCqrs]
 internal sealed class SignInHandler : ICommandHandler<SignIn>
 {
     private readonly IUserRepository _userRepository;
