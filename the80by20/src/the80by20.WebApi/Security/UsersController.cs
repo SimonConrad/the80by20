@@ -48,7 +48,7 @@ public class UsersController  : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<UserDto>> Get([FromRoute] Guid userId)
     {
-        var user = await _getUserHandler.HandleAsync(new GetUser(userId));
+        var user = await _getUserHandler.HandleAsync(new GetUser(){UserId = userId});
         if (user is null)
         {
             return NotFound();
@@ -69,7 +69,7 @@ public class UsersController  : ControllerBase
         }
 
         var userId = Guid.Parse(User.Identity?.Name);
-        var user = await _getUserHandler.HandleAsync(new GetUser(userId));
+        var user = await _getUserHandler.HandleAsync(new GetUser(){UserId = userId});
 
         return user;
     }
