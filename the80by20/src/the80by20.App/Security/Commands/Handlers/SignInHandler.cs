@@ -2,7 +2,7 @@
 using the80by20.App.Security.Commands.Exceptions;
 using the80by20.App.Security.Ports;
 
-namespace the80by20.App.Security.Commands;
+namespace the80by20.App.Security.Commands.Handlers;
 
 internal sealed class SignInHandler : ICommandHandler<SignIn>
 {

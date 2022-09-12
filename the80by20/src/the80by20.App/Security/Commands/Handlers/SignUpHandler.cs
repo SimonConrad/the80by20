@@ -5,7 +5,7 @@ using the80by20.App.Security.Ports;
 using the80by20.Domain.Security.UserEntity;
 using the80by20.Domain.SharedKernel;
 
-namespace the80by20.App.Security.Commands;
+namespace the80by20.App.Security.Commands.Handlers;
 
 internal sealed class SignUpHandler : ICommandHandler<SignUp>
 {

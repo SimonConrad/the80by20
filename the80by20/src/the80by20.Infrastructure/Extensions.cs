@@ -8,6 +8,7 @@ using the80by20.App.Abstractions;
 using the80by20.App.Core.SolutionToProblem.CommandsHandlers.ProblemHandlers;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.App.Security.Commands;
+using the80by20.App.Security.Commands.Handlers;
 using the80by20.Domain.SharedKernel;
 using the80by20.Infrastructure.Exceptions;
 using the80by20.Infrastructure.InputValidation;
