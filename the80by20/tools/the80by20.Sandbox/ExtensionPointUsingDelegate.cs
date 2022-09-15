@@ -48,4 +48,3 @@ public class StringBuilderExtendableClient : AStringBuilderExtendableClient
         return $"{input} extended";
     }
 }
-
