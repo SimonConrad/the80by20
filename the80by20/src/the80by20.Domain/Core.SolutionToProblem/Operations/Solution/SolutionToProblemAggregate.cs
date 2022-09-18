@@ -14,7 +14,8 @@ namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
         }
 
         public SolutionToProblemId Id { get; private set; }
-        public ProblemId ProblemId { get; private set; }
+        // INFO alternative will have one id for problem and solutiontoproblem as problem entity BECOMES solutionToProblem entit
+        public ProblemId ProblemId { get; private set; } 
         public RequiredSolutionTypes RequiredSolutionTypes { get; private set; } = RequiredSolutionTypes.Empty();
 
         public SolutionSummary SolutionSummary { get; private set; } = SolutionSummary.Empty();
