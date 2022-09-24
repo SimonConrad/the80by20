@@ -31,6 +31,11 @@ workspace and project file structure
 
 https://angular.io/guide/file-structure
 
+# layout
+
+flex https://tobiasahlin.com/blog/common-flexbox-patterns/
+grid https://www.positronx.io/css-grid-layout-holy-grail-angular-ui-tutorial/
+
 # todo
 
  - apply ci / cd 

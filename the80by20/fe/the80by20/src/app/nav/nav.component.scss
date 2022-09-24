@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  flex-grow: 1;
+  height: 100px;
+}
+
+.item + .item {
+  margin-left: 2%;
+}

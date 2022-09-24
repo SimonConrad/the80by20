@@ -31,9 +31,14 @@ workspace and project file structure
 
 https://angular.io/guide/file-structure
 
+
+
 # todo
 
- - apply ci / cd
+ - apply ci / cd 
  - layout with css grid and flex
  - authentication with jwt
- - angu
+ - angular material
+ - tests
+ - rxjs
+ - code the80by20 use cases - start with these with already done be
