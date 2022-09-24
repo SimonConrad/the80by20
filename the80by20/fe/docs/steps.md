@@ -45,3 +45,5 @@ grid https://www.positronx.io/css-grid-layout-holy-grail-angular-ui-tutorial/
  - tests
  - rxjs
  - code the80by20 use cases - start with these with already done be
+ - style cop
+ - usefull vs code plugins for angular, scss and html

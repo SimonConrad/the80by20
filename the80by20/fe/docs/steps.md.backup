@@ -31,7 +31,10 @@ workspace and project file structure
 
 https://angular.io/guide/file-structure
 
+# layout
 
+flex https://tobiasahlin.com/blog/common-flexbox-patterns/
+grid https://www.positronx.io/css-grid-layout-holy-grail-angular-ui-tutorial/
 
 # todo
 
@@ -42,3 +45,4 @@ https://angular.io/guide/file-structure
  - tests
  - rxjs
  - code the80by20 use cases - start with these with already done be
+ - 

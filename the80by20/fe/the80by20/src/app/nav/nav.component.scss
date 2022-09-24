@@ -1,13 +1,15 @@
 .container {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  //justify-content: center;
 }
 
-.item {
+.item-menu {
+  height: 200px;
+}
+
+.item-report {
   flex-grow: 1;
-  height: 100px;
-}
-
-.item + .item {
-  margin-left: 2%;
 }

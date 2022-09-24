@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  align-items: center;
+  //justify-content: center;
+  height: 50px;
+}
+
+.item-logo {
+  width: 100px; /* A fixed width as the default */
+}
+
+.item-center {
+  flex-grow: 1; /* Set the middle element to grow and stretch */
+}
+
+.item-auth {
+  width: 300px;
+}
+
+.item + .item {
+  margin-left: 2%;
+}
