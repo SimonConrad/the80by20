@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { NavComponent } from './nav/nav.component';
-import { MainComponent } from './main/main.component';
+import { HomeComponent } from './home/home.component';
 import { AsideComponent } from './aside/aside.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -14,7 +14,7 @@ import { FooterComponent } from './footer/footer.component';
     AppComponent,
     HeaderComponent,
     NavComponent,
-    MainComponent,
+    HomeComponent,
     AsideComponent,
     FooterComponent
   ],
