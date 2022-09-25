@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { SolutionToProblemService } from './solution-to-problem.service';
 import { UserProblemDto } from './model/UserProblemDto'
-import { Observable } from 'rxjs';
+import { catchError, EMPTY, Observable, of } from 'rxjs';
 @Component({
   selector: 'app-solution-to-problem',
   templateUrl: './solution-to-problem.component.html',
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class SolutionToProblemComponent implements OnInit {
 
   userProblems: string =  "Problems";
+  errorMessage = '';
   userSolutionsToProblems: string =  "Solutions to Problems";
 
   userProblems$ : Observable<UserProblemDto[]> | undefined;
@@ -18,7 +19,14 @@ export class SolutionToProblemComponent implements OnInit {
   constructor(private service: SolutionToProblemService) { }
 
   ngOnInit(): void {
-    this.userProblems$ = this.service.getUserProblems();
+    this.userProblems$ = this.service.getUserProblems()
+    .pipe(
+      catchError(err => {
+        this.errorMessage = err;
+        //return of([]);
+        return EMPTY;
+      })
+    );
   }
 
 }

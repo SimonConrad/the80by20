@@ -1,8 +1,9 @@
 <div class="container">
   <div class="item">
     <h5>{{userProblems}}</h5>
-    <table
-           *ngIf="userProblems$ | async as userProblems">
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      {{ errorMessage }}</div>
+    <table *ngIf="userProblems$ | async as userProblems">
       <thead>
         <tr>
           <th>Problem Id</th>
@@ -26,4 +27,3 @@
     <h5>{{userSolutionsToProblems}}</h5>
   </div>
 </div>
-
