@@ -79,9 +79,11 @@ https://angular.io/guide/file-structure
  
  - copy solution from repos: deborath, angular university
  - busy indicator generic way
+ - translations
+ - generic way of showing be error - interceptors
  - apply ci / cd 
  - layout with css grid and flex
- - authentication with jwt
+ - authentication with jwt, interceptors, like in angular university github
  - angular material
  - tests
  - rxjs

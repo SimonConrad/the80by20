@@ -10,6 +10,9 @@ import { Observable } from 'rxjs';
 })
 export class SolutionToProblemComponent implements OnInit {
 
+  userProblems: string =  "Problems";
+  userSolutionsToProblems: string =  "Solutions to Problems";
+
   userProblems$ : Observable<UserProblemDto[]> | undefined;
 
   constructor(private service: SolutionToProblemService) { }
