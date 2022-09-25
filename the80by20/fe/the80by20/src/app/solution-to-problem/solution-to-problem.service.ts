@@ -12,11 +12,19 @@ export class SolutionToProblemService {
   private userProblemsUrl = 'api/userProblems';
   private userSolutionsToProblemsUrl = 'api/userSolutionsToProblems';
 
-  userProblems$ =  this.http.get<UserProblemDto[]>(this.userProblemsUrl)
+  userProblems$ = this.http.get<UserProblemDto[]>(this.userProblemsUrl)
      .pipe(
        tap(data => console.log('User Problems: ', JSON.stringify(data))),
        catchError(this.handleError)
   );
+
+  // getProducts(): Observable<UserProblemDto[]> {
+  //   return this.http.get<UserProblemDto[]>(this.userProblemsUrl)
+  //     .pipe(
+  //       tap(data => console.log('Products: ', JSON.stringify(data))),
+  //       catchError(this.handleError)
+  //     );
+  // }
 
   constructor(private http: HttpClient) { }
 
