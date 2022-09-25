@@ -5,6 +5,9 @@ import { MainComponent } from './main/main.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: MainComponent },
+  { path: 'solution-to-problem',
+    loadChildren: () => import('./solution-to-problem/solution-to-problem.module').then(m =>
+      m.SolutionToProblemModule) },
 ];
 
 @NgModule({

@@ -1,4 +1,6 @@
-# setting up dev environment
+# Steps
+
+## setting up dev environment
 
 https://angular.io/guide/setup-local
 
@@ -21,6 +23,39 @@ run the application
 
 `ng serve --open`
 
+## create layout with css grid and flex
+
+- flex https://tobiasahlin.com/blog/common-flexbox-patterns/
+- grid https://www.positronx.io/css-grid-layout-holy-grail-angular-ui-tutorial/
+
+## routing with lazy-loaded modules
+
+https://angular.io/guide/lazy-loading-ngmodules
+
+`ng generate module solution-to-problem --route solution-to-problem --module app.module`
+
+## walking skeleton
+
+- crud: grid fetching data from in memory source, reactive forms
+- rxjs
+- tests
+- passing data between components -input / output, service + subject
+- web-api-client-service
+
+## security
+- authentication mechanism
+- roles handling
+
+## ci / cd
+
+- yaml
+- deploy to azure
+
+## install and use angular material controls
+
+## implement use cases
+
+
 # docummentation
 
 cli
@@ -31,10 +66,7 @@ workspace and project file structure
 
 https://angular.io/guide/file-structure
 
-# layout
 
-flex https://tobiasahlin.com/blog/common-flexbox-patterns/
-grid https://www.positronx.io/css-grid-layout-holy-grail-angular-ui-tutorial/
 
 # todo
 
@@ -47,3 +79,5 @@ grid https://www.positronx.io/css-grid-layout-holy-grail-angular-ui-tutorial/
  - code the80by20 use cases - start with these with already done be
  - style cop
  - usefull vs code plugins for angular, scss and html
+ - developer.mozilla.org
+ - angular.io
