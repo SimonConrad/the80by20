@@ -23,6 +23,9 @@ run the application
 
 `ng serve --open`
 
+eslint
+https://thesoreon.com/blog/how-to-set-up-eslint-with-typescript-in-vs-code
+
 ## create layout with css grid and flex
 
 - flex https://tobiasahlin.com/blog/common-flexbox-patterns/

@@ -83,7 +83,7 @@ https://angular.io/guide/file-structure
  - generic way of showing be error - interceptors
  - apply ci / cd 
  - layout with css grid and flex
- - authentication with jwt, intercept
+ - authentication with jwt, interceptors, like in angular university github
  - angular material
  - tests
  - rxjs
