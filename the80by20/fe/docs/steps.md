@@ -76,6 +76,9 @@ https://angular.io/guide/file-structure
 
 # todo
 
+ 
+ - copy solution from repos: deborath, angular university
+ - busy indicator generic way
  - apply ci / cd 
  - layout with css grid and flex
  - authentication with jwt
@@ -83,7 +86,7 @@ https://angular.io/guide/file-structure
  - tests
  - rxjs
  - code the80by20 use cases - start with these with already done be
- - style cop
+ - style cop, formatter, tslint?
  - usefull vs code plugins for angular, scss and html
  - developer.mozilla.org
  - angular.io

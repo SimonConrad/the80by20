@@ -44,6 +44,10 @@ https://angular.io/guide/lazy-loading-ngmodules
 
 installing npm package `npm i angular-in-memory-web-api`
 
+generate fake data from ts interface https://ts-faker.vercel.app/
+
+C# to typescript converter
+
 ## security
 - authentication mechanism
 - roles handling
@@ -79,7 +83,7 @@ https://angular.io/guide/file-structure
  - tests
  - rxjs
  - code the80by20 use cases - start with these with already done be
- - style cop
+ - style cop, formatter, tslint?
  - usefull vs code plugins for angular, scss and html
  - developer.mozilla.org
  - angular.io

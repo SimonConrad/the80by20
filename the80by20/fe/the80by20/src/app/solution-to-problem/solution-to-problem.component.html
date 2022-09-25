@@ -1,1 +1,22 @@
-<p>solution-to-problem works!</p>
+<div>
+  <table
+         *ngIf="userProblems$ | async as userProblems">
+    <thead>
+      <tr>
+        <th>Problem Id</th>
+        <!-- <th>User Id</th> -->
+        <th>Required Solution Types</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let userProblem of userProblems">
+        <td>{{ userProblem.problemId }}</td>
+        <!-- <td>{{ userProblem.userId }}</td> -->
+        <td>{{ userProblem.requiredSolutionTypes }}</td>
+        <td>{{ userProblem.description }}</td>
+        <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
