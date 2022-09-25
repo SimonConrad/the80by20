@@ -42,6 +42,8 @@ https://angular.io/guide/lazy-loading-ngmodules
 - passing data between components -input / output, service + subject
 - web-api-client-service
 
+installing npm package `npm i angular-in-memory-web-api`
+
 ## security
 - authentication mechanism
 - roles handling
@@ -79,3 +81,5 @@ https://angular.io/guide/file-structure
  - code the80by20 use cases - start with these with already done be
  - style cop
  - usefull vs code plugins for angular, scss and html
+ - developer.mozilla.org
+ - angular.io

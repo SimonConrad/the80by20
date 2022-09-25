@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
 
 import { SolutionToProblemRoutingModule } from './solution-to-problem-routing.module';
 import { SolutionToProblemComponent } from './solution-to-problem.component';
@@ -10,7 +10,7 @@ import { SolutionToProblemComponent } from './solution-to-problem.component';
     SolutionToProblemComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     SolutionToProblemRoutingModule
   ]
 })

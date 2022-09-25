@@ -42,6 +42,12 @@ https://angular.io/guide/lazy-loading-ngmodules
 - passing data between components -input / output, service + subject
 - web-api-client-service
 
+installing npm package `npm i angular-in-memory-web-api`
+
+generate fake data from ts interface https://ts-faker.vercel.app/
+
+C# to typescript converter
+
 ## security
 - authentication mechanism
 - roles handling
