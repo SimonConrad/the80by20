@@ -1,32 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { SolutionToProblemService } from './solution-to-problem.service';
-import { UserProblemDto } from './model/UserProblemDto'
-import { catchError, EMPTY, Observable, of } from 'rxjs';
+import { catchError, EMPTY } from 'rxjs';
 @Component({
   selector: 'app-solution-to-problem',
   templateUrl: './solution-to-problem.component.html',
-  styleUrls: ['./solution-to-problem.component.scss']
+  styleUrls: ['./solution-to-problem.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SolutionToProblemComponent implements OnInit {
+export class SolutionToProblemComponent {
 
   userProblems: string =  "Problems";
   errorMessage = '';
   userSolutionsToProblems: string =  "Solutions to Problems";
 
-  userProblems$ : Observable<UserProblemDto[]> | undefined;
+  userProblems$ = this.solutionToProblemService.userProblems$.pipe(
+    catchError(err => {
+      this.errorMessage = err;
+      //return of([]);
+      return EMPTY;
+    })
+  );
 
-  constructor(private service: SolutionToProblemService) { }
-
-  ngOnInit(): void {
-    this.userProblems$ = this.service.getUserProblems()
-    .pipe(
-      catchError(err => {
-        this.errorMessage = err;
-        //return of([]);
-        return EMPTY;
-      })
-    );
-  }
-
+  constructor(private solutionToProblemService: SolutionToProblemService) { }
 }

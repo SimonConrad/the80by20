@@ -12,15 +12,13 @@ export class SolutionToProblemService {
   private userProblemsUrl = 'api/userProblems';
   private userSolutionsToProblemsUrl = 'api/userSolutionsToProblems';
 
-  constructor(private http: HttpClient) { }
+  userProblems$ =  this.http.get<UserProblemDto[]>(this.userProblemsUrl)
+     .pipe(
+       tap(data => console.log('User Problems: ', JSON.stringify(data))),
+       catchError(this.handleError)
+  );
 
-  getUserProblems(): Observable<UserProblemDto[]> {
-    return this.http.get<UserProblemDto[]>(this.userProblemsUrl)
-      .pipe(
-        tap(data => console.log('User Problems: ', JSON.stringify(data))),
-        catchError(this.handleError)
-      );
-  }
+  constructor(private http: HttpClient) { }
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     // in a real world app, we may send the server to some remote logging infrastructure
