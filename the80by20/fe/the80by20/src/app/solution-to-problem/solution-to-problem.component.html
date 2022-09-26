@@ -3,6 +3,20 @@
     <h5>{{userProblems}}</h5>
     <div class="alert alert-danger" *ngIf="errorMessage">
       {{ errorMessage }}</div>
+
+    <div class="toolbar">
+      <div>
+        <select (change)="onSelected($any($event.target).value)">
+          <option value="0">- Display All -</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+      </div>
+      <div class="item-center">
+      </div>
+      <div>
+        <button type="button" class="btn btn-outline-secondary" (click)="onAdd()">Add Product</button>
+      </div>
+    </div>
     <table *ngIf="userProblems$ | async as userProblems">
       <thead>
         <tr>

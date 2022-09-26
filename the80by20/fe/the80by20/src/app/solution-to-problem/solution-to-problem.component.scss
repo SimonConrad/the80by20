@@ -22,3 +22,12 @@
     font-size: xx-small;
   }
 }
+
+.toolbar{
+  display: flex;
+  padding: 10px;
+
+  .item-center {
+    flex-grow: 1;
+  }
+}
