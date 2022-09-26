@@ -1,4 +1,5 @@
 import { UserProblem } from "../solution-to-problem/model/UserProblem";
+import { ProblemCategory } from "../solution-to-problem/model/ProblemCategory";
 
 export class UserProblemData {
   static usersProblems: UserProblem[] = [
@@ -7,7 +8,7 @@ export class UserProblemData {
       userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
       requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
       description: "refactor to cqrs instead of not cohesive services, srp against separate user use case",
-      category: "",
+      categoryId: "00000000-0000-0000-0000-000000000006",
       isConfirmed: false,
       isRejected: false,
       createdAt: "",
@@ -18,7 +19,7 @@ export class UserProblemData {
       userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
       requiredSolutionTypes: "TheoryOfConceptWithExample",
       description: "refactor anemic entity + service into ddd object oriented model (entities with behaviors, aggreagtes, value objects)",
-      category: "",
+      categoryId: "00000000-0000-0000-0000-000000000006",
       isConfirmed: false,
       isRejected: true,
       createdAt: "",
@@ -29,11 +30,22 @@ export class UserProblemData {
       userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
       requiredSolutionTypes: "RoiAnalysis",
       description: "introduce integration tests and unit test into existing code",
-      category: "",
+      categoryId: "00000000-0000-0000-0000-000000000010",
       isConfirmed: true,
       isRejected: false,
       createdAt: "",
       color: "	#000000"
     },
+  ]
+
+  static problemCategories : ProblemCategory[] = [
+    {
+      id: "00000000-0000-0000-0000-000000000006",
+      name : "architecture"
+    },
+    {
+      id: "00000000-0000-0000-0000-000000000010",
+      name : "tests"
+    }
   ]
 }

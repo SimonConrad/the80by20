@@ -14,7 +14,7 @@ export class SolutionToProblemComponent {
   errorMessage: string = '';
   userSolutionsToProblems: string =  "Solutions to Problems";
 
-  userProblems$ = this.solutionToProblemService.userProblems$.pipe(
+  userProblems$ = this.solutionToProblemService.userProblemswithCategory$.pipe(
     catchError(err => {
       this.errorMessage = err;
       //return of([]);
