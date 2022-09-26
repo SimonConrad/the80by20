@@ -40,6 +40,10 @@ https://angular.io/guide/lazy-loading-ngmodules
 
 `ng generate module solution-to-problem --route solution-to-problem --module app.module`
 
+## rxjs
+
+-  course RxJS in Angular: Reactive Development
+
 ## walking skeleton
 
 - crud: grid fetching data from in memory source, reactive forms

@@ -7,8 +7,8 @@
     <div class="toolbar">
       <div>
         <select (change)="onSelected($any($event.target).value)">
-          <option value="0">- Display All -</option>
-          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          <option value="">- Display All -</option>
+          <option *ngFor="let category of problemCategories$ | async" [value]="category.id">{{ category.name }}</option>
         </select>
       </div>
       <div class="item-center">
@@ -17,7 +17,7 @@
         <button type="button" class="btn btn-outline-secondary" (click)="onAdd()">Add Product</button>
       </div>
     </div>
-    <table *ngIf="userProblems$ | async as userProblems">
+    <table *ngIf="problems$ | async as userProblems">
       <thead>
         <tr>
           <th>Problem Id</th>
