@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { SolutionToProblemService } from './solution-to-problem.service';
-import { catchError, combineLatest, EMPTY, filter, map, startWith, Subject } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, filter, map, startWith, Subject } from 'rxjs';
 import { ProblemCategory } from './model/ProblemCategory';
 @Component({
   selector: 'app-solution-to-problem',
@@ -15,15 +15,16 @@ export class SolutionToProblemComponent {
   userSolutionsToProblems: string = "User Solutions to Problems";
   errorMessage: string = '';
 
-  private categorySelectedSubject = new Subject<string>();
+  //private categorySelectedSubject = new Subject<string>(); // stayed in component not in separate service beacouse emmitintg is from this compnent - onSelected
+  private categorySelectedSubject = new BehaviorSubject<string>(''); // stayed in component not in separate service beacouse emmitintg is from this compnent - onSelected
   categorySelectedAction$ = this.categorySelectedSubject.asObservable();
 
   problems$ = combineLatest([
     this.solutionToProblemService.userProblemswithCategory$,
     this.categorySelectedAction$
-    .pipe(
-      startWith(null)
-      )
+    // .pipe(
+    //   startWith(null) //
+    //   )
   ])
   .pipe(
     map(([problems, selectedCategoryId])=>
