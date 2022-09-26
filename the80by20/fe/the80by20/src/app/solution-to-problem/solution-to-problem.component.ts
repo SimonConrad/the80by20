@@ -11,7 +11,7 @@ import { ProblemCategory } from './model/ProblemCategory';
 })
 export class SolutionToProblemComponent {
 
-  userProblems: string =  "User Problems (todo separate analagous component for operator)";
+  userProblems: string =  "User Problems";
   userSolutionsToProblems: string =  "User Solutions to Problems";
   errorMessage: string = '';
   categories: ProblemCategory[] = [];
