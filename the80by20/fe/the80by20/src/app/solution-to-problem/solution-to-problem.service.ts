@@ -24,7 +24,7 @@ export class SolutionToProblemService {
       catchError(this.handleError)
     );
 
-  // getProducts(): Observable<UserProblemDto[]> { // INFO
+  // getProducts(): Observable<UserProblemDto[]> { // INFO instead of this exposed above userProblems$ property subscribed using async pipe
   //   return this.http.get<UserProblemDto[]>(this.userProblemsUrl)
   //     .pipe(
   //       tap(data => console.log('Products: ', JSON.stringify(data))),
