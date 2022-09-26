@@ -9,7 +9,7 @@ import { UserProblem } from './model/UserProblem'
   providedIn: 'root'
 })
 export class SolutionToProblemService {
-  private userProblemsUrl = 'api/userProblems';
+  private userProblemsUrl = 'api/userProblem';
   private userSolutionsToProblemsUrl = 'api/userSolutionsToProblems';
 
   userProblems$ = this.http.get<UserProblem[]>(this.userProblemsUrl)
@@ -59,7 +59,7 @@ export class SolutionToProblemService {
       // The response body may contain clues as to what went wrong,
       errorMessage = `Backend returned code ${err.status}: ${err.message}`;
     }
-    console.error(err);
+    //console.error(err);
     return throwError(() => errorMessage);
   }
 }

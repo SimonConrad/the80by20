@@ -6,12 +6,12 @@ import { catchError, EMPTY } from 'rxjs';
   selector: 'app-solution-to-problem',
   templateUrl: './solution-to-problem.component.html',
   styleUrls: ['./solution-to-problem.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SolutionToProblemComponent {
 
   userProblems: string =  "Problems";
-  errorMessage = '';
+  errorMessage: string = '';
   userSolutionsToProblems: string =  "Solutions to Problems";
 
   userProblems$ = this.solutionToProblemService.userProblems$.pipe(
