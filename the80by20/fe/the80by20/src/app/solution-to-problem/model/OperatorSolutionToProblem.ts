@@ -1,4 +1,4 @@
-export interface OperatorSolutionToProblemDto{
+export interface OperatorSolutionToProblem{
     problemId: string;
     userId: string;
     requiredSolutionTypes: string;

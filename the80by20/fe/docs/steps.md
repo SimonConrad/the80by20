@@ -2,6 +2,8 @@
 
 ## setting up dev environment
 
+### basics
+
 https://angular.io/guide/setup-local
 
 check node, npm, angular cli versions
@@ -23,8 +25,9 @@ run the application
 
 `ng serve --open`
 
-eslint
-https://thesoreon.com/blog/how-to-set-up-eslint-with-typescript-in-vs-code
+### eslint
+- https://thesoreon.com/blog/how-to-set-up-eslint-with-typescript-in-vs-code
+- https://typescript-eslint.io/docs/
 
 ## create layout with css grid and flex
 

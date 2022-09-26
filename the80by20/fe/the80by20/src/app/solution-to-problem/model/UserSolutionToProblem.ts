@@ -1,8 +1,8 @@
-export interface UserSolutionToProblemDto {
+export interface UserSolutionToProblem {
   problemId: string;
   userId: string;
   requiredSolutionTypes: string;
-  description?: string;
+  description: string;
   category?: string;
   solutionToProblemId?: string;
   price?: number;

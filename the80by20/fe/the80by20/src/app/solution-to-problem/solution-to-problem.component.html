@@ -7,7 +7,9 @@
       <thead>
         <tr>
           <th>Problem Id</th>
-          <!-- <th>User Id</th> -->
+          <th>Confirmed</th>
+          <th>Rejected</th>
+          <th>Color</th>
           <th>Required Solution Types</th>
           <th>Description</th>
         </tr>
@@ -15,7 +17,9 @@
       <tbody>
         <tr *ngFor="let userProblem of userProblems">
           <td>{{ userProblem.problemId }}</td>
-          <!-- <td>{{ userProblem.userId }}</td> -->
+          <td>{{ userProblem.isConfirmed }}</td>
+          <td>{{ userProblem.isRejected }}</td>
+          <td>{{ userProblem.color }}</td>
           <td>{{ userProblem.requiredSolutionTypes }}</td>
           <td>{{ userProblem.description }}</td>
           <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
