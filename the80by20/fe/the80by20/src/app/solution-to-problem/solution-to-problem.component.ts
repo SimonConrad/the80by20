@@ -7,7 +7,7 @@ import { ProblemCategory } from './model/ProblemCategory';
   selector: 'app-solution-to-problem',
   templateUrl: './solution-to-problem.component.html',
   styleUrls: ['./solution-to-problem.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush // todo uncomment and only async pipes will notify???
 })
 export class SolutionToProblemComponent {
 
@@ -23,7 +23,7 @@ export class SolutionToProblemComponent {
     this.solutionToProblemService.userProblemswithCategory$,
     this.categorySelectedAction$
     // .pipe(
-    //   startWith(null) //
+    //   startWith(null) // done with initial value passed to BehaviorSubject
     //   )
   ])
   .pipe(
