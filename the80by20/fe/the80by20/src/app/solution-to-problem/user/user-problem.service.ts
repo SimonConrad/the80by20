@@ -27,7 +27,7 @@ export class UserProblemService {
       catchError(this.handleError)
     );
 
-  userProblemswithCategory$ = combineLatest([ // INFO combineLatest
+  userProblemswithCategory$ = combineLatest([ // INFO combineLatest check fe/docs
     this.userProblems$,
     this.problemCategories$])
     .pipe(
