@@ -115,8 +115,9 @@ export class UserProblemService {
       {
         return this.http.delete(`${this.userProblemsUrl}/${id}`);
       }),
-      tap(() => this.startInit())
-    // tap(id =>{
+      tap(() => this.startInit()),
+      catchError(this.handleError)
+    // tap(id =>{ // todo jak tu przekazac id?
     //   this._delete(id);
     // } )
   )
@@ -138,7 +139,8 @@ export class UserProblemService {
     switchMap((userProblem) => {
       return this.http.put<UserProblem>(this.userProblemsUrl, userProblem)
     }),
-    tap(() => this.startInit())
+    tap(() => this.startInit()),
+    catchError(this.handleError)
     // todo call http put and when done, call _delete switchMap(?
     // tap(userProblem => { // todo jak to wywoalc
     //   this._update(userProblem)
@@ -161,8 +163,9 @@ export class UserProblemService {
     switchMap((userProblem) => {
       return this.http.post<UserProblem>(this.userProblemsUrl, userProblem)
     }),
-    tap(() => this.startInit())
-    // tap(problem => this._add(problem)) // todo uncomment and call backendd switchMap(
+    tap(() => this.startInit()),
+    catchError(this.handleError),
+    tap(problem => this._add(problem)) // todo uncomment and call backendd switchMap(
   );
 
   private _add = (problem: UserProblem) => {
