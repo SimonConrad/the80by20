@@ -77,6 +77,7 @@ export class UserProblemComponent  {
     this.solutionToProblemService.selectedProblemChanged(problemId);
   }
 
+  // todo move to form submit button
   onAdd(): void {
     this.solutionToProblemService.addProblem();
     // todo add also version with subscribe to invoke http.post, add to subscription obect and ondestry unsubscribe
