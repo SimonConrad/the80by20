@@ -1,1 +1,20 @@
-<p>user-product-form works!</p>
+<p>{{title}} todo angular reactive forms with validation</p>
+
+<div *ngIf="problem$ | async as problem">
+  <form>
+    <div>
+      <label>Id:  </label>
+      <span>{{problem.problemId}}</span>
+    </div>
+    <div>
+      <label>Description</label>
+      <input type="text"
+        [(ngModel)]="problem.description"
+        name="description"
+      >
+    </div>
+    <div>
+      <button>Save</button>
+    </div>
+  </form>
+</div>

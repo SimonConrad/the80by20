@@ -40,6 +40,15 @@ export class UserProblemService {
         } as UserProblem)))
     );
 
+    // INFO alternative is to send get via http for product details
+  selectedProblem$ = this.userProblemswithCategory$
+  .pipe(
+    map(problems =>
+      problems.find(problem => problem.problemId === 'f6a4f74e-4b0a-4487-a6ff-ca2244b4afd8')
+      ),
+      tap(problem => console.log('selectedProblem', problem))
+  )
+
   private markWithColor(problem: UserProblem): any {
     if (problem.isRejected) {
       return "#FF0000"; //red
