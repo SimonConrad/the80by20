@@ -109,7 +109,7 @@ export class UserProblemService {
 
   private _updateProblemSubject = new Subject<UserProblem>();
   updateProblemActionStream$ = this._updateProblemSubject.asObservable().pipe(
-    // todo call http put and when done, call _delete
+    // todo call http put and when done, call _delete switchMap(?
     tap(userProblem => {
       this._update(userProblem)
     })
@@ -120,26 +120,26 @@ export class UserProblemService {
   }
   //#endregion
 
-    //#region add
-    startAdd = (userProblem: UserProblem) => {
-      this._addProblemSubject.next(userProblem);
-    }
+  //#region add
+  startAdd = (userProblem: UserProblem) => {
+    this._addProblemSubject.next(userProblem);
+  }
 
-    private _addProblemSubject = new Subject<UserProblem>();
-    addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
-      tap(problem => this._add(problem)) // todo uncomment and call backendd
-      // switchMap((problem) => this.http.post(this.userProblemsUrl, problem).pipe(
-      //   tap(problems => this._add(problem))
-      // ))
-    );
+  private _addProblemSubject = new Subject<UserProblem>();
+  addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
+    tap(problem => this._add(problem)) // todo uncomment and call backendd switchMap(
+    // switchMap((problem) => this.http.post(this.userProblemsUrl, problem).pipe(
+    //   tap(problems => this._add(problem))
+    // ))
+  );
 
-    private _add = (problem: UserProblem) => {
-      this._problemsSubject.next([
-        ...this.problems,
-        problem
-      ])
-    }
-    //#endregion
+  private _add = (problem: UserProblem) => {
+    this._problemsSubject.next([
+      ...this.problems,
+      problem
+    ])
+  }
+  //#endregion
 
   //#region select
   startSelect = (problemId: string | undefined) => {
@@ -147,11 +147,28 @@ export class UserProblemService {
   }
   private _selectProblemSubject = new Subject<string | undefined>();
   selectProblemActionStream$ = this._selectProblemSubject.asObservable().pipe(
-    // todo call http-get/id
+    // todo call http-get/id switchMap(
     map(problemId => {
-      if(problemId === null)
-      {
+      if (problemId === null) {
         return undefined;
+      }
+
+      if (problemId === '') {
+        let newProblem: UserProblem =
+        {
+          problemId: '', //todo new guid
+          userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe", // todo get from user service
+          requiredSolutionTypes: "",
+          description: "",
+          categoryId: "",
+          category: "",
+          isConfirmed: false,
+          isRejected: false,
+          createdAt: "",
+          color: "#000000"
+        };
+
+        return newProblem;
       }
 
       return this.problems.find(p => p.problemId === problemId);

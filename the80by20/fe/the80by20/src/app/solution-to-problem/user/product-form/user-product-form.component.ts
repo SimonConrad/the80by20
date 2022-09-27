@@ -1,6 +1,6 @@
 import { EmptyExpr } from '@angular/compiler';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { catchError, EMPTY, Observable, Subject } from 'rxjs';
+import { catchError, EMPTY, finalize, Observable, Subject, tap } from 'rxjs';
 import { UserProblem } from '../model/UserProblem';
 import { UserProblemService } from '../user-problem.service';
 
@@ -14,7 +14,7 @@ import { UserProblemService } from '../user-problem.service';
   // bound values set in local properties won't trigger chnage detection, so won't update the ui
 })
 export class UserProductFormComponent {
-  title = 'Problem';
+  title = 'User Problem From';
 
   private errorMessageSubject = new Subject<string>()
   errorMessage$ = this.errorMessageSubject.asObservable();
@@ -35,14 +35,44 @@ export class UserProductFormComponent {
         })
       );
 
-    this.addProblem$ = this.problemService.addProblemActionStream$
+    this.addProblem$ = this.problemService.addProblemActionStream$.pipe(
+      catchError(err => {
+        this.errorMessageSubject.next(err); // emit value to the stream
+        return EMPTY;
+      }),
+      tap(() => this.problemService.startSelect(undefined))
+      );
 
-    this.updateProblem$ = this.problemService.updateProblemActionStream$
+    this.updateProblem$ = this.problemService.updateProblemActionStream$.pipe(
+      catchError(err => {
+        this.errorMessageSubject.next(err); // emit value to the stream
+        return EMPTY;
+      }),
+      tap(() => this.problemService.startSelect(undefined)),
+      );
   }
 
   //startEdit
   onSave(problem: UserProblem): void {
-    this.problemService.startUpdate(problem);
+
+    if(problem.problemId === ''){
+      this.problemService.startAdd(problem);
+    } else{
+      this.problemService.startUpdate(problem);
+    }
+      // let newProblem: UserProblem =
+    // {
+    //   problemId: userProblem.problemId,
+    //   userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
+    //   requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
+    //   description: "edit",
+    //   categoryId: "00000000-0000-0000-0000-000000000006",
+    //   category: "architecture",
+    //   isConfirmed: false,
+    //   isRejected: false,
+    //   createdAt: "",
+    //   color: "	#000000"
+    // };
   }
 
   onCancel(): void {

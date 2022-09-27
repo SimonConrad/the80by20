@@ -32,6 +32,7 @@ export class UserProblemComponent implements OnInit {
   filterProblem$: Observable<string>;
 
   actionInProgress$: Observable<boolean>;
+  selectedProblem$: Observable<UserProblem | undefined>;
 
   constructor(private solutionToProblemService: UserProblemService) {
     // INFO take a look at mechanism of this actionstream:
@@ -59,12 +60,14 @@ export class UserProblemComponent implements OnInit {
     this.actionInProgress$ = this.solutionToProblemService.actionInProgressDataStream$;
 
     this.problemCategories$ = this.solutionToProblemService.problemCategories$.pipe(
-    catchError(err => {
-      this.errorMessageSubject.next(err);
-      //return of([]);
-      return EMPTY;
-    })
-  );
+      catchError(err => {
+        this.errorMessageSubject.next(err);
+        //return of([]);
+        return EMPTY;
+      })
+    );
+
+    this.selectedProblem$ = this.solutionToProblemService.selectProblemActionStream$
   }
 
   ngOnInit(): void {
@@ -75,45 +78,15 @@ export class UserProblemComponent implements OnInit {
     this.solutionToProblemService.startInit()
   }
 
-   // todo move to separate problem-form submit button
   onAdd(): void {
-    let newProblem: UserProblem =
-    {
-      problemId: "z6a4f74e-4b0a-4487-a6ff-ca2244b4afd9",
-      userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
-      requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
-      description: "QQQQQQ",
-      categoryId: "00000000-0000-0000-0000-000000000006",
-      category: "architecture",
-      isConfirmed: false,
-      isRejected: false,
-      createdAt: "",
-      color: "	#000000"
-    };
-
-    this.solutionToProblemService.startAdd(newProblem);
-    // todo add also version with subscribe to invoke http.post, add to subscription obect and ondestry unsubscribe
+    this.solutionToProblemService.startSelect('');
   }
 
   onDelete(problemId: string): void {
     this.solutionToProblemService.startDelete(problemId);
   }
 
-   // todo move to separate problem-form submit button
   onEdit(userProblemId: string): void {
-    // let newProblem: UserProblem =
-    // {
-    //   problemId: userProblem.problemId,
-    //   userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
-    //   requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
-    //   description: "edit",
-    //   categoryId: "00000000-0000-0000-0000-000000000006",
-    //   category: "architecture",
-    //   isConfirmed: false,
-    //   isRejected: false,
-    //   createdAt: "",
-    //   color: "	#000000"
-    // };
     this.solutionToProblemService.startSelect(userProblemId);
   }
 
