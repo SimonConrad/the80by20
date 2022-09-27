@@ -136,10 +136,15 @@ export class UserProblemService {
 
   private _updateProblemSubject = new Subject<UserProblem>();
   updateProblemActionStream$ = this._updateProblemSubject.asObservable().pipe(
+
+    switchMap((userProblem) => {
+      return this.http.put<UserProblem>(this.userProblemsUrl, userProblem)
+    }),
+    tap(() => this.startInit())
     // todo call http put and when done, call _delete switchMap(?
-    tap(userProblem => {
-      this._update(userProblem)
-    })
+    // tap(userProblem => {
+    //   this._update(userProblem)
+    // })
   )
 
   private _update = (problem: UserProblem) => {

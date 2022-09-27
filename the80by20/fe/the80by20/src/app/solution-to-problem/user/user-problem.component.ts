@@ -48,12 +48,6 @@ export class UserProblemComponent implements OnInit {
 
     this.problems$ = this.solutionToProblemService.problemsDataStream$;
 
-    // this.deleteProblem$ = this.solutionToProblemService.deleteProblemActionStream$.pipe( // todo busy indicator there?
-    //   catchError(err => {
-    //     this.errorMessageSubject.next(err);
-    //     return EMPTY; // lub  //return of([]);
-    //   }));
-
     this.deleteProblem$ = this.solutionToProblemService.deleteProblemActionStream$.pipe( // todo busy indicator there?
       catchError(err => {
         this.errorMessageSubject.next(err);
