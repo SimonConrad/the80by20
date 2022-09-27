@@ -12,12 +12,10 @@ import { UserProblem } from './model/UserProblem';
   // and observables bound in the teamplate using an async pipe
   // bound values set in local properties won't trigger chnage detection, so won't update the ui
 })
-// export class UserProblemComponent implements OnInit {
+
 export class UserProblemComponent implements OnInit {
 
   userProblems: string = "User Problems";
-  problemDetails: string = "Problem details";
-  //errorMessage: string = '';
 
   private errorMessageSubject = new Subject<string>()
   errorMessage$ = this.errorMessageSubject.asObservable();
@@ -28,12 +26,17 @@ export class UserProblemComponent implements OnInit {
 
   constructor(private solutionToProblemService: UserProblemService) { }
 
+  // INFO take a look at mechanism of this actionstream:
+  // we are subscribing in component's template with async pipe,
+  // this actionstream is defined in service using behaviorsubject,
+  // we can add custom handling in pipe in this component,
+  // emitting items into this action stream is in service
+  // and is invoked from the component method this.solutionToProblemService.init()
   initProblem$ = this.solutionToProblemService.initProblemActionStream$.pipe(
     catchError(err => {
       this.errorMessageSubject.next(err);
       return EMPTY; // lub  //return of([]);
     }));
-
 
   problems$ = this.solutionToProblemService.problemsDataStream$;
 
