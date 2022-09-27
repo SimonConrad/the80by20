@@ -2,6 +2,7 @@
 <ng-container *ngIf="addProblem$ | async"></ng-container>
 <ng-container *ngIf="editProblem$ | async"></ng-container>
 <ng-container *ngIf="deleteProblem$ | async"></ng-container>
+<ng-container *ngIf="filterProblem$ | async"></ng-container>
 <div class="container">
   <div class="item">
     <h5>{{userProblems}}</h5>
@@ -16,12 +17,12 @@
   <div>
 
     <div class="toolbar">
-      <!-- <div>
-        <select (change)="onSelected($any($event.target).value)">
+      <div>
+        <select (change)="onCategorySelected($any($event.target).value)">
           <option value="">- Display All -</option>
           <option *ngFor="let category of problemCategories$ | async" [value]="category.id">{{ category.name }}</option>
         </select>
-      </div> -->
+      </div>
       <div class="item-center">
       </div>
       <div>

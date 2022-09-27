@@ -29,6 +29,36 @@ export class UserProblemService {
       finalize(() => this.stopActionInProgress())
     );
 
+  problemCategories$ = this.http.get<ProblemCategory[]>(this.problemCategories)
+    .pipe(
+      tap(data => console.log('Problem categories:', JSON.stringify(data))),
+      catchError(this.handleError),
+    );
+
+  userProblemswithCategory$ = combineLatest([ // INFO combineLatest check fe/docs
+    this.userProblems$,
+    this.problemCategories$])
+    .pipe(
+      map(([problems, problemCategories]) => // INFO javascript destructuring to define a name for each array element
+        problems.map(problem => ({
+          ...problem, // INFO spread-operator to map and copy values to property matched by name
+          color: this.markWithColor(problem),
+          category: problemCategories.find(c => problem.categoryId == c.id)?.name, // INFO find
+          searchKey: [problem.problemId]
+        } as UserProblem)))
+    );
+
+  private markWithColor(problem: UserProblem): any {
+    if (problem.isRejected) {
+      return "#FF0000"; //red
+    }
+    if (problem.isConfirmed) {
+      return "	#008000"; //green
+    }
+    return "#000000" //black
+  }
+
+
   private _actionInProgress = new BehaviorSubject<boolean>(false);
   actionInProgressDataStream$ = this._actionInProgress.asObservable();
 
@@ -49,7 +79,7 @@ export class UserProblemService {
   initProblemActionStream$ = this._initProblemSubject.asObservable()
     .pipe(
       tap(() => this.startActionInProgress()),
-      switchMap(() => this.userProblems$), // TODO switchMap????
+      switchMap(() => this.userProblemswithCategory$), // TODO switchMap????
       tap(res => this._problemsSubject.next(res))
     );
   //#endregion
@@ -103,7 +133,8 @@ export class UserProblemService {
   editProblemActionStream$ = this._editProblemSubject.asObservable().pipe(
     // todo call http put and when done, call _delete
     tap(userProblem => {
-      this._edit(userProblem)})
+      this._edit(userProblem)
+    })
   )
 
   private _edit = (problem: UserProblem) => {
@@ -113,7 +144,21 @@ export class UserProblemService {
 
 
   //#region filter
-  // todo filter
+  startFilter = (categoryId: string) => {
+    this._filterProblemSubject.next(categoryId);
+  }
+
+  private _filterProblemSubject = new Subject<string>();
+  filterProblemActionStream$ = this._filterProblemSubject.asObservable().pipe(
+    // todo call http get to filter data
+    tap(categoryId => {
+      this._filter(categoryId)
+    })
+  )
+
+  private _filter = (categoryId: string) => {
+    this._problemsSubject.next(this.problems.filter(currProblem => currProblem.categoryId === categoryId))
+  }
   //#endregion
 
 

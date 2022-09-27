@@ -24,16 +24,16 @@ export class UserProblemComponent implements OnInit {
   private categorySelectedSubject = new BehaviorSubject<string>(''); // stayed in component not in separate service beacouse emmitintg is from this compnent - onSelected
   categorySelectedAction$ = this.categorySelectedSubject.asObservable();
 
-  // subsribed in temaple (with async pipe) actionDataStreams, and dataStreams (observables)
   initProblem$: Observable<UserProblem[]>;
   problems$: Observable<UserProblem[]>;
+  problemCategories$: Observable<ProblemCategory[]>;
 
   addProblem$: Observable<UserProblem>;
   editProblem$: Observable<UserProblem>;
   deleteProblem$: Observable<string>;
+  filterProblem$: Observable<string>;
 
   actionInProgress$: Observable<boolean>;
-
 
   constructor(private solutionToProblemService: UserProblemService) {
     // INFO take a look at mechanism of this actionstream:
@@ -54,6 +54,8 @@ export class UserProblemComponent implements OnInit {
 
     this.editProblem$ = this.solutionToProblemService.editProblemActionStream$
 
+    this.filterProblem$ = this.solutionToProblemService.filterProblemActionStream$
+
     this.deleteProblem$ = this.solutionToProblemService.deleteProblemActionStream$.pipe( // todo busy indicator there?
       catchError(err => {
         this.errorMessageSubject.next(err);
@@ -61,6 +63,14 @@ export class UserProblemComponent implements OnInit {
       }));
 
     this.actionInProgress$ = this.solutionToProblemService.actionInProgressDataStream$;
+
+    this.problemCategories$ = this.solutionToProblemService.problemCategories$.pipe(
+    catchError(err => {
+      this.errorMessageSubject.next(err);
+      //return of([]);
+      return EMPTY;
+    })
+  );
   }
 
   ngOnInit(): void {
@@ -111,6 +121,10 @@ export class UserProblemComponent implements OnInit {
       color: "	#000000"
     };
     this.solutionToProblemService.startEdit(newProblem);
+  }
+
+  onCategorySelected(categoryId: string): void {
+    this.solutionToProblemService.startFilter(categoryId);
   }
 
   // problemCategories$ = this.solutionToProblemService.problemCategories$.pipe(
