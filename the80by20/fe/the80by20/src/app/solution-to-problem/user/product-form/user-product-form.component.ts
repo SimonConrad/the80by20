@@ -56,6 +56,8 @@ export class UserProductFormComponent {
   //startEdit
   onSave(problem: UserProblem): void {
 
+    //INFO alternative cal update service and subscribe to invoke it, rember then on need to unsubcribing in ondestroy
+
     if(problem.problemId === ''){
       problem.problemId = UUID.UUID();
       this.problemService.startAdd(problem);
