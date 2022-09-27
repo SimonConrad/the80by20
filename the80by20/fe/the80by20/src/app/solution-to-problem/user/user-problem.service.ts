@@ -107,8 +107,6 @@ export class UserProblemService {
   //#region delete
   startDelete = (id: string) => {
     this._deleteProblemSubject.next(id);
-
-  return this.http.delete(`${this.userProblemsUrl}/${id}`)
   }
 
   private _deleteProblemSubject = new Subject<string>();
