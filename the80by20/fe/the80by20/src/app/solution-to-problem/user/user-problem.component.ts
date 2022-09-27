@@ -106,21 +106,21 @@ export class UserProblemComponent implements OnInit {
   }
 
    // todo move to separate problem-form submit button
-  onEdit(userProblem: UserProblem): void {
-    let newProblem: UserProblem =
-    {
-      problemId: userProblem.problemId,
-      userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
-      requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
-      description: "edit",
-      categoryId: "00000000-0000-0000-0000-000000000006",
-      category: "architecture",
-      isConfirmed: false,
-      isRejected: false,
-      createdAt: "",
-      color: "	#000000"
-    };
-    this.solutionToProblemService.startEdit(newProblem);
+  onEdit(userProblemId: string): void {
+    // let newProblem: UserProblem =
+    // {
+    //   problemId: userProblem.problemId,
+    //   userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
+    //   requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
+    //   description: "edit",
+    //   categoryId: "00000000-0000-0000-0000-000000000006",
+    //   category: "architecture",
+    //   isConfirmed: false,
+    //   isRejected: false,
+    //   createdAt: "",
+    //   color: "	#000000"
+    // };
+    this.solutionToProblemService.startSelect(userProblemId);
   }
 
   onCategorySelected(categoryId: string): void {

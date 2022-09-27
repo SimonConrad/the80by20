@@ -85,28 +85,6 @@ export class UserProblemService {
   //#endregion
 
 
-  //#region add
-  startAdd = (userProblem: UserProblem) => {
-    this._addProblemSubject.next(userProblem);
-  }
-
-  private _addProblemSubject = new Subject<UserProblem>();
-  addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
-    tap(problem => this._add(problem)) // todo uncomment and call backendd
-    // switchMap((problem) => this.http.post(this.userProblemsUrl, problem).pipe(
-    //   tap(problems => this._add(problem))
-    // ))
-  );
-
-  private _add = (problem: UserProblem) => {
-    this._problemsSubject.next([
-      ...this.problems,
-      problem
-    ])
-  }
-  //#endregion
-
-
   //#region delete
   startDelete = (problemId: string) => {
     this._deleteProblemSubject.next(problemId);
@@ -142,6 +120,40 @@ export class UserProblemService {
   }
   //#endregion
 
+    //#region add
+    startAdd = (userProblem: UserProblem) => {
+      this._addProblemSubject.next(userProblem);
+    }
+
+    private _addProblemSubject = new Subject<UserProblem>();
+    addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
+      tap(problem => this._add(problem)) // todo uncomment and call backendd
+      // switchMap((problem) => this.http.post(this.userProblemsUrl, problem).pipe(
+      //   tap(problems => this._add(problem))
+      // ))
+    );
+
+    private _add = (problem: UserProblem) => {
+      this._problemsSubject.next([
+        ...this.problems,
+        problem
+      ])
+    }
+    //#endregion
+
+  //#region select
+  startSelect = (problemId: string) => {
+    this._selectProblemSubject.next(problemId);
+  }
+  private _selectProblemSubject = new Subject<string>();
+  selectProblemActionStream$ = this._selectProblemSubject.asObservable().pipe(
+    // todo call get/id
+    map(problemId => {
+      return this.problems.find(p => p.problemId === problemId);
+    })
+  )
+  //#endregion
+
 
   //#region filter
   startFilter = (categoryId: string) => {
@@ -156,25 +168,12 @@ export class UserProblemService {
     })
   )
 
+  // TODO
   private _filter = (categoryId: string) => {
     this._problemsSubject.next(this.problems.filter(currProblem => currProblem.categoryId === categoryId))
   }
   //#endregion
 
-
-
-  // userProblemswithCategory$ = combineLatest([ // INFO combineLatest check fe/docs
-  //   this.userProblems$,
-  //   this.problemCategories$])
-  //   .pipe(
-  //     map(([problems, problemCategories]) => // INFO javascript destructuring to define a name for each array element
-  //       problems.map(problem => ({
-  //         ...problem, // INFO spread-operator to map and copy values to property matched by name
-  //         color: this.markWithColor(problem),
-  //         category: problemCategories.find(c => problem.categoryId == c.id)?.name, // INFO find
-  //         searchKey: [problem.problemId]
-  //       } as UserProblem)))
-  //   );
 
   // private problemSelectedSubject = new BehaviorSubject<string | null>(null)
   // problemSelectedAction$ = this.problemSelectedSubject.asObservable();

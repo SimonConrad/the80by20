@@ -51,7 +51,7 @@
           <td>{{ userProblem.category }}</td>
           <td>{{ userProblem.requiredSolutionTypes }}</td>
           <td>{{ userProblem.description }}</td>
-          <td><button (click)="onEdit(userProblem)">Edit</button></td>
+          <td><button (click)="onEdit(userProblem.problemId)">Edit</button></td>
           <td><button (click)="onDelete(userProblem.problemId)">Delete</button></td>
           <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
         </tr>
@@ -59,5 +59,6 @@
     </table>
   </div>
   <div class="item">
+    <app-user-product-form></app-user-product-form>
   </div>
 </div>
