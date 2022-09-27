@@ -1,6 +1,6 @@
 import { EmptyExpr } from '@angular/compiler';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { catchError, EMPTY } from 'rxjs';
+import { catchError, EMPTY, Subject } from 'rxjs';
 import { UserProblem } from '../model/UserProblem';
 import { UserProblemService } from '../user-problem.service';
 
@@ -15,13 +15,16 @@ import { UserProblemService } from '../user-problem.service';
 })
 export class UserProductFormComponent {
   title = 'Problem';
-  errorMessage = '';
+  //errorMessage = '';
+  private errorMessageSubject = new Subject<string>()
+  errorMessage$ = this.errorMessageSubject.asObservable();
 
   // INFO problem observable data item stream, which emits Problem or undefined
   problem$ = this.problemService.selectedProblem$
   .pipe(
     catchError(err => {
-      this.errorMessage = err; //when changeDetection: ChangeDetectionStrategy.OnPush then this reactiong to chnage from ts to temaplte won't work
+      //this.errorMessage = err; //when changeDetection: ChangeDetectionStrategy.OnPush then this won't trigger chnage detection and error will not appear to the user
+      this.errorMessageSubject.next(err); // emit value to the stream
       return EMPTY;
     })
   );
