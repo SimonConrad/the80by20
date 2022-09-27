@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { UserProblemService } from './user-problem.service';
-import { BehaviorSubject, catchError, combineLatest, EMPTY, filter, map, startWith, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, filter, map, startWith, Subject, Subscription, tap } from 'rxjs';
 import { ProblemCategory } from '../shared-model/ProblemCategory';
 import { UserProblem } from './model/UserProblem';
 @Component({
@@ -28,18 +28,34 @@ export class UserProblemComponent implements OnInit {
 
   constructor(private solutionToProblemService: UserProblemService) { }
 
-  initProblem$ = this.solutionToProblemService.initProblem$
-  problems$ = this.solutionToProblemService.problems$;
-  addProblem$ = this.solutionToProblemService.addProblem$
+  initProblem$ = this.solutionToProblemService.initProblemActionStream$.pipe(
+    catchError(err => {
+      this.errorMessageSubject.next(err);
+      return EMPTY; // lub  //return of([]);
+    }));
 
-  sub: Subscription = new Subscription();
+
+  problems$ = this.solutionToProblemService.problemsDataStream$;
+
+  addProblem$ = this.solutionToProblemService.addProblemActionStream$
+
+  sub: Subscription = new Subscription();//to remove
+
   ngOnInit(): void {
     this.solutionToProblemService.init()
+
+    // this.problems$
+    //   .pipe(
+    //     tap(d => console.log("test")),
+    //     catchError(err => {
+    //       this.errorMessageSubject.next(err);
+    //       return EMPTY; // lub  //return of([]);
+    //     }))
   }
 
-   // todo move to form submit button
-   onAdd(): void {
-    let  newProblem : UserProblem =
+  // todo move to form submit button
+  onAdd(): void {
+    let newProblem: UserProblem =
     {
       problemId: "z6a4f74e-4b0a-4487-a6ff-ca2244b4afd9",
       userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",

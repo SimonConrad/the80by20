@@ -3,7 +3,7 @@
 <div class="container">
   <div class="item">
     <h5>{{userProblems}}</h5>
-    <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
+    <div *ngIf="errorMessage$ | async as errorMessage">
       {{ errorMessage }}</div>
     <div class="toolbar">
       <!-- <div>

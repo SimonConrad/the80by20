@@ -10,44 +10,42 @@ import { ProblemCategory } from '../shared-model/ProblemCategory'
   providedIn: 'root'
 })
 export class UserProblemService {
-  private userProblemsUrl = 'api/userProblems';
+  private userProblemsUrl = 'api/userProblem';
   private problemCategories = 'api/problemCategories';
 
   constructor(private http: HttpClient) {
   }
 
   private userProblems$ = this.http.get<UserProblem[]>(this.userProblemsUrl)
-   .pipe(
-     tap(data => console.log('User Problems: ', JSON.stringify(data))),
-     catchError(this.handleError)
-   );
+    .pipe(
+      tap(data => console.log('User Problems: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    );
 
   init = () => {
-    this._initProblem.next('');
+    this._initProblemSubject.next('');
   }
 
-  private _problems = new BehaviorSubject<UserProblem[]>([]);
-  problems$ = this._problems.asObservable();
+  private _problemsSubject = new BehaviorSubject<UserProblem[]>([]);
+  problemsDataStream$ = this._problemsSubject.asObservable();
   get problems() {
-    return this._problems.value;
+    return this._problemsSubject.value;
   }
 
-  private _initProblem = new BehaviorSubject('');
-  initProblem$ = this._initProblem.asObservable()
-  .pipe(
-    switchMap(() =>  this.userProblems$), // TODO switchMap????
-    tap(res => this._problems.next(res))
-  );
-
-
+  private _initProblemSubject = new BehaviorSubject('');
+  initProblemActionStream$ = this._initProblemSubject.asObservable()
+    .pipe(
+      switchMap(() => this.userProblems$), // TODO switchMap????
+      tap(res => this._problemsSubject.next(res)),
+    );
 
 
   startAdd = (userProblem: UserProblem) => {
-      this._addProblem.next(userProblem);
+    this._addProblemSubject.next(userProblem);
   }
 
-  private _addProblem = new Subject<UserProblem>();
-  addProblem$ = this._addProblem.asObservable().pipe(
+  private _addProblemSubject = new Subject<UserProblem>();
+  addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
     tap(problem => this._add(problem)) // todo uncomment and call be
     // switchMap((problem) => this.http.post(this.userProblemsUrl, problem).pipe(
     //   tap(problems => this._add(problem))
@@ -55,7 +53,7 @@ export class UserProblemService {
   ); //todo // addProblem$ | async in component
 
   private _add = (problem: UserProblem) => {
-    this._problems.next([
+    this._problemsSubject.next([
       ...this.problems,
       problem
     ])
@@ -63,12 +61,12 @@ export class UserProblemService {
 
   // todo
   private _edit = (problemId: UserProblem['problemId'], problem: UserProblem) => {
-    this._problems.next(this.problems.map(currProblem => currProblem.problemId === problemId ? problem : currProblem))
+    this._problemsSubject.next(this.problems.map(currProblem => currProblem.problemId === problemId ? problem : currProblem))
   }
 
   // todo
   private _delete = (problemId: UserProblem['problemId']) => {
-    this._problems.next(this.problems.filter(currProblem => currProblem.problemId !== problemId))
+    this._problemsSubject.next(this.problems.filter(currProblem => currProblem.problemId !== problemId))
   }
 
   // filter
