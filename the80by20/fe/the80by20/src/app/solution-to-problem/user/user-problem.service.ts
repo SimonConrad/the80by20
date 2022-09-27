@@ -48,6 +48,21 @@ export class UserProblemService {
         } as UserProblem)))
     );
 
+
+  private categorySelectedSubject = new BehaviorSubject<string>('');
+  categorySelectedAction$ = this.categorySelectedSubject.asObservable();
+
+  userProblemswithCategoryFiltered$ = combineLatest([
+    this.userProblemswithCategory$,
+    this.categorySelectedAction$
+  ])
+    .pipe(
+      map(([problems, selectedCategoryId]) =>
+        problems.filter(item =>
+          selectedCategoryId ? item.categoryId === selectedCategoryId : true)
+      )
+    );
+
   private markWithColor(problem: UserProblem): any {
     if (problem.isRejected) {
       return "#FF0000"; //red
@@ -59,6 +74,7 @@ export class UserProblemService {
   }
 
 
+  //#region busy-indicator
   private _actionInProgress = new BehaviorSubject<boolean>(false);
   actionInProgressDataStream$ = this._actionInProgress.asObservable();
 
@@ -69,6 +85,7 @@ export class UserProblemService {
   stopActionInProgress = () => {
     this._actionInProgress.next(false)
   }
+  //#endregion
 
   //#region init
   startInit = () => {
@@ -79,7 +96,8 @@ export class UserProblemService {
   initProblemActionStream$ = this._initProblemSubject.asObservable()
     .pipe(
       tap(() => this.startActionInProgress()),
-      switchMap(() => this.userProblemswithCategory$), // TODO switchMap????
+      //switchMap(() => this.userProblemswithCategory$), // TODO switchMap????
+      switchMap(() => this.userProblemswithCategoryFiltered$), // TODO switchMap????
       tap(res => this._problemsSubject.next(res))
     );
   //#endregion
@@ -176,119 +194,11 @@ export class UserProblemService {
   )
   //#endregion
 
-
   //#region filter
   startFilter = (categoryId: string) => {
-    this._filterProblemSubject.next(categoryId);
-  }
-
-  private _filterProblemSubject = new Subject<string>();
-  filterProblemActionStream$ = this._filterProblemSubject.asObservable().pipe(
-    // todo call http get to filter data
-    tap(categoryId => {
-      this._filter(categoryId)
-    })
-  )
-
-  // TODO
-  private _filter = (categoryId: string) => {
-    this._problemsSubject.next(this.problems.filter(currProblem => currProblem.categoryId === categoryId))
+    this.categorySelectedSubject.next(categoryId);
   }
   //#endregion
-
-
-  // private problemSelectedSubject = new BehaviorSubject<string | null>(null)
-  // problemSelectedAction$ = this.problemSelectedSubject.asObservable();
-
-  // // INFO Action stream // how to do similar edit and delete actions??
-  // private problemInsertedSubject = new Subject<UserProblem>()
-  // problemInsertedAction$ = this.problemInsertedSubject.asObservable();
-
-  // // INFO Action stream ??
-  // private problemDeletedSubject = new Subject<string>()
-  // problemDeletedAction$ = this.problemDeletedSubject.asObservable();
-
-  // // INFO Action stream ??
-  // private problemUpdatedSubject = new Subject<UserProblem>()
-  // problemUpdatedAction$ = this.problemUpdatedSubject.asObservable();
-
-  // // INFO Combine action stream with data stream
-  // problemsWithAdd$ = merge(
-  //   this.userProblemswithCategory$,
-  //   this.problemInsertedAction$
-  // ).pipe(
-  //   scan((acc, value) => (value instanceof Array) ? [...value] : [...acc, value], [] as UserProblem[]),
-  // )
-
-  // problemsWithDelete$ = merge(
-  //   this.problemsWithAdd$,
-  //   this.problemDeletedAction$)
-  //   .pipe(
-  //     scan((acc, value) => (value instanceof Array) ? value.filter(item => item.problemId) : [], [] as UserProblem[])
-  //     //??
-
-  //   );
-
-  // deleteProblem = (problemId: string) => {
-  //   this.problemsWithAdd$.next(
-  //     this.problemCategories.valueOf.filter(das) => das
-  //   )
-  // }
-
-  // // INFO alternative is to send get via http for product details
-  // selectedProblem$ = combineLatest([
-  //   //this.userProblemswithCategory$,
-  //   this.problemsWithAdd$,
-  //   this.problemSelectedAction$
-  // ]).pipe(
-  //   map(([problems, selectedProblemId]) =>
-  //     problems.find(problem => problem.problemId == selectedProblemId)
-  //   ),
-  //   tap(problem => console.log('selectedProblem', problem))
-  // );
-
-  // selectedProblemChanged(selectedProblemId: string): void {
-  //   this.problemSelectedSubject.next(selectedProblemId) // INFO emit id to action stream
-  // }
-
-  // addProblem(newProblem?: UserProblem) {
-  //   newProblem = newProblem ||
-  //   {
-  //     problemId: "z6a4f74e-4b0a-4487-a6ff-ca2244b4afd9",
-  //     userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
-  //     requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
-  //     description: "QQQQQQ",
-  //     categoryId: "00000000-0000-0000-0000-000000000006",
-  //     category: "architecture",
-  //     isConfirmed: false,
-  //     isRejected: false,
-  //     createdAt: "",
-  //     color: "	#000000"
-  //   };
-  //   //this.problemInsertedSubject.next(newProblem)
-
-  //   //todo
-
-  //   of(newProblem) // todo change with http post observable
-  //     .pipe(
-  //       tap(newProblem => {
-  //         this.problemInsertedSubject.next(newProblem)
-  //       })
-  //     ).subscribe()
-  //   //http service post then pie + concatMap / mergeMap to update source-products
-  //   // this.http.post<UserProblem[]>(this.userProblemsUrl)
-
-  // }
-
-  // private markWithColor(problem: UserProblem): any {
-  //   if (problem.isRejected) {
-  //     return "#FF0000"; //red
-  //   }
-  //   if (problem.isConfirmed) {
-  //     return "	#008000"; //green
-  //   }
-  //   return "#000000" //black
-  // }
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     // in a real world app, we may send the server to some remote logging infrastructure
@@ -305,24 +215,4 @@ export class UserProblemService {
     //console.error(err);
     return throwError(() => errorMessage);
   }
-
-  // getProducts(): Observable<UserProblemDto[]> { // INFO instead of this exposed above userProblems$ property subscribed using async pipe
-  //   return this.http.get<UserProblemDto[]>(this.userProblemsUrl)
-  //     .pipe(
-  //       tap(data => console.log('Products: ', JSON.stringify(data))),
-  //       catchError(this.handleError)
-  //     );
-  // }
-
-  // userProblems$ = this.http.get<UserProblem[]>(this.userProblemsUrl)
-  //   .pipe(
-  //     map(problems =>
-  //       problems.map(problem => ({
-  //         ...problem, // INFO spread-operator
-  //         color : this.markWithColor(problem),
-  //         searchKey: [problem.problemId]
-  //       } as UserProblem))),
-  //     tap(data => console.log('User Problems: ', JSON.stringify(data))),
-  //     catchError(this.handleError)
-  //   );
 }

@@ -29,7 +29,6 @@ export class UserProblemComponent implements OnInit {
   problemCategories$: Observable<ProblemCategory[]>;
 
   deleteProblem$: Observable<string>;
-  filterProblem$: Observable<string>;
 
   actionInProgress$: Observable<boolean>;
   selectedProblem$: Observable<UserProblem | undefined>;
@@ -48,8 +47,6 @@ export class UserProblemComponent implements OnInit {
       }));
 
     this.problems$ = this.solutionToProblemService.problemsDataStream$;
-
-    this.filterProblem$ = this.solutionToProblemService.filterProblemActionStream$
 
     this.deleteProblem$ = this.solutionToProblemService.deleteProblemActionStream$.pipe( // todo busy indicator there?
       catchError(err => {
@@ -93,15 +90,6 @@ export class UserProblemComponent implements OnInit {
   onCategorySelected(categoryId: string): void {
     this.solutionToProblemService.startFilter(categoryId);
   }
-
-  // problemCategories$ = this.solutionToProblemService.problemCategories$.pipe(
-  //   catchError(err => {
-  //     this.errorMessageSubject.next(err);
-  //     //return of([]);
-  //     return EMPTY;
-  //   })
-  // );
-
 
   // selectedProblem$ = this.solutionToProblemService.selectedProblem$;
 
