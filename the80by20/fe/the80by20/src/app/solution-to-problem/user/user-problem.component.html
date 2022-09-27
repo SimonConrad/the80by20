@@ -1,10 +1,10 @@
 <ng-container *ngIf="initProblem$ | async"></ng-container>
+<ng-container *ngIf="addProblem$ | async"></ng-container>
 <div class="container">
   <div class="item">
     <h5>{{userProblems}}</h5>
     <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
       {{ errorMessage }}</div>
-
     <div class="toolbar">
       <!-- <div>
         <select (change)="onSelected($any($event.target).value)">
@@ -15,7 +15,7 @@
       <div class="item-center">
       </div>
       <div>
-        <button type="button" class="btn btn-outline-secondary" >Add Product</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="onAdd()">Add Product</button>
       </div>
     </div>
     <table *ngIf="problems$ | async as userProblems">

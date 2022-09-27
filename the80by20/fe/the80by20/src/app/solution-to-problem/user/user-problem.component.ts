@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { UserProblemService } from './user-problem.service';
 import { BehaviorSubject, catchError, combineLatest, EMPTY, filter, map, startWith, Subject, Subscription } from 'rxjs';
 import { ProblemCategory } from '../shared-model/ProblemCategory';
+import { UserProblem } from './model/UserProblem';
 @Component({
   selector: 'app-user-problem',
   templateUrl: './user-problem.component.html',
@@ -27,17 +28,34 @@ export class UserProblemComponent implements OnInit {
 
   constructor(private solutionToProblemService: UserProblemService) { }
 
-
-
   initProblem$ = this.solutionToProblemService.initProblem$
+  problems$ = this.solutionToProblemService.problems$;
+  addProblem$ = this.solutionToProblemService.addProblem$
 
   sub: Subscription = new Subscription();
   ngOnInit(): void {
     this.solutionToProblemService.init()
   }
 
-  // INFO the80by20\fe\docs
-  problems$ = this.solutionToProblemService.problems$;
+   // todo move to form submit button
+   onAdd(): void {
+    let  newProblem : UserProblem =
+    {
+      problemId: "z6a4f74e-4b0a-4487-a6ff-ca2244b4afd9",
+      userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
+      requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
+      description: "QQQQQQ",
+      categoryId: "00000000-0000-0000-0000-000000000006",
+      category: "architecture",
+      isConfirmed: false,
+      isRejected: false,
+      createdAt: "",
+      color: "	#000000"
+    };
+
+    this.solutionToProblemService.startAdd(newProblem);
+    // todo add also version with subscribe to invoke http.post, add to subscription obect and ondestry unsubscribe
+  }
 
   // problemCategories$ = this.solutionToProblemService.problemCategories$.pipe(
   //   catchError(err => {
@@ -63,11 +81,7 @@ export class UserProblemComponent implements OnInit {
   //   this.solutionToProblemService.selectedProblemChanged(problemId);
   // }
 
-  // // todo move to form submit button
-  // onAdd(): void {
-  //   this.solutionToProblemService.addProblem();
-  //   // todo add also version with subscribe to invoke http.post, add to subscription obect and ondestry unsubscribe
-  // }
+
 
   // onDeleted(problemId: string): void {
   //   // this.solutionToProblemService.addProblem();

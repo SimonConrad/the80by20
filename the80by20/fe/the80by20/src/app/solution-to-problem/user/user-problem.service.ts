@@ -22,6 +22,10 @@ export class UserProblemService {
      catchError(this.handleError)
    );
 
+  init = () => {
+    this._initProblem.next('');
+  }
+
   private _problems = new BehaviorSubject<UserProblem[]>([]);
   problems$ = this._problems.asObservable();
   get problems() {
@@ -31,17 +35,24 @@ export class UserProblemService {
   private _initProblem = new BehaviorSubject('');
   initProblem$ = this._initProblem.asObservable()
   .pipe(
-    switchMap(() =>  this.userProblems$),
+    switchMap(() =>  this.userProblems$), // TODO switchMap????
     tap(res => this._problems.next(res))
   );
 
-  init = () => {
-    this._initProblem.next('');
+
+
+
+  startAdd = (userProblem: UserProblem) => {
+      this._addProblem.next(userProblem);
   }
 
-  // problems$  | async
-  // addProblem$ | async
-
+  private _addProblem = new Subject<UserProblem>();
+  addProblem$ = this._addProblem.asObservable().pipe(
+    tap(problem => this._add(problem)) // todo uncomment and call be
+    // switchMap((problem) => this.http.post(this.userProblemsUrl, problem).pipe(
+    //   tap(problems => this._add(problem))
+    // ))
+  ); //todo // addProblem$ | async in component
 
   private _add = (problem: UserProblem) => {
     this._problems.next([
@@ -50,28 +61,17 @@ export class UserProblemService {
     ])
   }
 
-  private _addProblem = new Subject<UserProblem>();
-  addProblem$ = this._addProblem.asObservable().pipe(
-    switchMap((problem) => this.http.post(this.userProblemsUrl, problem).pipe(
-      tap(problems => this._add(problem))
-    ))
-  ); //todo // addProblem$ | async in component
-
-  // todo called from component form
-  startAdd = (userProblem: UserProblem) => {
-    this._addProblem.next(userProblem);
-  }
-
-
-
+  // todo
   private _edit = (problemId: UserProblem['problemId'], problem: UserProblem) => {
     this._problems.next(this.problems.map(currProblem => currProblem.problemId === problemId ? problem : currProblem))
   }
 
+  // todo
   private _delete = (problemId: UserProblem['problemId']) => {
     this._problems.next(this.problems.filter(currProblem => currProblem.problemId !== problemId))
   }
 
+  // filter
 
   // userProblemswithCategory$ = combineLatest([ // INFO combineLatest check fe/docs
   //   this.userProblems$,
@@ -100,9 +100,6 @@ export class UserProblemService {
   // // INFO Action stream ??
   // private problemUpdatedSubject = new Subject<UserProblem>()
   // problemUpdatedAction$ = this.problemUpdatedSubject.asObservable();
-
-
-
 
   // // INFO Combine action stream with data stream
   // problemsWithAdd$ = merge(
