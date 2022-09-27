@@ -20,7 +20,7 @@
     <table *ngIf="problems$ | async as userProblems">
       <thead>
         <tr>
-          <th>Problem Id</th>
+          <!-- <th>Problem Id</th> -->
           <th>Confirmed</th>
           <th>Rejected</th>
           <th>Color</th>
@@ -31,13 +31,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let userProblem of userProblems">
-          <td>{{ userProblem.problemId }}</td>
+          <!-- <td>{{ userProblem.problemId }}</td> -->
           <td>{{ userProblem.isConfirmed }}</td>
           <td>{{ userProblem.isRejected }}</td>
           <td>{{ userProblem.color }}</td>
           <td>{{ userProblem.category }}</td>
           <td>{{ userProblem.requiredSolutionTypes }}</td>
           <td>{{ userProblem.description }}</td>
+          <td><button
+            (click)="onProblemSelected(userProblem.problemId)"
+            [ngClass]="{ selected : userProblem?.problemId === (selectedProblem$ | async)?.problemId}"
+            >Edit</button></td>
           <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
         </tr>
       </tbody>

@@ -49,6 +49,9 @@ export class UserProblemComponent {
     })
   );
 
+
+  selectedProblem$ = this.solutionToProblemService.selectedProblem$;
+
   onSelected(categoryId: string): void {
 
     if(categoryId == ''){
@@ -56,6 +59,10 @@ export class UserProblemComponent {
     }
     this.categorySelectedSubject.next(categoryId);
     //this.selectedCategoryId = +categoryId; // INFO + cast string to number
+  }
+
+  onProblemSelected(problemId: string): void {
+    this.solutionToProblemService.selectedProblemChanged(problemId);
   }
 
   onAdd(): void {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { catchError, combineLatest, map, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, map, Observable, tap, throwError } from 'rxjs';
 
 import { UserProblem } from './model/UserProblem'
 import { ProblemCategory } from '../shared-model/ProblemCategory'
@@ -40,14 +40,23 @@ export class UserProblemService {
         } as UserProblem)))
     );
 
-    // INFO alternative is to send get via http for product details
-  selectedProblem$ = this.userProblemswithCategory$
-  .pipe(
-    map(problems =>
-      problems.find(problem => problem.problemId === 'f6a4f74e-4b0a-4487-a6ff-ca2244b4afd8')
-      ),
-      tap(problem => console.log('selectedProblem', problem))
-  )
+  private problemSelectedSubject = new BehaviorSubject<string | null>(null)
+  problemSelectedAction$ = this.problemSelectedSubject.asObservable();
+
+  // INFO alternative is to send get via http for product details
+  selectedProblem$ = combineLatest([
+    this.userProblemswithCategory$,
+    this.problemSelectedAction$
+  ]).pipe(
+    map(([problems, selectedProblemId]) =>
+      problems.find(problem => problem.problemId == selectedProblemId)
+    ),
+    tap(problem => console.log('selectedProblem', problem))
+  );
+
+  selectedProblemChanged(selectedProblemId: string): void {
+    this.problemSelectedSubject.next(selectedProblemId) // INFO emit id to action stream
+  }
 
   private markWithColor(problem: UserProblem): any {
     if (problem.isRejected) {

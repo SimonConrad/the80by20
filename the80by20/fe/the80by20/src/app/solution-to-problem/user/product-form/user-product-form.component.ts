@@ -9,7 +9,9 @@ import { UserProblemService } from '../user-problem.service';
   selector: 'app-user-product-form',
   templateUrl: './user-product-form.component.html',
   styleUrls: ['./user-product-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush // INFO !!!! only detect chnages made from input properties, and events from child components (output),
+  // and observables bound in the teamplate using an async pipe
+  // bound values set in local properties won't trigger chnage detection, so won't update the ui
 })
 export class UserProductFormComponent {
   title = 'Problem';
@@ -19,7 +21,7 @@ export class UserProductFormComponent {
   problem$ = this.problemService.selectedProblem$
   .pipe(
     catchError(err => {
-      this.errorMessage = err;
+      this.errorMessage = err; //when changeDetection: ChangeDetectionStrategy.OnPush then this reactiong to chnage from ts to temaplte won't work
       return EMPTY;
     })
   );
