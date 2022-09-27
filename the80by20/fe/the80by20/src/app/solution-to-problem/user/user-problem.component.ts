@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { UserProblemService } from './user-problem.service';
-import { BehaviorSubject, catchError, combineLatest, EMPTY, filter, map, startWith, Subject } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, filter, map, startWith, Subject, Subscription } from 'rxjs';
 import { ProblemCategory } from '../shared-model/ProblemCategory';
 @Component({
   selector: 'app-user-problem',
@@ -11,7 +11,8 @@ import { ProblemCategory } from '../shared-model/ProblemCategory';
   // and observables bound in the teamplate using an async pipe
   // bound values set in local properties won't trigger chnage detection, so won't update the ui
 })
-export class UserProblemComponent {
+// export class UserProblemComponent implements OnInit {
+export class UserProblemComponent  {
 
   userProblems: string = "User Problems";
   problemDetails: string = "Problem details";
@@ -25,6 +26,11 @@ export class UserProblemComponent {
   categorySelectedAction$ = this.categorySelectedSubject.asObservable();
 
   constructor(private solutionToProblemService: UserProblemService) { }
+
+  sub: Subscription  = new Subscription();
+  // ngOnInit(): void {
+  //   //this.solutionToProblemService.addProblem();
+  // }
 
   // INFO the80by20\fe\docs
   problems$ = combineLatest([

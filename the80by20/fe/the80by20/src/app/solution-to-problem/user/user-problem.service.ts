@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, concatMap, map, merge, Observable, of, scan, Subject, tap, throwError } from 'rxjs';
 
 import { UserProblem } from './model/UserProblem'
 import { ProblemCategory } from '../shared-model/ProblemCategory'
@@ -72,11 +72,6 @@ export class UserProblemService {
     this.problemSelectedSubject.next(selectedProblemId) // INFO emit id to action stream
   }
 
-
-
-
-
-
   addProblem(newProblem?: UserProblem) {
     newProblem = newProblem ||
     {
@@ -91,7 +86,21 @@ export class UserProblemService {
       createdAt: "",
       color: "	#000000"
     };
-    this.problemInsertedSubject.next(newProblem);
+    //this.problemInsertedSubject.next(newProblem);
+
+
+    //todo
+
+    of(newProblem) // todo change with http post observable
+    .pipe(
+      tap(newProblem => {
+
+        this.problemInsertedSubject.next(newProblem)
+      })
+    ).subscribe()
+    //http service post then pie + concatMap / mergeMap to update source-products
+    // this.http.post<UserProblem[]>(this.userProblemsUrl)
+
   }
 
   private markWithColor(problem: UserProblem): any {
