@@ -3,8 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { catchError, combineLatest, map, Observable, tap, throwError } from 'rxjs';
 
-import { UserProblem } from './model/UserProblem'
-import { ProblemCategory } from './model/ProblemCategory'
+import { UserProblem } from '../model/UserProblem'
+import { ProblemCategory } from '../model/ProblemCategory'
 
 @Injectable({
   providedIn: 'root'

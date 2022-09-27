@@ -1,24 +1,25 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { SolutionToProblemService } from './solution-to-problem.service';
+import { SolutionToProblemService } from './user-problem.service';
 import { BehaviorSubject, catchError, combineLatest, EMPTY, filter, map, startWith, Subject } from 'rxjs';
-import { ProblemCategory } from './model/ProblemCategory';
+import { ProblemCategory } from '../model/ProblemCategory';
 @Component({
-  selector: 'app-solution-to-problem',
-  templateUrl: './solution-to-problem.component.html',
-  styleUrls: ['./solution-to-problem.component.scss'],
+  selector: 'app-user-problem',
+  templateUrl: './user-problem.component.html',
+  styleUrls: ['./user-problem.component.scss'],
   //changeDetection: ChangeDetectionStrategy.OnPush // todo uncomment and only async pipes will notify???
 })
-export class SolutionToProblemComponent {
+export class UserProblemComponent {
 
   userProblems: string = "User Problems";
-  userSolutionsToProblems: string = "User Solutions to Problems";
+  problemDetails: string = "Problem details";
   errorMessage: string = '';
 
   //private categorySelectedSubject = new Subject<string>(); // stayed in component not in separate service beacouse emmitintg is from this compnent - onSelected
   private categorySelectedSubject = new BehaviorSubject<string>(''); // stayed in component not in separate service beacouse emmitintg is from this compnent - onSelected
   categorySelectedAction$ = this.categorySelectedSubject.asObservable();
 
+  // INFO the80by20\fe\docs
   problems$ = combineLatest([
     this.solutionToProblemService.userProblemswithCategory$,
     this.categorySelectedAction$
@@ -74,5 +75,7 @@ export class SolutionToProblemComponent {
 
   onAdd(): void {
     console.log('Not yet implemented');
+
+    // todo add also version with subscribe to invoke http.post, add to subscription obect and ondestry unsubscribe
   }
 }
