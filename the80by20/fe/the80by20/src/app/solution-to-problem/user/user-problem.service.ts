@@ -10,7 +10,7 @@ import { ProblemCategory } from '../shared-model/ProblemCategory'
   providedIn: 'root'
 })
 export class UserProblemService {
-  private userProblemsUrl = 'api/userProblem';
+  private userProblemsUrl = 'api/userProblems';
   private problemCategories = 'api/problemCategories';
 
   constructor(private http: HttpClient) {
