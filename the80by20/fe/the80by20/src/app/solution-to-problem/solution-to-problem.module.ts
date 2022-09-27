@@ -3,11 +3,13 @@ import { SharedModule } from '../shared/shared.module';
 
 import { SolutionToProblemRoutingModule } from './solution-to-problem-routing.module';
 import { UserProblemComponent } from './user/user-problem.component';
+import { UserProductFormComponent } from './user/product-form/user-product-form/user-product-form.component';
 
 
 @NgModule({
   declarations: [
-    UserProblemComponent
+    UserProblemComponent,
+    UserProductFormComponent
   ],
   imports: [
     SharedModule,

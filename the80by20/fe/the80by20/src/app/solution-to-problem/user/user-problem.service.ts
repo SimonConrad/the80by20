@@ -9,9 +9,11 @@ import { ProblemCategory } from '../model/ProblemCategory'
 @Injectable({
   providedIn: 'root'
 })
-export class SolutionToProblemService {
+export class UserProblemService {
   private userProblemsUrl = 'api/userProblems';
   private problemCategories = 'api/problemCategories';
+
+  constructor(private http: HttpClient) { }
 
   userProblems$ = this.http.get<UserProblem[]>(this.userProblemsUrl)
     .pipe(
@@ -38,18 +40,14 @@ export class SolutionToProblemService {
         } as UserProblem)))
     );
 
-  constructor(private http: HttpClient) { }
-
   private markWithColor(problem: UserProblem): any {
 
     if (problem.isRejected) {
       return "#FF0000"; //red
     }
-
     if (problem.isConfirmed) {
       return "	#008000"; //green
     }
-
     return "#000000" //black
   }
 
