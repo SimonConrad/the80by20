@@ -5,7 +5,15 @@
   <div class="item">
     <h5>{{userProblems}}</h5>
     <div *ngIf="errorMessage$ | async as errorMessage">
-      {{ errorMessage }}</div>
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="actionInProgress$ | async as actionInProgress">
+      <div *ngIf="actionInProgress">
+        is loading...
+      </div>
+    </div>
+  <div>
+
     <div class="toolbar">
       <!-- <div>
         <select (change)="onSelected($any($event.target).value)">
@@ -16,6 +24,7 @@
       <div class="item-center">
       </div>
       <div>
+        <button type="button" class="btn btn-outline-secondary" (click)="onRefresh()">Refresh from server</button>
         <button type="button" class="btn btn-outline-secondary" (click)="onAdd()">Add Product</button>
       </div>
     </div>
@@ -40,7 +49,7 @@
           <td>{{ userProblem.category }}</td>
           <td>{{ userProblem.requiredSolutionTypes }}</td>
           <td>{{ userProblem.description }}</td>
-          <td><button>Edit</button></td>
+          <td><button (click)="onEdit(userProblem)">Edit</button></td>
           <td><button (click)="onDelete(userProblem.problemId)">Delete</button></td>
           <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
         </tr>

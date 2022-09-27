@@ -29,7 +29,10 @@ export class UserProblemComponent implements OnInit {
   problems$: Observable<UserProblem[]>;
 
   addProblem$: Observable<UserProblem>;
-  deleteProblem$: Observable<string>;;
+  deleteProblem$: Observable<string>;
+
+  actionInProgress$: Observable<boolean>;
+
 
   constructor(private solutionToProblemService: UserProblemService) {
     // INFO take a look at mechanism of this actionstream:
@@ -53,17 +56,19 @@ export class UserProblemComponent implements OnInit {
         this.errorMessageSubject.next(err);
         return EMPTY; // lub  //return of([]);
       }));
+
+    this.actionInProgress$ = this.solutionToProblemService.actionInProgressDataStream$;
   }
-
-
-
-  sub: Subscription = new Subscription();//to remove
 
   ngOnInit(): void {
     this.solutionToProblemService.startInit()
   }
 
-  // todo move to form submit button
+  onRefresh(): void {
+    this.solutionToProblemService.startInit()
+  }
+
+   // todo move to separate problem-form submit button
   onAdd(): void {
     let newProblem: UserProblem =
     {
@@ -85,6 +90,11 @@ export class UserProblemComponent implements OnInit {
 
   onDelete(problemId: string): void {
     this.solutionToProblemService.startDelete(problemId);
+  }
+
+   // todo move to separate problem-form submit button
+  onEdit(userProblem: UserProblem): void {
+    this.solutionToProblemService.startEdit(userProblem);
   }
 
   // problemCategories$ = this.solutionToProblemService.problemCategories$.pipe(

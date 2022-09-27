@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { BehaviorSubject, catchError, combineLatest, concatMap, switchMap, map, merge, Observable, of, scan, Subject, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, concatMap, switchMap, map, merge, Observable, of, scan, Subject, tap, throwError, finalize } from 'rxjs';
 
 import { UserProblem } from './model/UserProblem'
 import { ProblemCategory } from '../shared-model/ProblemCategory'
@@ -25,10 +25,22 @@ export class UserProblemService {
   private userProblems$ = this.http.get<UserProblem[]>(this.userProblemsUrl)
     .pipe(
       tap(data => console.log('User Problems: ', JSON.stringify(data))),
-      catchError(this.handleError)
+      catchError(this.handleError),
+      finalize(() => this.stopActionInProgress())
     );
 
-//#region init
+  private _actionInProgress = new BehaviorSubject<boolean>(false);
+  actionInProgressDataStream$ = this._actionInProgress.asObservable();
+
+  startActionInProgress = () => {
+    this._actionInProgress.next(true)
+  }
+
+  stopActionInProgress = () => {
+    this._actionInProgress.next(false)
+  }
+
+  //#region init
   startInit = () => {
     this._initProblemSubject.next('');
   }
@@ -36,13 +48,14 @@ export class UserProblemService {
   private _initProblemSubject = new BehaviorSubject('');
   initProblemActionStream$ = this._initProblemSubject.asObservable()
     .pipe(
+      tap(() => this.startActionInProgress()),
       switchMap(() => this.userProblems$), // TODO switchMap????
-      tap(res => this._problemsSubject.next(res)),
+      tap(res => this._problemsSubject.next(res))
     );
-//#endregion
+  //#endregion
 
 
-//#region add
+  //#region add
   startAdd = (userProblem: UserProblem) => {
     this._addProblemSubject.next(userProblem);
   }
@@ -61,10 +74,10 @@ export class UserProblemService {
       problem
     ])
   }
-//#endregion
+  //#endregion
 
 
-//#region delete
+  //#region delete
   startDelete = (problemId: string) => {
     this._deleteProblemSubject.next(problemId);
   }
@@ -77,20 +90,30 @@ export class UserProblemService {
   private _delete = (problemId: UserProblem['problemId']) => {
     this._problemsSubject.next(this.problems.filter(currProblem => currProblem.problemId !== problemId))
   }
-//#endregion
+  //#endregion
 
 
-//#region edit
+  //#region edit
   // todo
-  private _edit = (problemId: UserProblem['problemId'], problem: UserProblem) => {
-    this._problemsSubject.next(this.problems.map(currProblem => currProblem.problemId === problemId ? problem : currProblem))
+  startEdit = (userProblem: UserProblem) => {
+    this._editProblemSubject.next(userProblem);
   }
-//#endregion
+
+  private _editProblemSubject = new Subject<UserProblem>();
+  editProblemActionStream$ = this._editProblemSubject.asObservable().pipe(
+    // todo call http put and when done, call _delete
+    tap(userProblem => this._edit(userProblem))
+  )
+
+  private _edit = (problem: UserProblem) => {
+    this._problemsSubject.next(this.problems.map(currProblem => currProblem.problemId === problem.problemId ? problem : currProblem))
+  }
+  //#endregion
 
 
-//#region filter
+  //#region filter
   // todo filter
-//#endregion
+  //#endregion
 
 
 
