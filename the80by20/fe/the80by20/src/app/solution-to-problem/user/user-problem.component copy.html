@@ -38,8 +38,8 @@
           <td>{{ userProblem.requiredSolutionTypes }}</td>
           <td>{{ userProblem.description }}</td>
           <td><button
-            (click)="onProblemSelected(userProblem.problemId)"
-            [ngClass]="{ selected : userProblem?.problemId === (selectedProblem$ | async)?.problemId}"
+            (click)="onProblemSelected(userProblem.id)"
+            [ngClass]="{ selected : userProblem?.id === (selectedProblem$ | async)?.id}"
             >Edit</button></td>
         </tr>
       </tbody>

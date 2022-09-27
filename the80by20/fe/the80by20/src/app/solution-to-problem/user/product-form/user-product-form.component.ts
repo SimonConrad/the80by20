@@ -58,15 +58,15 @@ export class UserProductFormComponent {
 
     //INFO alternative cal update service and subscribe to invoke it, rember then on need to unsubcribing in ondestroy
 
-    if(problem.problemId === ''){
-      problem.problemId = UUID.UUID();
+    if(problem.id === ''){
+      problem.id = UUID.UUID();
       this.problemService.startAdd(problem);
     } else{
       this.problemService.startUpdate(problem);
     }
       // let newProblem: UserProblem =
     // {
-    //   problemId: userProblem.problemId,
+    //   id: userProblem.id,
     //   userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
     //   requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
     //   description: "edit",

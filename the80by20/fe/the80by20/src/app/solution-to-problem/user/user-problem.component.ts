@@ -79,12 +79,12 @@ export class UserProblemComponent implements OnInit {
     this.solutionToProblemService.startSelect('');
   }
 
-  onDelete(problemId: string): void {
-    this.solutionToProblemService.startDelete(problemId);
+  onDelete(id: string): void {
+    this.solutionToProblemService.startDelete(id);
   }
 
-  onEdit(userProblemId: string): void {
-    this.solutionToProblemService.startSelect(userProblemId);
+  onEdit(userid: string): void {
+    this.solutionToProblemService.startSelect(userid);
   }
 
   onCategorySelected(categoryId: string): void {
@@ -102,15 +102,15 @@ export class UserProblemComponent implements OnInit {
   //   //this.selectedCategoryId = +categoryId; // INFO + cast string to number
   // }
 
-  // onProblemSelected(problemId: string): void {
-  //   this.solutionToProblemService.selectedProblemChanged(problemId);
+  // onProblemSelected(id: string): void {
+  //   this.solutionToProblemService.selectedProblemChanged(id);
   // }
 
 
 
-  // onDeleted(problemId: string): void {
+  // onDeleted(id: string): void {
   //   // this.solutionToProblemService.addProblem();
-  //   this.solutionToProblemService.deleteProblem(problemId)
+  //   this.solutionToProblemService.deleteProblem(id)
   // }
 
   // userProblemsSimpleFilter$ = this.solutionToProblemService.userProblemswithCategory$

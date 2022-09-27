@@ -1,12 +1,12 @@
 export interface OperatorSolutionToProblem{
-    problemId: string;
+    id: string;
     userId: string;
     requiredSolutionTypes: string;
     description?: string;
     category?: string;
     isConfirmed?: boolean;
     isRejected: boolean;
-    solutionToProblemId?: string;
+    solutionToid?: string;
     price?: number;
     solutionSummary?: string;
     solutionElements?: string;

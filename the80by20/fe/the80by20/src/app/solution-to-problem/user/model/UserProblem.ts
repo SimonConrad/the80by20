@@ -1,5 +1,5 @@
 export interface UserProblem {
-  problemId: string;
+  id: string;
   userId: string;
   requiredSolutionTypes: string;
   description: string;

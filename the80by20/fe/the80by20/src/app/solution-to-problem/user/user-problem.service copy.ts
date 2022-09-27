@@ -36,7 +36,7 @@
 //           ...problem, // INFO spread-operator to map and copy values to property matched by name
 //           color: this.markWithColor(problem),
 //           category: problemCategories.find(c => problem.categoryId == c.id)?.name, // INFO find
-//           searchKey: [problem.problemId]
+//           searchKey: [problem.id]
 //         } as UserProblem)))
 //     );
 
@@ -70,12 +70,12 @@
 //     this.problemsWithAdd$,
 //     this.problemDeletedAction$)
 //     .pipe(
-//       scan((acc, value) => (value instanceof Array) ? value.filter(item => item.problemId) : [], [] as UserProblem[])
+//       scan((acc, value) => (value instanceof Array) ? value.filter(item => item.id) : [], [] as UserProblem[])
 //       //??
 
 //     );
 
-//     deleteProblem = (problemId: string) => {
+//     deleteProblem = (id: string) => {
 //       this.problemsWithAdd$.next(
 //         this.problemCategories.valueOf.filter(das) => das
 //       )
@@ -87,20 +87,20 @@
 //     this.problemsWithAdd$,
 //     this.problemSelectedAction$
 //   ]).pipe(
-//     map(([problems, selectedProblemId]) =>
-//       problems.find(problem => problem.problemId == selectedProblemId)
+//     map(([problems, selectedid]) =>
+//       problems.find(problem => problem.id == selectedid)
 //     ),
 //     tap(problem => console.log('selectedProblem', problem))
 //   );
 
-//   selectedProblemChanged(selectedProblemId: string): void {
-//     this.problemSelectedSubject.next(selectedProblemId) // INFO emit id to action stream
+//   selectedProblemChanged(selectedid: string): void {
+//     this.problemSelectedSubject.next(selectedid) // INFO emit id to action stream
 //   }
 
 //   addProblem(newProblem?: UserProblem) {
 //     newProblem = newProblem ||
 //     {
-//       problemId: "z6a4f74e-4b0a-4487-a6ff-ca2244b4afd9",
+//       id: "z6a4f74e-4b0a-4487-a6ff-ca2244b4afd9",
 //       userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
 //       requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
 //       description: "QQQQQQ",
@@ -166,7 +166,7 @@
 //   //       problems.map(problem => ({
 //   //         ...problem, // INFO spread-operator
 //   //         color : this.markWithColor(problem),
-//   //         searchKey: [problem.problemId]
+//   //         searchKey: [problem.id]
 //   //       } as UserProblem))),
 //   //     tap(data => console.log('User Problems: ', JSON.stringify(data))),
 //   //     catchError(this.handleError)

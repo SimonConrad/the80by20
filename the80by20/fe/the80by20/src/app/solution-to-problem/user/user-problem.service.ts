@@ -44,7 +44,7 @@ export class UserProblemService {
           ...problem, // INFO spread-operator to map and copy values to property matched by name
           color: this.markWithColor(problem),
           category: problemCategories.find(c => problem.categoryId == c.id)?.name, // INFO find
-          searchKey: [problem.problemId]
+          searchKey: [problem.id]
         } as UserProblem)))
     );
 
@@ -104,17 +104,17 @@ export class UserProblemService {
 
 
   //#region delete
-  startDelete = (problemId: string) => {
-    this._deleteProblemSubject.next(problemId);
+  startDelete = (id: string) => {
+    this._deleteProblemSubject.next(id);
   }
 
   private _deleteProblemSubject = new Subject<string>();
   deleteProblemActionStream$ = this._deleteProblemSubject.asObservable().pipe(
     // todo call http delete and when done, call _delete
-    tap(problemId => this._delete(problemId))
+    tap(id => this._delete(id))
   )
-  private _delete = (problemId: UserProblem['problemId']) => {
-    this._problemsSubject.next(this.problems.filter(currProblem => currProblem.problemId !== problemId))
+  private _delete = (id: UserProblem['id']) => {
+    this._problemsSubject.next(this.problems.filter(currProblem => currProblem.id !== id))
   }
   //#endregion
 
@@ -134,7 +134,7 @@ export class UserProblemService {
   )
 
   private _update = (problem: UserProblem) => {
-    this._problemsSubject.next(this.problems.map(currProblem => currProblem.problemId === problem.problemId ? problem : currProblem))
+    this._problemsSubject.next(this.problems.map(currProblem => currProblem.id === problem.id ? problem : currProblem))
   }
   //#endregion
 
@@ -160,21 +160,21 @@ export class UserProblemService {
   //#endregion
 
   //#region select
-  startSelect = (problemId: string | undefined) => {
-    this._selectProblemSubject.next(problemId);
+  startSelect = (id: string | undefined) => {
+    this._selectProblemSubject.next(id);
   }
   private _selectProblemSubject = new Subject<string | undefined>();
   selectProblemActionStream$ = this._selectProblemSubject.asObservable().pipe(
     // todo call http-get/id switchMap(
-    map(problemId => {
-      if (problemId === null) {
+    map(id => {
+      if (id === null) {
         return undefined;
       }
 
-      if (problemId === '') {
+      if (id === '') {
         let newProblem: UserProblem =
         {
-          problemId: '', //todo new guid
+          id: '', //todo new guid
           userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe", // todo get from user service
           requiredSolutionTypes: "",
           description: "",
@@ -189,7 +189,7 @@ export class UserProblemService {
         return newProblem;
       }
 
-      return this.problems.find(p => p.problemId === problemId);
+      return this.problems.find(p => p.id === id);
     })
   )
   //#endregion

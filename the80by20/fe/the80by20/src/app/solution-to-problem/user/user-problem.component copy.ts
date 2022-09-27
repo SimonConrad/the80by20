@@ -73,8 +73,8 @@
 //     //this.selectedCategoryId = +categoryId; // INFO + cast string to number
 //   }
 
-//   onProblemSelected(problemId: string): void {
-//     this.solutionToProblemService.selectedProblemChanged(problemId);
+//   onProblemSelected(id: string): void {
+//     this.solutionToProblemService.selectedProblemChanged(id);
 //   }
 
 //   // todo move to form submit button
@@ -83,9 +83,9 @@
 //     // todo add also version with subscribe to invoke http.post, add to subscription obect and ondestry unsubscribe
 //   }
 
-//   onDeleted(problemId: string): void {
+//   onDeleted(id: string): void {
 //     // this.solutionToProblemService.addProblem();
-//     this.solutionToProblemService.deleteProblem(problemId)
+//     this.solutionToProblemService.deleteProblem(id)
 //   }
 
 //   // userProblemsSimpleFilter$ = this.solutionToProblemService.userProblemswithCategory$

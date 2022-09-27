@@ -42,7 +42,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let userProblem of userProblems">
-          <!-- <td>{{ userProblem.problemId }}</td> -->
+          <!-- <td>{{ userProblem.id }}</td> -->
           <td>{{ userProblem.isConfirmed }}</td>
           <td>{{ userProblem.isRejected }}</td>
           <td>{{ userProblem.color }}</td>
@@ -50,10 +50,10 @@
           <td>{{ userProblem.requiredSolutionTypes }}</td>
           <td>{{ userProblem.description }}</td>
           <td><button
-            (click)="onEdit(userProblem.problemId)"
-            [ngClass]="{ selected : userProblem?.problemId === (selectedProblem$ | async)?.problemId}"
+            (click)="onEdit(userProblem.id)"
+            [ngClass]="{ selected : userProblem?.id === (selectedProblem$ | async)?.id}"
             >Edit</button></td>
-          <td><button (click)="onDelete(userProblem.problemId)">Delete</button></td>
+          <td><button (click)="onDelete(userProblem.id)">Delete</button></td>
           <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
         </tr>
       </tbody>

@@ -1,10 +1,10 @@
 export interface UserSolutionToProblem {
-  problemId: string;
+  id: string;
   userId: string;
   requiredSolutionTypes: string;
   description: string;
   category?: string;
-  solutionToProblemId?: string;
+  solutionToid?: string;
   price?: number;
   solutionSummary?: string;
   solutionElements?: string;
