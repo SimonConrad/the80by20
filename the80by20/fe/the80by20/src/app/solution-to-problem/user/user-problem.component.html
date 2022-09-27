@@ -1,5 +1,6 @@
 <ng-container *ngIf="initProblem$ | async"></ng-container>
 <ng-container *ngIf="addProblem$ | async"></ng-container>
+<ng-container *ngIf="deleteProblem$ | async"></ng-container>
 <div class="container">
   <div class="item">
     <h5>{{userProblems}}</h5>
@@ -39,9 +40,8 @@
           <td>{{ userProblem.category }}</td>
           <td>{{ userProblem.requiredSolutionTypes }}</td>
           <td>{{ userProblem.description }}</td>
-          <td><button
-
-            >Edit</button></td>
+          <td><button>Edit</button></td>
+          <td><button (click)="onDelete(userProblem.problemId)">Delete</button></td>
           <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
         </tr>
       </tbody>

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { UserProblemService } from './user-problem.service';
-import { BehaviorSubject, catchError, combineLatest, EMPTY, filter, map, startWith, Subject, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, filter, map, Observable, startWith, Subject, Subscription, tap } from 'rxjs';
 import { ProblemCategory } from '../shared-model/ProblemCategory';
 import { UserProblem } from './model/UserProblem';
 @Component({
@@ -24,36 +24,43 @@ export class UserProblemComponent implements OnInit {
   private categorySelectedSubject = new BehaviorSubject<string>(''); // stayed in component not in separate service beacouse emmitintg is from this compnent - onSelected
   categorySelectedAction$ = this.categorySelectedSubject.asObservable();
 
-  constructor(private solutionToProblemService: UserProblemService) { }
+  // subsribed in temaple (with async pipe) actionDataStreams, and dataStreams (observables)
+  initProblem$: Observable<UserProblem[]>;
+  problems$: Observable<UserProblem[]>;
 
-  // INFO take a look at mechanism of this actionstream:
-  // we are subscribing in component's template with async pipe,
-  // this actionstream is defined in service using behaviorsubject,
-  // we can add custom handling in pipe in this component,
-  // emitting items into this action stream is in service
-  // and is invoked from the component method this.solutionToProblemService.init()
-  initProblem$ = this.solutionToProblemService.initProblemActionStream$.pipe(
-    catchError(err => {
-      this.errorMessageSubject.next(err);
-      return EMPTY; // lub  //return of([]);
-    }));
+  addProblem$: Observable<UserProblem>;
+  deleteProblem$: Observable<string>;;
 
-  problems$ = this.solutionToProblemService.problemsDataStream$;
+  constructor(private solutionToProblemService: UserProblemService) {
+    // INFO take a look at mechanism of this actionstream:
+    // we are subscribing in component's template with async pipe,
+    // this actionstream is defined in service using behaviorsubject,
+    // we can add custom handling in pipe in this component,
+    // emitting items into this action stream is in service
+    // and is invoked from the component method this.solutionToProblemService.init()
+    this.initProblem$ = this.solutionToProblemService.initProblemActionStream$.pipe( // todo busy indicator there?
+      catchError(err => {
+        this.errorMessageSubject.next(err);
+        return EMPTY; // lub  //return of([]);
+      }));
 
-  addProblem$ = this.solutionToProblemService.addProblemActionStream$
+    this.problems$ = this.solutionToProblemService.problemsDataStream$;
+
+    this.addProblem$ = this.solutionToProblemService.addProblemActionStream$
+
+    this.deleteProblem$ = this.solutionToProblemService.deleteProblemActionStream$.pipe( // todo busy indicator there?
+      catchError(err => {
+        this.errorMessageSubject.next(err);
+        return EMPTY; // lub  //return of([]);
+      }));
+  }
+
+
 
   sub: Subscription = new Subscription();//to remove
 
   ngOnInit(): void {
-    this.solutionToProblemService.init()
-
-    // this.problems$
-    //   .pipe(
-    //     tap(d => console.log("test")),
-    //     catchError(err => {
-    //       this.errorMessageSubject.next(err);
-    //       return EMPTY; // lub  //return of([]);
-    //     }))
+    this.solutionToProblemService.startInit()
   }
 
   // todo move to form submit button
@@ -74,6 +81,10 @@ export class UserProblemComponent implements OnInit {
 
     this.solutionToProblemService.startAdd(newProblem);
     // todo add also version with subscribe to invoke http.post, add to subscription obect and ondestry unsubscribe
+  }
+
+  onDelete(problemId: string): void {
+    this.solutionToProblemService.startDelete(problemId);
   }
 
   // problemCategories$ = this.solutionToProblemService.problemCategories$.pipe(

@@ -16,20 +16,21 @@ export class UserProblemService {
   constructor(private http: HttpClient) {
   }
 
+  private _problemsSubject = new BehaviorSubject<UserProblem[]>([]);
+  problemsDataStream$ = this._problemsSubject.asObservable();
+  get problems() {
+    return this._problemsSubject.value;
+  }
+
   private userProblems$ = this.http.get<UserProblem[]>(this.userProblemsUrl)
     .pipe(
       tap(data => console.log('User Problems: ', JSON.stringify(data))),
       catchError(this.handleError)
     );
 
-  init = () => {
+//#region init
+  startInit = () => {
     this._initProblemSubject.next('');
-  }
-
-  private _problemsSubject = new BehaviorSubject<UserProblem[]>([]);
-  problemsDataStream$ = this._problemsSubject.asObservable();
-  get problems() {
-    return this._problemsSubject.value;
   }
 
   private _initProblemSubject = new BehaviorSubject('');
@@ -38,19 +39,21 @@ export class UserProblemService {
       switchMap(() => this.userProblems$), // TODO switchMap????
       tap(res => this._problemsSubject.next(res)),
     );
+//#endregion
 
 
+//#region add
   startAdd = (userProblem: UserProblem) => {
     this._addProblemSubject.next(userProblem);
   }
 
   private _addProblemSubject = new Subject<UserProblem>();
   addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
-    tap(problem => this._add(problem)) // todo uncomment and call be
+    tap(problem => this._add(problem)) // todo uncomment and call backendd
     // switchMap((problem) => this.http.post(this.userProblemsUrl, problem).pipe(
     //   tap(problems => this._add(problem))
     // ))
-  ); //todo // addProblem$ | async in component
+  );
 
   private _add = (problem: UserProblem) => {
     this._problemsSubject.next([
@@ -58,18 +61,38 @@ export class UserProblemService {
       problem
     ])
   }
+//#endregion
 
+
+//#region delete
+  startDelete = (problemId: string) => {
+    this._deleteProblemSubject.next(problemId);
+  }
+
+  private _deleteProblemSubject = new Subject<string>();
+  deleteProblemActionStream$ = this._deleteProblemSubject.asObservable().pipe(
+    // todo call http delete and when done, call _delete
+    tap(problemId => this._delete(problemId))
+  )
+  private _delete = (problemId: UserProblem['problemId']) => {
+    this._problemsSubject.next(this.problems.filter(currProblem => currProblem.problemId !== problemId))
+  }
+//#endregion
+
+
+//#region edit
   // todo
   private _edit = (problemId: UserProblem['problemId'], problem: UserProblem) => {
     this._problemsSubject.next(this.problems.map(currProblem => currProblem.problemId === problemId ? problem : currProblem))
   }
+//#endregion
 
-  // todo
-  private _delete = (problemId: UserProblem['problemId']) => {
-    this._problemsSubject.next(this.problems.filter(currProblem => currProblem.problemId !== problemId))
-  }
 
-  // filter
+//#region filter
+  // todo filter
+//#endregion
+
+
 
   // userProblemswithCategory$ = combineLatest([ // INFO combineLatest check fe/docs
   //   this.userProblems$,
