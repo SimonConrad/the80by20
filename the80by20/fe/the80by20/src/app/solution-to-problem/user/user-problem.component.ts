@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { UserProblemService } from './user-problem.service';
 import { BehaviorSubject, catchError, combineLatest, EMPTY, filter, map, startWith, Subject } from 'rxjs';
-import { ProblemCategory } from '../model/ProblemCategory';
+import { ProblemCategory } from '../shared-model/ProblemCategory';
 @Component({
   selector: 'app-user-problem',
   templateUrl: './user-problem.component.html',

@@ -1,5 +1,5 @@
-import { UserProblem } from "../solution-to-problem/model/UserProblem";
-import { ProblemCategory } from "../solution-to-problem/model/ProblemCategory";
+import { UserProblem } from "../solution-to-problem/user/model/UserProblem";
+import { ProblemCategory } from "../solution-to-problem/shared-model/ProblemCategory";
 
 export class UserProblemData {
   static usersProblems: UserProblem[] = [

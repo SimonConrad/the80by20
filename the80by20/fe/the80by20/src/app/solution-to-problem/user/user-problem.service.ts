@@ -3,8 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { catchError, combineLatest, map, Observable, tap, throwError } from 'rxjs';
 
-import { UserProblem } from '../model/UserProblem'
-import { ProblemCategory } from '../model/ProblemCategory'
+import { UserProblem } from './model/UserProblem'
+import { ProblemCategory } from '../shared-model/ProblemCategory'
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,6 @@ export class UserProblemService {
     );
 
   private markWithColor(problem: UserProblem): any {
-
     if (problem.isRejected) {
       return "#FF0000"; //red
     }
