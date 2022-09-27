@@ -1,4 +1,4 @@
-<ng-container *ngIf="initProblem$ | async"></ng-container>
+<!-- <ng-container *ngIf="addProblem$ | async"></ng-container>
 <div class="container">
   <div class="item">
     <h5>{{userProblems}}</h5>
@@ -6,22 +6,21 @@
       {{ errorMessage }}</div>
 
     <div class="toolbar">
-      <!-- <div>
+      <div>
         <select (change)="onSelected($any($event.target).value)">
           <option value="">- Display All -</option>
           <option *ngFor="let category of problemCategories$ | async" [value]="category.id">{{ category.name }}</option>
         </select>
-      </div> -->
+      </div>
       <div class="item-center">
       </div>
       <div>
-        <button type="button" class="btn btn-outline-secondary" >Add Product</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="onAdd()">Add Product</button>
       </div>
     </div>
     <table *ngIf="problems$ | async as userProblems">
       <thead>
         <tr>
-          <!-- <th>Problem Id</th> -->
           <th>Confirmed</th>
           <th>Rejected</th>
           <th>Color</th>
@@ -32,7 +31,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let userProblem of userProblems">
-          <!-- <td>{{ userProblem.problemId }}</td> -->
           <td>{{ userProblem.isConfirmed }}</td>
           <td>{{ userProblem.isRejected }}</td>
           <td>{{ userProblem.color }}</td>
@@ -40,13 +38,14 @@
           <td>{{ userProblem.requiredSolutionTypes }}</td>
           <td>{{ userProblem.description }}</td>
           <td><button
-
+            (click)="onProblemSelected(userProblem.problemId)"
+            [ngClass]="{ selected : userProblem?.problemId === (selectedProblem$ | async)?.problemId}"
             >Edit</button></td>
-          <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
         </tr>
       </tbody>
     </table>
   </div>
   <div class="item">
+    <app-user-product-form></app-user-product-form>
   </div>
-</div>
+</div> -->

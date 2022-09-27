@@ -12,7 +12,7 @@ import { ProblemCategory } from '../shared-model/ProblemCategory';
   // bound values set in local properties won't trigger chnage detection, so won't update the ui
 })
 // export class UserProblemComponent implements OnInit {
-export class UserProblemComponent  {
+export class UserProblemComponent implements OnInit {
 
   userProblems: string = "User Problems";
   problemDetails: string = "Problem details";
@@ -27,61 +27,52 @@ export class UserProblemComponent  {
 
   constructor(private solutionToProblemService: UserProblemService) { }
 
-  sub: Subscription  = new Subscription();
-  // ngOnInit(): void {
-  //   //this.solutionToProblemService.addProblem();
-  // }
+
+
+  initProblem$ = this.solutionToProblemService.initProblem$
+
+  sub: Subscription = new Subscription();
+  ngOnInit(): void {
+    this.solutionToProblemService.init()
+  }
 
   // INFO the80by20\fe\docs
-  problems$ = combineLatest([
-    //this.solutionToProblemService.userProblemswithCategory$,
-    this.solutionToProblemService.problemsWithAdd$,
-    this.categorySelectedAction$
-    // .pipe(
-    //   startWith(null) // done with initial value passed to BehaviorSubject
-    //   )
-  ])
-  .pipe(
-    map(([problems, selectedCategoryId])=>
-      problems.filter(item =>
-        selectedCategoryId ? item.categoryId === selectedCategoryId : true)
-    ),
-    catchError(err => {
-      this.errorMessageSubject.next(err);
-      //return of([]);
-      return EMPTY;
-    })
-  );
+  problems$ = this.solutionToProblemService.problems$;
 
- problemCategories$ = this.solutionToProblemService.problemCategories$.pipe(
-    catchError(err => {
-      this.errorMessageSubject.next(err);
-      //return of([]);
-      return EMPTY;
-    })
-  );
+  // problemCategories$ = this.solutionToProblemService.problemCategories$.pipe(
+  //   catchError(err => {
+  //     this.errorMessageSubject.next(err);
+  //     //return of([]);
+  //     return EMPTY;
+  //   })
+  // );
 
 
-  selectedProblem$ = this.solutionToProblemService.selectedProblem$;
+  // selectedProblem$ = this.solutionToProblemService.selectedProblem$;
 
-  onSelected(categoryId: string): void {
+  // onSelected(categoryId: string): void {
 
-    if(categoryId == ''){
-      categoryId == null;
-    }
-    this.categorySelectedSubject.next(categoryId);
-    //this.selectedCategoryId = +categoryId; // INFO + cast string to number
-  }
+  //   if (categoryId == '') {
+  //     categoryId == null;
+  //   }
+  //   this.categorySelectedSubject.next(categoryId);
+  //   //this.selectedCategoryId = +categoryId; // INFO + cast string to number
+  // }
 
-  onProblemSelected(problemId: string): void {
-    this.solutionToProblemService.selectedProblemChanged(problemId);
-  }
+  // onProblemSelected(problemId: string): void {
+  //   this.solutionToProblemService.selectedProblemChanged(problemId);
+  // }
 
-  // todo move to form submit button
-  onAdd(): void {
-    this.solutionToProblemService.addProblem();
-    // todo add also version with subscribe to invoke http.post, add to subscription obect and ondestry unsubscribe
-  }
+  // // todo move to form submit button
+  // onAdd(): void {
+  //   this.solutionToProblemService.addProblem();
+  //   // todo add also version with subscribe to invoke http.post, add to subscription obect and ondestry unsubscribe
+  // }
+
+  // onDeleted(problemId: string): void {
+  //   // this.solutionToProblemService.addProblem();
+  //   this.solutionToProblemService.deleteProblem(problemId)
+  // }
 
   // userProblemsSimpleFilter$ = this.solutionToProblemService.userProblemswithCategory$
   //   .pipe(
