@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { BehaviorSubject, catchError, combineLatest, concatMap, switchMap, map, merge, Observable, of, scan, Subject, tap, throwError, finalize } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, switchMap, map, Observable, Subject, tap, throwError, finalize } from 'rxjs';
 
 import { UserProblem } from './model/UserProblem'
 import { ProblemCategory } from '../shared-model/ProblemCategory'
-import { identifierName } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +47,6 @@ export class UserProblemService {
           searchKey: [problem.id]
         } as UserProblem)))
     );
-
 
   private categorySelectedSubject = new BehaviorSubject<string>('');
   categorySelectedAction$ = this.categorySelectedSubject.asObservable();
@@ -111,15 +109,15 @@ export class UserProblemService {
 
   private _deleteProblemSubject = new Subject<string>();
   deleteProblemActionStream$ = this._deleteProblemSubject.asObservable().pipe(
-    switchMap(id =>
-      {
-        return this.http.delete(`${this.userProblemsUrl}/${id}`);
-      }),
-      tap(() => this.startInit()),
-      catchError(this.handleError)
-    // tap(id =>{ // todo jak tu przekazac id?
-    //   this._delete(id);
-    // } )
+    switchMap(id => {
+      return this.http.delete(`${this.userProblemsUrl}/${id}`).pipe(map(() => { return id })); //info https://medium.com/@snorredanielsen/rxjs-accessing-a-previous-value-further-down-the-pipe-chain-b881026701c1
+    }),
+    tap(id => {
+      this._delete(id);
+    }),
+    //tap(() => this.startInit()), //INFO to make thinks simplers change above tap with this for refresh from server
+    catchError(this.handleError)
+
   )
   private _delete = (id: UserProblem['id']) => {
     this._problemsSubject.next(this.problems.filter(currProblem => currProblem.id !== id))
@@ -135,16 +133,15 @@ export class UserProblemService {
 
   private _updateProblemSubject = new Subject<UserProblem>();
   updateProblemActionStream$ = this._updateProblemSubject.asObservable().pipe(
-
+    // todo switchMap vs mergeMap vs concatMap?
     switchMap((userProblem) => {
-      return this.http.put<UserProblem>(this.userProblemsUrl, userProblem)
+      return this.http.put<UserProblem>(this.userProblemsUrl, userProblem).pipe(map(() => { return userProblem }));
     }),
-    tap(() => this.startInit()),
+    tap(userProblem => {
+      this._update(userProblem)
+    }),
+    //tap(() => this.startInit()),
     catchError(this.handleError)
-    // todo call http put and when done, call _delete switchMap(?
-    // tap(userProblem => { // todo jak to wywoalc
-    //   this._update(userProblem)
-    // })
   )
 
   private _update = (problem: UserProblem) => {
@@ -159,13 +156,12 @@ export class UserProblemService {
 
   private _addProblemSubject = new Subject<UserProblem>();
   addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
-
     switchMap((userProblem) => {
-      return this.http.post<UserProblem>(this.userProblemsUrl, userProblem)
+      return this.http.post<UserProblem>(this.userProblemsUrl, userProblem).pipe(map(() => { return userProblem }));
     }),
-    tap(() => this.startInit()),
+    //tap(() => this.startInit()),
+    tap(problem => this._add(problem)),
     catchError(this.handleError),
-    tap(problem => this._add(problem)) // todo uncomment and call backendd switchMap(
   );
 
   private _add = (problem: UserProblem) => {
