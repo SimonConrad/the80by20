@@ -28,8 +28,6 @@ export class UserProblemComponent implements OnInit {
   problems$: Observable<UserProblem[]>;
   problemCategories$: Observable<ProblemCategory[]>;
 
-  addProblem$: Observable<UserProblem>;
-  editProblem$: Observable<UserProblem>;
   deleteProblem$: Observable<string>;
   filterProblem$: Observable<string>;
 
@@ -49,10 +47,6 @@ export class UserProblemComponent implements OnInit {
       }));
 
     this.problems$ = this.solutionToProblemService.problemsDataStream$;
-
-    this.addProblem$ = this.solutionToProblemService.addProblemActionStream$
-
-    this.editProblem$ = this.solutionToProblemService.editProblemActionStream$
 
     this.filterProblem$ = this.solutionToProblemService.filterProblemActionStream$
 

@@ -101,21 +101,21 @@ export class UserProblemService {
   //#endregion
 
 
-  //#region edit
+  //#region update
   // todo
-  startEdit = (userProblem: UserProblem) => {
-    this._editProblemSubject.next(userProblem);
+  startUpdate = (userProblem: UserProblem) => {
+    this._updateProblemSubject.next(userProblem);
   }
 
-  private _editProblemSubject = new Subject<UserProblem>();
-  editProblemActionStream$ = this._editProblemSubject.asObservable().pipe(
+  private _updateProblemSubject = new Subject<UserProblem>();
+  updateProblemActionStream$ = this._updateProblemSubject.asObservable().pipe(
     // todo call http put and when done, call _delete
     tap(userProblem => {
-      this._edit(userProblem)
+      this._update(userProblem)
     })
   )
 
-  private _edit = (problem: UserProblem) => {
+  private _update = (problem: UserProblem) => {
     this._problemsSubject.next(this.problems.map(currProblem => currProblem.problemId === problem.problemId ? problem : currProblem))
   }
   //#endregion
@@ -142,13 +142,18 @@ export class UserProblemService {
     //#endregion
 
   //#region select
-  startSelect = (problemId: string) => {
+  startSelect = (problemId: string | undefined) => {
     this._selectProblemSubject.next(problemId);
   }
-  private _selectProblemSubject = new Subject<string>();
+  private _selectProblemSubject = new Subject<string | undefined>();
   selectProblemActionStream$ = this._selectProblemSubject.asObservable().pipe(
-    // todo call get/id
+    // todo call http-get/id
     map(problemId => {
+      if(problemId === null)
+      {
+        return undefined;
+      }
+
       return this.problems.find(p => p.problemId === problemId);
     })
   )

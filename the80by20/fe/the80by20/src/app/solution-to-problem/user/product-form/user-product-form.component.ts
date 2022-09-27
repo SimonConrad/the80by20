@@ -19,18 +19,34 @@ export class UserProductFormComponent {
   private errorMessageSubject = new Subject<string>()
   errorMessage$ = this.errorMessageSubject.asObservable();
 
-  problem$: Observable<UserProblem | undefined>;
+  selectedProblem$: Observable<UserProblem | undefined>;
+
+  updateProblem$: Observable<UserProblem>;
+  addProblem$: Observable<UserProblem>;
 
   constructor(private problemService: UserProblemService) {
-     // INFO problem observable data item stream, which emits Problem or undefined
-  this.problem$ = this.problemService.selectProblemActionStream$
-  .pipe(
-    catchError(err => {
-      //this.errorMessage = err; //when changeDetection: ChangeDetectionStrategy.OnPush then this won't trigger chnage detection and error will not appear to the user
-      this.errorMessageSubject.next(err); // emit value to the stream
-      return EMPTY;
-    })
-  );
-}
+    // INFO problem observable data item stream, which emits Problem or undefined
+    this.selectedProblem$ = this.problemService.selectProblemActionStream$
+      .pipe(
+        catchError(err => {
+          //this.errorMessage = err; //when changeDetection: ChangeDetectionStrategy.OnPush then this won't trigger chnage detection and error will not appear to the user
+          this.errorMessageSubject.next(err); // emit value to the stream
+          return EMPTY;
+        })
+      );
+
+    this.addProblem$ = this.problemService.addProblemActionStream$
+
+    this.updateProblem$ = this.problemService.updateProblemActionStream$
+  }
+
+  //startEdit
+  onSave(problem: UserProblem): void {
+    this.problemService.startUpdate(problem);
+  }
+
+  onCancel(): void {
+    this.problemService.startSelect(undefined);
+  }
 
 }
