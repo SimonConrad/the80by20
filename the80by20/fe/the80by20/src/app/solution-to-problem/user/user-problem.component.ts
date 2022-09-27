@@ -28,7 +28,8 @@ export class UserProblemComponent {
 
   // INFO the80by20\fe\docs
   problems$ = combineLatest([
-    this.solutionToProblemService.userProblemswithCategory$,
+    //this.solutionToProblemService.userProblemswithCategory$,
+    this.solutionToProblemService.problemsWithAdd$,
     this.categorySelectedAction$
     // .pipe(
     //   startWith(null) // done with initial value passed to BehaviorSubject
@@ -71,8 +72,7 @@ export class UserProblemComponent {
   }
 
   onAdd(): void {
-    console.log('Not yet implemented');
-
+    this.solutionToProblemService.addProblem();
     // todo add also version with subscribe to invoke http.post, add to subscription obect and ondestry unsubscribe
   }
 

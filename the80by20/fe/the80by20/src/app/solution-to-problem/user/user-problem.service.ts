@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { BehaviorSubject, catchError, combineLatest, map, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from 'rxjs';
 
 import { UserProblem } from './model/UserProblem'
 import { ProblemCategory } from '../shared-model/ProblemCategory'
@@ -56,6 +56,36 @@ export class UserProblemService {
 
   selectedProblemChanged(selectedProblemId: string): void {
     this.problemSelectedSubject.next(selectedProblemId) // INFO emit id to action stream
+  }
+
+  // INFO Action stream
+  private problemInsertedSubject = new Subject<UserProblem>()
+  problemInsertedAction$ = this.problemInsertedSubject.asObservable();
+
+  // INFO Combine action stream with data stream
+  problemsWithAdd$ = merge(
+    this.userProblemswithCategory$,
+    this.problemInsertedAction$
+  ).pipe(
+    scan((acc, value) => (value instanceof Array) ? [...value] : [...acc, value], [] as UserProblem[])
+  )
+
+
+  addProblem(newProblem?: UserProblem) {
+    newProblem = newProblem ||
+    {
+      problemId: "z6a4f74e-4b0a-4487-a6ff-ca2244b4afd9",
+      userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
+      requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
+      description: "QQQQQQ",
+      categoryId: "00000000-0000-0000-0000-000000000006",
+      category: "architecture",
+      isConfirmed: false,
+      isRejected: false,
+      createdAt: "",
+      color: "	#000000"
+    };
+    this.problemInsertedSubject.next(newProblem);
   }
 
   private markWithColor(problem: UserProblem): any {
