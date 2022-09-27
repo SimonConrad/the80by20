@@ -1,8 +1,9 @@
-import { EmptyExpr } from '@angular/compiler';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { catchError, EMPTY, finalize, Observable, Subject, tap } from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { catchError, EMPTY, Observable, Subject, tap } from 'rxjs';
 import { UserProblem } from '../model/UserProblem';
 import { UserProblemService } from '../user-problem.service';
+import { UUID } from 'angular2-uuid';
+
 
 
 @Component({
@@ -56,6 +57,7 @@ export class UserProductFormComponent {
   onSave(problem: UserProblem): void {
 
     if(problem.problemId === ''){
+      problem.problemId = UUID.UUID();
       this.problemService.startAdd(problem);
     } else{
       this.problemService.startUpdate(problem);
