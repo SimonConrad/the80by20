@@ -28,7 +28,7 @@ export class UserProblemComponent implements OnInit {
   problems$: Observable<UserProblem[]>;
   problemCategories$: Observable<ProblemCategory[]>;
 
-  deleteProblem$: Observable<string>;
+  deleteProblem$: Observable<any>;
 
   actionInProgress$: Observable<boolean>;
   selectedProblem$: Observable<UserProblem | undefined>;
@@ -47,6 +47,12 @@ export class UserProblemComponent implements OnInit {
       }));
 
     this.problems$ = this.solutionToProblemService.problemsDataStream$;
+
+    // this.deleteProblem$ = this.solutionToProblemService.deleteProblemActionStream$.pipe( // todo busy indicator there?
+    //   catchError(err => {
+    //     this.errorMessageSubject.next(err);
+    //     return EMPTY; // lub  //return of([]);
+    //   }));
 
     this.deleteProblem$ = this.solutionToProblemService.deleteProblemActionStream$.pipe( // todo busy indicator there?
       catchError(err => {

@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, combineLatest, concatMap, switchMap, map, 
 
 import { UserProblem } from './model/UserProblem'
 import { ProblemCategory } from '../shared-model/ProblemCategory'
+import { identifierName } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -106,12 +107,20 @@ export class UserProblemService {
   //#region delete
   startDelete = (id: string) => {
     this._deleteProblemSubject.next(id);
+
+  return this.http.delete(`${this.userProblemsUrl}/${id}`)
   }
 
   private _deleteProblemSubject = new Subject<string>();
   deleteProblemActionStream$ = this._deleteProblemSubject.asObservable().pipe(
-    // todo call http delete and when done, call _delete
-    tap(id => this._delete(id))
+    switchMap(id =>
+      {
+        return this.http.delete(`${this.userProblemsUrl}/${id}`);
+      }),
+      tap(() => this.startInit())
+    // tap(id =>{
+    //   this._delete(id);
+    // } )
   )
   private _delete = (id: UserProblem['id']) => {
     this._problemsSubject.next(this.problems.filter(currProblem => currProblem.id !== id))
