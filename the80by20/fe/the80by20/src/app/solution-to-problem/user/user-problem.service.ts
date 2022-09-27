@@ -43,9 +43,23 @@ export class UserProblemService {
   private problemSelectedSubject = new BehaviorSubject<string | null>(null)
   problemSelectedAction$ = this.problemSelectedSubject.asObservable();
 
+    // INFO Action stream
+    private problemInsertedSubject = new Subject<UserProblem>()
+    problemInsertedAction$ = this.problemInsertedSubject.asObservable();
+
+
+    // INFO Combine action stream with data stream
+    problemsWithAdd$ = merge(
+      this.userProblemswithCategory$,
+      this.problemInsertedAction$
+    ).pipe(
+      scan((acc, value) =>  (value instanceof Array) ? [...value] : [...acc, value], [] as UserProblem[]),
+    )
+
   // INFO alternative is to send get via http for product details
   selectedProblem$ = combineLatest([
-    this.userProblemswithCategory$,
+    //this.userProblemswithCategory$,
+    this.problemsWithAdd$,
     this.problemSelectedAction$
   ]).pipe(
     map(([problems, selectedProblemId]) =>
@@ -58,17 +72,9 @@ export class UserProblemService {
     this.problemSelectedSubject.next(selectedProblemId) // INFO emit id to action stream
   }
 
-  // INFO Action stream
-  private problemInsertedSubject = new Subject<UserProblem>()
-  problemInsertedAction$ = this.problemInsertedSubject.asObservable();
 
-  // INFO Combine action stream with data stream
-  problemsWithAdd$ = merge(
-    this.userProblemswithCategory$,
-    this.problemInsertedAction$
-  ).pipe(
-    scan((acc, value) => (value instanceof Array) ? [...value] : [...acc, value], [] as UserProblem[])
-  )
+
+
 
 
   addProblem(newProblem?: UserProblem) {
