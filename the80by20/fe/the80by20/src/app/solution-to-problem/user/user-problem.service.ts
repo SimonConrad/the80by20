@@ -142,7 +142,7 @@ export class UserProblemService {
     }),
     tap(() => this.startInit())
     // todo call http put and when done, call _delete switchMap(?
-    // tap(userProblem => {
+    // tap(userProblem => { // todo jak to wywoalc
     //   this._update(userProblem)
     // })
   )
@@ -159,10 +159,12 @@ export class UserProblemService {
 
   private _addProblemSubject = new Subject<UserProblem>();
   addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
-    tap(problem => this._add(problem)) // todo uncomment and call backendd switchMap(
-    // switchMap((problem) => this.http.post(this.userProblemsUrl, problem).pipe(
-    //   tap(problems => this._add(problem))
-    // ))
+
+    switchMap((userProblem) => {
+      return this.http.post<UserProblem>(this.userProblemsUrl, userProblem)
+    }),
+    tap(() => this.startInit())
+    // tap(problem => this._add(problem)) // todo uncomment and call backendd switchMap(
   );
 
   private _add = (problem: UserProblem) => {
