@@ -102,7 +102,8 @@ export class UserProblemService {
   private _editProblemSubject = new Subject<UserProblem>();
   editProblemActionStream$ = this._editProblemSubject.asObservable().pipe(
     // todo call http put and when done, call _delete
-    tap(userProblem => this._edit(userProblem))
+    tap(userProblem => {
+      this._edit(userProblem)})
   )
 
   private _edit = (problem: UserProblem) => {

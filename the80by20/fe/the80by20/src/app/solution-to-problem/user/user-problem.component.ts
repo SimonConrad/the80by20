@@ -29,6 +29,7 @@ export class UserProblemComponent implements OnInit {
   problems$: Observable<UserProblem[]>;
 
   addProblem$: Observable<UserProblem>;
+  editProblem$: Observable<UserProblem>;
   deleteProblem$: Observable<string>;
 
   actionInProgress$: Observable<boolean>;
@@ -37,7 +38,7 @@ export class UserProblemComponent implements OnInit {
   constructor(private solutionToProblemService: UserProblemService) {
     // INFO take a look at mechanism of this actionstream:
     // we are subscribing in component's template with async pipe,
-    // this actionstream is defined in service using behaviorsubject,
+    // this actionstream is defined in service using behaviorsubject and is exposed via asObservable,
     // we can add custom handling in pipe in this component,
     // emitting items into this action stream is in service
     // and is invoked from the component method this.solutionToProblemService.init()
@@ -50,6 +51,8 @@ export class UserProblemComponent implements OnInit {
     this.problems$ = this.solutionToProblemService.problemsDataStream$;
 
     this.addProblem$ = this.solutionToProblemService.addProblemActionStream$
+
+    this.editProblem$ = this.solutionToProblemService.editProblemActionStream$
 
     this.deleteProblem$ = this.solutionToProblemService.deleteProblemActionStream$.pipe( // todo busy indicator there?
       catchError(err => {
@@ -94,7 +97,20 @@ export class UserProblemComponent implements OnInit {
 
    // todo move to separate problem-form submit button
   onEdit(userProblem: UserProblem): void {
-    this.solutionToProblemService.startEdit(userProblem);
+    let newProblem: UserProblem =
+    {
+      problemId: userProblem.problemId,
+      userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
+      requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
+      description: "edit",
+      categoryId: "00000000-0000-0000-0000-000000000006",
+      category: "architecture",
+      isConfirmed: false,
+      isRejected: false,
+      createdAt: "",
+      color: "	#000000"
+    };
+    this.solutionToProblemService.startEdit(newProblem);
   }
 
   // problemCategories$ = this.solutionToProblemService.problemCategories$.pipe(
