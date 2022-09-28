@@ -96,8 +96,7 @@ export class UserProblemService {
   initProblemActionStream$ = this._initProblemSubject.asObservable()
     .pipe(
       tap(() => this.startActionInProgress()),
-      concatMap(() => this.userProblemswithCategoryFiltered$),
-      //switchMap(() => this.userProblemswithCategoryFiltered$),
+      switchMap(() => this.userProblemswithCategoryFiltered$), ////INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
       tap(res => this._problemsSubject.next(res))
     );
   //#endregion
@@ -110,8 +109,7 @@ export class UserProblemService {
 
   private _deleteProblemSubject = new Subject<string>();
   deleteProblemActionStream$ = this._deleteProblemSubject.asObservable().pipe(
-    //switchMap(id => {
-    concatMap(id => {
+    switchMap(id => { //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
       return this.http.delete(`${this.userProblemsUrl}/${id}`)
       .pipe(tap(() => {
         this._delete(id);
@@ -136,8 +134,7 @@ export class UserProblemService {
 
   private _updateProblemSubject = new Subject<UserProblem>();
   updateProblemActionStream$ = this._updateProblemSubject.asObservable().pipe(
-    //switchMap((userProblem) => {
-    concatMap((userProblem) => {
+    switchMap((userProblem) => {  //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
       return this.http.put<UserProblem>(this.userProblemsUrl, userProblem).pipe(map(() => { return userProblem }));
     }),
     tap(userProblem => {
@@ -159,8 +156,7 @@ export class UserProblemService {
 
   private _addProblemSubject = new Subject<UserProblem>();
   addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
-    //switchMap((userProblem) => {
-    concatMap((userProblem) => {
+    switchMap((userProblem) => { //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
       return this.http.post<UserProblem>(this.userProblemsUrl, userProblem).pipe(map(() => { return userProblem }));
     }),
     //tap(() => this.startInit()),
