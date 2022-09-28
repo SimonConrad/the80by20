@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { BehaviorSubject, catchError, combineLatest, concatMap, map, merge, Observable, of, scan, Subject, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, concatMap, map, merge, Observable, of, scan, shareReplay, Subject, tap, throwError } from 'rxjs';
 
 import { UserProblem } from './model/UserProblem'
 import { ProblemCategory } from '../shared-model/ProblemCategory'
@@ -24,6 +24,7 @@ export class DeborathProblemService {
   problemCategories$ = this.http.get<ProblemCategory[]>(this.problemCategories)
     .pipe(
       tap(data => console.log('Problem catgeires: ', JSON.stringify(data))),
+      //shareReplay(1), // todo naprawić keszowanie
       catchError(this.handleError)
     );
 

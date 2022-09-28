@@ -32,7 +32,8 @@ export class UserProblemService {
   problemCategories$ = this.http.get<ProblemCategory[]>(this.problemCategories)
     .pipe(
       tap(data => console.log('Problem categories:', JSON.stringify(data))),
-      catchError(this.handleError),
+      //shareReplay(1), // todo keszowanie
+      catchError(this.handleError)
     );
 
   userProblemswithCategory$ = combineLatest([ // INFO combineLatest check fe/docs
@@ -230,3 +231,7 @@ export class UserProblemService {
     return throwError(() => errorMessage);
   }
 }
+function shareReplay(arg0: number): import("rxjs").OperatorFunction<ProblemCategory[], unknown> {
+  throw new Error('Function not implemented.');
+}
+
