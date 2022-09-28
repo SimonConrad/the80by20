@@ -1,10 +1,9 @@
-<!-- <ng-container *ngIf="addProblem$ | async"></ng-container>
 <div class="container">
   <div class="item">
     <h5>{{userProblems}}</h5>
     <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
-      {{ errorMessage }}</div>
-
+      {{ errorMessage }}
+    </div>
     <div class="toolbar">
       <div>
         <select (change)="onSelected($any($event.target).value)">
@@ -37,15 +36,13 @@
           <td>{{ userProblem.category }}</td>
           <td>{{ userProblem.requiredSolutionTypes }}</td>
           <td>{{ userProblem.description }}</td>
-          <td><button
-            (click)="onProblemSelected(userProblem.id)"
-            [ngClass]="{ selected : userProblem?.id === (selectedProblem$ | async)?.id}"
-            >Edit</button></td>
+          <td><button (click)="onProblemSelected(userProblem.id)"
+              [ngClass]="{ selected : userProblem?.id === (selectedProblem$ | async)?.id}">Edit</button></td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="item">
-    <app-user-product-form></app-user-product-form>
+    <app-deborath-product-form></app-deborath-product-form>
   </div>
-</div> -->
+</div>

@@ -5,15 +5,20 @@ import { SolutionToProblemRoutingModule } from './solution-to-problem-routing.mo
 import { UserProblemComponent } from './user/user-problem.component';
 import { UserProductFormComponent } from './user/product-form/user-product-form.component';
 
+import {DeborathProblemComponent} from './user/deborath-problem.component'
+import { DeborathProductFormComponent } from './user/product-form/deborath-product-form.component'
+
 
 @NgModule({
   declarations: [
     UserProblemComponent,
-    UserProductFormComponent
+    UserProductFormComponent,
+    DeborathProblemComponent,
+    DeborathProductFormComponent
   ],
   imports: [
     SharedModule,
-    SolutionToProblemRoutingModule
+    SolutionToProblemRoutingModule,
   ]
 })
 export class SolutionToProblemModule { }

@@ -110,11 +110,12 @@ export class UserProblemService {
   private _deleteProblemSubject = new Subject<string>();
   deleteProblemActionStream$ = this._deleteProblemSubject.asObservable().pipe(
     switchMap(id => {
-      return this.http.delete(`${this.userProblemsUrl}/${id}`).pipe(map(() => { return id })); //info https://medium.com/@snorredanielsen/rxjs-accessing-a-previous-value-further-down-the-pipe-chain-b881026701c1
+      return this.http.delete(`${this.userProblemsUrl}/${id}`)
+      .pipe(tap(() => {
+        this._delete(id);
+      })); //info https://medium.com/@snorredanielsen/rxjs-accessing-a-previous-value-further-down-the-pipe-chain-b881026701c1
     }),
-    tap(id => {
-      this._delete(id);
-    }),
+
     //tap(() => this.startInit()), //INFO to make thinks simplers change above tap with this for refresh from server
     catchError(this.handleError)
 
