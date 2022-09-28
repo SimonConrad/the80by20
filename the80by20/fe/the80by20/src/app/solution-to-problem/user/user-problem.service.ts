@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { BehaviorSubject, catchError, combineLatest, switchMap, map, Observable, Subject, tap, throwError, finalize } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, switchMap, map, Observable, Subject, tap, throwError, finalize, concatMap } from 'rxjs';
 
 import { UserProblem } from './model/UserProblem'
 import { ProblemCategory } from '../shared-model/ProblemCategory'
@@ -96,8 +96,8 @@ export class UserProblemService {
   initProblemActionStream$ = this._initProblemSubject.asObservable()
     .pipe(
       tap(() => this.startActionInProgress()),
-      //switchMap(() => this.userProblemswithCategory$), // TODO switchMap????
-      switchMap(() => this.userProblemswithCategoryFiltered$), // TODO switchMap????
+      concatMap(() => this.userProblemswithCategoryFiltered$),
+      //switchMap(() => this.userProblemswithCategoryFiltered$),
       tap(res => this._problemsSubject.next(res))
     );
   //#endregion
@@ -110,7 +110,8 @@ export class UserProblemService {
 
   private _deleteProblemSubject = new Subject<string>();
   deleteProblemActionStream$ = this._deleteProblemSubject.asObservable().pipe(
-    switchMap(id => {
+    //switchMap(id => {
+    concatMap(id => {
       return this.http.delete(`${this.userProblemsUrl}/${id}`)
       .pipe(tap(() => {
         this._delete(id);
@@ -135,8 +136,8 @@ export class UserProblemService {
 
   private _updateProblemSubject = new Subject<UserProblem>();
   updateProblemActionStream$ = this._updateProblemSubject.asObservable().pipe(
-    // todo switchMap vs mergeMap vs concatMap?
-    switchMap((userProblem) => {
+    //switchMap((userProblem) => {
+    concatMap((userProblem) => {
       return this.http.put<UserProblem>(this.userProblemsUrl, userProblem).pipe(map(() => { return userProblem }));
     }),
     tap(userProblem => {
@@ -158,7 +159,8 @@ export class UserProblemService {
 
   private _addProblemSubject = new Subject<UserProblem>();
   addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
-    switchMap((userProblem) => {
+    //switchMap((userProblem) => {
+    concatMap((userProblem) => {
       return this.http.post<UserProblem>(this.userProblemsUrl, userProblem).pipe(map(() => { return userProblem }));
     }),
     //tap(() => this.startInit()),
