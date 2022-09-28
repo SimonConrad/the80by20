@@ -43,6 +43,7 @@ https://angular.io/guide/lazy-loading-ngmodules
 ## rxjs
 
 -  course RxJS in Angular: Reactive Development
+- https://github.com/DeborahK/Angular-RxJS
 
 ## walking skeleton
 
