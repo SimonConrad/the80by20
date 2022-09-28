@@ -13,7 +13,7 @@ export class UserProblemService {
   private userProblemsUrl = 'api/userProblems';
   private problemCategories = 'api/problemCategories';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) { // info data should not be loaded from the constructor
   }
 
   private _problemsSubject = new BehaviorSubject<UserProblem[]>([]);
