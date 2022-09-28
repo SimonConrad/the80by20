@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { DeborathProblemService } from './deborath-problem.service';
 import { BehaviorSubject, catchError, combineLatest, EMPTY, map, Subject, Subscription } from 'rxjs';
@@ -6,7 +6,7 @@ import { BehaviorSubject, catchError, combineLatest, EMPTY, map, Subject, Subscr
   selector: 'app-deborath-problem',
   templateUrl: './deborath-problem.component.html',
   styleUrls: ['./deborath-problem.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush // INFO !!!! only detect chnages made from input properties, and events from child components (output),
+  changeDetection: ChangeDetectionStrategy.OnPush // INFO !!!! only detect chnages made from input properties, and events from child components (output),
   // and observables bound in the teamplate using an async pipe
   // bound values set in local properties won't trigger chnage detection, so won't update the ui
 })
