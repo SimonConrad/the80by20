@@ -1,22 +1,24 @@
 <ng-container *ngIf="addProblem$ | async"></ng-container>
 <ng-container *ngIf="updateProblem$ | async"></ng-container>
-<div *ngIf="selectedProblem$ | async as problem">
-<h5>{{title}}</h5>
-  <form>
-    <div>
-      <label>Id:  </label>
-      <span>{{problem.id}}</span>
+<div class="container">
+
+  <form class="problem-form">
+    <h5>{{title}}</h5>
+    <div class="inputs">
+      <div>
+        <label>Id: </label>
+        <span>{{problem?.id}}</span>
+      </div>
+      <div>
+        <label>Description</label>
+        <input type="text" [(ngModel)]="problem.description" name="description">
+      </div>
     </div>
-    <div>
-      <label>Description</label>
-      <input type="text"
-        [(ngModel)]="problem.description"
-        name="description"
-      >
-    </div>
-    <div>
-      <button (click)="onSave(problem)" >Save</button>
-      <button (click)="onCancel()">Cancel</button>
+    <div class="spacer"></div>
+    <div class="action-bar">
+      <div class="item-left"></div>
+      <div><button (click)="onSave(problem)">Save</button></div>
+      <div><button (click)="onCancel()">Cancel</button></div>
     </div>
   </form>
 </div>

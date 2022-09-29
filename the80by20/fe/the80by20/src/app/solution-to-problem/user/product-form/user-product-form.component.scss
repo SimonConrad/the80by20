@@ -1,7 +1,41 @@
+.container{
+  height: 100%;
+}
+
 form{
   font-size: xx-small;
+  height: 100%;
 }
 
 h5{
   text-align: center;
+}
+
+.problem-form{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .spacer{
+    flex-grow: 1;
+  }
+
+  .inputs {
+    padding: 2px;
+
+    > * {
+      padding: 5px;
+    }
+  }
+
+}
+
+.action-bar{
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+
+  .item-left {
+    flex-grow: 1;
+  }
 }

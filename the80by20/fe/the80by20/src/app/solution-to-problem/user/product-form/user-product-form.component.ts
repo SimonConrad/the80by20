@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { catchError, EMPTY, Observable, Subject, tap } from 'rxjs';
 import { UserProblem } from '../model/UserProblem';
 import { UserProblemService } from '../user-problem.service';
@@ -16,6 +16,20 @@ import { UUID } from 'angular2-uuid';
 })
 export class UserProductFormComponent {
   title = 'User Problem From';
+
+  @Input()
+  problem: UserProblem = {
+      id: "",
+      userId: "",
+      requiredSolutionTypes: "",
+      description: "",
+      categoryId: "",
+      category: "",
+      isConfirmed: false,
+      isRejected: false,
+      createdAt: "",
+      color: ""
+    };
 
   private errorMessageSubject = new Subject<string>()
   errorMessage$ = this.errorMessageSubject.asObservable();
