@@ -13,21 +13,14 @@ export class UserProblemService {
   private userProblemsUrl = 'api/userProblems';
   private problemCategories = 'api/problemCategories';
 
-  constructor(private http: HttpClient) { // info data should not be loaded from the constructor
+  constructor(private http: HttpClient) { // INFO data should not be loaded from the constructor
   }
 
-  private _problemsSubject = new BehaviorSubject<UserProblem[]>([]);
-  problemsDataStream$ = this._problemsSubject.asObservable();
+  private problemsSubject = new BehaviorSubject<UserProblem[]>([]);
+  problemsDataStream$ = this.problemsSubject.asObservable();
   get problems() {
-    return this._problemsSubject.value;
+    return this.problemsSubject.value;
   }
-
-  private userProblems$ = this.http.get<UserProblem[]>(this.userProblemsUrl)
-    .pipe(
-      tap(data => console.log('User Problems: ', JSON.stringify(data))),
-      catchError(this.handleError),
-      finalize(() => this.stopActionInProgress())
-    );
 
   problemCategories$ = this.http.get<ProblemCategory[]>(this.problemCategories)
     .pipe(
@@ -36,7 +29,14 @@ export class UserProblemService {
       catchError(this.handleError)
     );
 
-  userProblemswithCategory$ = combineLatest([ // INFO combineLatest check fe/docs
+  private userProblems$ = this.http.get<UserProblem[]>(this.userProblemsUrl)
+    .pipe(
+      tap(data => console.log('User Problems: ', JSON.stringify(data))),
+      catchError(this.handleError),
+      finalize(() => this.stopActionInProgress())
+    );
+
+  private userProblemswithCategory$ = combineLatest([ // INFO combineLatest check fe/docs
     this.userProblems$,
     this.problemCategories$])
     .pipe(
@@ -49,10 +49,12 @@ export class UserProblemService {
         } as UserProblem)))
     );
 
+  // emitting is invoked from component click category handler onCategorySelected (which calls this service categorySelectedSubject.next)
+  // INFO categorySelectedAction$ is not subscribed but it is working, probably beacouse rxjs method combineLatest subscribes it
   private categorySelectedSubject = new BehaviorSubject<string>('');
-  categorySelectedAction$ = this.categorySelectedSubject.asObservable();
+  private categorySelectedAction$ = this.categorySelectedSubject.asObservable();
 
-  userProblemswithCategoryFiltered$ = combineLatest([
+  private userProblemswithCategoryFiltered$ = combineLatest([
     this.userProblemswithCategory$,
     this.categorySelectedAction$
   ])
@@ -73,99 +75,98 @@ export class UserProblemService {
     return "#000000" //black
   }
 
-
   //#region busy-indicator
-  private _actionInProgress = new BehaviorSubject<boolean>(false);
-  actionInProgressDataStream$ = this._actionInProgress.asObservable();
+  private actionInProgress = new BehaviorSubject<boolean>(false);
+  actionInProgressDataStream$ = this.actionInProgress.asObservable();
 
-  startActionInProgress = () => {
-    this._actionInProgress.next(true)
+  private startActionInProgress = () => {
+    this.actionInProgress.next(true)
   }
 
-  stopActionInProgress = () => {
-    this._actionInProgress.next(false)
+  private stopActionInProgress = () => {
+    this.actionInProgress.next(false)
   }
   //#endregion
 
   //#region init
-  startInit = () => {
-    this._initProblemSubject.next('');
+  startInitializeProblems = () => {
+    this.initProblemSubject.next('');
   }
 
-  private _initProblemSubject = new BehaviorSubject('');
-  initProblemActionStream$ = this._initProblemSubject.asObservable()
+  private initProblemSubject = new BehaviorSubject('');
+  initProblemActionStream$ = this.initProblemSubject.asObservable()
     .pipe(
       tap(() => this.startActionInProgress()),
       switchMap(() => this.userProblemswithCategoryFiltered$), ////INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
-      tap(res => this._problemsSubject.next(res))
+      tap(res => this.problemsSubject.next(res))
     );
   //#endregion
 
-
   //#region delete
-  startDelete = (id: string) => {
-    this._deleteProblemSubject.next(id);
+  startDeleteAction = (id: string) => {
+    this.deleteProblemSubject.next(id);
   }
 
-  private _deleteProblemSubject = new Subject<string>();
-  deleteProblemActionStream$ = this._deleteProblemSubject.asObservable().pipe(
+  private deleteProblemSubject = new Subject<string>();
+  deleteProblemActionStream$ = this.deleteProblemSubject.asObservable().pipe(
     switchMap(id => { //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
-      return this.http.delete(`${this.userProblemsUrl}/${id}`)
+      return this.http.delete(`${this.userProblemsUrl}/${id}`) // INFO usage of inMemoryWebApi
       .pipe(tap(() => {
-        this._delete(id);
+        this.delete(id);
       })); //info https://medium.com/@snorredanielsen/rxjs-accessing-a-previous-value-further-down-the-pipe-chain-b881026701c1
     }),
-
-    //tap(() => this.startInit()), //INFO to make thinks simplers change above tap with this for refresh from server
+    //tap(() => this.startInitializeProblems()), //INFO to make thinks simplers change above tap with this for refresh from server
     catchError(this.handleError)
 
   )
-  private _delete = (id: UserProblem['id']) => {
-    this._problemsSubject.next(this.problems.filter(currProblem => currProblem.id !== id))
+
+  private delete = (id: UserProblem['id']) => {
+    this.problemsSubject.next(this.problems.filter(currProblem => currProblem.id !== id))
   }
   //#endregion
-
 
   //#region update
   // todo
   startUpdate = (userProblem: UserProblem) => {
-    this._updateProblemSubject.next(userProblem);
+    this.updateProblemSubject.next(userProblem);
   }
 
-  private _updateProblemSubject = new Subject<UserProblem>();
-  updateProblemActionStream$ = this._updateProblemSubject.asObservable().pipe(
+  private updateProblemSubject = new Subject<UserProblem>();
+  updateProblemActionStream$ = this.updateProblemSubject.asObservable().pipe(
     switchMap((userProblem) => {  //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
-      return this.http.put<UserProblem>(this.userProblemsUrl, userProblem).pipe(map(() => { return userProblem }));
+      return this.http.put<UserProblem>(this.userProblemsUrl, userProblem)  //INFO usage of inMemoryWebApi
+      .pipe(map(() => { return userProblem }));
     }),
     tap(userProblem => {
-      this._update(userProblem)
+      this.update(userProblem)
     }),
-    //tap(() => this.startInit()),
+    //tap(() => this.startInitializeProblems()),
     catchError(this.handleError)
   )
 
-  private _update = (problem: UserProblem) => {
-    this._problemsSubject.next(this.problems.map(currProblem => currProblem.id === problem.id ? problem : currProblem))
+  private update = (problem: UserProblem) => {
+    this.problemsSubject.next(this.problems.map(currProblem => currProblem.id === problem.id ? problem : currProblem))
   }
   //#endregion
 
   //#region add
   startAdd = (userProblem: UserProblem) => {
-    this._addProblemSubject.next(userProblem);
+    this.addProblemSubject.next(userProblem);
   }
 
-  private _addProblemSubject = new Subject<UserProblem>();
-  addProblemActionStream$ = this._addProblemSubject.asObservable().pipe(
+  private addProblemSubject = new Subject<UserProblem>();
+  addProblemActionStream$ = this.addProblemSubject.asObservable().pipe(
     switchMap((userProblem) => { //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
-      return this.http.post<UserProblem>(this.userProblemsUrl, userProblem).pipe(map(() => { return userProblem }));
+      return this.http.post<UserProblem>(this.userProblemsUrl, userProblem)  //INFO usage of inMemoryWebApi
+      .pipe(map(() => { return userProblem }));
     }),
-    //tap(() => this.startInit()),
-    tap(problem => this._add(problem)),
+    //tap(() => this.startInitializeProblems()),
+    tap(problem => this.add(problem)),
     catchError(this.handleError),
   );
 
-  private _add = (problem: UserProblem) => {
-    this._problemsSubject.next([
+  private add = (problem: UserProblem) => {
+    this.problemsSubject.next([
       ...this.problems,
       problem
     ])
@@ -173,12 +174,12 @@ export class UserProblemService {
   //#endregion
 
   //#region select
-  startSelect = (id: string | undefined) => {
-    this._selectProblemSubject.next(id);
+  startSelectAction = (id: string | undefined) => {
+    this.selectProblemSubject.next(id);
   }
-  private _selectProblemSubject = new Subject<string | undefined>();
-  selectProblemActionStream$ = this._selectProblemSubject.asObservable().pipe(
-    // todo call http-get/id switchMap(
+  private selectProblemSubject = new Subject<string | undefined>();
+  selectProblemActionStream$ = this.selectProblemSubject.asObservable().pipe(
+    // todo call http-get/id
     map(id => {
       if (id === null) {
         return undefined;
@@ -208,7 +209,7 @@ export class UserProblemService {
   //#endregion
 
   //#region filter
-  startFilter = (categoryId: string) => {
+  startFilterAction = (categoryId: string) => {
     this.categorySelectedSubject.next(categoryId);
   }
   //#endregion
@@ -229,7 +230,3 @@ export class UserProblemService {
     return throwError(() => errorMessage);
   }
 }
-function shareReplay(arg0: number): import("rxjs").OperatorFunction<ProblemCategory[], unknown> {
-  throw new Error('Function not implemented.');
-}
-

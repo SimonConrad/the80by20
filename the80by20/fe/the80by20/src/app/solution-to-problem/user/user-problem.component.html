@@ -1,65 +1,62 @@
-<ng-container *ngIf="initProblem$ | async"></ng-container>
-<ng-container *ngIf="deleteProblem$ | async"></ng-container>
-<ng-container *ngIf="selectedProblem$ | async"></ng-container>
+<ng-container *ngIf="initProblemActionStream$ | async"></ng-container>
+<ng-container *ngIf="deleteProblemActionStream$ | async"></ng-container>
 <div class="container">
   <div class="item">
-    <h5>{{userProblems}}</h5>
-    <div *ngIf="errorMessage$ | async as errorMessage">
+    <h5>{{userProblemsTitle}}</h5>
+    <div *ngIf="errorMessageDataStream$ | async as errorMessage">
       {{ errorMessage }}
     </div>
-    <div *ngIf="actionInProgress$ | async as actionInProgress">
+    <div *ngIf="actionInProgressDataStream$ | async as actionInProgress">
       <div *ngIf="actionInProgress">
         is loading...
       </div>
     </div>
-  <div>
-
-    <div class="toolbar">
-      <div>
-        <select (change)="onCategorySelected($any($event.target).value)">
-          <option value="">- Display All -</option>
-          <option *ngFor="let category of problemCategories$ | async" [value]="category.id">{{ category.name }}</option>
-        </select>
+    <div>
+      <div class="toolbar">
+        <div>
+          <select (change)="onCategorySelected($any($event.target).value)">
+            <option value="">- Display All -</option>
+            <option *ngFor="let category of problemCategoriesDataStream$ | async" [value]="category.id">{{ category.name
+              }}</option>
+          </select>
+        </div>
+        <div class="item-center">
+        </div>
+        <div>
+          <button type="button" class="btn btn-outline-secondary" (click)="onRefresh()">Refresh from server</button>
+          <button type="button" class="btn btn-outline-secondary" (click)="onAdd()">Add Product</button>
+        </div>
       </div>
-      <div class="item-center">
-      </div>
-      <div>
-        <button type="button" class="btn btn-outline-secondary" (click)="onRefresh()">Refresh from server</button>
-        <button type="button" class="btn btn-outline-secondary" (click)="onAdd()">Add Product</button>
-      </div>
+      <table *ngIf="problemsDataStream$ | async as userProblems">
+        <thead>
+          <tr>
+            <!-- <th>Problem Id</th> -->
+            <th>Confirmed</th>
+            <th>Rejected</th>
+            <th>Color</th>
+            <th>Category</th>
+            <th>Required Solution Types</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let userProblem of userProblems">
+            <!-- <td>{{ userProblem.id }}</td> -->
+            <td>{{ userProblem.isConfirmed }}</td>
+            <td>{{ userProblem.isRejected }}</td>
+            <td>{{ userProblem.color }}</td>
+            <td>{{ userProblem.category }}</td>
+            <td>{{ userProblem.requiredSolutionTypes }}</td>
+            <td>{{ userProblem.description }}</td>
+            <td><button (click)="onEdit(userProblem.id)"
+                [ngClass]="{ selected : userProblem?.id === (selectProblemActionStream$ | async)?.id}">Edit</button></td>
+            <td><button (click)="onDelete(userProblem.id)">Delete</button></td>
+            <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table *ngIf="problems$ | async as userProblems">
-      <thead>
-        <tr>
-          <!-- <th>Problem Id</th> -->
-          <th>Confirmed</th>
-          <th>Rejected</th>
-          <th>Color</th>
-          <th>Category</th>
-          <th>Required Solution Types</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let userProblem of userProblems">
-          <!-- <td>{{ userProblem.id }}</td> -->
-          <td>{{ userProblem.isConfirmed }}</td>
-          <td>{{ userProblem.isRejected }}</td>
-          <td>{{ userProblem.color }}</td>
-          <td>{{ userProblem.category }}</td>
-          <td>{{ userProblem.requiredSolutionTypes }}</td>
-          <td>{{ userProblem.description }}</td>
-          <td><button
-            (click)="onEdit(userProblem.id)"
-            [ngClass]="{ selected : userProblem?.id === (selectedProblem$ | async)?.id}"
-            >Edit</button></td>
-          <td><button (click)="onDelete(userProblem.id)">Delete</button></td>
-          <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
-        </tr>
-      </tbody>
-    </table>
+    <div class="item">
+      <app-user-product-form></app-user-product-form>
+    </div>
   </div>
-  <div class="item">
-    <app-user-product-form></app-user-product-form>
-  </div>
-</div>

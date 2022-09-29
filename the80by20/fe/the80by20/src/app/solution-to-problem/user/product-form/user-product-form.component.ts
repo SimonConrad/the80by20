@@ -41,7 +41,7 @@ export class UserProductFormComponent {
         this.errorMessageSubject.next(err); // emit value to the stream
         return EMPTY;
       }),
-      tap(() => this.problemService.startSelect(undefined))
+      tap(() => this.problemService.startSelectAction(undefined))
       );
 
     this.updateProblem$ = this.problemService.updateProblemActionStream$.pipe(
@@ -49,7 +49,7 @@ export class UserProductFormComponent {
         this.errorMessageSubject.next(err); // emit value to the stream
         return EMPTY;
       }),
-      tap(() => this.problemService.startSelect(undefined)),
+      tap(() => this.problemService.startSelectAction(undefined)),
       );
   }
 
@@ -80,7 +80,7 @@ export class UserProductFormComponent {
   }
 
   onCancel(): void {
-    this.problemService.startSelect(undefined);
+    this.problemService.startSelectAction(undefined);
   }
 
 }
