@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { UserProblemService } from './user-problem.service';
-import { catchError, EMPTY, Observable, Subject } from 'rxjs';
+import { catchError, combineLatest, EMPTY, map, Observable, Subject } from 'rxjs';
 import { ProblemCategory } from '../shared-model/ProblemCategory';
 import { UserProblem } from './model/UserProblem';
 @Component({
@@ -31,6 +31,15 @@ export class UserProblemComponent implements OnInit {
       return EMPTY; // INFO or return of([]);
     })
   );
+
+  // INFO can be used as described: fe\docs\combining -all-the-streams\combining-all-the-streams.jpg
+  // vm$ = combineLatest([
+  //   this.problemsDataStream$,
+  //   this.problemCategoriesDataStream$
+  // ]).pipe(
+  //   map(([problems, categories]) =>
+  //     ({problems, categories}))
+  //   );
 
   actionInProgressDataStream$ =  this.userProblemService.actionInProgressDataStream$
   //#endregion
