@@ -1,7 +1,6 @@
-<ng-container *ngIf="addProblem$ | async"></ng-container>
-<ng-container *ngIf="updateProblem$ | async"></ng-container>
+<ng-container *ngIf="addProblemActionStream$ | async"></ng-container>
+<ng-container *ngIf="updateProblemActionStream$ | async"></ng-container>
 <div class="container">
-
   <form class="problem-form">
     <h5>{{title}}</h5>
     <div class="inputs">

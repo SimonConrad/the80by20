@@ -5,96 +5,79 @@ import { UserProblemService } from '../user-problem.service';
 import { UUID } from 'angular2-uuid';
 
 
-
 @Component({
   selector: 'app-user-product-form',
   templateUrl: './user-product-form.component.html',
   styleUrls: ['./user-product-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush // INFO !!!! only detect chnages made from input properties, and events from child components (output),
-  // and observables bound in the teamplate using an async pipe
-  // bound values set in local properties won't trigger chnage detection, so won't update the ui
+  changeDetection: ChangeDetectionStrategy.OnPush //// INFO ChangeDetectionStrategy.OnPush only detect changes made from:
+  // - input properties, and events from child components (output),
+  // - observables bound in the template using an async pipe;
+  // bound values set in local properties won't trigger change detection, so won't update the ui
 })
 export class UserProductFormComponent {
   title = 'User Problem From';
 
   @Input()
   problem: UserProblem = {
-      id: "",
-      userId: "",
-      requiredSolutionTypes: "",
-      description: "",
-      categoryId: "",
-      category: "",
-      isConfirmed: false,
-      isRejected: false,
-      createdAt: "",
-      color: ""
-    };
+    id: "",
+    userId: "",
+    requiredSolutionTypes: "",
+    description: "",
+    categoryId: "",
+    category: "",
+    isConfirmed: false,
+    isRejected: false,
+    createdAt: "",
+    color: ""
+  };
 
   private errorMessageSubject = new Subject<string>()
-  errorMessage$ = this.errorMessageSubject.asObservable();
+  errorMessageDataStream$ = this.errorMessageSubject.asObservable();
 
-  selectedProblem$: Observable<UserProblem | undefined>;
-
-  updateProblem$: Observable<UserProblem>;
-  addProblem$: Observable<UserProblem>;
-
-  constructor(private problemService: UserProblemService) {
-    // INFO problem observable data item stream, which emits Problem or undefined
-    this.selectedProblem$ = this.problemService.selectProblemActionStream$
-      .pipe(
-        catchError(err => {
-          //this.errorMessage = err; //when changeDetection: ChangeDetectionStrategy.OnPush then this won't trigger chnage detection and error will not appear to the user
-          this.errorMessageSubject.next(err); // emit value to the stream
-          return EMPTY;
-        })
-      );
-
-    this.addProblem$ = this.problemService.addProblemActionStream$.pipe(
+  // INFO problem observable data item stream, which emits Problem or undefined
+  // INFO  user-problem-component already subsribed to this observable using async pipe (in its html temaplte)
+  selectProblemActionStream$ = this.problemService.selectProblemActionStream$
+    .pipe(
       catchError(err => {
+        //this.errorMessage = err; //INFO when changeDetection: ChangeDetectionStrategy.OnPush then this won't trigger chnage detection and error will not appear to the user
         this.errorMessageSubject.next(err); // emit value to the stream
         return EMPTY;
-      }),
-      tap(() => this.problemService.startSelectAction(undefined))
-      );
+      })
+    );
 
-    this.updateProblem$ = this.problemService.updateProblemActionStream$.pipe(
-      catchError(err => {
-        this.errorMessageSubject.next(err); // emit value to the stream
-        return EMPTY;
-      }),
-      tap(() => this.problemService.startSelectAction(undefined)),
-      );
-  }
+  updateProblemActionStream$ = this.problemService.updateProblemActionStream$.pipe(
+    catchError(err => {
+      this.errorMessageSubject.next(err); // INFO emit value to the stream
+      return EMPTY;
+    }),
+    tap(() => this.problemService.startSelectAction(undefined)),
+  );
 
-  //startEdit
+  addProblemActionStream$ = this.problemService.addProblemActionStream$.pipe(
+    catchError(err => {
+      this.errorMessageSubject.next(err); // emit value to the stream
+      return EMPTY;
+    }),
+    tap(() => this.problemService.startSelectAction(undefined))
+  );
+
+  constructor(private problemService: UserProblemService) { }
+
   onSave(problem: UserProblem): void {
+    //INFO alternative (not fully reactive way) is to
+    // call update service and subscribe to it (invoke it thi way),
+    // but rember then about the need to unsubcribe it in ondestroy
+    // use Subscription class
 
-    //INFO alternative cal update service and subscribe to invoke it, rember then on need to unsubcribing in ondestroy
-
-    if(problem.id === ''){
+    if (problem.id === '') {
       problem.id = UUID.UUID();
       this.problemService.startAdd(problem);
-    } else{
+    } else {
       this.problemService.startUpdate(problem);
     }
-      // let newProblem: UserProblem =
-    // {
-    //   id: userProblem.id,
-    //   userId: "c1bfe7bc-053c-465b-886c-6f55af7ec4fe",
-    //   requiredSolutionTypes: "PocInCode; PlanOfImplmentingChangeInCode",
-    //   description: "edit",
-    //   categoryId: "00000000-0000-0000-0000-000000000006",
-    //   category: "architecture",
-    //   isConfirmed: false,
-    //   isRejected: false,
-    //   createdAt: "",
-    //   color: "	#000000"
-    // };
   }
 
   onCancel(): void {
     this.problemService.startSelectAction(undefined);
   }
-
 }
