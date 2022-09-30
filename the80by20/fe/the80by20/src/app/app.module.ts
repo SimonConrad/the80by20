@@ -14,6 +14,8 @@ import { HomeComponent } from './layout/home/home.component';
 import { AsideComponent } from './layout/aside/aside.component';
 import { FooterComponent } from './layout/footer/footer.component';
 
+import { AuthModule } from './auth/auth.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { FooterComponent } from './layout/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AuthModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(AppData, { delay: 1000 }),
   ],

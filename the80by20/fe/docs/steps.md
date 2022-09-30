@@ -62,6 +62,7 @@ C# to typescript converter
 ## security
 - authentication mechanism
 - roles handling
+- https://appdividend.com/2022/02/02/angular-authentication/
 
 ## ci / cd
 
