@@ -35,7 +35,7 @@ export class AuthService {
     // }));
 
     // INFO https://jwt.io/
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6IlNpbW9uIiwiZXhwIjoxNTE2MjM5MDIyfQ.RxwTuNFAYlRkapdnk7FuyiZV5D3OlpVVrMvQwBpzXmI"
     return of(token).pipe(map(token => {
         return this.saveToken(token);
       }));
@@ -57,7 +57,15 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     console.log(this.decodedToken.exp);
-    return moment().isBefore(moment.unix(this.decodedToken.exp));
+
+
+    if(this.decodedToken.username != '') {
+      return true;
+    }
+
+    return false;
+
+    // TODO: return moment().isBefore(moment.unix(this.decodedToken.exp));
   }
 
 
