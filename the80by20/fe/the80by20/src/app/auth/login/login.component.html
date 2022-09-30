@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div>
+  <h1 class="page-title">Login</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="form-group">
+      <div *ngIf="notify" class="alert alert-success">
+        {{ notify }}
+      </div>
+      <label for="email">Email</label>
+      <input type="email" class="form-control" formControlName="email">
+    </div>
+    <div *ngIf="isInvalidInput('email')" class="alert alert-danger">
+      <span>Email is invalid</span>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" formControlName="password">
+    </div>
+    <div *ngIf="isInvalidInput('password')" class="alert alert-danger">
+      <span>Password is invalid</span>
+    </div>
+    <button [disabled]="!loginForm?.valid" type="submit" class="btn btn-warning">Sign In</button>
+  </form>
+</div>

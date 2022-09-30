@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'; // TODO consider instead importing SharedModule ?
+import { SharedModule } from '../shared/shared.module'; // TODO before was Commonmodule ?
 
 
 import { Routes, RouterModule } from '@angular/router';
@@ -32,7 +32,7 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
+    SharedModule
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard]
