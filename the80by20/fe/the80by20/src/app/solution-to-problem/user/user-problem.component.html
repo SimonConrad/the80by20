@@ -6,6 +6,9 @@
     <div *ngIf="errorMessageDataStream$ | async as errorMessage">
       {{ errorMessage }}
     </div>
+    <div *ngIf="notifySubjectDataStream$ | async as notifyMessage">
+      {{ notifyMessage }}
+    </div>
     <div *ngIf="actionInProgressDataStream$ | async as actionInProgress">
       <div *ngIf="actionInProgress">
         is loading...
@@ -58,6 +61,6 @@
     </div>
   </div>
   <div class="item" *ngIf="selectProblemActionStream$ | async as problem">
-    <app-user-product-form [problem]="problem"></app-user-product-form>
+    <app-user-product-form [problem]=""></app-user-product-form>
   </div>
 </div>

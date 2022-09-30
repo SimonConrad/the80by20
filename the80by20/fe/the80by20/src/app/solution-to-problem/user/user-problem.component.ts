@@ -4,6 +4,7 @@ import { UserProblemService } from './user-problem.service';
 import { catchError, combineLatest, EMPTY, map, Observable, Subject } from 'rxjs';
 import { ProblemCategory } from '../shared-model/ProblemCategory';
 import { UserProblem } from './model/UserProblem';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-user-problem',
   templateUrl: './user-problem.component.html',
@@ -22,6 +23,9 @@ export class UserProblemComponent implements OnInit {
   // subject for component, so defined there not in service
   private errorMessageSubject = new Subject<string>()
   errorMessageDataStream$ = this.errorMessageSubject.asObservable(); // INFO errorMessage$ observable subscribed in the template with async pipe
+
+  private notifySubject = new Subject<string>()
+  notifySubjectDataStream$ = this.notifySubject.asObservable(); // INFO notifySubjectDataStream$ observable subscribed in the template with async pipe
 
   problemsDataStream$ = this.userProblemService.problemsDataStream$;
 
@@ -65,10 +69,17 @@ export class UserProblemComponent implements OnInit {
   selectProblemActionStream$ = this.userProblemService.selectProblemActionStream$ // INFO subscribed with async pipe in template
   //#endregion
 
-  constructor(private userProblemService: UserProblemService) {}
+  constructor(private userProblemService: UserProblemService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.userProblemService.startInitializeProblems()
+
+    this.route.queryParams.subscribe((params) => {
+      if (params['loggedin'] === 'success') {
+        this.notifySubject.next('You have been successfully logged in'); // TODO fix as it is not showing depite it is invoked
+      }
+    });
+
   }
 
   onRefresh(): void {

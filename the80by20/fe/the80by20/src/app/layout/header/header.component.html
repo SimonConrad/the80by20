@@ -10,11 +10,17 @@
       <span>basket</span>
     </div>
     <div class="item-auth">
-      <a routerLink="/auth/login">Login</a>
-      <span>/</span>
-      <a class="pointer" (click)="logout()">Logout</a>
+      <ng-container *ngIf="!auth.isAuthenticated()">
+        <a routerLink="/auth/login">Login</a>
       <span>/</span>
       <a routerLink="/auth/register">Register</a>
+      </ng-container>
+      <ng-container *ngIf="auth.isAuthenticated()">
+        <a class="nav-link">
+          {{ auth.getUsername() }}
+        </a>
+        <a class="pointer" (click)="logout()">Logout</a>
+      </ng-container>
     </div>
   </div>
 </header>

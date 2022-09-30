@@ -45,16 +45,13 @@ export class LoginComponent implements OnInit {
   login(): void {
     console.log(this.loginForm.value);
 
-
-    this.router.navigate(['/'], { queryParams: { loggedin: 'success' } })
-
-    // this.errors = [];
-    // this.auth.login(this.loginForm.value)
-    //   .subscribe((token) => {
-    //     this.router.navigate(['/'], { queryParams: { loggedin: 'success' } });
-    //    },
-    //     (errorResponse) => {
-    //       this.errors.push(errorResponse.error.error);
-    //     });
+    this.errors = [];
+    this.auth.login(this.loginForm.value)
+      .subscribe((token) => {
+        this.router.navigate(['/solution-to-problem'], { queryParams: { loggedin: 'success' } });
+       },
+        (errorResponse) => {
+          this.errors.push(errorResponse.error.error);
+        });
   }
 }
