@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module'; // TODO before was Commonmodule ?
 
-
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthComponent } from './auth.component';

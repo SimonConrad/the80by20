@@ -1,10 +1,8 @@
-
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 
 const jwt = new JwtHelperService();
@@ -16,6 +14,7 @@ export class AuthService {
 
   private baseUrl: string = environment.baseApiUrl;
   private uriseg = this.baseUrl + 'api/users';
+
   private decodedToken: DecodedToken = new DecodedToken()
 
   constructor(private http: HttpClient) {
@@ -34,7 +33,7 @@ export class AuthService {
     //   return this.saveToken(token);
     // }));
 
-    // INFO https://jwt.io/
+    // INFO generated at https://jwt.io/
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6IlNpbW9uIiwiZXhwIjoxNTE2MjM5MDIyfQ.RxwTuNFAYlRkapdnk7FuyiZV5D3OlpVVrMvQwBpzXmI"
     return of(token).pipe(map(token => {
         return this.saveToken(token);
@@ -44,14 +43,13 @@ export class AuthService {
   private saveToken(token: any): any {
     this.decodedToken = jwt.decodeToken(token);
 
-
-
     console.log(this.decodedToken.username);
     console.log(this.decodedToken.exp);
     console.log(this.decodedToken.role);
 
     localStorage.setItem('auth_tkn', token);
     localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
+
     return token;
   }
 
@@ -72,11 +70,9 @@ export class AuthService {
     // TODO: return moment().isBefore(moment.unix(this.decodedToken.exp));
   }
 
-
   public getUsername(): string {
     return this.decodedToken.username;
   }
-
 }
 
 class DecodedToken {
