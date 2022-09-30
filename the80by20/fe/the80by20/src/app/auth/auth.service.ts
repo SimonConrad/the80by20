@@ -43,6 +43,13 @@ export class AuthService {
 
   private saveToken(token: any): any {
     this.decodedToken = jwt.decodeToken(token);
+
+
+
+    console.log(this.decodedToken.username);
+    console.log(this.decodedToken.exp);
+    console.log(this.decodedToken.role);
+
     localStorage.setItem('auth_tkn', token);
     localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
     return token;
@@ -56,9 +63,6 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    console.log(this.decodedToken.exp);
-
-
     if(this.decodedToken.username != '') {
       return true;
     }
@@ -78,4 +82,5 @@ export class AuthService {
 class DecodedToken {
   exp: number = 0;
   username: string = '';
+  role: string = '';
 }
