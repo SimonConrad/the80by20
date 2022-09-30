@@ -9,6 +9,8 @@ https://angular.io/guide/setup-local
 check node, npm, angular cli versions
 
 `ng version`
+`node --version`
+`npm --version`
 
 install angular cli
 
@@ -21,9 +23,13 @@ create workspace  and initial starer app
 - with routing
 - chosen scss https://sass-lang.com/documentation/syntax#scss
 
+install spp packages
+
+`npm install`
+
 run the application
 
-`ng serve --open`
+`npm run ng serve --open`
 
 ### eslint
 - https://thesoreon.com/blog/how-to-set-up-eslint-with-typescript-in-vs-code
