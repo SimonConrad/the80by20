@@ -11,7 +11,7 @@ real buisness system, created end2end, to master following developer toolbox's e
 - solid, low coupling, high cohesion, grasp, craftsmanship, pragmatic design patterns; 
 - tools vs, vs code, ssms, chrome; 
 
-
+and these ones:
 - working with legacy and refactoring legacy into buisness models, 
 - maintaing, monitoring, debugging
 - defining problems, planning solution intruduction, solution implementation into code, safety nest with high-level tests, observation
