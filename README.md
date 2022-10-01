@@ -15,6 +15,7 @@ real buisness system, created in the end to end way, in purpose to master by doi
 and these ones:
 - working with legacy and refactoring legacy into buisness models, 
 - maintaing, monitoring, debugging
+- algorithms, data structures
 - defining problems, planning solution intruduction, solution implementation into code, safety nest with high-level tests, observation
 - visualization of concepts, processes, problmes, solutions
 - the80by20, divide and conquer (complex problems into smaller ones), planning, pomodoro, having fun, how brain works, learning by practice
