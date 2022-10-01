@@ -10,3 +10,8 @@ real buisness system, created end2end, to master following developer toolbox's e
 - solid, low coupling, high cohesion, grasp, craftsmanship, pragmatic design patterns; 
 - tools vs, vs code, ssms, chrome; 
 - working with legacy
+
+based upon: 
+- dna, devmentors, better software design, 
+- long list of udemy / pluralsight / other courses, books, documentation
+- author experince in developing software since 2010
