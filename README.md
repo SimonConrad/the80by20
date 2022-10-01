@@ -1,10 +1,11 @@
 # the80by20
-real buisness system, created end2end, to master following developer toolbox's elemenets: 
-- event storming model + implementation; adr, c4; 
+real buisness system, created in the end to end way, in purpose to master by doing following developer toolbox's elemenets: 
+- event storming model + implementation; 
+- adr, c4, uml, other forms of visualization, miro 
 - ddd; cqrs; modular monolith; 
 - messaging, rabbit mq, event-driven; 
 - tests; 
-- ci/cd, security, powershell, , github actions, azure services; containers, git
+- ci/cd, security, powershell, github actions, azure services; containers, git
 - .net, ef, asp.net,c#, packages; 
 - typescript, angular, css layout, rxjs; extnsions in vscode; linters
 - sql server, sql
