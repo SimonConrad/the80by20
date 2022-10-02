@@ -47,11 +47,11 @@ export class LoginComponent implements OnInit {
   }
 
   getPasswordErrorMessage() {
-    if (this.email.hasError('required')) {
+    if (this.password.hasError('required')) {
       return 'You must enter a value';
     }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.password.hasError('password') ? 'Not a valid password' : '';
   }
 
   // isInvalidInput(fieldName:any): boolean {
