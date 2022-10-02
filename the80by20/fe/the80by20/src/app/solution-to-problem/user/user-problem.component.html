@@ -53,9 +53,9 @@
             <td>{{ userProblem.category }}</td>
             <td>{{ userProblem.requiredSolutionTypes }}</td>
             <td>{{ userProblem.description }}</td>
-            <td><button (click)="onEdit(userProblem.id)"
+            <td><button mat-stroked-button (click)="onEdit(userProblem.id)"
                 [ngClass]="{ selected : userProblem?.id === (selectProblemActionStream$ | async)?.id}">Edit</button></td>
-            <td><button (click)="onDelete(userProblem.id)">Delete</button></td>
+            <td><button mat-stroked-button color="warn" (click)="onDelete(userProblem.id)">Delete</button></td>
             <!-- <td>{{ product.price | currency:"USD":"symbol":"1.2-2" }}</td> -->
           </tr>
         </tbody>
