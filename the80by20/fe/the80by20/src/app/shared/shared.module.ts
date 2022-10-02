@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSliderModule } from '@angular/material/slider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [],
@@ -19,7 +21,9 @@ import { MatSliderModule } from '@angular/material/slider';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatSliderModule
+    MatSliderModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   exports: [
     CommonModule,
@@ -30,7 +34,9 @@ import { MatSliderModule } from '@angular/material/slider';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatSliderModule
+    MatSliderModule,
+    MatIconModule,
+    MatToolbarModule
   ]
 })
 export class SharedModule { }

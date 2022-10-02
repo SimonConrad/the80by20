@@ -17,21 +17,21 @@ boody {
 
 }
 app-header {
-  font-size: 14px;
+  //font-size: 14px;
   grid-area: header;
-  text-align: center;
-  background-color: #0657d832;
+  //text-align: center;
+  //background-color: #0657d832;
 }
 
 app-nav {
   grid-area: nav;
-  margin-left: 0.6rem;
-  background-color: #0657d832;
+  //margin-left: 0.6rem;
+  //background-color: #0657d832;
 }
 
 .main {
   grid-area: content;
-  background-color: #0657d832;
+  //background-color: #0657d832;
   //padding: 25px;
 }
 

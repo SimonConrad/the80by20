@@ -1,26 +1,34 @@
 <header>
-  <div class="container">
-    <div class="item-logo">
-      <span>logo</span>
-    </div>
+  <mat-toolbar class="container">
+    <!-- <a routerLink="">
+      <mat-icon class="item-logo" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+    </a>
     <div class="item-center">
       <span>The 80 by 20</span>
+    </div> -->
+    <button mat-icon-button class="menu-icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="center"><a routerLink="" 
+      style="text-decoration: none;">The 80 by 20</a>
     </div>
-    <div class="item-basket">
-      <span>basket</span>
-    </div>
-    <div class="item-auth">
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="menu-icon">
+      <mat-icon>shopping_basket</mat-icon>
+    </button>
+    <div class="center" >
       <ng-container *ngIf="!auth.isAuthenticated()">
-        <a routerLink="/auth/login">Login</a>
-      <span>/</span>
-      <a routerLink="/auth/register">Register</a>
+        <a routerLink="/auth/login" style="text-decoration: none;">Login</a>
+        <span>/</span>
+        <a routerLink="/auth/register" style="text-decoration: none;">Register</a>
       </ng-container>
       <ng-container *ngIf="auth.isAuthenticated()">
-        <a class="nav-link">
+        <a class="nav-link" style="text-decoration: none;">
           {{ auth.getUsername() }}
         </a>
-        <a class="pointer" (click)="logout()">Logout</a>
+        <span>/</span>
+        <a class="pointer" (click)="logout()" style="text-decoration: none;">Logout</a>
       </ng-container>
     </div>
-  </div>
+  </mat-toolbar>
 </header>

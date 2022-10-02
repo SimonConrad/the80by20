@@ -5,9 +5,19 @@
   gap: 2px;
   //justify-content: center;
   //height: 50px;
-  & > div {
-    border: solid 1px black;
-  }
+  // & > mat-icon-button {
+  //   border: solid 1px black;
+  // }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-icon{
+  height: 100%;
 }
 
 .item-logo {
@@ -32,4 +42,8 @@
 
 .pointer {
   cursor: pointer;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
 }

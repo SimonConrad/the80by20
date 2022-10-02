@@ -1,12 +1,13 @@
 .container {
   display: flex;
+  padding: 2px;
   flex-direction: column;
   height: 100%;
   gap: 2px;
   //align-items: center;
   //align-content: center;
   //justify-content: center;
-  & > div {
+  & > mat-card-content {
     border: solid 1px black;
   }
 }
