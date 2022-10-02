@@ -6,9 +6,34 @@
     <div class="item-center">
       <span>The 80 by 20</span>
     </div> -->
-    <button mat-icon-button class="menu-icon">
+    <!-- <button mat-icon-button class="menu-icon">
+      <mat-icon>menu</mat-icon>
+    </button> -->
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-icon">
       <mat-icon>menu</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <!-- <mat-icon>dialpad</mat-icon> -->
+        <span routerLink="/solution-to-problem">Problems</span>
+      </button>
+      <button mat-menu-item>
+        <span routerLink="/">Solutions</span>
+      </button>
+      <button mat-menu-item>
+        <span routerLink="/">Master Data</span>
+      </button>
+      <button mat-menu-item>
+        <span routerLink="/">Reports</span>
+      </button>
+      <button mat-menu-item>
+        <span routerLink="/">Security</span>
+      </button>
+      <button mat-menu-item>
+        <span routerLink="/solution-to-problem/deborath">Deborath playground</span>
+      </button>
+    </mat-menu>
+
     <div class="center"><a routerLink="" 
       style="text-decoration: none;">The 80 by 20</a>
     </div>
