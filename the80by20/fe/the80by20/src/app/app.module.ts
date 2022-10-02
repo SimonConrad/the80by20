@@ -17,6 +17,9 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {  SharedModule, } from './shared/shared.module';
+
+
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavComponent,
     HomeComponent,
     AsideComponent,
-    FooterComponent
+    FooterComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -34,6 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     InMemoryWebApiModule.forRoot(AppData, { delay: 1000 }),
     BrowserAnimationsModule,
+    SharedModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../auth.service';
 
 @Component({
@@ -9,11 +9,12 @@ import { AuthService } from './../auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required]);
 
   loginForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required,
-    Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],
-    password: ['', Validators.required]
+    email: this.email,
+    password: this.password
   });
 
   errors: any = [];
@@ -37,10 +38,26 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  isInvalidInput(fieldName:any): boolean {
-    return this.loginForm.controls[fieldName].invalid &&
-      (this.loginForm.controls[fieldName].dirty || this.loginForm.controls[fieldName].touched);
+  getEmailErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+
+  getPasswordErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  // isInvalidInput(fieldName:any): boolean {
+  //   return this.loginForm.controls[fieldName].invalid &&
+  //     (this.loginForm.controls[fieldName].dirty || this.loginForm.controls[fieldName].touched);
+  // }
 
   login(): void {
     console.log(this.loginForm.value);

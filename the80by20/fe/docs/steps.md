@@ -58,6 +58,7 @@ https://angular.io/guide/lazy-loading-ngmodules
 - tests
 - passing data between components -input / output, service + subject
 - web-api-client-service
+- angular material https://material.angular.io/components/form-field/examples https://tudip.com/blog-post/how-to-install-angular-material/
 
 installing npm package `npm i angular-in-memory-web-api`
 
