@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { catchError, EMPTY, Observable, Subject, tap } from 'rxjs';
 import { UserProblem } from '../model/UserProblem';
 import { UserProblemService } from '../user-problem.service';
 import { UUID } from 'angular2-uuid';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { UUID } from 'angular2-uuid';
   // - observables bound in the template using an async pipe;
   // bound values set in local properties won't trigger change detection, so won't update the ui
 })
-export class UserProductFormComponent {
+export class UserProductFormComponent implements OnInit {
   title = 'User Problem From';
 
   @Input()
@@ -33,6 +34,7 @@ export class UserProductFormComponent {
 
   private errorMessageSubject = new Subject<string>()
   errorMessageDataStream$ = this.errorMessageSubject.asObservable();
+
 
   // INFO problem observable data item stream, which emits Problem or undefined
   // INFO  user-problem-component already subsribed to this observable using async pipe (in its html temaplte)
@@ -61,19 +63,31 @@ export class UserProductFormComponent {
     tap(() => this.problemService.startSelectAction(undefined))
   );
 
-  constructor(private problemService: UserProblemService) { }
+  description = new FormControl('', []);
 
-  onSave(problem: UserProblem): void {
+  problemForm: FormGroup = this.fb.group({
+    description: this.description,
+  });
+
+  constructor(private problemService: UserProblemService, private fb: FormBuilder,) { }
+  
+  ngOnInit(): void {
+    this.description.setValue(this.problem.description);
+  }
+
+  onSave(): void {
     //INFO alternative (not fully reactive way) is to
     // call update service and subscribe to it (invoke it thi way),
     // but rember then about the need to unsubcribe it in ondestroy
     // use Subscription class
 
-    if (problem.id === '') {
-      problem.id = UUID.UUID();
-      this.problemService.startAdd(problem);
+    if (this.problem.id === '') {
+      this.problem.id = UUID.UUID();
+      this.problem.description = this.description.value!;
+      this.problemService.startAdd(this.problem);
     } else {
-      this.problemService.startUpdate(problem);
+      this.problem.description = this.description.value!;
+      this.problemService.startUpdate(this.problem);
     }
   }
 
