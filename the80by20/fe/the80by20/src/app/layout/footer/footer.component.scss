@@ -1,17 +1,19 @@
 .container {
   padding: 5px;
   display: flex;
-  align-items: stretch;
+  //align-items: stretch;
   //flex-direction: row;
   gap: 2px;
+
   //justify-content: center;
   height: 50px;
-  & > div {
-    border: solid 1px black;
-  }
+  // & > div {
+  //   border: solid 1px black;
+  // }
 }
 
 .item {
-  flex-grow: 1
+  flex-grow: 1;
+  //background-color: #0657d832;
 }
 

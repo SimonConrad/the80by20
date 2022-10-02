@@ -59,6 +59,7 @@ https://angular.io/guide/lazy-loading-ngmodules
 - passing data between components -input / output, service + subject
 - web-api-client-service
 - angular material https://material.angular.io/components/form-field/examples https://tudip.com/blog-post/how-to-install-angular-material/
+- input validation https://material.angular.io/components/form-field/examples#form-field-error
 
 installing npm package `npm i angular-in-memory-web-api`
 
@@ -92,22 +93,3 @@ workspace and project file structure
 https://angular.io/guide/file-structure
 
 
-
-# todo
-
- 
- - copy solution from repos: deborath, angular university
- - busy indicator generic way
- - translations
- - generic way of showing be error - interceptors
- - apply ci / cd 
- - layout with css grid and flex
- - authentication with jwt, interceptors, like in angular university github
- - angular material
- - tests
- - rxjs
- - code the80by20 use cases - start with these with already done be
- - style cop, formatter, tslint?
- - usefull vs code plugins for angular, scss and html
- - developer.mozilla.org
- - angular.io
