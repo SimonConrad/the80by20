@@ -17,6 +17,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     AppComponent,
