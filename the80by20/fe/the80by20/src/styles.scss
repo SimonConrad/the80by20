@@ -4,18 +4,31 @@ boody {
   font-family: sans-serif;
   background-color: #E4F0FF;
 }
+
+// .grid-container {
+//   display: grid;
+//   grid-template-columns: 200px 1fr 200px;
+//   grid-template-rows: auto 1fr auto;
+//   grid-gap: 2px;
+//   grid-template-areas:
+//   "header header header"
+//   "nav content side"
+//   "footer footer footer";
+//   height: 100vh;
+// }
+
 .grid-container {
   display: grid;
-  grid-template-columns: 200px 1fr 200px;
+  grid-template-columns: 200px 1fr;
   grid-template-rows: auto 1fr auto;
-  grid-gap: 12px;
+  grid-gap: 2px;
   grid-template-areas:
-  "header header header"
-  "nav content side"
-  "footer footer footer";
+  "header header"
+  "nav content"
+  "footer footer";
   height: 100vh;
-
 }
+
 app-header {
   //font-size: 14px;
   grid-area: header;
