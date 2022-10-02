@@ -1,25 +1,7 @@
 <mat-card>
-  <h1 class="page-title">Login</h1>
+  <mat-card-title>Login</mat-card-title>
   <form [formGroup]="loginForm" (ngSubmit)="login()">
-    <!-- <div class="form-group">
-      <div *ngIf="notify" class="alert alert-success">
-        {{ notify }}
-      </div>
-      <label for="email">Email</label>
-      <input type="email" class="form-control" formControlName="email">
-    </div> -->
-    <!-- <div *ngIf="isInvalidInput('email')" class="alert alert-danger">
-      <span>Email is invalid</span>
-    </div> -->
-    <!-- <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" formControlName="password">
-    </div>
-    <div *ngIf="isInvalidInput('password')" class="alert alert-danger">
-      <span>Password is invalid</span>
-    </div> -->
-
-    <!-- <p>todo https://material.angular.io/components/form-field/examples#form-field-error</p> -->
+    <!-- INFO based on: https://material.angular.io/components/form-field/examples#form-field-error -->
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Enter your email</mat-label>
@@ -39,6 +21,25 @@
     </div>
   </form>
 </mat-card>
+
+
+<!-- <div class="form-group">
+      <div *ngIf="notify" class="alert alert-success">
+        {{ notify }}
+      </div>
+      <label for="email">Email</label>
+      <input type="email" class="form-control" formControlName="email">
+    </div> -->
+<!-- <div *ngIf="isInvalidInput('email')" class="alert alert-danger">
+      <span>Email is invalid</span>
+    </div> -->
+<!-- <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" formControlName="password">
+    </div>
+    <div *ngIf="isInvalidInput('password')" class="alert alert-danger">
+      <span>Password is invalid</span>
+    </div> -->
 
 <!-- <p>
   <mat-checkbox>Check me!</mat-checkbox>
