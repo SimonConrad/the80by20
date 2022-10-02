@@ -57,3 +57,9 @@
   background-color: rgb(79, 9, 145);
   color: white;
 }
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
