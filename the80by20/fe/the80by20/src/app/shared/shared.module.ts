@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -27,7 +28,8 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ],
   exports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

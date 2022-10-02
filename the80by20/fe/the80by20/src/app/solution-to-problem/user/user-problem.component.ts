@@ -99,6 +99,12 @@ export class UserProblemComponent implements OnInit {
   }
 
   onCategorySelected(categoryId: string): void {
+    console.log('dddd')
+    
     this.userProblemService.startFilterAction(categoryId);
+  }
+
+  onCategorySelected2(event: any): void {
+    this.userProblemService.startFilterAction(event.value);
   }
 }

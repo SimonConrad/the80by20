@@ -2,7 +2,7 @@
 <ng-container *ngIf="deleteProblemActionStream$ | async"></ng-container>
 <div class="container">
   <div class="item">
-    <h5>{{userProblemsTitle}}</h5>
+    <!-- <h5>{{userProblemsTitle}}</h5> -->
     <div *ngIf="errorMessageDataStream$ | async as errorMessage">
       {{ errorMessage }}
     </div>
@@ -17,17 +17,26 @@
     <div>
       <div class="toolbar">
         <div>
-          <select (change)="onCategorySelected($any($event.target).value)">
+          <!-- <select (change)="onCategorySelected($any($event.target).value)">
             <option value="">- Display All -</option>
             <option *ngFor="let category of problemCategoriesDataStream$ | async" [value]="category.id">{{ category.name
               }}</option>
-          </select>
+          </select> -->
+          <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select (selectionChange)="onCategorySelected2($event)">
+              <mat-option value="">- Display All -</mat-option>
+              <mat-option *ngFor="let category of problemCategoriesDataStream$ | async" [value]="category.id">{{ category.name
+                }}</mat-option>
+            </mat-select>
+            </mat-form-field>
+       
         </div>
         <div class="item-center">
         </div>
         <div>
-          <button type="button" class="btn btn-outline-secondary" (click)="onRefresh()">Refresh from server</button>
-          <button type="button" class="btn btn-outline-secondary" (click)="onAdd()">Add Product</button>
+          <button type="button" mat-stroked-button (click)="onRefresh()">Refresh from server</button>
+          <button type="button" mat-stroked-button (click)="onAdd()">Add Product</button>
         </div>
       </div>
       <table *ngIf="problemsDataStream$ | async as userProblems" class="problems-table">
