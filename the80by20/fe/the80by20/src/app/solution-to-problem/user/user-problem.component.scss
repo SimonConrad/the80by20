@@ -33,3 +33,26 @@
     flex-grow: 1;
   }
 }
+
+.problems-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.problems-table td, .problems-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.problems-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.problems-table tr:hover {background-color: #ddd;}
+
+.problems-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(79, 9, 145);
+  color: white;
+}

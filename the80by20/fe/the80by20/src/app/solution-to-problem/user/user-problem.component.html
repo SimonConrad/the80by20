@@ -30,7 +30,7 @@
           <button type="button" class="btn btn-outline-secondary" (click)="onAdd()">Add Product</button>
         </div>
       </div>
-      <table *ngIf="problemsDataStream$ | async as userProblems">
+      <table *ngIf="problemsDataStream$ | async as userProblems" class="problems-table">
         <thead>
           <tr>
             <!-- <th>Problem Id</th> -->
@@ -40,6 +40,8 @@
             <th>Category</th>
             <th>Required Solution Types</th>
             <th>Description</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
