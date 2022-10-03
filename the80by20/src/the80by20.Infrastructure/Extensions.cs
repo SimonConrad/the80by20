@@ -94,6 +94,18 @@ public static class Extensions
 
         services.AddAuth(configuration);
 
+        // Default Policy
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+        });
+
 
         return services;
     }
@@ -129,6 +141,10 @@ public static class Extensions
         app.UseAuthorization();
         app.MapControllers();
 
+
+        app.UseCors();
+
+
         return app;
     }
 
@@ -140,4 +156,6 @@ public static class Extensions
 
         return options;
     }
+
+    // TODO Do cors in proper way https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-6.0
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { WebApiClientService } from 'src/app/web-api-client.service';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +10,13 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class HeaderComponent {
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, 
+    private router: Router, 
+    private webApiClient: WebApiClientService) { }
 
+
+
+  appName$ = this.webApiClient.applicationData$;
 
   logout(): void {
     this.auth.logout();
