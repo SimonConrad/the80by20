@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -17,7 +17,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {  SharedModule, } from './shared/shared.module';
+import { SharedModule, } from './shared/shared.module';
+import { TokenInterceptorService } from './auth/token-interceptor.service';
 
 
 
@@ -41,7 +42,13 @@ import {  SharedModule, } from './shared/shared.module';
     SharedModule,
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -73,6 +73,7 @@ export class AuthService {
   public getUsername(): string {
     return this.decodedToken.username;
   }
+
 }
 
 class DecodedToken {
