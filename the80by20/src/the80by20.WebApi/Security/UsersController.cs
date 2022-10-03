@@ -100,6 +100,7 @@ public class UsersController  : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<JwtDto>> Post([FromBody] SignIn command)
     {
+        // todo add claims before encoding jwt token like username and role
         await _signInHandler.HandleAsync(command);
         var jwt = _tokenStorage.Get();
         return jwt;

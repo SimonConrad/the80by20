@@ -22,4 +22,8 @@ export class HeaderComponent {
     this.auth.logout();
     this.router.navigate(['/auth/login'], {queryParams: {loggedOut: 'success'}});
   }
+
+  test(): void {
+    this.webApiClient.me$.subscribe();
+  }
 }
