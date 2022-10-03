@@ -71,7 +71,10 @@
       </table>
     </div>
   </div>
-  <div class="item form-container" *ngIf="selectProblemActionStream$ | async as problem">
+  <!-- <div class="item form-container" *ngIf="selectProblemActionStream$ | async as problem">
     <app-user-product-form [problem]="problem"></app-user-product-form>
+  </div> -->
+  <div class="item form-container">
+    <app-user-product-form></app-user-product-form>
   </div>
 </div>

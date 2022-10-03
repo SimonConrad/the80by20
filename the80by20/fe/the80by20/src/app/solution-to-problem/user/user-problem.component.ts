@@ -99,8 +99,6 @@ export class UserProblemComponent implements OnInit {
   }
 
   onCategorySelected(categoryId: string): void {
-    console.log('dddd')
-    
     this.userProblemService.startFilterAction(categoryId);
   }
 

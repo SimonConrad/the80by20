@@ -24,7 +24,7 @@
 </div> -->
 
 
-<mat-card class="container">
+<mat-card class="container" *ngIf="selectProblemActionStream$ | async">
   <form class="problem-form" [formGroup]="problemForm" (ngSubmit)="onSave()">
     <!-- INFO based on: https://material.angular.io/components/form-field/examples#form-field-error -->
     <div class="inputs">

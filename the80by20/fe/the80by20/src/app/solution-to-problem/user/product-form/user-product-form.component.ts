@@ -18,7 +18,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class UserProductFormComponent implements OnInit {
   title = 'User Problem From';
 
-  @Input()
+  //@Input()
   problem: UserProblem = {
     id: "",
     userId: "",
@@ -35,11 +35,14 @@ export class UserProductFormComponent implements OnInit {
   private errorMessageSubject = new Subject<string>()
   errorMessageDataStream$ = this.errorMessageSubject.asObservable();
 
-
   // INFO problem observable data item stream, which emits Problem or undefined
   // INFO  user-problem-component already subsribed to this observable using async pipe (in its html temaplte)
   selectProblemActionStream$ = this.problemService.selectProblemActionStream$
     .pipe(
+      tap(selectedProblem => {
+        this.problem = { ...selectedProblem! };
+        this.description.setValue(this.problem.description);
+      }),
       catchError(err => {
         //this.errorMessage = err; //INFO when changeDetection: ChangeDetectionStrategy.OnPush then this won't trigger chnage detection and error will not appear to the user
         this.errorMessageSubject.next(err); // emit value to the stream
@@ -72,7 +75,7 @@ export class UserProductFormComponent implements OnInit {
   constructor(private problemService: UserProblemService, private fb: FormBuilder,) { }
   
   ngOnInit(): void {
-    this.description.setValue(this.problem.description);
+    
   }
 
   onSave(): void {
@@ -85,6 +88,7 @@ export class UserProductFormComponent implements OnInit {
       this.problem.id = UUID.UUID();
       this.problem.description = this.description.value!;
       this.problemService.startAdd(this.problem);
+
     } else {
       this.problem.description = this.description.value!;
       this.problemService.startUpdate(this.problem);
