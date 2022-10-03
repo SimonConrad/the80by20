@@ -1,50 +1,51 @@
 <main>
 
-  <h4>todo</h4>
-
+  <h3>todo</h3>
   <ul>
-    <li>komunikacja z backendem, prawilnie zrobiony corsy</li>
-    <li>ujenolicona obsługa błedów z backendu toaster??</li>
+    <li>komunikacja z backendem (users-problem + security), cors, zostawienie kodu z inmemorywebapi - właczanie / wyłaczanie, fasada api-service</li>
+    <li>ujednolicona obsługa błedów z backendu toaster?</li>
     <li>commonowy busy indicator jak w oneshift </li>
-    <li>busy indicator z angular material</li>
     <li>api service podmieniany</li>
-    <li>polaczyc  z bakendem + jwt token test, expiration token?</li>
     <li>dial na potiwerdzenie delete</li>
-    <li>toaster do powiadomien</li>
+    <li>toaster do powiadomienia</li>
     <li>pipe zimeniajacy hex na color / ikonke</li>
     <li>hideowany boczny panel - zminiec gjego htmla z nav na aside</li>
-    <li>skońćzyc wszystkie formularze tak jak login z walidacja</li>
+    <li>skończyć wszystkie formularze tak jak formularz logowania (angular material kontorlki z walidacja, reactive forms)</li>
     <li>porządek w css-ach</li>
+    <li>angular material dialog</li>
+    <li>passing data from parent to child via input, output angular mechanism</li>
+    <li>creactive ommunicating via common service with subjects</li>
+    <li>translation mechanism using angular services</li>
+    <li>layout css grid / flex - porzadek</li>
+    <li>tests</li>
+    <li>podłaczenie ngrx</li>
   </ul>
 
+  <h3>security</h3>
   <ul>
-    <li>angular reactive forms with validation</li>
-    <li>review Adriana</li>
-    <li>filtrowanie</li>
-    <li>praca na inmememorywebapi</li>
+    <li>obsluga rol - warunkowe łądowanie lazy / loading modules, pokazywanie routów w zalezności od roli, guardy</li>
+    <li>automatic sign out with interval$</li>
+    <li>based on current role (user / operator) proper module loaded with its menu
+      - for operator: modules: master-data, reports,
+      - for booperator and user: modules: solution-2-problem and sale- one module but dedicated to user components with
+      guards based on userservice.role in routing
+      create separate analgous component for operator problems / solutions, guard in routes based on user-service.role
+    </li>
   </ul>
 
+  <h3>repa i docsy</h3>
   <ul>
-    <li>auth jwt token jak w angular university obsluga rol</li>
-    <li>automatic sign out with services</li>
-    <li>weryfkacja ról</li>
-  </ul>
-
-
-  <ul>
-    <li>doprowadzenie do dzialania deborath rxj i kontynuwanie kursu deborath</li>
-    <li> like in deborath curata course table with mocked data and lazy loaded module</li>
-    <li> odpalic apke deborath i poczytac xze zrozumieniem kod, jak cos git to uzyc</li>
     <li> poodpalac inne repa deborath, poczytac kod, uzyc w th80by20</li>
     <li> poodpalac repa angular university, poczytac kod, uzyc w th80by20</li>
-    <li>angular docs przeczytac i używać</li>
+    <li> angular docs przeczytac i używać</li>
+    <li> w3w school docs przeczytac i używać</li>
+    <li> angular material school docs przeczytac i używać</li>
+    <li> typescript school docs przeczytac i używać</li>
+    <li>rxjs docs przeczytac i używać</li>
+    <li>  developer.mozilla.org</li>
   </ul>
 
-  <ul>
-    <li>podłaczenie ngrx</li>
-    <li>napisanie w react</li>
-  </ul>
-
+  <h3>ci / cd</h3>
   <ul>
     <li>ci / cd frontu</li>
     <li>gitlab build</li>
@@ -52,25 +53,7 @@
     <li>deploy na azure-a, storreage cos tam?</li>
   </ul>
 
-  <ul>
-    <li>based on current role (user / operator) proper module loaded with its menu
-      - for operator: modules: master-data, reports,
-      - for booperator and user: modules: solution-2-problem and sale- one module but dedicated to user components with
-      guards based on userservice.role in routing
-      create separate analgous component for operator problems / solutions, guard in routes based on user-service.role
-    </li>
-    <li>lazy loaded modules are rendered in main</li>
-    <li>master detials</li>
-    <li>reactive forms</li>
-    <li>angular material controls</li>
-    <li> if module complex it has its own menu and routing</li>
-    <li>passing data from parent to child via input, output angular mechanism</li>
-    <li>creactive ommunicating via common service with subjects</li>
-    <li>take a look at deborath kurata repos, angular universisty reports (watched courses in skills), one-shift and use
-      concepts from them</li>
-    <li>translation mechanism using angular services</li>
-  </ul>
-
+  <h3>tools</h3>
   <ul>
     <li>użyć prettier-a, poprawnie skonfigurowac elslinta dla angularatypescripta, html, wg jakiegos tutoriala</li>
     <li>skróty jak w Visula Stdio, szukanie po typac, refactor ctrl- itd</li>
@@ -79,23 +62,7 @@
     <li>plynność w vs code</li>
     <li>!!!!!plynnosc w npm cli</li>
     <li>plynnośc w ng cli</li>
+    <li> style cop, formatter, tslint?</li>
+    <li>usefull vs code plugins for angular, scss and html</li>
   </ul>
-
-
-  copy solution from repos: deborath, angular university
-  busy indicator generic way
-  translations
-  generic way of showing be error - interceptors
-  apply ci / cd 
-  layout with css grid and flex
-  authentication with jwt, interceptors, like in angular university github
-  angular material
-  tests
-  rxjs
-  code the80by20 use cases - start with these with already done be
-  style cop, formatter, tslint?
-  usefull vs code plugins for angular, scss and html
-  developer.mozilla.org
-  angular.io
-
 </main>
