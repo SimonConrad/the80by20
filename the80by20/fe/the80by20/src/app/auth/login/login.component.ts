@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   errors: any = [];
   notify: string | undefined;
+  hide = true;
 
   constructor(private auth: AuthService,
     private router: Router,

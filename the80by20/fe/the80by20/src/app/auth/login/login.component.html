@@ -16,7 +16,15 @@
         <div>
           <mat-form-field appearance="fill">
             <mat-label>Enter your password</mat-label>
-            <input matInput [formControl]="password" required>
+            <input matInput 
+              [formControl]="password" 
+              [type]="hide ? 'password' : 'text'"
+              required
+            >
+            <mat-icon 
+              matSuffix 
+              (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
             <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
           </mat-form-field>
         </div>
