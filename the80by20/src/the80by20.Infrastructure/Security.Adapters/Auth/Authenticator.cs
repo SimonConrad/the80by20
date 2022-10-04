@@ -28,14 +28,16 @@ public sealed class Authenticator : IAuthenticator
             SecurityAlgorithms.HmacSha256);
     }
     
-    public JwtDto CreateToken(Guid userId, string role)
+    public JwtDto CreateToken(Guid userId, string role, string userName)
     {
         var now = _clock.Current();
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Sub, userId.ToString()),
             new(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
-            new(ClaimTypes.Role, role)
+            new(JwtRegisteredClaimNames.Name, userName),
+            new(ClaimTypes.Role, role),
+            new(ClaimTypes.NameIdentifier, userName)
         };
 
         var expires = now.Add(_expiry);

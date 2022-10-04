@@ -18,14 +18,14 @@ export class AuthService {
 
   private decodedToken: DecodedToken = new DecodedToken()
 
-  constructor(private http: HttpClient, private webApiClient: WebApiClientService) {
+  constructor(private webApiClient: WebApiClientService) {
     //INFO '!' is used for: Type 'string | null' is not assignable to type 'string'. you can use the non-null assertion operator to tell typescript that you know what you are doing:
     this.decodedToken = JSON.parse(localStorage.getItem('auth_meta')!) || new DecodedToken();
   }
 
   public register(userData: any): Observable<any> {
-    const URI = this.uriseg + '/register';
-    return this.http.post(URI, userData);
+
+    return this.webApiClient.register(userData);
   }
 
   public login(userData: any): Observable<any> {
@@ -34,19 +34,21 @@ export class AuthService {
     //   return this.saveToken(t.accessToken);
     // }));
 
-    //INFO generated at https://jwt.io/
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6IlNpbW9uIiwiZXhwIjoxNTE2MjM5MDIyfQ.RxwTuNFAYlRkapdnk7FuyiZV5D3OlpVVrMvQwBpzXmI"
-    return of(token).pipe(map(token => {
+        
+    return this.webApiClient.signIn(userData).pipe(map(token => {
         return this.saveToken(token);
       }));
   }
 
   private saveToken(token: any): any {
-    this.decodedToken = jwt.decodeToken(token);
+    let res = jwt.decodeToken(token);
+    res.role = res["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]; //role
+    res.username = res["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]; //username
+    this.decodedToken = {...res};
 
-    console.log(this.decodedToken.username);
-    console.log(this.decodedToken.exp);
-    console.log(this.decodedToken.role);
+    // console.log(this.decodedToken.username);
+    // console.log(this.decodedToken.exp);
+    // console.log(this.decodedToken.role);
 
     localStorage.setItem('auth_tkn', token);
     localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));

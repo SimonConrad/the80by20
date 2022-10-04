@@ -16,7 +16,7 @@ export class HeaderComponent {
 
 
 
-  appName$ = this.webApiClient.applicationData$;
+  appName$ = this.webApiClient.applicationData();
 
   logout(): void {
     this.auth.logout();
@@ -24,6 +24,6 @@ export class HeaderComponent {
   }
 
   test(): void {
-    this.webApiClient.me$.subscribe();
+    this.webApiClient.me().subscribe();
   }
 }

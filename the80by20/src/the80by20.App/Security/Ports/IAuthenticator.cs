@@ -2,5 +2,5 @@
 
 public interface IAuthenticator
 {
-    JwtDto CreateToken(Guid userId, string role);
+    JwtDto CreateToken(Guid userId, string role, string userName);
 }
