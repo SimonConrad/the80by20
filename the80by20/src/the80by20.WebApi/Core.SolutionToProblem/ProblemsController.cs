@@ -1,3 +1,4 @@
+using Bogus;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -61,6 +62,40 @@ namespace the80by20.WebApi.Core.SolutionToProblem
         {
             // todo do not return whole scope of this readmodel to users, caouse thers is solutions-elemnts there 
             var res = await _solutionToProblemReadModelQueries.GetByProblemId(problemId);
+
+            return Ok(res);
+        }
+
+
+        [HttpGet()]
+        [AllowAnonymous]
+        public async Task<ActionResult<SolutionToProblemReadModel[]>> Get()
+        {
+            // TODO dedicated dto, to not leak fragile properties like price etc - dedicated readmodel scope
+            var faker = new Faker<SolutionToProblemReadModel>()
+                .RuleFor(d => d.Id, d => Guid.NewGuid())
+                .RuleFor(d => d.UserId, d => Guid.Parse(User.Identity?.Name));
+
+            var res = faker.Generate(3);
+
+            res[0].RequiredSolutionTypes = "PocInCode; PlanOfImplmentingChangeInCode";
+            res[0].Description = "refactor to cqrs instead of not cohesive services, srp against separate user use case";
+            res[0].CategoryId = new Guid("00000000-0000-0000-0000-000000000006");
+            res[0].IsConfirmed = false;
+            res[0].IsRejected = false;
+
+            res[1].RequiredSolutionTypes = "TheoryOfConceptWithExample";
+            res[1].Description = "refactor anemic entity + service into ddd object oriented model (entities with behaviors, aggreagtes, value objects)";
+            res[1].CategoryId = new Guid("00000000-0000-0000-0000-000000000006");
+            res[1].IsConfirmed = false;
+            res[1].IsRejected = true;
+
+            res[2].RequiredSolutionTypes = "RoiAnalysis";
+            res[2].Description = "introduce integration tests and unit test into existing code)";
+            res[2].CategoryId = new Guid("00000000-0000-0000-0000-000000000010");
+            res[2].IsConfirmed = true;
+            res[2].IsRejected = false;
+
 
             return Ok(res);
         }

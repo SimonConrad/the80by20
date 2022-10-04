@@ -20,7 +20,7 @@ namespace the80by20.App.Core.SolutionToProblem.ReadModel;
 [ReadModelDdd]
 public class SolutionToProblemReadModel
 {
-    public Guid ProblemId { get; set; }
+    public Guid Id { get; set; }
 
     public Guid UserId { get; set; }
 
@@ -29,6 +29,8 @@ public class SolutionToProblemReadModel
     public string? Description { get; set; }
 
     public string? Category { get; set; }
+
+    public Guid? CategoryId { get; set; }
     
     public bool IsConfirmed { get; set; }
 

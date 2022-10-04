@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, combineLatest, switchMap, map, Observable,
 
 import { UserProblem } from './model/UserProblem'
 import { ProblemCategory } from '../shared-model/ProblemCategory'
+import { WebApiClientService } from 'src/app/web-api-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UserProblemService {
   private userProblemsUrl = 'api/userProblems';
   private problemCategories = 'api/problemCategories';
 
-  constructor(private http: HttpClient) { // INFO data should not be loaded from the constructor
+  constructor(private http: HttpClient, private webApiClient: WebApiClientService) { // INFO data should not be loaded from the constructor
   }
 
   private problemsSubject = new BehaviorSubject<UserProblem[]>([]);
@@ -22,14 +23,14 @@ export class UserProblemService {
     return this.problemsSubject.value;
   }
 
-  problemCategories$ = this.http.get<ProblemCategory[]>(this.problemCategories)
+  problemCategories$ = this.webApiClient.problemCategories()
     .pipe(
       tap(data => console.log('Problem categories:', JSON.stringify(data))),
       //shareReplay(1), // todo keszowanie
       catchError(this.handleError)
     );
 
-  private userProblems$ = this.http.get<UserProblem[]>(this.userProblemsUrl)
+  private userProblems$ = this.webApiClient.userProblems()
     .pipe(
       tap(data => console.log('User Problems: ', JSON.stringify(data))),
       catchError(this.handleError),
@@ -40,11 +41,11 @@ export class UserProblemService {
     this.userProblems$,
     this.problemCategories$])
     .pipe(
-      map(([problems, problemCategories]) => // INFO javascript destructuring to define a name for each array element
+      map(([problems, problemCategoriess]) => // INFO javascript destructuring to define a name for each array element
         problems.map(problem => ({
           ...problem, // INFO spread-operator to map and copy values to property matched by name
           color: this.markWithColor(problem),
-          category: problemCategories.find(c => problem.categoryId == c.id)?.name, // INFO find
+          category: problemCategoriess.find(c => problem.categoryId == c.id)?.name, // INFO find
           searchKey: [problem.id]
         } as UserProblem)))
     );

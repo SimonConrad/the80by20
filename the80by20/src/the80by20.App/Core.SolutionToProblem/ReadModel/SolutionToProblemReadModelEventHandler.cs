@@ -47,7 +47,7 @@ public class SolutionToProblemReadModelEventHandler :
 
         var readmodel = new SolutionToProblemReadModel()
         {
-            ProblemId = problem.Id,
+            Id = problem.Id,
             RequiredSolutionTypes = string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray()),
             IsConfirmed = problem.Confirmed,
             IsRejected = problem.Rejected,

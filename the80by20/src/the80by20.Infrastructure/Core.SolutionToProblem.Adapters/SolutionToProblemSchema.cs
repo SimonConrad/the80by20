@@ -82,7 +82,7 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem.Adapters
 
             modelBuilder.Entity<SolutionToProblemReadModel>(e =>
             {
-                e.HasKey(r => r.ProblemId);
+                e.HasKey(r => r.Id);
             });
         }
     }

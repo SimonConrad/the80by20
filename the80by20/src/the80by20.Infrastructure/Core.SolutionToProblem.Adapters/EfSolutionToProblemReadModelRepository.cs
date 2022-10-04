@@ -43,7 +43,7 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem.Adapters
         public async Task<SolutionToProblemReadModel> GetByProblemId(ProblemId id)
         {
             var readModel  = await _coreDbContext.SolutionsToProblemsReadModel
-                .FirstOrDefaultAsync(r => r.ProblemId == id.Value);
+                .FirstOrDefaultAsync(r => r.Id == id.Value);
             return readModel;
         }
 

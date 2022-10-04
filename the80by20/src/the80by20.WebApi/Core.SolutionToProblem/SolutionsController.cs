@@ -39,7 +39,7 @@ namespace the80by20.WebApi.Core.SolutionToProblem
         public async Task<ActionResult<SolutionToProblemReadModel[]>> Get()
         {
             var faker = new Faker<SolutionToProblemReadModel>()
-                .RuleFor(d => d.ProblemId, d => Guid.NewGuid())
+                .RuleFor(d => d.Id, d => Guid.NewGuid())
                 .RuleFor(d => d.UserId, d => Guid.NewGuid());
 
             var res = faker.Generate(10);

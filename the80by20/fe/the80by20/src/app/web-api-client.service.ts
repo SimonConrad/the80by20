@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ProblemCategory } from './solution-to-problem/shared-model/ProblemCategory';
+import { UserProblem } from './solution-to-problem/user/model/UserProblem';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,7 @@ export class WebApiClientService {
 
   private readonly apiUrl: string = `${this.baseUrl}/api`;
   private readonly  usersUrl: string = `${this.baseUrl}/security/users/`;
+  private readonly  problemsUrl: string = `${this.baseUrl}/solution-to-problem/problems/`;
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +21,7 @@ export class WebApiClientService {
   applicationData(){
     //return of('The 80 by 20');
     
-    return this.http.get<string>(`${this.baseUrl}/api`);
+    return this.http.get<string>(`${this.apiUrl}`);
   } 
   //#endregion
 
@@ -51,6 +54,25 @@ export class WebApiClientService {
 
     //return this.http.get(`${this.usersUrl}me`)
    
+  }
+  //#endregion
+
+  //#region problems
+  problemCategories() : Observable<ProblemCategory[]> {
+    // const problemCategories = 'api/problemCategories';
+    // return this.http.get<ProblemCategory[]>(problemCategories);
+
+    return this.http.get<any>(`${this.problemsUrl}categories-and-solution-types`)
+    .pipe(map(result =>  result.categories))
+  }
+
+  userProblems() : Observable<UserProblem[]> {
+    // const userProblemsUrl = 'api/userProblems';
+    // return this.http.get<UserProblem[]>(userProblemsUrl)
+
+
+    return this.http.get<any>(`${this.problemsUrl}`)
+
   }
   //#endregion
 
