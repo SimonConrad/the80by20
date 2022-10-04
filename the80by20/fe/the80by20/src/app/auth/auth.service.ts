@@ -69,9 +69,7 @@ export class AuthService {
     // return false;
 
     // TODO:
-    
     const exp = moment.unix(this.decodedToken.exp)
-    
     return moment().isBefore(exp);
   }
 
