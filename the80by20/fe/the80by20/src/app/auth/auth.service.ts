@@ -43,9 +43,9 @@ export class AuthService {
     res.username = res["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]; //username
     this.decodedToken = {...res};
 
-    // console.log(this.decodedToken.username);
-    // console.log(this.decodedToken.exp);
-    // console.log(this.decodedToken.role);
+    console.log(`username: ${this.decodedToken.username}`);
+    console.log(`expiration:  ${this.decodedToken.exp}`);
+    console.log(`role: ${ this.decodedToken.role}`);
 
     localStorage.setItem('auth_tkn', token);
     localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
