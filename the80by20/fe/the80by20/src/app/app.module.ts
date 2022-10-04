@@ -37,7 +37,7 @@ import { TokenInterceptorService } from './auth/token-interceptor.service';
     AppRoutingModule,
     AuthModule,
     HttpClientModule,
-    //InMemoryWebApiModule.forRoot(AppData, { delay: 1000 }), // INFO comment if won't to user real http web api
+    InMemoryWebApiModule.forRoot(AppData, { delay: 1000 }), // INFO comment if won't to user real http web api
     BrowserAnimationsModule,
     SharedModule,
 
