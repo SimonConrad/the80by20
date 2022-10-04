@@ -13,9 +13,6 @@ const jwt = new JwtHelperService();
 })
 export class AuthService {
 
-  private baseUrl: string = environment.baseApiUrl;
-  private uriseg = this.baseUrl + 'api/users';
-
   private decodedToken: DecodedToken = new DecodedToken()
 
   constructor(private webApiClient: WebApiClientService) {
@@ -24,7 +21,7 @@ export class AuthService {
   }
 
   public register(userData: any): Observable<any> {
-
+    // TODO
     return this.webApiClient.register(userData);
   }
 
@@ -76,7 +73,6 @@ export class AuthService {
   public getUsername(): string {
     return this.decodedToken.username;
   }
-
 }
 
 class DecodedToken {
