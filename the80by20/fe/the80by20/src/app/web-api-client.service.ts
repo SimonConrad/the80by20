@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable, ObservableInput, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ProblemCategory } from './solution-to-problem/shared-model/ProblemCategory';
 import { UserProblem } from './solution-to-problem/user/model/UserProblem';
@@ -33,9 +33,15 @@ export class WebApiClientService {
     // return of(token);
          
     let signInPayload = {
-      email: "user1@wp.pl",
+      email: "admin@wp.pl",
       password: "secret"
     }
+
+    // let signInPayload = {
+    //   email: "user1@wp.pl",
+    //   password: "secret"
+    // }
+
     return this.http.post(`${this.usersUrl}sign-in`, signInPayload)
     .pipe(map(token => {
       const result : any = token;
@@ -72,6 +78,11 @@ export class WebApiClientService {
 
 
     return this.http.get<any>(`${this.problemsUrl}`)
+  }
+
+  updateUserProblem(problem: UserProblem) :ObservableInput<any> {
+    const userProblemsUrl = 'api/userProblems';
+    return this.http.put<UserProblem>(userProblemsUrl, problem) 
 
   }
   //#endregion

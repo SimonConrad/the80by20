@@ -110,11 +110,16 @@ export class UserProblemService {
 
   private deleteProblemSubject = new Subject<string>();
   deleteProblemActionStream$ = this.deleteProblemSubject.asObservable().pipe(
-    switchMap(id => { //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
-      return this.http.delete(`${this.userProblemsUrl}/${id}`) // INFO usage of inMemoryWebApi
-      .pipe(tap(() => {
-        this.delete(id);
-      })); //info https://medium.com/@snorredanielsen/rxjs-accessing-a-previous-value-further-down-the-pipe-chain-b881026701c1
+    
+    // TODO below works but in memorywebapi - move it to webapiclient service with bot versions with backend and without
+    // switchMap(id => { //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
+    //   return this.http.delete(`${this.userProblemsUrl}/${id}`) // INFO usage of inMemoryWebApi
+    //   .pipe(tap(() => {
+    //     this.delete(id);
+    //   })); //info https://medium.com/@snorredanielsen/rxjs-accessing-a-previous-value-further-down-the-pipe-chain-b881026701c1
+    // }),
+    tap(id => {
+      this.delete(id)
     }),
     //tap(() => this.startInitializeProblems()), //INFO to make thinks simplers change above tap with this for refresh from server
     catchError(this.handleError)
@@ -134,10 +139,11 @@ export class UserProblemService {
 
   private updateProblemSubject = new Subject<UserProblem>();
   updateProblemActionStream$ = this.updateProblemSubject.asObservable().pipe(
-    switchMap((userProblem) => {  //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
-      return this.http.put<UserProblem>(this.userProblemsUrl, userProblem)  //INFO usage of inMemoryWebApi
-      .pipe(map(() => { return userProblem }));
-    }),
+    // TODO below works but in memorywebapi - move it to webapiclient service with bot versions with backend and without
+    // switchMap((userProblem) => {  //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
+    //   return this.http.put<UserProblem>(this.userProblemsUrl, userProblem)  //INFO usage of inMemoryWebApi
+    //   .pipe(map(() => { return userProblem }));
+    // }),
     tap(userProblem => {
       this.update(userProblem)
     }),
@@ -157,10 +163,12 @@ export class UserProblemService {
 
   private addProblemSubject = new Subject<UserProblem>();
   addProblemActionStream$ = this.addProblemSubject.asObservable().pipe(
-    switchMap((userProblem) => { //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
-      return this.http.post<UserProblem>(this.userProblemsUrl, userProblem)  //INFO usage of inMemoryWebApi
-      .pipe(map(() => { return userProblem }));
-    }),
+    
+    //// TODO below works but in memorywebapi - move it to webapiclient service with bot versions with backend and without
+    // switchMap((userProblem) => { //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
+    //   return this.http.post<UserProblem>(this.userProblemsUrl, userProblem)  //INFO usage of inMemoryWebApi
+    //   .pipe(map(() => { return userProblem }));
+    // }),
     //tap(() => this.startInitializeProblems()),
     tap(problem => this.add(problem)),
     catchError(this.handleError),
