@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { WebApiClientService } from '../web-api-client.service';
+import * as moment from 'moment';
 
 const jwt = new JwtHelperService();
 
@@ -61,13 +62,17 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    if(this.decodedToken.username != '') {
-      return true;
-    }
+    // if(this.decodedToken.username != '') {
+    //   return true;
+    // }
 
-    return false;
+    // return false;
 
-    // TODO: return moment().isBefore(moment.unix(this.decodedToken.exp));
+    // TODO:
+    
+    const exp = moment.unix(this.decodedToken.exp)
+    
+    return moment().isBefore(exp);
   }
 
   public getUsername(): string {
