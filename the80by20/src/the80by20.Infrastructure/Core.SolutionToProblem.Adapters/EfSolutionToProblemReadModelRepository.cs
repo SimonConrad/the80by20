@@ -58,5 +58,11 @@ namespace the80by20.Infrastructure.Core.SolutionToProblem.Adapters
             _coreDbContext.SolutionsToProblemsReadModel.Update(readModel);
             await _coreDbContext.SaveChangesAsync();
         }
+
+        public async Task<SolutionToProblemReadModel[]> GetByUserId(Guid userId)
+        {
+            var readModel = await _coreDbContext.SolutionsToProblemsReadModel.Where(rm => rm.UserId == userId).ToArrayAsync();
+            return readModel;
+        }
     }
 }

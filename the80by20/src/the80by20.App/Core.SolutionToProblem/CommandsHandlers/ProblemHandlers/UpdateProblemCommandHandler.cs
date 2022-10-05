@@ -25,6 +25,7 @@ public class UpdateProblemCommandHandler : IRequestHandler<UpdateProblemCommand,
         if (command.UpdateScope == UpdateDataScope.OnlyData)
         {
             await UpdateData(command);
+            await UpdateReadModel(command.ProblemId, cancellationToken);
             return command.ProblemId;
         }
 

@@ -10,6 +10,7 @@ nuget package Microsoft.EntityFrameworkCore.Design
 
 fabryka CoreSqlServerDbContextDesignTimeFactory
 
+wybrany jako startup projekt infrastructure, bo inaczej Your startup project 'the80by20.WebApi' doesn't reference Microsoft.EntityFrameworkCore.Design.
 Add-Migration Initial-Create -Context CoreDbContext -o "DAL/Migrations"
 Update-Database -context CoreDbContext
 

@@ -56,6 +56,7 @@ public class SolutionToProblemReadModelEventHandler :
             UserId = problemData.UserId,
             CreatedAt = problemData.CreatedAt,
             Category = category.Name,
+            CategoryId = category.Id,
         };
 
         await _readModelUpdates.Create(readmodel);
@@ -75,6 +76,9 @@ public class SolutionToProblemReadModelEventHandler :
         rm.IsRejected = problem.Rejected;
         rm.Description = problemData.Description;
         rm.Category = category.Name;
+        rm.CategoryId = category.Id;
+
+        await _readModelUpdates.Update(rm);
     }
 
     public async Task Handle(StartedWorkingOnSolution @event, CancellationToken cancellationToken)

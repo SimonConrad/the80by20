@@ -15,9 +15,9 @@ export class WebApiClientService {
   private readonly problemCategoriesUrl = 'api/problemCategories';
 
   private readonly baseUrl: string = environment.baseApiUrl;
-  private readonly apiUrl: string = `${this.baseUrl}/api`;
-  private readonly usersUrl: string = `${this.baseUrl}/security/users/`;
-  private readonly problemsUrl: string = `${this.baseUrl}/solution-to-problem/problems/`;
+  private readonly appApiUrl: string = `${this.baseUrl}/api`;
+  private readonly usersApiUrl: string = `${this.baseUrl}/security/users/`;
+  private readonly problemsApiUrl: string = `${this.baseUrl}/solution-to-problem/problems/`;
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +29,7 @@ export class WebApiClientService {
     if (this.useInMemoryWebApi) {
       return of('The 80 by 20');
     } else {
-      return this.http.get<string>(`${this.apiUrl}`);
+      return this.http.get<string>(`${this.appApiUrl}`);
     }
   }
   //#endregion
@@ -41,17 +41,17 @@ export class WebApiClientService {
       const token = environment.devjwtToken;
       return of(token);
     } else {
-      let signInPayload = {
+      const signInPayload = {
         email: "admin@wp.pl",
         password: "secret"
       }
 
-      // let signInPayload = {
+      // const signInPayload = {
       //   email: "user1@wp.pl",
       //   password: "secret"
       // }
 
-      return this.http.post(`${this.usersUrl}sign-in`, signInPayload)
+      return this.http.post(`${this.usersApiUrl}sign-in`, signInPayload)
         .pipe(map(token => {
           const result: any = token;
           return result.accessToken
@@ -66,14 +66,14 @@ export class WebApiClientService {
 
     // }
     // TODO
-    return this.http.post(`${this.usersUrl}`, userData);
+    return this.http.post(`${this.usersApiUrl}`, userData);
   }
 
   me() {
     if (this.useInMemoryWebApi) {
       return of('user');
     } else {
-      return this.http.get(`${this.usersUrl}me`)
+      return this.http.get(`${this.usersApiUrl}me`)
     }
   }
   //#endregion
@@ -83,7 +83,7 @@ export class WebApiClientService {
     if (this.useInMemoryWebApi) {
       return this.http.get<ProblemCategory[]>(this.problemCategoriesUrl);
     } else {
-      return this.http.get<any>(`${this.problemsUrl}categories-and-solution-types`)
+      return this.http.get<any>(`${this.problemsApiUrl}categories-and-solution-types`)
         .pipe(map(result => result.categories))
     }
   }
@@ -92,16 +92,24 @@ export class WebApiClientService {
     if (this.useInMemoryWebApi) {
       return this.http.get<UserProblem[]>(this.userProblemsUrl)
     } else {
-      return this.http.get<any>(`${this.problemsUrl}`)
+      return this.http.get<any>(`${this.problemsApiUrl}`)
     }
   }
 
-  deleteUserProblem(id: any ) {
+  addUserProblem(problem: UserProblem) {
     if (this.useInMemoryWebApi) {
-      return this.http.delete(`${this.userProblemsUrl}/${id}`)
+      return this.http.post<UserProblem>(this.userProblemsUrl, problem)
     } else {
-      // todo
-      return this.http.delete(`${this.userProblemsUrl}/${id}`)
+      
+      //todo
+      const addUserProblemPayload = {
+        description: problem.description,
+        category: "00000000-0000-0000-0000-000000000006",
+        solutionElementTypes: [
+          0,1,2,3
+        ]
+      }
+      return this.http.post<UserProblem>(this.problemsApiUrl, addUserProblemPayload)
     }
   }
 
@@ -110,16 +118,23 @@ export class WebApiClientService {
       return this.http.put<UserProblem>(this.userProblemsUrl, problem)
     } else {
       //todo
-      return this.http.put<UserProblem>(this.userProblemsUrl, problem)
+      const updateUserProblemPayload = {
+        problemId: problem.id,
+        description: problem.description,
+        category: "00000000-0000-0000-0000-000000000006",
+        updateScope: 1
+      }
+
+      return this.http.put<UserProblem>(this.problemsApiUrl, updateUserProblemPayload)
     }
   }
 
-  addUserProblem(problem: UserProblem) {
+  deleteUserProblem(id: any ) {
     if (this.useInMemoryWebApi) {
-      return this.http.post<UserProblem>(this.userProblemsUrl, problem)
+      return this.http.delete(`${this.userProblemsUrl}/${id}`)
     } else {
-      //todo
-      return this.http.post<UserProblem>(this.userProblemsUrl, problem)
+      // todo do backend (buisness rules - for example cannot delete if accpeted or sopmething....)
+      return of('')// this.http.delete(`${this.userProblemsUrl}/${id}`)
     }
   }
   //#endregion

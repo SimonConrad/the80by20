@@ -96,6 +96,9 @@ namespace the80by20.WebApi.Core.SolutionToProblem
             res[2].IsConfirmed = true;
             res[2].IsRejected = false;
 
+            var resFromdb = await _solutionToProblemReadModelQueries.GetByUserId(Guid.Parse(User.Identity?.Name));
+
+            res.AddRange(resFromdb);
 
             return Ok(res);
         }

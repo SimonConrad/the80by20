@@ -24,5 +24,5 @@ public interface ISolutionToProblemReadModelQueries
     // data retrieved straight from aggragtes data-sources and master-data data-sources 
     Task<SolutionToProblemReadModel> GetByProblemId(ProblemId id);
 
-
+    Task<SolutionToProblemReadModel[]> GetByUserId(Guid userId);
 }

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  useInMemoryWebApi: true,
-  devjwtToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMzZkYTdhMy02NWFkLTQ5ODYtOTUyNi0xMTI3NTU1YjcwYWMiLCJ1bmlxdWVfbmFtZSI6IjAzNmRhN2EzLTY1YWQtNDk4Ni05NTI2LTExMjc1NTViNzBhYyIsIm5hbWUiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiJhZG1pbiIsIm5iZiI6MTY2NDk0NDY3NCwiZXhwIjoxNjY0OTQ4Mjc0LCJpc3MiOiJ0aGU4MGJ5MjAtaXNzdWVyIiwiYXVkIjoidGhlODBieTIwLWF1ZGllbmNlIn0.dDQg8pgRTMnUkfQ6NTzs1St4e0DD8r42mcjtu9gtVjw",
+  useInMemoryWebApi: false,
+  devjwtToken: "",
   baseApiUrl: "http://localhost:5000",
 };
 

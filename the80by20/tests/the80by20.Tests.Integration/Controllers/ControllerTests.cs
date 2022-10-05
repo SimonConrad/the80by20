@@ -16,7 +16,7 @@ public abstract class ControllerTests : IClassFixture<OptionsProvider>
 
     protected JwtDto Authorize(Guid userId, string role)
     {
-        var jwt = _authenticator.CreateToken(userId, role);
+        var jwt = _authenticator.CreateToken(userId, role, "username");
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt.AccessToken);
 
         return jwt;
