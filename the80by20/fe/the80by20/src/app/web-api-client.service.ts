@@ -62,6 +62,26 @@ export class WebApiClientService {
   register(userData: any) {
     // if(this.useInMemoryWebApi) { 
 
+
+  //     {
+  //       "email": "admin@wp.pl",
+  //       "username": "admin",
+  //       "password": "secret",
+  //       "fullName": "Admin",
+  //       "role": "admin"
+  //   }
+
+  //   {
+  //     "email": "user1@wp.pl",
+  //     "username": "user1",
+  //     "password": "secret",
+  //     "fullName": "Jan Jo",
+  //     "role": "user"
+  // }
+  
+    
+
+
     // } else{
 
     // }
