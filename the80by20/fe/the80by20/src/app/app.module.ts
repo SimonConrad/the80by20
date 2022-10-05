@@ -37,7 +37,10 @@ import { TokenInterceptorService } from './auth/token-interceptor.service';
     AppRoutingModule,
     AuthModule,
     HttpClientModule,
-    //InMemoryWebApiModule.forRoot(AppData, { delay: 1000 }), // INFO comment if won't to user real http web api
+    // TODO refactor to 2 implmentations of interface-web-api and factory which decides which one to register into ioc container based on env
+    // also based on env import InMemoryWebApiModule
+    // https://stackoverflow.com/questions/39942118/how-to-inject-different-service-based-on-certain-build-environment-in-angular2
+    InMemoryWebApiModule.forRoot(AppData, { delay: 1000 }), // INFO comment if won't to user real http web api
     BrowserAnimationsModule,
     SharedModule,
 

@@ -46,6 +46,7 @@ export class AuthService {
 
     console.log(`username: ${this.decodedToken.username}`);
     console.log(`expiration:  ${this.decodedToken.exp}`);
+    console.log(`expiration datetime:  ${moment.unix(this.decodedToken.exp)}`);
     console.log(`role: ${ this.decodedToken.role}`);
 
     localStorage.setItem('auth_tkn', token);

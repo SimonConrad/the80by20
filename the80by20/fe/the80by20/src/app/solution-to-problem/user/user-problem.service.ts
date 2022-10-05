@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { BehaviorSubject, catchError, combineLatest, switchMap, map, Observable, Subject, tap, throwError, finalize, concatMap } from 'rxjs';
 
@@ -11,10 +11,7 @@ import { WebApiClientService } from 'src/app/web-api-client.service';
   providedIn: 'root'
 })
 export class UserProblemService {
-  private userProblemsUrl = 'api/userProblems';
-  private problemCategories = 'api/problemCategories';
-
-  constructor(private http: HttpClient, private webApiClient: WebApiClientService) { // INFO data should not be loaded from the constructor
+  constructor(private webApiClient: WebApiClientService) { // INFO data should not be loaded from the constructor
   }
 
   private problemsSubject = new BehaviorSubject<UserProblem[]>([]);
@@ -110,20 +107,20 @@ export class UserProblemService {
 
   private deleteProblemSubject = new Subject<string>();
   deleteProblemActionStream$ = this.deleteProblemSubject.asObservable().pipe(
-    
-    // TODO below works but in memorywebapi - move it to webapiclient service with bot versions with backend and without
-    // switchMap(id => { //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
-    //   return this.http.delete(`${this.userProblemsUrl}/${id}`) // INFO usage of inMemoryWebApi
-    //   .pipe(tap(() => {
-    //     this.delete(id);
-    //   })); //info https://medium.com/@snorredanielsen/rxjs-accessing-a-previous-value-further-down-the-pipe-chain-b881026701c1
-    // }),
-    tap(id => {
-      this.delete(id)
+
+
+    //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
+    switchMap(id => {
+      return this.webApiClient.deleteUserProblem(id)
+        .pipe(tap(() => {
+          this.delete(id);
+        })); //info https://medium.com/@snorredanielsen/rxjs-accessing-a-previous-value-further-down-the-pipe-chain-b881026701c1
     }),
+    // tap(id => {
+    //   this.delete(id)
+    // }),
     //tap(() => this.startInitializeProblems()), //INFO to make thinks simplers change above tap with this for refresh from server
     catchError(this.handleError)
-
   )
 
   private delete = (id: UserProblem['id']) => {
@@ -139,11 +136,11 @@ export class UserProblemService {
 
   private updateProblemSubject = new Subject<UserProblem>();
   updateProblemActionStream$ = this.updateProblemSubject.asObservable().pipe(
-    // TODO below works but in memorywebapi - move it to webapiclient service with bot versions with backend and without
-    // switchMap((userProblem) => {  //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
-    //   return this.http.put<UserProblem>(this.userProblemsUrl, userProblem)  //INFO usage of inMemoryWebApi
-    //   .pipe(map(() => { return userProblem }));
-    // }),
+    //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
+    switchMap((userProblem) => {
+      return this.webApiClient.updateUserProblem(userProblem)
+        .pipe(map(() => { return userProblem }));
+    }),
     tap(userProblem => {
       this.update(userProblem)
     }),
@@ -163,12 +160,12 @@ export class UserProblemService {
 
   private addProblemSubject = new Subject<UserProblem>();
   addProblemActionStream$ = this.addProblemSubject.asObservable().pipe(
-    
-    //// TODO below works but in memorywebapi - move it to webapiclient service with bot versions with backend and without
-    // switchMap((userProblem) => { //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
-    //   return this.http.post<UserProblem>(this.userProblemsUrl, userProblem)  //INFO usage of inMemoryWebApi
-    //   .pipe(map(() => { return userProblem }));
-    // }),
+
+    //INFO conctaMap, mergeMap, switchMap described in fe\docs\higher-order mapping operators\
+    switchMap((userProblem) => {
+      return this.webApiClient.addUserProblem(userProblem)
+        .pipe(map(() => { return userProblem }));
+    }),
     //tap(() => this.startInitializeProblems()),
     tap(problem => this.add(problem)),
     catchError(this.handleError),
