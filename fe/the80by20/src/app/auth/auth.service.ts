@@ -63,13 +63,12 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    // if(this.decodedToken.username != '') {
-    //   return true;
-    // }
-
-    // return false;
-
-    // TODO:
+    if(environment.useInMemoryWebApi){
+      if(this.decodedToken.username != '') {
+        return true;
+      }
+    }
+ 
     const exp = moment.unix(this.decodedToken.exp)
     return moment().isBefore(exp);
   }
