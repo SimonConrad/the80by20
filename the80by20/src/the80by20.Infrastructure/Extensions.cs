@@ -94,13 +94,16 @@ public static class Extensions
 
         services.AddAuth(configuration);
 
+        var appOptions = configuration.GetOptions<AppOptions>("app");
+
+
         // Default Policy
         services.AddCors(options =>
         {
             options.AddDefaultPolicy(
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200")
+                    builder.WithOrigins(appOptions.FrontUrl)
                                         .AllowAnyHeader()
                                         .AllowAnyMethod();
                 });
