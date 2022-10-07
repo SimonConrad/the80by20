@@ -27,7 +27,7 @@ export class WebApiClientService {
     // also based on env import InMemoryWebApiModule
     // https://stackoverflow.com/questions/39942118/how-to-inject-different-service-based-on-certain-build-environment-in-angular2
     if (this.useInMemoryWebApi) {
-      return of('The 80 by 20');
+      return of('The 80 by 20 [in memory web api]');
     } else {
       return this.http.get<string>(`${this.appApiUrl}`);
     }
