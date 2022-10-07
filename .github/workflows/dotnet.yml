@@ -1,17 +1,19 @@
 
 
-name: Build and deploy ASP.Net Core app to an Azure Web App
+name: Build and deploy ASP.Net Core app to an azure app service
 
 env:
-    AZURE_WEBAPP_NAME: the80by20    # set this to the name of your Azure Web App
+    AZURE_WEBAPP_NAME: the80by20        # set this to the name of your Azure Web App
     AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-    DOTNET_VERSION: '6.0.x'                 # set this to the .NET Core version to use
+    DOTNET_VERSION: '6.0.x'             # set this to the .NET Core version to use
     WORKING_DIRECTORY: the80by20
 
 
 on:
   push:
     branches: [ "main" ]
+    paths:
+        - 'the80by20/**'
   pull_request: 
     branches: [ "main" ]
 # todo pull request on other branches only build without deploy
