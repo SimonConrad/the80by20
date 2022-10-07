@@ -96,7 +96,7 @@ public static class Extensions
 
         var appOptions = configuration.GetOptions<AppOptions>("app");
 
-
+        // INFO Do cors in proper way https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-6.0
         // Default Policy
         services.AddCors(options =>
         {
@@ -158,7 +158,5 @@ public static class Extensions
         section.Bind(options);
 
         return options;
-    }
-
-    // TODO Do cors in proper way https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-6.0
+    }   
 }
