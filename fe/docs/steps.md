@@ -23,13 +23,17 @@ create workspace  and initial starer app
 - with routing
 - chosen scss https://sass-lang.com/documentation/syntax#scss
 
-install spp packages
+install packages defined in package.json
 
 `npm install`
 
 run the application
 
 `npm run ng serve --open`
+
+build application, build:prod is alias to npm cli command in package.json file scripts node, or use default command `npm run build` build details are in angular.json file, like buuild catalog environment.json details etc.
+
+`npm run "build:prod"` 
 
 ### eslint
 - https://thesoreon.com/blog/how-to-set-up-eslint-with-typescript-in-vs-code
@@ -60,6 +64,7 @@ https://angular.io/guide/lazy-loading-ngmodules
 - web-api-client-service
 - angular material https://material.angular.io/components/form-field/examples https://tudip.com/blog-post/how-to-install-angular-material/
 - input validation https://material.angular.io/components/form-field/examples#form-field-error
+
 
 installing npm package `npm i angular-in-memory-web-api`
 
