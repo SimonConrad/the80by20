@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{DBC8B925-6625-4ACB-9D4A-3D98999821CB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "reports", "reports", "{DBC8B925-6625-4ACB-9D4A-3D98999821CB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.App", "src\the80by20.App\the80by20.App.csproj", "{17E03AC9-1103-4088-89D3-D14412A1CC58}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.WebApi", "src\the
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Reports", "src\Reports\the80by20.Reports\the80by20.Reports.csproj", "{ED762F98-D9D0-4C42-8D74-22D1B8C7719F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{2304AB52-C945-426E-931F-02DCA0445F18}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{2304AB52-C945-426E-931F-02DCA0445F18}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.EventsSubsrciber", "src\Reports\the80by20.EventsSubsrciber\the80by20.EventsSubsrciber.csproj", "{C2794FE6-6845-4B76-A074-4DAB3D367AA2}"
 EndProject

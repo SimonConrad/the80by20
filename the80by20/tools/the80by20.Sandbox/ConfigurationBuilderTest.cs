@@ -5,7 +5,7 @@ public class ConfigurationBuilderTest
     [Fact]
     void Do()
     {
-        var b = new ConfigurationBuilder()
+        var b = new ConfigurationBuilderSandbox()
             .Configure1(c =>
             {
                 c.Settings1 = "s1-1";
@@ -21,17 +21,17 @@ public class ConfigurationBuilderTest
     }
 }
 
-public class ConfigurationBuilder
+public class ConfigurationBuilderSandbox
 {
     private Configuration _configuration1 = new();
     private Configuration _configuration2 = new();
 
-    public ConfigurationBuilder Configure1(Action<Configuration> c)
+    public ConfigurationBuilderSandbox Configure1(Action<Configuration> c)
     {
         c?.Invoke(_configuration1);
         return this;
     }
-    public ConfigurationBuilder Configure2(Action<Configuration> c)
+    public ConfigurationBuilderSandbox Configure2(Action<Configuration> c)
     {
         c?.Invoke(_configuration2);
         return this;
