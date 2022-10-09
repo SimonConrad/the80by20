@@ -38,9 +38,9 @@ namespace the80by20.Infrastructure.DAL.DbContext
         {
             // todo move to extensions
             optionsBuilder
-                .LogTo(Console.WriteLine)
-                .EnableSensitiveDataLogging()
-                .EnableDetailedErrors();
+                .LogTo(Console.WriteLine);
+                //.EnableSensitiveDataLogging()
+                //.EnableDetailedErrors();
 
             base.OnConfiguring(optionsBuilder);
         }
