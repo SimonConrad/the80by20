@@ -1,5 +1,4 @@
-﻿using Azure.Messaging.ServiceBus;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace the80by20.Sandbox.Azure
 {
