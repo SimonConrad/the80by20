@@ -1,6 +1,6 @@
-﻿using the80by20.Domain.SharedKernel;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
+﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
 
 namespace the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 

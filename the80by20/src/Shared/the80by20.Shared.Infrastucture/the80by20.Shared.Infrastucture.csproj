@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\the80by20.Domain\the80by20.Domain.csproj" />
     <ProjectReference Include="..\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Messaging\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,8 @@
 ﻿using the80by20.Domain.Core.SolutionToProblem.Capabilities;
 using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
-using the80by20.Domain.SharedKernel;
-using the80by20.Domain.SharedKernel.Capabilities;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
+using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 
 namespace the80by20.Domain.Core.SolutionToProblem.Operations.Solution
 {

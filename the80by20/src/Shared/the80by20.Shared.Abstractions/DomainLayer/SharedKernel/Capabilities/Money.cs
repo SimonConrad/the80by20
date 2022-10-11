@@ -2,7 +2,7 @@
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Domain.SharedKernel.Capabilities;
+namespace the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 
 [ValueObjectDdd]
 public sealed record Money
@@ -44,5 +44,5 @@ public sealed record Money
     {
         return Value.ToString("0.00", CultureInfo.CreateSpecificCulture("pl-PL"));
     }
-    
+
 }

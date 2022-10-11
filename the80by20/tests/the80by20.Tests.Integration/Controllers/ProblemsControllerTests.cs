@@ -8,9 +8,9 @@ using Shouldly;
 using the80by20.App.Core.SolutionToProblem.Commands.ProblemCommands;
 using the80by20.App.MasterData.CategoryCrud;
 using the80by20.Domain.Security.UserEntity;
-using the80by20.Domain.SharedKernel.Capabilities;
 using the80by20.Infrastructure.Security.Adapters.Security;
-using the80by20.Infrastructure.Time;
+using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
+using the80by20.Shared.Infrastucture.Time;
 using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;

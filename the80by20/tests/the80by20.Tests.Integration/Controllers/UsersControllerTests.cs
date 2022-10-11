@@ -10,7 +10,7 @@ using the80by20.App.Security.Ports;
 using the80by20.App.Security.Queries;
 using the80by20.Domain.Security.UserEntity;
 using the80by20.Infrastructure.Security.Adapters.Security;
-using the80by20.Infrastructure.Time;
+using the80by20.Shared.Infrastucture.Time;
 using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;

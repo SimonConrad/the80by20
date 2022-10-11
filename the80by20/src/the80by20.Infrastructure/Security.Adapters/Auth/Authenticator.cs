@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using the80by20.App.Security.Ports;
-using the80by20.Domain.SharedKernel;
+using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
 
 namespace the80by20.Infrastructure.Security.Adapters.Auth;
 

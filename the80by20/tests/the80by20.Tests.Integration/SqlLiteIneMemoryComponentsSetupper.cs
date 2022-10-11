@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using the80by20.Infrastructure.DAL;
 using the80by20.Infrastructure.DAL.DbContext;
-using the80by20.Infrastructure.DAL.Misc;
 
 namespace the80by20.Tests.Integration;
 

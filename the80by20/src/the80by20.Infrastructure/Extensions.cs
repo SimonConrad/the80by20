@@ -6,15 +6,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.App.Security.Commands.Handlers;
-using the80by20.Domain.SharedKernel;
 using the80by20.Infrastructure.Exceptions;
 using the80by20.Infrastructure.InputValidation;
 using the80by20.Infrastructure.Logging;
 using the80by20.Infrastructure.Security.Adapters.Auth;
 using the80by20.Infrastructure.Security.Adapters.Security;
 using the80by20.Infrastructure.Security.Adapters.Users;
-using the80by20.Infrastructure.Time;
 using the80by20.Shared.Abstractions.AppLayer;
+using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
+using the80by20.Shared.Infrastucture.Time;
 
 namespace the80by20.Infrastructure;
 

@@ -2,8 +2,8 @@
 using the80by20.App.Security.Commands.Exceptions;
 using the80by20.App.Security.Ports;
 using the80by20.Domain.Security.UserEntity;
-using the80by20.Domain.SharedKernel;
 using the80by20.Shared.Abstractions.AppLayer;
+using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
 
 namespace the80by20.App.Security.Commands.Handlers;
 

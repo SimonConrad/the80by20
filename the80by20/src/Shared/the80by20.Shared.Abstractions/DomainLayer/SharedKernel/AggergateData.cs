@@ -1,4 +1,4 @@
-﻿namespace the80by20.Domain.SharedKernel;
+﻿namespace the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
 
 public class AggergateData
 {

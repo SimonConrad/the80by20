@@ -35,8 +35,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Core.SolutionSale.Adapters\" />
-	  <Folder Include="Messaging.Adapters\" />
-	  <Folder Include="Time\" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -10,7 +10,6 @@ using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
 using the80by20.Infrastructure.Core.SolutionToProblem.Adapters;
 using the80by20.Infrastructure.DAL;
 using the80by20.Infrastructure.DAL.DbContext;
-using the80by20.Infrastructure.DAL.Misc;
 using the80by20.Infrastructure.MasterData.Adapters;
 using the80by20.Infrastructure.Security.Adapters.Users;
 using the80by20.Shared.Abstractions.AppLayer;

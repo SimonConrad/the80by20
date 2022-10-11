@@ -1,9 +1,9 @@
 ﻿using System.Collections.Immutable;
 using System.Text.Json;
 using the80by20.Domain.Core.SolutionToProblem.Operations;
-using the80by20.Domain.SharedKernel.Capabilities;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 
 namespace the80by20.Domain.Core.SolutionToProblem.Capabilities;
 

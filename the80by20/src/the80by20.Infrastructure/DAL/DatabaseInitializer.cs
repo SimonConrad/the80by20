@@ -4,10 +4,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using the80by20.App.MasterData.CategoryCrud;
-using the80by20.Domain.SharedKernel;
 using the80by20.Infrastructure.DAL.DbContext;
+using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
 
-namespace the80by20.Infrastructure.DAL.Misc;
+namespace the80by20.Infrastructure.DAL;
 
 // todo enebaled only in development environmetn in test, prod disabled and custom cli for running migratinons and seeding with data
 public class DatabaseInitializer : IHostedService
@@ -18,8 +18,8 @@ public class DatabaseInitializer : IHostedService
     private readonly IOptions<DatabaseOptions> _options;
     private readonly ILogger<DatabaseInitializer> _logger;
 
-    public DatabaseInitializer(IServiceProvider serviceProvider, 
-        IClock clock, 
+    public DatabaseInitializer(IServiceProvider serviceProvider,
+        IClock clock,
         IOptions<DatabaseOptions> options,
         ILogger<DatabaseInitializer> logger)
     {
