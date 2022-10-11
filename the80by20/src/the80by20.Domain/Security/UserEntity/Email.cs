@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
-using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Domain.Security.UserEntity.Exceptions;
+using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.Domain.Security.UserEntity;
 

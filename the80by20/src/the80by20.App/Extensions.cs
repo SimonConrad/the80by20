@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using the80by20.App.Abstractions;
+using the80by20.Shared.Abstractions.AppLayer;
 
 namespace the80by20.App
 {
@@ -7,7 +7,7 @@ namespace the80by20.App
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            var applicationAssembly = typeof(ICommandHandler<>).Assembly;
+            var applicationAssembly = typeof(Extensions).Assembly;
 
             services.Scan(s => s.FromAssemblies(applicationAssembly)
                 .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))

@@ -1,7 +1,7 @@
 ﻿using the80by20.App.Security.Queries;
 using Microsoft.EntityFrameworkCore;
-using the80by20.App.Abstractions;
 using the80by20.Infrastructure.DAL.DbContext;
+using the80by20.Shared.Abstractions.AppLayer;
 
 namespace the80by20.Infrastructure.Security.Adapters.Users;
 

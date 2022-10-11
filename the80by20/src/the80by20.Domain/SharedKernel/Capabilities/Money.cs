@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
-using the80by20.Common.ArchitectureBuildingBlocks.Exceptions;
-using the80by20.Common.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
+using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.Domain.SharedKernel.Capabilities;
 

@@ -1,6 +1,4 @@
-﻿using Shouldly;
-
-namespace the80by20.Sandbox;
+﻿namespace the80by20.Sandbox;
 
 public class Operators
 {

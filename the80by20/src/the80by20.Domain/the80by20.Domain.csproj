@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\the80by20.Common\the80by20.Common.csproj" />
+    <ProjectReference Include="..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using FluentValidation;
-using the80by20.App.Abstractions;
+using the80by20.Shared.Abstractions.AppLayer;
 
 namespace the80by20.Infrastructure.InputValidation;
 

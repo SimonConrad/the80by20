@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using the80by20.App.Abstractions;
 using the80by20.App.Core.SolutionToProblem.ReadModel;
 using the80by20.App.MasterData;
 using the80by20.App.MasterData.CategoryCrud.Ports;
@@ -14,6 +13,7 @@ using the80by20.Infrastructure.DAL.DbContext;
 using the80by20.Infrastructure.DAL.Misc;
 using the80by20.Infrastructure.MasterData.Adapters;
 using the80by20.Infrastructure.Security.Adapters.Users;
+using the80by20.Shared.Abstractions.AppLayer;
 
 namespace the80by20.Infrastructure;
 

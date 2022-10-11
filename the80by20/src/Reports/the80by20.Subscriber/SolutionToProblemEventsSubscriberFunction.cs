@@ -2,14 +2,14 @@ using System;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 
-namespace the80by20.Subscriber
+namespace the80by20.Reports.Subscriber
 {
     // INFO https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-service-bus-trigger?tabs=in-process%2Cextensionv5
     public class SolutionToProblemEventsSubscriberFunction
     {
         [FunctionName("SolutionToProblemEventsSubscriberFunction")]
-        public void Run([ServiceBusTrigger("%MessageQueue Name%", Connection = "ServiceBusConnectionString")]string message,
-            Int32 deliveryCount,
+        public void Run([ServiceBusTrigger("%MessageQueue Name%", Connection = "ServiceBusConnectionString")] string message,
+            int deliveryCount,
             DateTime enqueuedTimeUtc,
             string messageId,
             ILogger log)

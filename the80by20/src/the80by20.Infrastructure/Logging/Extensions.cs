@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using the80by20.App.Abstractions;
+using the80by20.Shared.Abstractions.AppLayer;
 
 namespace the80by20.Infrastructure.Logging;
 

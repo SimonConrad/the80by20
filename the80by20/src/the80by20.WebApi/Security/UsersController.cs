@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
-using the80by20.App.Abstractions;
 using the80by20.App.Security.Commands;
 using the80by20.App.Security.Ports;
 using the80by20.App.Security.Queries;
 using the80by20.Infrastructure;
+using the80by20.Shared.Abstractions.AppLayer;
 
 namespace the80by20.WebApi.Security;
 

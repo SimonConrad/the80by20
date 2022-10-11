@@ -1,6 +1,0 @@
-﻿namespace the80by20.App.Abstractions;
-
-public interface IQueryHandler<in TQuery, TResult> where TQuery: class, IQuery<TResult>
-{
-    Task<TResult> HandleAsync(TQuery query);
-}
