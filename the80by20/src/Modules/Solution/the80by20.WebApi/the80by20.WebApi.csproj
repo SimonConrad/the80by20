@@ -5,12 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\the80by20.App\the80by20.App.csproj" />
-    <ProjectReference Include="..\the80by20.Domain\the80by20.Domain.csproj" />
-    <ProjectReference Include="..\the80by20.Infrastructure\the80by20.Infrastructure.csproj" />
-  </ItemGroup>
-
 
 
 	<ItemGroup>
@@ -21,6 +15,14 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Bogus" Version="34.0.2" />
+	</ItemGroup>
+
+
+
+	<ItemGroup>
+	  <ProjectReference Include="..\the80by20.App\the80by20.App.csproj" />
+	  <ProjectReference Include="..\the80by20.Domain\the80by20.Domain.csproj" />
+	  <ProjectReference Include="..\the80by20.Infrastructure\the80by20.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>

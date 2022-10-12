@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\the80by20.Domain\the80by20.Domain.csproj" />
     <ProjectReference Include="..\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
   </ItemGroup>
 

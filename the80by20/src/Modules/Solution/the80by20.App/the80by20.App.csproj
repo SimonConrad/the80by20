@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Core.SolutionSale\**" />
+    <EmbeddedResource Remove="Core.SolutionSale\**" />
+    <None Remove="Core.SolutionSale\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.1.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
@@ -13,12 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Core.SolutionSale\" />
     <Folder Include="Core.SolutionToProblem\Messaging.Ports\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
     <ProjectReference Include="..\the80by20.Domain\the80by20.Domain.csproj" />
   </ItemGroup>
 
