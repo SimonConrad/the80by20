@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using the80by20.Masterdata.Infrastructure.EF;
+using the80by20.Solution.Infrastructure.DAL.DbContext;
 
 namespace the80by20.Tests.Integration;
 

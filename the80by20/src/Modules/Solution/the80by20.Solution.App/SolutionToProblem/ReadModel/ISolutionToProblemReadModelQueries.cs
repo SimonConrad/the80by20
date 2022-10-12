@@ -1,6 +1,8 @@
 ﻿using the80by20.Masterdata.App.CategoryCrud;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
+using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
+using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
 
 namespace the80by20.Solution.App.SolutionToProblem.ReadModel;
 

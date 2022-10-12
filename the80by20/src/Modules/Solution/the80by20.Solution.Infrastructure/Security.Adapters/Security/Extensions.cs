@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using the80by20.Solution.App.Security.Ports;
 using the80by20.Solution.Domain.Security.UserEntity;
 using the80by20.Solution.Infrastructure.Security.Adapters.Users;
 

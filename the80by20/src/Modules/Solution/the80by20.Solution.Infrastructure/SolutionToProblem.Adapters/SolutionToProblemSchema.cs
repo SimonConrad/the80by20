@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 using the80by20.Shared.Infrastucture.EF;
+using the80by20.Solution.App.SolutionToProblem.ReadModel;
 using the80by20.Solution.Domain.SolutionToProblem.Capabilities;
 using the80by20.Solution.Domain.SolutionToProblem.Operations;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;

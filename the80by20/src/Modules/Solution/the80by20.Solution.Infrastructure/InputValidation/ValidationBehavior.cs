@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using the80by20.Infrastructure.InputValidation;
 
 namespace the80by20.Solution.Infrastructure.InputValidation
 {

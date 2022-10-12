@@ -1,4 +1,5 @@
-﻿using the80by20.Solution.Domain.Security.UserEntity;
+﻿using the80by20.Solution.App.Security.Queries;
+using the80by20.Solution.Domain.Security.UserEntity;
 
 namespace the80by20.Solution.Infrastructure.Security.Adapters.Users
 {

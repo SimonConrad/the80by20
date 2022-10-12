@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using the80by20.Masterdata.Infrastructure.EF;
 using the80by20.Shared.Abstractions.Dal;
+using the80by20.Solution.Infrastructure.DAL.DbContext;
 
 namespace the80by20.Tests.Integration;
 

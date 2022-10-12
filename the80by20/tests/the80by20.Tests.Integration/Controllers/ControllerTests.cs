@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using the80by20.Shared.Infrastucture.Time;
 using the80by20.Solution.App.Security.Ports;
+using the80by20.Solution.Infrastructure.Security.Adapters.Auth;
 using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;

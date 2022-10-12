@@ -9,7 +9,7 @@ using the80by20.Solution.Infrastructure.DAL.DbContext;
 
 #nullable disable
 
-namespace the80by20.Infrastructure.DAL.Migrations
+namespace the80by20.Solution.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
     [Migration("20220731162659_Initial-Create")]

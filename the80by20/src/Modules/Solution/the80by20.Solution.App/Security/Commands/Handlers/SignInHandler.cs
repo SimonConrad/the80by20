@@ -1,5 +1,6 @@
 ﻿using the80by20.Shared.Abstractions.AppLayer;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Solution.App.Security.Commands.Exceptions;
 using the80by20.Solution.App.Security.Ports;
 
 namespace the80by20.Solution.App.Security.Commands.Handlers;

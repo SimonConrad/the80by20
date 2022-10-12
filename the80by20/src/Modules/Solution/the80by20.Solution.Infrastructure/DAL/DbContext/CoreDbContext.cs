@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using the80by20.Solution.App.SolutionToProblem.ReadModel;
 using the80by20.Solution.Domain.Security.UserEntity;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;

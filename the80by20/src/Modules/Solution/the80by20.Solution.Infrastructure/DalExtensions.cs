@@ -2,6 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.Shared.Abstractions.AppLayer;
+using the80by20.Shared.Abstractions.Dal;
+using the80by20.Solution.App.Security.Ports;
+using the80by20.Solution.App.SolutionToProblem.ReadModel;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
 using the80by20.Solution.Infrastructure.DAL;

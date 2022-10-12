@@ -1,6 +1,10 @@
 ﻿using MediatR;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Solution.App.SolutionToProblem.Commands.ProblemCommands;
+using the80by20.Solution.App.SolutionToProblem.Events.ProblemEvents;
+using the80by20.Solution.Domain.SolutionToProblem.Operations.DomainServices;
+using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
+using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
 
 namespace the80by20.Solution.App.SolutionToProblem.CommandsHandlers.ProblemHandlers;
 

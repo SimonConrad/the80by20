@@ -7,6 +7,8 @@ using Microsoft.OpenApi.Models;
 using the80by20.Shared.Abstractions.AppLayer;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
 using the80by20.Shared.Infrastucture.Time;
+using the80by20.Solution.App.Security.Commands.Handlers;
+using the80by20.Solution.App.SolutionToProblem.ReadModel;
 using the80by20.Solution.Infrastructure.Exceptions;
 using the80by20.Solution.Infrastructure.InputValidation;
 using the80by20.Solution.Infrastructure.Logging;

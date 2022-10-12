@@ -7,7 +7,7 @@ namespace the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
 // INFO record gives out of the box, following value objects characteristics:
 // - checking equality by value (by guid Value in this case); don't need to implement IEquatable<SolutionToProblemId>
 // - immutaiblity guarding (cannot do: var id = new(Guid.NewGuid()); id.Value = guid.NewGuid())
-public sealed record SolutionToProblemId
+public sealed record SolutionToProblemId // INFO problem becomes solution,, DDD perspective becoming, so set id to same value as problem
 {
     public Guid Value { get; }
 
