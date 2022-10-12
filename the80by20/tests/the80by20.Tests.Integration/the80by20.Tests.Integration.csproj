@@ -23,9 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Bootstrapper\the80by20.WebApi\the80by20.WebApi.csproj" />
     <ProjectReference Include="..\..\src\Modules\Solution\the80by20.App\the80by20.App.csproj" />
     <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Infrastructure\the80by20.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\src\Modules\Solution\the80by20.WebApi\the80by20.WebApi.csproj" />
     <ProjectReference Include="..\..\src\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
   </ItemGroup>
 
