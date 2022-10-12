@@ -7,9 +7,9 @@ using the80by20.Solution.Domain.SolutionToProblem.Operations;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
 
-namespace the80by20.Solution.Infrastructure.SolutionToProblem.Adapters
+namespace the80by20.Solution.Infrastructure.EF.Configurations
 {
-    public static class SolutionToProblemSchema
+    public static class SolutionToProblemConfiguration
     {
         public static void MapUsing(ModelBuilder modelBuilder)
         {

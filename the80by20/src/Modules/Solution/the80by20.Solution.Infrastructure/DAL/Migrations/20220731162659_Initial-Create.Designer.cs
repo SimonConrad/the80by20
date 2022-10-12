@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using the80by20.Solution.Infrastructure.DAL.DbContext;
+using the80by20.Solution.Infrastructure.EF;
 
 #nullable disable
 
 namespace the80by20.Solution.Infrastructure.DAL.Migrations
 {
-    [DbContext(typeof(CoreDbContext))]
+    [DbContext(typeof(SolutionDbContext))]
     [Migration("20220731162659_Initial-Create")]
     partial class InitialCreate
     {

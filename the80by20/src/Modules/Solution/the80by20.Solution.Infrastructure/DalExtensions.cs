@@ -8,9 +8,9 @@ using the80by20.Solution.App.SolutionToProblem.ReadModel;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
 using the80by20.Solution.Infrastructure.DAL;
-using the80by20.Solution.Infrastructure.DAL.DbContext;
+using the80by20.Solution.Infrastructure.EF;
+using the80by20.Solution.Infrastructure.EF.Repositories;
 using the80by20.Solution.Infrastructure.Security.Adapters.Users;
-using the80by20.Solution.Infrastructure.SolutionToProblem.Adapters;
 
 namespace the80by20.Solution.Infrastructure
 {
@@ -23,7 +23,7 @@ namespace the80by20.Solution.Infrastructure
         {
             services.Configure<DatabaseOptions>(configuration.GetRequiredSection(OptionsDataBaseName));
             var dataBaseOptions = configuration.GetOptions<DatabaseOptions>(OptionsDataBaseName);
-            services.AddDbContext<CoreDbContext>(x => x.UseSqlServer(dataBaseOptions.ConnectionString));
+            services.AddDbContext<SolutionDbContext>(x => x.UseSqlServer(dataBaseOptions.ConnectionString));
 
             services
                 .AddSecurityDal()

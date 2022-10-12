@@ -1,15 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
-using the80by20.Solution.Infrastructure.DAL.DbContext;
 
-namespace the80by20.Solution.Infrastructure.SolutionToProblem.Adapters
+namespace the80by20.Solution.Infrastructure.EF.Repositories
 {
     public class EfSolutionToProblemAggregateRepository : ISolutionToProblemAggregateRepository
     {
-        private readonly CoreDbContext _context;
+        private readonly SolutionDbContext _context;
 
-        public EfSolutionToProblemAggregateRepository(CoreDbContext context)
+        public EfSolutionToProblemAggregateRepository(SolutionDbContext context)
         {
             _context = context;
         }

@@ -6,19 +6,18 @@ using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 using the80by20.Solution.App.SolutionToProblem.ReadModel;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
-using the80by20.Solution.Infrastructure.DAL.DbContext;
 
-namespace the80by20.Solution.Infrastructure.SolutionToProblem.Adapters
+namespace the80by20.Solution.Infrastructure.EF.Repositories
 {
     // TODO pass cancelationtoken
     [Adapter]
     public class EfSolutionToProblemReadModelRepository : ISolutionToProblemReadModelQueries, ISolutionToProblemReadModelUpdates
     {
-        private readonly CoreDbContext _coreDbContext;
+        private readonly SolutionDbContext _coreDbContext;
         private readonly ICategoryCrudRepository categoryCrudRepository;
 
         // todo pobrać kategorie przez interfejs w warstwie plaikacyjnej modulu masterdata
-        public EfSolutionToProblemReadModelRepository(CoreDbContext coreDbContext,
+        public EfSolutionToProblemReadModelRepository(SolutionDbContext coreDbContext,
             ICategoryCrudRepository categoryCrudRepository)
         {
             _coreDbContext = coreDbContext;

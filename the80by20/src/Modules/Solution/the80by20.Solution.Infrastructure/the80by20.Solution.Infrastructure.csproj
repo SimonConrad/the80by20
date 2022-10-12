@@ -46,4 +46,9 @@
 	  <ProjectReference Include="..\the80by20.Solution.Domain\the80by20.Solution.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="EF\Migrations\" />
+	  <Folder Include="SolutionToProblem.Adapters\" />
+	</ItemGroup>
+
 </Project>

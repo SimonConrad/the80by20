@@ -3,15 +3,15 @@ using the80by20.Solution.App.SolutionToProblem.ReadModel;
 using the80by20.Solution.Domain.Security.UserEntity;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
 using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
+using the80by20.Solution.Infrastructure.EF.Configurations;
 using the80by20.Solution.Infrastructure.Security.Adapters.Users;
-using the80by20.Solution.Infrastructure.SolutionToProblem.Adapters;
 
 // todo do command handler decorator that wrpas into unit of worka transaction - like in my-spot
 
-namespace the80by20.Solution.Infrastructure.DAL.DbContext
+namespace the80by20.Solution.Infrastructure.EF
 {
     // in future do some in memory or not in memopry sqllite for testing purposes
-    public class CoreDbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class SolutionDbContext : DbContext
     {
         #region write models
         public DbSet<SolutionToProblemAggregate> SolutionsToProblemsAggregates { get; set; }
@@ -24,11 +24,10 @@ namespace the80by20.Solution.Infrastructure.DAL.DbContext
         #endregion
 
 
-
         public DbSet<User> Users { get; set; }
 
 
-        public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
+        public SolutionDbContext(DbContextOptions<SolutionDbContext> options) : base(options)
         {
         }
 
@@ -50,7 +49,7 @@ namespace the80by20.Solution.Infrastructure.DAL.DbContext
 
 
             UserSchema.MapUsing(modelBuilder);
-            SolutionToProblemSchema.MapUsing(modelBuilder);
+            SolutionToProblemConfiguration.MapUsing(modelBuilder);
         }
     }
 }

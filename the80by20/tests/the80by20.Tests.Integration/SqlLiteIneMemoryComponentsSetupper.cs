@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using the80by20.Masterdata.Infrastructure.EF;
-using the80by20.Solution.Infrastructure.DAL.DbContext;
+using the80by20.Solution.Infrastructure.EF;
 
 namespace the80by20.Tests.Integration;
 
@@ -13,7 +13,7 @@ internal static class SqlLiteIneMemoryComponentsSetupper
     {
         var coreDbCtxtDescriptor = services.SingleOrDefault(
             d => d.ServiceType ==
-                 typeof(DbContextOptions<CoreDbContext>));
+                 typeof(DbContextOptions<SolutionDbContext>));
 
         if (coreDbCtxtDescriptor != null)
         {
@@ -42,7 +42,7 @@ internal static class SqlLiteIneMemoryComponentsSetupper
         connection.Open();
         var testDatabase = new TestSqlLiteInMemoryDatabase(connection);
 
-        services.AddDbContext<CoreDbContext>(x => x.UseSqlite(connection));
+        services.AddDbContext<SolutionDbContext>(x => x.UseSqlite(connection));
         services.AddDbContext<MasterDataDbContext>(x => x.UseSqlite(connection));
 
         return (connection, testDatabase);

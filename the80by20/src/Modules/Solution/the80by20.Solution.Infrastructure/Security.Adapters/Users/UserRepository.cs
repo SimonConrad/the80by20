@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Solution.App.Security.Ports;
 using the80by20.Solution.Domain.Security.UserEntity;
-using the80by20.Solution.Infrastructure.DAL.DbContext;
+using the80by20.Solution.Infrastructure.EF;
 
 namespace the80by20.Solution.Infrastructure.Security.Adapters.Users
 {
     public sealed class UserRepository : IUserRepository
     {
-        private readonly CoreDbContext _dbContext;
+        private readonly SolutionDbContext _dbContext;
 
-        public UserRepository(CoreDbContext dbContext)
+        public UserRepository(SolutionDbContext dbContext)
         {
             _dbContext = dbContext;
         }

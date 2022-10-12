@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Solution.Infrastructure.DAL.DbContext;
+using the80by20.Solution.Infrastructure.EF;
 
 namespace the80by20.Solution.Infrastructure.DAL
 {
@@ -10,9 +10,9 @@ namespace the80by20.Solution.Infrastructure.DAL
     public class UnitOfWorkBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
-        private readonly CoreDbContext _dbContext;
+        private readonly SolutionDbContext _dbContext;
 
-        public UnitOfWorkBehavior(CoreDbContext dbContext)
+        public UnitOfWorkBehavior(SolutionDbContext dbContext)
         {
             _dbContext = dbContext;
         }

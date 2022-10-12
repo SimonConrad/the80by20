@@ -1,13 +1,13 @@
 ﻿using the80by20.Shared.Abstractions.AppLayer;
-using the80by20.Solution.Infrastructure.DAL.DbContext;
+using the80by20.Solution.Infrastructure.EF;
 
 namespace the80by20.Solution.Infrastructure.DAL
 {
     public class EfUnitOfWork : IUnitOfWork
     {
-        private readonly CoreDbContext _coreDbContext;
+        private readonly SolutionDbContext _coreDbContext;
 
-        public EfUnitOfWork(CoreDbContext coreDbContext)
+        public EfUnitOfWork(SolutionDbContext coreDbContext)
         {
             _coreDbContext = coreDbContext;
         }
