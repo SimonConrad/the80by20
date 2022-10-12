@@ -1,9 +1,8 @@
-﻿using the80by20.App.Security.Commands.Exceptions;
-using the80by20.App.Security.Ports;
-using the80by20.Shared.Abstractions.AppLayer;
+﻿using the80by20.Shared.Abstractions.AppLayer;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Solution.App.Security.Ports;
 
-namespace the80by20.App.Security.Commands.Handlers;
+namespace the80by20.Solution.App.Security.Commands.Handlers;
 
 [CommandHandlerCqrs]
 internal sealed class SignInHandler : ICommandHandler<SignIn>
@@ -13,8 +12,8 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
     private readonly IPasswordManager _passwordManager;
     private readonly ITokenStorage _tokenStorage;
 
-    public SignInHandler(IUserRepository userRepository, 
-        IAuthenticator authenticator, 
+    public SignInHandler(IUserRepository userRepository,
+        IAuthenticator authenticator,
         IPasswordManager passwordManager,
         ITokenStorage tokenStorage)
     {
@@ -23,7 +22,7 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
         _passwordManager = passwordManager;
         _tokenStorage = tokenStorage;
     }
-    
+
     // todo version with cancelationtoken
     public async Task HandleAsync(SignIn command)
     {

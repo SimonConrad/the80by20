@@ -1,43 +1,45 @@
 ﻿using System.Text;
 using FluentValidation;
+using the80by20.Infrastructure.InputValidation;
 using the80by20.Shared.Abstractions.AppLayer;
 
-namespace the80by20.Infrastructure.InputValidation;
-
-internal sealed class ValidationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand>
-    where TCommand : class, ICommand
+namespace the80by20.Solution.Infrastructure.InputValidation
 {
-    private readonly ICommandHandler<TCommand> _decorated;
-    private readonly IEnumerable<IValidator<TCommand>> _validators;
-
-    public ValidationCommandHandlerDecorator(ICommandHandler<TCommand> decorated,
-        IEnumerable<IValidator<TCommand>> validators)
+    internal sealed class ValidationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand>
+        where TCommand : class, ICommand
     {
-        _decorated = decorated;
-        _validators = validators;
-    }
+        private readonly ICommandHandler<TCommand> _decorated;
+        private readonly IEnumerable<IValidator<TCommand>> _validators;
 
-    public Task HandleAsync(TCommand command)
-    {
-        var errors = _validators
-            .Select(v => v.Validate(command))
-            .SelectMany(result => result.Errors)
-            .Where(error => error is not null);
-
-        if (errors.Any())
+        public ValidationCommandHandlerDecorator(ICommandHandler<TCommand> decorated,
+            IEnumerable<IValidator<TCommand>> validators)
         {
-            var errorBuilder = new StringBuilder();
-
-            errorBuilder.AppendLine("Invalid command, reason: ");
-
-            foreach (var error in errors)
-            {
-                errorBuilder.AppendLine(error.ErrorMessage);
-            }
-
-            throw new InputValidationException(errorBuilder.ToString());
+            _decorated = decorated;
+            _validators = validators;
         }
 
-        return _decorated.HandleAsync(command);
+        public Task HandleAsync(TCommand command)
+        {
+            var errors = _validators
+                .Select(v => v.Validate(command))
+                .SelectMany(result => result.Errors)
+                .Where(error => error is not null);
+
+            if (errors.Any())
+            {
+                var errorBuilder = new StringBuilder();
+
+                errorBuilder.AppendLine("Invalid command, reason: ");
+
+                foreach (var error in errors)
+                {
+                    errorBuilder.AppendLine(error.ErrorMessage);
+                }
+
+                throw new InputValidationException(errorBuilder.ToString());
+            }
+
+            return _decorated.HandleAsync(command);
+        }
     }
 }

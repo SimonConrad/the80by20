@@ -1,15 +1,14 @@
-﻿using the80by20.App.Security.Queries;
-using Microsoft.EntityFrameworkCore;
-using the80by20.Infrastructure.DAL.DbContext;
+﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Shared.Abstractions.AppLayer;
+using the80by20.Solution.Infrastructure.DAL.DbContext;
 
-namespace the80by20.Infrastructure.Security.Adapters.Users;
+namespace the80by20.Solution.Infrastructure.Security.Adapters.Users;
 
 public sealed class GetUsersHandler : IQueryHandler<GetUsers, IEnumerable<UserDto>>
 {
     private readonly CoreDbContext _dbContext;
 
-    public GetUsersHandler(CoreDbContext dbContext) 
+    public GetUsersHandler(CoreDbContext dbContext)
         => _dbContext = dbContext;
 
     public async Task<IEnumerable<UserDto>> HandleAsync(GetUsers query)

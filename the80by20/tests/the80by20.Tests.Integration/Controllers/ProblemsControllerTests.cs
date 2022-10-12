@@ -5,12 +5,11 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
-using the80by20.App.Core.SolutionToProblem.Commands.ProblemCommands;
-using the80by20.App.MasterData.CategoryCrud;
-using the80by20.Domain.Security.UserEntity;
 using the80by20.Infrastructure.Security.Adapters.Security;
+using the80by20.Masterdata.App.CategoryCrud;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 using the80by20.Shared.Infrastucture.Time;
+using the80by20.Solution.Domain.Security.UserEntity;
 using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;
@@ -35,7 +34,7 @@ public class ProblemsControllerTests : ControllerTests, IDisposable
         await ApplyMigrations();
         await _testDatabase.Context.Users.AddAsync(user);
         // comment when normal sql db used in tests beacouse then it is done using dtabaseinitializer class
-        await _testDatabase.Context.Categories.AddRangeAsync(GetCategories());
+        await _testDatabase.MasterDataDbContext.Categories.AddRangeAsync(GetCategories());
         await _testDatabase.Context.SaveChangesAsync();
 
         // Act

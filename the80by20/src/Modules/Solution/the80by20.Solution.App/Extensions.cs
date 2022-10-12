@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using the80by20.Shared.Abstractions.AppLayer;
 
-namespace the80by20.App
+namespace the80by20.Solution.App
 {
     public static class Extensions
     {

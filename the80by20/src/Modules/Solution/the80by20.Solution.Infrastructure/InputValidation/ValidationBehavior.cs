@@ -1,38 +1,41 @@
 ﻿using FluentValidation;
 using MediatR;
+using the80by20.Infrastructure.InputValidation;
 
-namespace the80by20.Infrastructure.InputValidation;
-// todo ipiplinepreprocessor sprawidzic czy nie lepszy niżli IPipelineBehavior
-// https://github.com/jbogard/MediatR/wiki/Behaviors
-
-// todo in future use one approcach with app/abstractions not mediatr so check validation errors in decorator
-// or find other solution to do mapping of fluent errors to custom-exception
-public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>
+namespace the80by20.Solution.Infrastructure.InputValidation
 {
-    private readonly IEnumerable<IValidator<TRequest>> _validators;
-    public ValidationBehaviour(IEnumerable<IValidator<TRequest>> validators)
+    // todo ipiplinepreprocessor sprawidzic czy nie lepszy niżli IPipelineBehavior
+    // https://github.com/jbogard/MediatR/wiki/Behaviors
+
+    // todo in future use one approcach with app/abstractions not mediatr so check validation errors in decorator
+    // or find other solution to do mapping of fluent errors to custom-exception
+    public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
-        _validators = validators;
-    }
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
-    {
-        if (_validators.Any())
+        private readonly IEnumerable<IValidator<TRequest>> _validators;
+        public ValidationBehaviour(IEnumerable<IValidator<TRequest>> validators)
         {
-            var context = new ValidationContext<TRequest>(request);
-
-            var validationResults = await Task.WhenAll(
-                _validators.Select(v =>
-                    v.ValidateAsync(context, cancellationToken)));
-
-            var failures = validationResults
-                .Where(r => r.Errors.Any())
-                .SelectMany(r => r.Errors)
-                .ToList();
-
-            if (failures.Any())
-                throw new InputValidationException(string.Join("-", failures.Select(x => x.ErrorMessage)));
+            _validators = validators;
         }
-        return await next();
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        {
+            if (_validators.Any())
+            {
+                var context = new ValidationContext<TRequest>(request);
+
+                var validationResults = await Task.WhenAll(
+                    _validators.Select(v =>
+                        v.ValidateAsync(context, cancellationToken)));
+
+                var failures = validationResults
+                    .Where(r => r.Errors.Any())
+                    .SelectMany(r => r.Errors)
+                    .ToList();
+
+                if (failures.Any())
+                    throw new InputValidationException(string.Join("-", failures.Select(x => x.ErrorMessage)));
+            }
+            return await next();
+        }
     }
 }

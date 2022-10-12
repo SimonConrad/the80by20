@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using the80by20.Infrastructure.DAL.DbContext;
+using the80by20.Solution.Infrastructure.DAL.DbContext;
 
 #nullable disable
 
-namespace the80by20.Infrastructure.DAL.Migrations
+namespace the80by20.Solution.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
     partial class CoreDbContextModelSnapshot : ModelSnapshot

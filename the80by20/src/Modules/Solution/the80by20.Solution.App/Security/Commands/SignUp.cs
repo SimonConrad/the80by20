@@ -1,6 +1,6 @@
 ﻿using the80by20.Shared.Abstractions.AppLayer;
 
-namespace the80by20.App.Security.Commands;
+namespace the80by20.Solution.App.Security.Commands;
 
 
 public record SignUp(Guid UserId,

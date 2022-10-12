@@ -19,11 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Core.SolutionToProblem\Messaging.Ports\" />
+    <Folder Include="SolutionToProblem\Messaging.Ports\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Masterdata\the80by20.Masterdata.App\the80by20.Masterdata.App.csproj" />
     <ProjectReference Include="..\the80by20.Solution.Domain\the80by20.Solution.Domain.csproj" />
   </ItemGroup>
 

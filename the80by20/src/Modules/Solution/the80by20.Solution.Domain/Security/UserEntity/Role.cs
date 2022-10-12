@@ -1,13 +1,12 @@
-﻿using the80by20.Domain.Security.UserEntity.Exceptions;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Domain.Security.UserEntity;
+namespace the80by20.Solution.Domain.Security.UserEntity;
 
 [ValueObjectDdd]
 public sealed record Role
 {
 
-    public static IEnumerable<string> AvailableRoles { get; } = new[] {"admin", "user"};
+    public static IEnumerable<string> AvailableRoles { get; } = new[] { "admin", "user" };
 
     public string Value { get; }
 
@@ -27,7 +26,7 @@ public sealed record Role
     }
 
     public static Role Admin() => new("admin");
-    
+
     public static Role User() => new("user");
 
     public static implicit operator Role(string value) => new Role(value);

@@ -1,16 +1,18 @@
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
-using the80by20.App;
-using the80by20.Domain;
-using the80by20.Infrastructure;
+using the80by20.Masterdata.Infrastructure;
+using the80by20.Solution.App;
+using the80by20.Solution.Domain;
+using the80by20.Solution.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddDomain()
     .AddApplication()
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure(builder.Configuration)
+    .AddMasterDataDal(builder.Configuration);
 
 ConfigureLogging(builder);
 

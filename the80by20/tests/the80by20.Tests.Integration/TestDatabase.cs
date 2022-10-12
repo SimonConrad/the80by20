@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using the80by20.Infrastructure.DAL.DbContext;
+using the80by20.Masterdata.Infrastructure.EF;
+using the80by20.Shared.Abstractions.Dal;
 
 namespace the80by20.Tests.Integration;
 
@@ -8,33 +9,35 @@ namespace the80by20.Tests.Integration;
 internal interface IWithCoreDbContext : IDisposable
 {
     CoreDbContext Context { get; }
+    MasterDataDbContext MasterDataDbContext { get; }
 }
 
 internal sealed class TestDatabase : IWithCoreDbContext
 {
     public CoreDbContext Context { get; }
+    public MasterDataDbContext MasterDataDbContext { get; }
 
-    // todo check in memory sqllite
-    // todo run tests against db in ci
-    // - inmemory
-    // - using docker image with sql server
     public TestDatabase()
     {
         var options = new OptionsProvider().Get<DatabaseOptions>("dataBase");
         Context = new CoreDbContext(new DbContextOptionsBuilder<CoreDbContext>().UseSqlServer(options.ConnectionString).Options);
+        MasterDataDbContext = new MasterDataDbContext(new DbContextOptionsBuilder<MasterDataDbContext>().UseSqlServer(options.ConnectionString).Options);
     }
 
     public void Dispose()
     {
         Context.Database.EnsureDeleted();
         Context.Dispose();
+
+        MasterDataDbContext.Database.EnsureDeleted();
+        MasterDataDbContext.Dispose();
     }
 }
 
-// todo
 internal sealed class TestSqlLiteInMemoryDatabase : IWithCoreDbContext
 {
     public CoreDbContext Context { get; }
+    public MasterDataDbContext MasterDataDbContext { get; }
 
     public TestSqlLiteInMemoryDatabase(SqliteConnection connection)
     {
@@ -42,11 +45,17 @@ internal sealed class TestSqlLiteInMemoryDatabase : IWithCoreDbContext
         //https://stackoverflow.com/questions/58375527/override-ef-core-dbcontext-in-asp-net-core-webapplicationfactory
         Context = new CoreDbContext(new DbContextOptionsBuilder<CoreDbContext>().UseSqlite(connection).Options);
         Context.Database.EnsureCreated();
+
+        MasterDataDbContext = new MasterDataDbContext(new DbContextOptionsBuilder<MasterDataDbContext>().UseSqlite(connection).Options);
+        MasterDataDbContext.Database.EnsureCreated();
     }
 
     public void Dispose()
     {
         Context.Database.EnsureDeleted();
         Context.Dispose();
+
+        MasterDataDbContext.Database.EnsureDeleted();
+        MasterDataDbContext.Dispose();
     }
 }

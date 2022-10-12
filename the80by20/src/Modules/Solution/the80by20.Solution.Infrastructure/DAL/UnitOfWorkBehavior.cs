@@ -1,39 +1,40 @@
 ﻿using MediatR;
-using the80by20.Infrastructure.DAL.DbContext;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Solution.Infrastructure.DAL.DbContext;
 
-namespace the80by20.Infrastructure.DAL;
-
-// todo test 
-// https://github.com/jbogard/MediatR/wiki/Behaviors todo check if instead of IPipelineBehavior use preprocessor and posprocessobehavior
-[HandlerDecorator]
-public class UnitOfWorkBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
-    where TRequest : IRequest<TResponse>
+namespace the80by20.Solution.Infrastructure.DAL
 {
-    private readonly CoreDbContext _dbContext;
-
-    public UnitOfWorkBehavior(CoreDbContext dbContext)
+    // todo test 
+    // https://github.com/jbogard/MediatR/wiki/Behaviors todo check if instead of IPipelineBehavior use preprocessor and posprocessobehavior
+    [HandlerDecorator]
+    public class UnitOfWorkBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
-        _dbContext = dbContext;
-    }
+        private readonly CoreDbContext _dbContext;
 
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
-    {
-        await using var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
-
-        try
+        public UnitOfWorkBehavior(CoreDbContext dbContext)
         {
-            var result = await next();
-            await _dbContext.SaveChangesAsync(cancellationToken);
-            await transaction.CommitAsync(cancellationToken);
-
-            return result;
+            _dbContext = dbContext;
         }
-        catch (Exception)
+
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            await transaction.RollbackAsync(cancellationToken);
-            throw;
-        }
-    }
+            await using var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
 
+            try
+            {
+                var result = await next();
+                await _dbContext.SaveChangesAsync(cancellationToken);
+                await transaction.CommitAsync(cancellationToken);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                throw;
+            }
+        }
+
+    }
 }

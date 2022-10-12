@@ -1,14 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using the80by20.Shared.Abstractions.AppLayer;
 
-namespace the80by20.Infrastructure.Logging;
-
-internal static class Extensions
+namespace the80by20.Solution.Infrastructure.Logging
 {
-    public static IServiceCollection AddCustomLogging(this IServiceCollection services)
+    internal static class Extensions
     {
-        services.TryDecorate(typeof(ICommandHandler<>), typeof(LoggingCommandHandlerDecorator<>));
+        public static IServiceCollection AddCustomLogging(this IServiceCollection services)
+        {
+            services.TryDecorate(typeof(ICommandHandler<>), typeof(LoggingCommandHandlerDecorator<>));
 
-        return services;
+            return services;
+        }
     }
 }

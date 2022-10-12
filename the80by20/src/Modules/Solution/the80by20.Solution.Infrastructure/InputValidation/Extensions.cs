@@ -1,14 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using the80by20.Shared.Abstractions.AppLayer;
 
-namespace the80by20.Infrastructure.InputValidation;
-
-internal static class Extensions
+namespace the80by20.Solution.Infrastructure.InputValidation
 {
-    public static IServiceCollection AddInputValidation(this IServiceCollection services)
+    internal static class Extensions
     {
-        services.TryDecorate(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
+        public static IServiceCollection AddInputValidation(this IServiceCollection services)
+        {
+            services.TryDecorate(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
 
-        return services;
+            return services;
+        }
     }
 }

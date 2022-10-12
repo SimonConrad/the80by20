@@ -1,6 +1,6 @@
-﻿using the80by20.Domain.Security.UserEntity;
+﻿using the80by20.Solution.Domain.Security.UserEntity;
 
-namespace the80by20.App.Security.Ports;
+namespace the80by20.Solution.App.Security.Ports;
 
 public interface IUserRepository
 {

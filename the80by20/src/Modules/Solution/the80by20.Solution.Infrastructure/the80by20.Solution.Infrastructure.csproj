@@ -41,6 +41,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
+	  <ProjectReference Include="..\..\Masterdata\the80by20.Masterdata.App\the80by20.Masterdata.App.csproj" />
 	  <ProjectReference Include="..\the80by20.Solution.App\the80by20.Solution.App.csproj" />
 	  <ProjectReference Include="..\the80by20.Solution.Domain\the80by20.Solution.Domain.csproj" />
 	</ItemGroup>

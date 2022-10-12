@@ -14,6 +14,9 @@
 
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.Api\the80by20.Masterdata.Api.csproj" />
+	  <ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.App\the80by20.Masterdata.App.csproj" />
+	  <ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.Infrastructure\the80by20.Masterdata.Infrastructure.csproj" />
 	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.Api\the80by20.Solution.Api.csproj" />
 	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.App\the80by20.Solution.App.csproj" />
 	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.Domain\the80by20.Solution.Domain.csproj" />

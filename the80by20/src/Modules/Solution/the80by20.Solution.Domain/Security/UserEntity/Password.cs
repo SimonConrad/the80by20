@@ -1,20 +1,19 @@
-﻿using the80by20.Domain.Security.UserEntity.Exceptions;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Domain.Security.UserEntity;
+namespace the80by20.Solution.Domain.Security.UserEntity;
 
 [ValueObjectDdd]
 public sealed record Password
 {
     public string Value { get; }
-        
+
     public Password(string value)
     {
         if (string.IsNullOrWhiteSpace(value) || value.Length is > 200 or < 6)
         {
             throw new InvalidPasswordException();
         }
-            
+
         Value = value;
     }
 

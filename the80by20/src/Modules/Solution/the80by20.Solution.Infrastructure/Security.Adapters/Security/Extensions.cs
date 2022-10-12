@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using the80by20.App.Security.Ports;
-using the80by20.Domain.Security.UserEntity;
-using the80by20.Infrastructure.Security.Adapters.Users;
+using the80by20.Solution.Domain.Security.UserEntity;
+using the80by20.Solution.Infrastructure.Security.Adapters.Users;
 
-namespace the80by20.Infrastructure.Security.Adapters.Security;
-
-internal static class Extensions
+namespace the80by20.Solution.Infrastructure.Security.Adapters.Security
 {
-    public static IServiceCollection AddSecurity(this IServiceCollection services)
+    internal static class Extensions
     {
-        services
-            .AddScoped<IUserRepository, UserRepository>()
-            .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
-            .AddSingleton<IPasswordManager, PasswordManager>();
+        public static IServiceCollection AddSecurity(this IServiceCollection services)
+        {
+            services
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
+                .AddSingleton<IPasswordManager, PasswordManager>();
 
-        return services;
+            return services;
+        }
     }
 }

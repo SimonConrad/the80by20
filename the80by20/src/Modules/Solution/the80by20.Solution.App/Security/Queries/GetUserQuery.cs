@@ -1,7 +1,7 @@
 ﻿using the80by20.Shared.Abstractions.AppLayer;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.App.Security.Queries;
+namespace the80by20.Solution.App.Security.Queries;
 
 // INFO we don't done care in querying for immutability
 // as it is only for querying and not changing state, lack of encapsulation is not harm for our system like it is in command

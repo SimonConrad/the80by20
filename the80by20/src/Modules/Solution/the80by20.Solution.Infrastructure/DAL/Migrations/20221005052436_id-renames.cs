@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace the80by20.Infrastructure.DAL.Migrations
+namespace the80by20.Solution.Infrastructure.DAL.Migrations
 {
     public partial class idrenames : Migration
     {

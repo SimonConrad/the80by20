@@ -1,7 +1,7 @@
 using Shouldly;
-using the80by20.Domain.Core.SolutionToProblem.Operations;
-using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
+using the80by20.Solution.Domain.SolutionToProblem.Operations;
+using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
 
 // info look at test from 3 perpsectives
 // 1st testing like pure function give input and verify output

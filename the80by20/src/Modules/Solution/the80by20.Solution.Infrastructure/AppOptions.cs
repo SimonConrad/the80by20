@@ -1,7 +1,8 @@
-﻿namespace the80by20.Infrastructure;
-
-public sealed class AppOptions
+﻿namespace the80by20.Solution.Infrastructure
 {
-    public string Name { get; set; }
-    public string FrontUrl { get; set; }
+    public sealed class AppOptions
+    {
+        public string Name { get; set; }
+        public string FrontUrl { get; set; }
+    }
 }

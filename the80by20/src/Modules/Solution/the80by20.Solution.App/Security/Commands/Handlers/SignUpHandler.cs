@@ -1,11 +1,10 @@
 ﻿using FluentValidation;
-using the80by20.App.Security.Commands.Exceptions;
-using the80by20.App.Security.Ports;
-using the80by20.Domain.Security.UserEntity;
 using the80by20.Shared.Abstractions.AppLayer;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
+using the80by20.Solution.App.Security.Ports;
+using the80by20.Solution.Domain.Security.UserEntity;
 
-namespace the80by20.App.Security.Commands.Handlers;
+namespace the80by20.Solution.App.Security.Commands.Handlers;
 
 internal sealed class SignUpHandler : ICommandHandler<SignUp>
 {
@@ -13,8 +12,8 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
     private readonly IPasswordManager _passwordManager;
     private readonly IClock _clock;
 
-    public SignUpHandler(IUserRepository userRepository, 
-        IPasswordManager passwordManager, 
+    public SignUpHandler(IUserRepository userRepository,
+        IPasswordManager passwordManager,
         IClock clock)
     {
         _userRepository = userRepository;
@@ -31,7 +30,7 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         var password = new Password(command.Password);
         var fullName = new FullName(command.FullName);
         var role = string.IsNullOrWhiteSpace(command.Role) ? Role.User() : new Role(command.Role);
-        
+
         if (await _userRepository.GetByEmailAsync(email) is not null)
         {
             throw new EmailAlreadyInUseException(email);

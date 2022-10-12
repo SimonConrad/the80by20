@@ -1,7 +1,7 @@
 ﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Domain.Security.UserEntity;
+namespace the80by20.Solution.Domain.Security.UserEntity;
 
 [ValueObjectDdd]
 public sealed record UserId
@@ -19,6 +19,6 @@ public sealed record UserId
     }
 
     public static implicit operator Guid(UserId date) => date.Value;
-    
+
     public static implicit operator UserId(Guid value) => new(value);
 }

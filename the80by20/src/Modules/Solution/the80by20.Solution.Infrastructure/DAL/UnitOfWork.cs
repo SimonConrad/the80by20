@@ -1,31 +1,32 @@
-﻿using the80by20.Infrastructure.DAL.DbContext;
-using the80by20.Shared.Abstractions.AppLayer;
+﻿using the80by20.Shared.Abstractions.AppLayer;
+using the80by20.Solution.Infrastructure.DAL.DbContext;
 
-namespace the80by20.Infrastructure.DAL;
-
-public class EfUnitOfWork : IUnitOfWork
+namespace the80by20.Solution.Infrastructure.DAL
 {
-    private readonly CoreDbContext _coreDbContext;
-
-    public EfUnitOfWork(CoreDbContext coreDbContext)
+    public class EfUnitOfWork : IUnitOfWork
     {
-        _coreDbContext = coreDbContext;
-    }
+        private readonly CoreDbContext _coreDbContext;
 
-    public async Task ExecuteAsync(Func<Task> action)
-    {
-        await using var transaction = await _coreDbContext.Database.BeginTransactionAsync();
-
-        try
+        public EfUnitOfWork(CoreDbContext coreDbContext)
         {
-            await action();
-            await _coreDbContext.SaveChangesAsync();
-            await transaction.CommitAsync();
+            _coreDbContext = coreDbContext;
         }
-        catch (Exception)
+
+        public async Task ExecuteAsync(Func<Task> action)
         {
-            await transaction.RollbackAsync();
-            throw;
+            await using var transaction = await _coreDbContext.Database.BeginTransactionAsync();
+
+            try
+            {
+                await action();
+                await _coreDbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
     }
 }

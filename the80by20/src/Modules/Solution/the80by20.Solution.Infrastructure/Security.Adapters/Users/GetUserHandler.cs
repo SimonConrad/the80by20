@@ -1,18 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.App.Security.Queries;
-using the80by20.Domain.Security.UserEntity;
-using the80by20.Infrastructure.DAL.DbContext;
 using the80by20.Shared.Abstractions.AppLayer;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Solution.Infrastructure.DAL.DbContext;
+using the80by20.Solution.Infrastructure.Security.Adapters.Users;
 
-namespace the80by20.Infrastructure.Security.Adapters.Users;
+namespace the80by20.Solution.Infrastructure.Security.Adapters.Users;
 
 [QueryHandlerCqrs]
 public sealed class GetUserHandler : IQueryHandler<GetUser, UserDto>
 {
     private readonly CoreDbContext _dbContext;
 
-    public GetUserHandler(CoreDbContext dbContext) 
+    public GetUserHandler(CoreDbContext dbContext)
         => _dbContext = dbContext;
 
     public async Task<UserDto> HandleAsync(GetUser query)

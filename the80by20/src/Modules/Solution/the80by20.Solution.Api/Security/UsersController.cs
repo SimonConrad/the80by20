@@ -3,19 +3,19 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
-using the80by20.App.Security.Commands;
-using the80by20.App.Security.Ports;
-using the80by20.App.Security.Queries;
-using the80by20.Infrastructure;
 using the80by20.Shared.Abstractions.AppLayer;
+using the80by20.Solution.App.Security.Commands;
+using the80by20.Solution.App.Security.Ports;
+using the80by20.Solution.App.Security.Queries;
+using the80by20.Solution.Infrastructure;
 
-namespace the80by20.WebApi.Security;
+namespace the80by20.Solution.Api.Security;
 
 // todo is convention userscontroller vs usercontroller
 
 [ApiController] // info bacouse of inheriting from ControllerBase and marking controllre as [ApiController] attributes: FromRoute, FromQuery, FromBody can be removed
 [Route("security/[controller]")]
-public class UsersController  : ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly IQueryHandler<GetUsers, IEnumerable<UserDto>> _getUsersHandler;
     private readonly IQueryHandler<GetUser, UserDto> _getUserHandler;
@@ -49,7 +49,7 @@ public class UsersController  : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<UserDto>> Get([FromRoute] Guid userId)
     {
-        var user = await _getUserHandler.HandleAsync(new GetUser(){UserId = userId});
+        var user = await _getUserHandler.HandleAsync(new GetUser() { UserId = userId });
         if (user is null)
         {
             return NotFound();
@@ -70,7 +70,7 @@ public class UsersController  : ControllerBase
         }
 
         var userId = Guid.Parse(User.Identity?.Name);
-        var user = await _getUserHandler.HandleAsync(new GetUser(){UserId = userId});
+        var user = await _getUserHandler.HandleAsync(new GetUser() { UserId = userId });
 
         return user;
     }

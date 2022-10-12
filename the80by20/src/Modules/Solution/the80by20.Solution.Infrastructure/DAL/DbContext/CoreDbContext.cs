@@ -1,16 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.App.Core.SolutionToProblem.ReadModel;
-using the80by20.App.MasterData.CategoryCrud;
-using the80by20.Domain.Core.SolutionToProblem.Operations.Problem;
-using the80by20.Domain.Core.SolutionToProblem.Operations.Solution;
-using the80by20.Domain.Security.UserEntity;
-using the80by20.Infrastructure.Core.SolutionToProblem.Adapters;
-using the80by20.Infrastructure.MasterData.Adapters;
-using the80by20.Infrastructure.Security.Adapters.Users;
+using the80by20.Solution.Domain.Security.UserEntity;
+using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
+using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
+using the80by20.Solution.Infrastructure.Security.Adapters.Users;
+using the80by20.Solution.Infrastructure.SolutionToProblem.Adapters;
 
 // todo do command handler decorator that wrpas into unit of worka transaction - like in my-spot
 
-namespace the80by20.Infrastructure.DAL.DbContext
+namespace the80by20.Solution.Infrastructure.DAL.DbContext
 {
     // in future do some in memory or not in memopry sqllite for testing purposes
     public class CoreDbContext : Microsoft.EntityFrameworkCore.DbContext
@@ -25,10 +22,10 @@ namespace the80by20.Infrastructure.DAL.DbContext
         public DbSet<SolutionToProblemReadModel> SolutionsToProblemsReadModel { get; set; }
         #endregion
 
-        #region crud models
-        public DbSet<Category> Categories { get; set; }
+
+
         public DbSet<User> Users { get; set; }
-        #endregion
+
 
         public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
         {
@@ -39,8 +36,8 @@ namespace the80by20.Infrastructure.DAL.DbContext
             // todo move to extensions
             optionsBuilder
                 .LogTo(Console.WriteLine);
-                //.EnableSensitiveDataLogging()
-                //.EnableDetailedErrors();
+            //.EnableSensitiveDataLogging()
+            //.EnableDetailedErrors();
 
             base.OnConfiguring(optionsBuilder);
         }
@@ -49,8 +46,8 @@ namespace the80by20.Infrastructure.DAL.DbContext
         {
             // TODO think if needed
             base.OnModelCreating(modelBuilder);
-            
-            MasterDataSchema.MapUsing(modelBuilder);
+
+
             UserSchema.MapUsing(modelBuilder);
             SolutionToProblemSchema.MapUsing(modelBuilder);
         }

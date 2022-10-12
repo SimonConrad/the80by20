@@ -5,12 +5,11 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
-using the80by20.App.Security.Commands;
-using the80by20.App.Security.Ports;
-using the80by20.App.Security.Queries;
-using the80by20.Domain.Security.UserEntity;
 using the80by20.Infrastructure.Security.Adapters.Security;
 using the80by20.Shared.Infrastucture.Time;
+using the80by20.Solution.App.Security.Ports;
+using the80by20.Solution.App.Security.Queries;
+using the80by20.Solution.Domain.Security.UserEntity;
 using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;

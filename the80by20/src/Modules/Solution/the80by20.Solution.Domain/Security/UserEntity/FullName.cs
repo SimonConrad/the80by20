@@ -1,20 +1,19 @@
-﻿using the80by20.Domain.Security.UserEntity.Exceptions;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Domain.Security.UserEntity;
+namespace the80by20.Solution.Domain.Security.UserEntity;
 
 [ValueObjectDdd]
 public sealed record FullName
 {
     public string Value { get; }
-        
+
     public FullName(string value)
     {
         if (string.IsNullOrWhiteSpace(value) || value.Length is > 100 or < 3)
         {
             throw new InvalidFullNameException(value);
         }
-            
+
         Value = value;
     }
 
