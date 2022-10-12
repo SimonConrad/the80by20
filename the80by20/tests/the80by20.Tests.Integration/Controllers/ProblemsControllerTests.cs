@@ -1,16 +1,12 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using the80by20.Masterdata.App.CategoryCrud;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 using the80by20.Shared.Infrastucture.Time;
-using the80by20.Solution.App.SolutionToProblem.Commands.ProblemCommands;
-using the80by20.Solution.Domain.Security.UserEntity;
-using the80by20.Solution.Infrastructure.Security.Adapters.Security;
 using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;

@@ -1,7 +1,6 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Masterdata.Infrastructure.EF;
-using the80by20.Shared.Abstractions.Dal;
+using the80by20.Shared.Infrastucture;
 using the80by20.Solution.Infrastructure.EF;
 
 namespace the80by20.Tests.Integration;

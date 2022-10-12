@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using the80by20.Shared.Infrastucture.Time;
-using the80by20.Solution.App.Security.Commands;
-using the80by20.Solution.App.Security.Ports;
-using the80by20.Solution.App.Security.Queries;
-using the80by20.Solution.Domain.Security.UserEntity;
-using the80by20.Solution.Infrastructure.Security.Adapters.Security;
+using the80by20.Users.App.Commands;
+using the80by20.Users.App.Ports;
+using the80by20.Users.App.Queries;
+using the80by20.Users.Domain.UserEntity;
+using the80by20.Users.Infrastructure.Security;
 using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;

@@ -1,24 +1,31 @@
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
+using the80by20.Bootstrapper;
 using the80by20.Masterdata.Infrastructure;
-using the80by20.Solution.App;
+using the80by20.Shared.Infrastucture;
 using the80by20.Solution.Domain;
 using the80by20.Solution.Infrastructure;
+using the80by20.Users.App;
+using the80by20.Users.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddDomain()
-    .AddApplication()
-    .AddInfrastructure(builder.Configuration)
-    .AddMasterDataDal(builder.Configuration);
+    .AddSolutionDomain()
+    .AddSolutionInfrastructure(builder.Configuration)
+    .AddMasterdataInfrastructure(builder.Configuration)
+    .AddUsersApp()
+    .AddUsersInfrastructure(builder.Configuration)
+    .AddBootsrapper(builder.Configuration);
+
+builder.Services.AddHostedService<DatabaseInitializer>();
 
 ConfigureLogging(builder);
 
 var app = builder.Build();
 
-app.UseInfrastructure(builder.Configuration);
+app.UseBootstartpper(builder.Configuration);
 
 app.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
 

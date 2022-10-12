@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using the80by20.Solution.Infrastructure;
 
 namespace the80by20.Tests.Integration;
 

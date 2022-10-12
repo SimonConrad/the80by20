@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
-using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
+using the80by20.Solution.Domain.Operations.Problem;
+using the80by20.Solution.Domain.Operations.Solution;
 
 namespace the80by20.Solution.Infrastructure.EF.Repositories
 {

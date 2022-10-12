@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SolutionToProblem\Messaging.Ports\" />
+    <Folder Include="Messaging.Ports\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.Solution.App.SolutionToProblem.ReadModel;
-using the80by20.Solution.Domain.Security.UserEntity;
-using the80by20.Solution.Domain.SolutionToProblem.Operations.Problem;
-using the80by20.Solution.Domain.SolutionToProblem.Operations.Solution;
+using the80by20.Solution.App.ReadModel;
+using the80by20.Solution.Domain.Operations.Problem;
+using the80by20.Solution.Domain.Operations.Solution;
 using the80by20.Solution.Infrastructure.EF.Configurations;
-using the80by20.Solution.Infrastructure.Security.Adapters.Users;
 
 // todo do command handler decorator that wrpas into unit of worka transaction - like in my-spot
 
@@ -22,9 +20,6 @@ namespace the80by20.Solution.Infrastructure.EF
         #region read models
         public DbSet<SolutionToProblemReadModel> SolutionsToProblemsReadModel { get; set; }
         #endregion
-
-
-        public DbSet<User> Users { get; set; }
 
 
         public SolutionDbContext(DbContextOptions<SolutionDbContext> options) : base(options)
@@ -47,6 +42,7 @@ namespace the80by20.Solution.Infrastructure.EF
             // TODO think if needed
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.HasDefaultSchema("solution");
 
             UserSchema.MapUsing(modelBuilder);
             SolutionToProblemConfiguration.MapUsing(modelBuilder);

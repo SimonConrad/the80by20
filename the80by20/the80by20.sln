@@ -55,11 +55,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Solution.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Solution.Infrastructure", "src\Modules\Solution\the80by20.Solution.Infrastructure\the80by20.Solution.Infrastructure.csproj", "{1B4B0EF6-64B2-4A1B-BD89-8CE123F7A01A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Masterdata.Api", "src\Modules\Masterdata\the80by20.Masterdata.Api\the80by20.Masterdata.Api.csproj", "{B4759DCA-472A-4054-ACAB-CFAC446875FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Masterdata.Api", "src\Modules\Masterdata\the80by20.Masterdata.Api\the80by20.Masterdata.Api.csproj", "{B4759DCA-472A-4054-ACAB-CFAC446875FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Masterdata.App", "src\Modules\Masterdata\the80by20.Masterdata.App\the80by20.Masterdata.App.csproj", "{A47730D8-BC9B-4D0B-A4CD-8B4FAC54AEBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Masterdata.App", "src\Modules\Masterdata\the80by20.Masterdata.App\the80by20.Masterdata.App.csproj", "{A47730D8-BC9B-4D0B-A4CD-8B4FAC54AEBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Masterdata.Infrastructure", "src\Modules\Masterdata\the80by20.Masterdata.Infrastructure\the80by20.Masterdata.Infrastructure.csproj", "{C3C2064A-59CC-4FC5-903A-811C739ECA7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Masterdata.Infrastructure", "src\Modules\Masterdata\the80by20.Masterdata.Infrastructure\the80by20.Masterdata.Infrastructure.csproj", "{C3C2064A-59CC-4FC5-903A-811C739ECA7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Users.Api", "src\Modules\Users\the80by20.Users.Api\the80by20.Users.Api.csproj", "{36C344B8-1B0A-4227-8531-5A5B44FD8F81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Users.App", "src\Modules\Users\the80by20.Users.App\the80by20.Users.App.csproj", "{A8F2EEC1-E1A3-4375-802D-F922E4874BA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Users.Infrastructure", "src\Modules\Users\the80by20.Users.Infrastructure\the80by20.Users.Infrastructure.csproj", "{859EE842-73E7-4883-9CAA-6A1DB998E5AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Users.Domain", "src\Modules\Users\the80by20.Users.Domain\the80by20.Users.Domain.csproj", "{3BCB604A-9200-42C9-912A-0DD63A03C604}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +135,22 @@ Global
 		{C3C2064A-59CC-4FC5-903A-811C739ECA7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3C2064A-59CC-4FC5-903A-811C739ECA7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3C2064A-59CC-4FC5-903A-811C739ECA7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36C344B8-1B0A-4227-8531-5A5B44FD8F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36C344B8-1B0A-4227-8531-5A5B44FD8F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36C344B8-1B0A-4227-8531-5A5B44FD8F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36C344B8-1B0A-4227-8531-5A5B44FD8F81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F2EEC1-E1A3-4375-802D-F922E4874BA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F2EEC1-E1A3-4375-802D-F922E4874BA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F2EEC1-E1A3-4375-802D-F922E4874BA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F2EEC1-E1A3-4375-802D-F922E4874BA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{859EE842-73E7-4883-9CAA-6A1DB998E5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{859EE842-73E7-4883-9CAA-6A1DB998E5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{859EE842-73E7-4883-9CAA-6A1DB998E5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{859EE842-73E7-4883-9CAA-6A1DB998E5AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BCB604A-9200-42C9-912A-0DD63A03C604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BCB604A-9200-42C9-912A-0DD63A03C604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BCB604A-9200-42C9-912A-0DD63A03C604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BCB604A-9200-42C9-912A-0DD63A03C604}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +180,10 @@ Global
 		{B4759DCA-472A-4054-ACAB-CFAC446875FA} = {971DFE39-177B-4150-8634-FBCDBD369548}
 		{A47730D8-BC9B-4D0B-A4CD-8B4FAC54AEBE} = {971DFE39-177B-4150-8634-FBCDBD369548}
 		{C3C2064A-59CC-4FC5-903A-811C739ECA7F} = {971DFE39-177B-4150-8634-FBCDBD369548}
+		{36C344B8-1B0A-4227-8531-5A5B44FD8F81} = {4ACEC4D4-1D65-49CE-8502-222B5F7F8F5D}
+		{A8F2EEC1-E1A3-4375-802D-F922E4874BA5} = {4ACEC4D4-1D65-49CE-8502-222B5F7F8F5D}
+		{859EE842-73E7-4883-9CAA-6A1DB998E5AE} = {4ACEC4D4-1D65-49CE-8502-222B5F7F8F5D}
+		{3BCB604A-9200-42C9-912A-0DD63A03C604} = {4ACEC4D4-1D65-49CE-8502-222B5F7F8F5D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EF83377-9D3D-407D-89DA-82A9D7E6B66C}

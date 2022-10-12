@@ -14,6 +14,19 @@
 
 
 	<ItemGroup>
+	  <PackageReference Include="Serilog" Version="2.11.0" />
+	  <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+	  <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+	  <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+	  <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+	  <PackageReference Include="Serilog.Sinks.Seq" Version="5.1.1" />
+	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	  <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
+	</ItemGroup>
+
+
+
+	<ItemGroup>
 	  <ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.Api\the80by20.Masterdata.Api.csproj" />
 	  <ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.App\the80by20.Masterdata.App.csproj" />
 	  <ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.Infrastructure\the80by20.Masterdata.Infrastructure.csproj" />
@@ -21,6 +34,7 @@
 	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.App\the80by20.Solution.App.csproj" />
 	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.Domain\the80by20.Solution.Domain.csproj" />
 	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.Infrastructure\the80by20.Solution.Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\Modules\Users\the80by20.Users.Infrastructure\the80by20.Users.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>

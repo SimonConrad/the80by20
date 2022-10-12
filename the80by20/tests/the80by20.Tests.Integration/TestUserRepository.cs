@@ -1,7 +1,4 @@
-﻿using the80by20.Solution.App.Security.Ports;
-using the80by20.Solution.Domain.Security.UserEntity;
-
-namespace the80by20.Tests.Integration;
+﻿namespace the80by20.Tests.Integration;
 
 internal sealed class TestUserRepository : IUserRepository
 {

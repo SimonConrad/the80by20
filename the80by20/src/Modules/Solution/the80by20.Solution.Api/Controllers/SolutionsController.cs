@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using the80by20.Solution.App.SolutionToProblem.ReadModel;
+using the80by20.Solution.App.ReadModel;
 
 namespace the80by20.Solution.Api.Controllers
 {
