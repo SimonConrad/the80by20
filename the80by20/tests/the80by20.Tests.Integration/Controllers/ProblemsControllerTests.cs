@@ -1,4 +1,4 @@
-﻿//// TODO
+﻿//// TODO make tests working with real database work, also on ci/cd sqllite ine memory has problems with applying migrations if multiple contexts and schemas
 
 //using System.Net;
 //using System.Net.Http.Json;

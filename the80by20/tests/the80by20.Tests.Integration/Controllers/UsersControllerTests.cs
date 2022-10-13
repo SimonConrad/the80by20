@@ -1,4 +1,5 @@
-﻿// TODO
+﻿//// TODO make tests working with real database work, also on ci/cd sqllite ine memory has problems with applying migrations if multiple contexts and schemas
+
 
 //using System.Net;
 //using System.Net.Http.Json;
@@ -36,7 +37,7 @@
 //        var passwordManager = new PasswordManager(new PasswordHasher<User>());
 //        var clock = new Clock();
 //        const string password = "secret";
-        
+
 //        var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
 //            "test-user1", passwordManager.Secure(password), "Test Jon", Role.User(), clock.Current());
 //        await _userRepository.AddAsync(user);
@@ -62,7 +63,7 @@
 //        var passwordManager = new PasswordManager(new PasswordHasher<User>());
 //        var clock = new Clock();
 //        const string password = "secret";
-        
+
 //        var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
 //            "test-user1", passwordManager.Secure(password), "Test Jon", Role.User(), clock.Current());
 
@@ -89,7 +90,7 @@
 //    }
 
 //    private IUserRepository _userRepository;
-    
+
 //    private IWithCoreDbContext _testDatabase;
 //    private SqliteConnection _connection;
 
