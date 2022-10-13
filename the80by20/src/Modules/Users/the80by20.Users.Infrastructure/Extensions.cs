@@ -16,6 +16,8 @@ using Microsoft.EntityFrameworkCore;
 using the80by20.Shared.Infrastucture;
 using the80by20.Users.Infrastructure.EF;
 using the80by20.Shared.Abstractions.AppLayer;
+using the80by20.Shared.Infrastucture.Decorators;
+using the80by20.Shared.Infrastucture.EF;
 
 namespace the80by20.Users.Infrastructure
 {
@@ -28,7 +30,10 @@ namespace the80by20.Users.Infrastructure
             AddSecurity(services);
 
             AddAuth(services, configuration);
-            
+
+            AddCommandHAndlersDecorators(services);
+
+
             AddDbCtxt(services, configuration);
 
             // INFO CQRS queryhandlers registration
@@ -57,6 +62,17 @@ namespace the80by20.Users.Infrastructure
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
                 .AddSingleton<IPasswordManager, PasswordManager>();
+        }
+
+        private static void AddCommandHAndlersDecorators(IServiceCollection services)
+        {
+            // info only used in commands done like the80by20.App.Abstractions.ICommand
+            services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+            services.TryDecorate(typeof(ICommandHandler<>), typeof(UnitOfWorkCommandHandlerDecorator<>));
+
+            services.TryDecorate(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
+
+            services.TryDecorate(typeof(ICommandHandler<>), typeof(LoggingCommandHandlerDecorator<>));
         }
 
         private static void AddAuth(IServiceCollection services, IConfiguration configuration)

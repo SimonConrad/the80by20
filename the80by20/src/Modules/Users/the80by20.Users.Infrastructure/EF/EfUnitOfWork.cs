@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Shared.Abstractions.AppLayer;
+using the80by20.Users.Infrastructure.EF;
 
 namespace the80by20.Shared.Infrastucture.EF
 {
     public class EfUnitOfWork : IUnitOfWork
     {
-        private readonly DbContext _dbContext;
+        private readonly UsersDbContext _dbContext;
 
-        public EfUnitOfWork(DbContext dbContext)
+        public EfUnitOfWork(UsersDbContext dbContext)
         {
             _dbContext = dbContext;
         }
