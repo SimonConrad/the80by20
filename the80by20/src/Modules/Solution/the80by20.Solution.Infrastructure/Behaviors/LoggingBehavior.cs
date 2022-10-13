@@ -10,7 +10,7 @@ namespace the80by20.Solution.Infrastructure.Behaviors
     {
         private readonly ILogger _logger;
 
-        public LoggingBehavior(ILogger logger)
+        public LoggingBehavior(ILogger<TRequest> logger)
         {
             _logger = logger;
         }

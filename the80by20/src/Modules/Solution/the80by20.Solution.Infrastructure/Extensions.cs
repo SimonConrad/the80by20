@@ -10,6 +10,9 @@ using the80by20.Solution.Domain.Operations.Solution;
 using the80by20.Solution.Infrastructure.Behaviors;
 using the80by20.Solution.Infrastructure.EF.Repositories;
 using the80by20.Solution.Infrastructure.EF;
+using static System.Net.Mime.MediaTypeNames;
+using FluentValidation;
+using the80by20.Solution.App.CommandsHandlers.ProblemHandlers;
 
 namespace the80by20.Solution.Infrastructure
 {
@@ -37,6 +40,8 @@ namespace the80by20.Solution.Infrastructure
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
+            services.AddValidatorsFromAssembly(typeof(CreateProblemInputValidator).Assembly);
             // info more problems with this then pozytku services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkBehavior<,>));
         }
 
