@@ -42,7 +42,7 @@ namespace the80by20.Solution.Infrastructure.EF
             // TODO think if needed
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.HasDefaultSchema("solution");
+            modelBuilder.HasDefaultSchema("solutions");
 
             SolutionToProblemConfiguration.MapUsing(modelBuilder);
         }

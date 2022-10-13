@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Masterdata.App.CategoryCrud;
+using the80by20.Masterdata.Infrastructure.EF.Configurations;
 
 namespace the80by20.Masterdata.Infrastructure.EF
 {
@@ -14,7 +15,7 @@ namespace the80by20.Masterdata.Infrastructure.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("masterdata");
-            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+            CategoryConfiguration.MapUsing(modelBuilder);
         }
     }
 }

@@ -14,13 +14,13 @@ internal static class SqlLiteIneMemoryComponentsSetupper
 {
     internal static (SqliteConnection connection, IWithCoreDbContext ctxt) Setup(IServiceCollection services)
     {
-        var coreDbCtxtDescriptor = services.SingleOrDefault(
+        var solutionDbContextDescriptor = services.SingleOrDefault(
             d => d.ServiceType ==
                  typeof(DbContextOptions<SolutionDbContext>));
 
-        if (coreDbCtxtDescriptor != null)
+        if (solutionDbContextDescriptor != null)
         {
-            services.Remove(coreDbCtxtDescriptor);
+            services.Remove(solutionDbContextDescriptor);
         }
 
         var masterDataDbCtxtDescriptor = services.SingleOrDefault(

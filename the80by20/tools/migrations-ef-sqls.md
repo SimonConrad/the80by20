@@ -5,18 +5,29 @@ https://docs.microsoft.com/en-us/ef/core/cli/dbcontext-creation?tabs=dotnet-core
 package manager console
 dotnet tool install --global dotnet-ef
 
-default project core\core.infrastructure
-nuget package Microsoft.EntityFrameworkCore.Design
+default project the80by20.Solution.Infrastructure
+nuget package Microsoft.EntityFrameworkCore.Design // maybe not needed
 
 fabryka CoreSqlServerDbContextDesignTimeFactory
 
 wybrany jako startup projekt infrastructure, bo inaczej Your startup project 'the80by20.WebApi' doesn't reference Microsoft.EntityFrameworkCore.Design.
-Add-Migration Initial-Create -Context CoreDbContext -o "DAL/Migrations"
-Update-Database -context CoreDbContext
 
-Add-Migration newcolumn -Context CoreDbContext
+Add-Migration Initial-Create -Context SolutionDbContext -o "EF/Migrations"
+Update-Database -context SolutionDbContext
 
-Remove-Migration -Context CoreDbContext
+Add-Migration newcolumn -Context SolutionDbContext
+
+Remove-Migration -Context SolutionDbContext
+
+
+---- run for other dbctxts:
+the80by20.Masterdata.Infrastructure
+Add-Migration Initial-Create -Context MasterDataDbContext -o "EF/Migrations"
+Update-Database -context MasterDataDbContext
+
+default project the80by20.Users.Infrastructure
+Add-Migration Initial-Create -Context UsersDbContext -o "EF/Migrations"
+Update-Database -context UsersDbContext
 
 ## SQL
 

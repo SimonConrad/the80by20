@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using the80by20.Users.Domain.UserEntity;
+using the80by20.Users.Infrastructure.EF.Configurations;
 
 namespace the80by20.Users.Infrastructure.EF
 {
@@ -16,7 +17,7 @@ namespace the80by20.Users.Infrastructure.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("users");
-            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+            UserConfiguration.MapUsing(modelBuilder);
         }
     }
 }
