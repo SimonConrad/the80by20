@@ -25,7 +25,7 @@ namespace the80by20.Tests.Integration.Controllers;
 
 
 
-public class HomeControllerTests : ControllerTests
+public class HomeControllerTests : ControllerTests, IDisposable
 {
     private SqliteConnection _connection;
     private IWithCoreDbContext _testDatabase;

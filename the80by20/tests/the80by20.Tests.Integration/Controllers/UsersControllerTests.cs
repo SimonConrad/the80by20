@@ -80,7 +80,7 @@ public class UsersControllerTests : ControllerTests, IDisposable
 
     private async Task ApplyMigrations()
     {
-        if (!_testDatabase.UsersDbContext.Database.GetPendingMigrations().Any())
+        if (_testDatabase.UsersDbContext.Database.GetPendingMigrations().Any())
         {
             await _testDatabase.UsersDbContext.Database.MigrateAsync();
         }
