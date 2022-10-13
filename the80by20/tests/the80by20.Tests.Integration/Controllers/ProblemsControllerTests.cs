@@ -1,12 +1,16 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using the80by20.Masterdata.App.CategoryCrud;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 using the80by20.Shared.Infrastucture.Time;
+using the80by20.Solution.App.Commands.ProblemCommands;
+using the80by20.Users.Domain.UserEntity;
+using the80by20.Users.Infrastructure.Security;
 using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;
@@ -29,10 +33,12 @@ public class ProblemsControllerTests : ControllerTests, IDisposable
             "test-user1", passwordManager.Secure(password), "Test Jon", Role.User(), clock.Current());
 
         await ApplyMigrations();
-        await _testDatabase.Context.Users.AddAsync(user);
+        await _testDatabase.UsersDbContext.Users.AddAsync(user);
         // comment when normal sql db used in tests beacouse then it is done using dtabaseinitializer class
         await _testDatabase.MasterDataDbContext.Categories.AddRangeAsync(GetCategories());
-        await _testDatabase.Context.SaveChangesAsync();
+
+        await _testDatabase.MasterDataDbContext.SaveChangesAsync();
+        await _testDatabase.UsersDbContext.SaveChangesAsync();
 
         // Act
         Authorize(user.Id, user.Role);
@@ -58,20 +64,30 @@ public class ProblemsControllerTests : ControllerTests, IDisposable
 
         var problemAggregateId = Guid.Parse(response.Headers.Location.Segments.Last());
 
-        _testDatabase.Context.ProblemsAggregates.ShouldHaveSingleItem();
-        _testDatabase.Context.ProblemsCrudData.ShouldHaveSingleItem();
-        _testDatabase.Context.SolutionsToProblemsReadModel.ShouldHaveSingleItem();
+        _testDatabase.SolutionDbContext.ProblemsAggregates.ShouldHaveSingleItem();
+        _testDatabase.SolutionDbContext.ProblemsCrudData.ShouldHaveSingleItem();
+        _testDatabase.SolutionDbContext.SolutionsToProblemsReadModel.ShouldHaveSingleItem();
     }
 
     private async Task ApplyMigrations()
     {
-        if (!_testDatabase.Context.Database.GetPendingMigrations().Any())
+        if (!_testDatabase.SolutionDbContext.Database.GetPendingMigrations().Any())
         {
-            await _testDatabase.Context.Database.MigrateAsync();
+            await _testDatabase.SolutionDbContext.Database.MigrateAsync();
+        }
+
+
+        if (!_testDatabase.MasterDataDbContext.Database.GetPendingMigrations().Any())
+        {
+            await _testDatabase.MasterDataDbContext.Database.MigrateAsync();
+        }
+
+
+        if (!_testDatabase.UsersDbContext.Database.GetPendingMigrations().Any())
+        {
+            await _testDatabase.UsersDbContext.Database.MigrateAsync();
         }
     }
-
-
 
     public ProblemsControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
     {

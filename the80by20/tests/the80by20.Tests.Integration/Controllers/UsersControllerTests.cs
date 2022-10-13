@@ -66,8 +66,8 @@ public class UsersControllerTests : ControllerTests, IDisposable
 
 
         await ApplyMigrations();
-        await _testDatabase.Context.Users.AddAsync(user);
-        await _testDatabase.Context.SaveChangesAsync();
+        await _testDatabase.UsersDbContext.Users.AddAsync(user);
+        await _testDatabase.UsersDbContext.SaveChangesAsync();
 
         // Act
         Authorize(user.Id, user.Role);
@@ -80,9 +80,9 @@ public class UsersControllerTests : ControllerTests, IDisposable
 
     private async Task ApplyMigrations()
     {
-        if (!_testDatabase.Context.Database.GetPendingMigrations().Any())
+        if (!_testDatabase.UsersDbContext.Database.GetPendingMigrations().Any())
         {
-            await _testDatabase.Context.Database.MigrateAsync();
+            await _testDatabase.UsersDbContext.Database.MigrateAsync();
         }
     }
 

@@ -44,7 +44,6 @@ namespace the80by20.Solution.Infrastructure.EF
 
             modelBuilder.HasDefaultSchema("solution");
 
-            UserSchema.MapUsing(modelBuilder);
             SolutionToProblemConfiguration.MapUsing(modelBuilder);
         }
     }

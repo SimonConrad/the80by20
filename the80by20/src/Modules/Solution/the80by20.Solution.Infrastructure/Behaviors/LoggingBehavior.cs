@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.Solution.Infrastructure.Behaviors
@@ -15,11 +16,11 @@ namespace the80by20.Solution.Infrastructure.Behaviors
         }
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            _logger.Debug($"before: {request.GetType().Name}");
+            _logger.LogDebug($"before: {request.GetType().Name}");
 
             TResponse response = await next();
 
-            _logger.Debug($"after: {request.GetType().Name}");
+            _logger.LogDebug($"after: {request.GetType().Name}");
 
             return response;
         }
