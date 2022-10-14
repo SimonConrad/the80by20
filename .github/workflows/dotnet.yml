@@ -1,6 +1,7 @@
 # based on: https://learn.microsoft.com/en-us/dotnet/devops/dotnet-publish-github-action
 # https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/azure-apps/?view=aspnetcore-6.0&tabs=netcore-cli
 
+# todo set appservice to run on linux
 name: CI/CD .net backend to azure
 
 env:
@@ -48,12 +49,12 @@ jobs:
       working-directory: ${{env.WORKING_DIRECTORY}}
       run: |
         dotnet build --configuration Release --no-restore
-        dotnet publish -c Release -o ../dotnet-webapp --runtime win-x86 --self-contained true /p:UseAppHost=true
+        dotnet publish -c Release -o ../dotnet-webapp --runtime win-x64 --self-contained true /p:UseAppHost=true
         
-    #- name: Test
-    #  working-directory: ${{env.WORKING_DIRECTORY}}
-    #  #run: dotnet test --runtime win-x86 --verbosity normal --filter FullyQualifiedName!~the80by20.Sandbox
-    #  run: dotnet test --runtime win-x86 --filter FullyQualifiedName!~the80by20.Sandbox
+    - name: Test
+      working-directory: ${{env.WORKING_DIRECTORY}}
+      #run: dotnet test --runtime win-x86 --verbosity normal --filter FullyQualifiedName!~the80by20.Sandbox
+      run: dotnet test --runtime win-x64 --filter FullyQualifiedName!~the80by20.Sandbox
       
     - uses: azure/webapps-deploy@v2
       name: Deploy

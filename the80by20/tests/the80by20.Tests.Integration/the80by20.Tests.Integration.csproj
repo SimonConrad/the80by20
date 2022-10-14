@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
 	<IsPublishable>false</IsPublishable>
-	  <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
