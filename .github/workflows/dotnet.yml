@@ -46,7 +46,7 @@ jobs:
     
     - name: Build
       working-directory: ${{env.WORKING_DIRECTORY}}
-      run: dotnet build --configuration Release --no-restore --filter FullyQualifiedName!~the80by20.Sandbox
+      run: dotnet build --configuration Release --no-restore
     
     - name: Test
       working-directory: ${{env.WORKING_DIRECTORY}}
