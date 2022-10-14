@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: CI/CD to Azure Static Web Apps 
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'fe/**'
+      - '.github/workflows/frontend.yml'
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
