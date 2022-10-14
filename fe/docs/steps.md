@@ -27,13 +27,15 @@ install packages defined in package.json
 
 `npm install`
 
-run the application
+run the application locally
 
 `npm run ng serve --open`
 
 build application, build:prod is alias to npm cli command in package.json file scripts node, or use default command `npm run build` build details are in angular.json file, like buuild catalog environment.json details etc.
 
 `npm run "build:prod"` 
+`npm run "build"` 
+`ng build` 
 
 ### eslint
 - https://thesoreon.com/blog/how-to-set-up-eslint-with-typescript-in-vs-code
