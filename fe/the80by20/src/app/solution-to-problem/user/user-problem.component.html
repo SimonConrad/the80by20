@@ -36,7 +36,7 @@
         </div>
         <div>
           <button type="button" mat-stroked-button (click)="onRefresh()">Refresh from server</button>
-          <button type="button" mat-stroked-button (click)="onAdd()">Add Product</button>
+          <button type="button" mat-stroked-button (click)="onAdd()">Request Problem</button>
         </div>
       </div>
       <table *ngIf="problemsDataStream$ | async as userProblems" class="problems-table">
