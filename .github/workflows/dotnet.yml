@@ -15,8 +15,7 @@ on:
     paths:
         - 'the80by20/**'
         - '.github/workflows/dotnet.yml'
-    paths-ignore:
-      - 'the80by20/the80by20/tools/**'
+        - '!the80by20/the80by20/tools/**'
   pull_request: 
     branches: [ "main" ]
 # todo pull request on other branches only build without deploy
