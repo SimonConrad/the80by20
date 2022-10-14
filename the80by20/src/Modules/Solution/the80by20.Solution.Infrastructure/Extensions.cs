@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using FluentValidation;
 using the80by20.Shared.Infrastucture;
 using the80by20.Shared.Infrastucture.Configuration;
 using the80by20.Solution.App.ReadModel;
@@ -10,8 +11,7 @@ using the80by20.Solution.Domain.Operations.Solution;
 using the80by20.Solution.Infrastructure.Behaviors;
 using the80by20.Solution.Infrastructure.EF.Repositories;
 using the80by20.Solution.Infrastructure.EF;
-using static System.Net.Mime.MediaTypeNames;
-using FluentValidation;
+
 using the80by20.Solution.App.CommandsHandlers.ProblemHandlers;
 
 namespace the80by20.Solution.Infrastructure
