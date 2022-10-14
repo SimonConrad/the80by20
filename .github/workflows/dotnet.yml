@@ -47,15 +47,12 @@ jobs:
     - name: Build
       working-directory: ${{env.WORKING_DIRECTORY}}
       run: |
-        # cd DotNet.WebApp
         dotnet build --configuration Release --no-restore
-        #dotnet publish -c Release -o ../dotnet-webapp --runtime win-x86 --self-contained true /p:UseAppHost=true
-        dotnet publish -c Release -o ../dotnet-webapp --self-contained true /p:UseAppHost=true
+        dotnet publish --configuration Release -o ../dotnet-webapp --runtime win-x86 --self-contained true /p:UseAppHost=true
         
     - name: Test
       working-directory: ${{env.WORKING_DIRECTORY}}
-      ##run: dotnet test --verbosity normal --filter FullyQualifiedName!~the80by20.Sandbox
-      run: dotnet test --filter FullyQualifiedName!~the80by20.Sandbox
+      run: dotnet test --runtime win-x86 --verbosity normal --filter FullyQualifiedName!~the80by20.Sandbox
       
     - uses: azure/webapps-deploy@v2
       name: Deploy
