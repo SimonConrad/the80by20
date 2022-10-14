@@ -1,6 +1,6 @@
 
 
-name: Build and deploy ASP.Net Core app to an azure app service
+name: CI/CD .net backend to azure
 
 env:
     AZURE_WEBAPP_NAME: the80by20        # set this to the name of your Azure Web App
