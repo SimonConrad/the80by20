@@ -21,73 +21,49 @@ on:
 # todo pull request on other branches only build without deploy
 
 jobs:
- 
- ############# BUILD #############
-  build:
-    runs-on: windows-latest
+  publish:
+
+    runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     
-    - name: App Settings Variable Substitution               
+    - name: App Settings Variable Substitution
       uses: microsoft/variable-substitution@v1
       with:
         files: './the80by20/src/Bootstrapper/the80by20.Bootstrapper/appsettings.json'
       env:
         dataBase.connectionString: ${{ secrets.connection_string }}      
     
-    - name: Restore dependencies
+    - name: Install dependencies
       working-directory: ${{env.WORKING_DIRECTORY}}
       run: dotnet restore
-    
+      
     - name: Build
       working-directory: ${{env.WORKING_DIRECTORY}}
-      run: dotnet build --configuration Release --no-restore
+      run: |
+        # cd DotNet.WebApp
+        dotnet build --configuration Release --no-restore
+        dotnet publish -c Release -o ../dotnet-webapp -r win-x86 --self-contained true /p:UseAppHost=true
     
+    #- name: Test
+     # working-directory: ${{env.WORKING_DIRECTORY}}
+      #run: |
+       # # cd DotNet.WebApp.Tests
+        #dotnet test --no-restore --verbosity normal
+        
     - name: Test
       working-directory: ${{env.WORKING_DIRECTORY}}
-      #run: dotnet test --verbosity normal --filter FullyQualifiedName!~the80by20.Sandbox
+      ##run: dotnet test --verbosity normal --filter FullyQualifiedName!~the80by20.Sandbox
       run: dotnet test --filter FullyQualifiedName!~the80by20.Sandbox
-    
-    - name: dotnet publish
-      working-directory: ${{env.WORKING_DIRECTORY}}
-      #run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-      run: dotnet publish --configuration Release  -o ${{env.DOTNET_ROOT}}/myapp --runtime win-x86 --self-contained
-      #run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp --runtime win-x86
-
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v3
+      
+    - uses: azure/webapps-deploy@v2
+      name: Deploy
       with:
-        name: .net-app
-        path: ${{env.DOTNET_ROOT}}/myapp
-
- ############# ARTIFACT #############
- 
- ############# DEPLOY #############
- 
-  deploy:
-    permissions:
-      contents: none
-    runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'Development'       
-      url: "https://the80by20.azurewebsites.net"
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: .net-app
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-     
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/dotnet-webapp'
