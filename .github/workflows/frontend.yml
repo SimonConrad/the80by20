@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'fe/**'
+      - '.github/workflows/frontend.yml'
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
