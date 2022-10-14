@@ -55,8 +55,8 @@ jobs:
     
     - name: dotnet publish
       working-directory: ${{env.WORKING_DIRECTORY}}
-      #run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp --runtime win-x86
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      #run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp --runtime win-x86
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
