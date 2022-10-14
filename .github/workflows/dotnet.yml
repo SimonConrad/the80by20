@@ -40,16 +40,19 @@ jobs:
         dataBase.connectionString: ${{ secrets.connection_string }}      
     
     - name: Install dependencies
+      working-directory: ${{env.WORKING_DIRECTORY}}
       run: dotnet restore
       
     - name: Build
       run: |
         # cd DotNet.WebApp
+        working-directory: ${{env.WORKING_DIRECTORY}}
         dotnet build --configuration Release --no-restore
         dotnet publish -c Release -o ../dotnet-webapp -r win-x86 --self-contained true /p:UseAppHost=true
     - name: Test
       run: |
         # cd DotNet.WebApp.Tests
+        working-directory: ${{env.WORKING_DIRECTORY}}
         dotnet test --no-restore --verbosity normal
       
     - uses: azure/webapps-deploy@v2
