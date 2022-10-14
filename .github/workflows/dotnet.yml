@@ -48,7 +48,7 @@ jobs:
       working-directory: ${{env.WORKING_DIRECTORY}}
       run: |
         dotnet build --configuration Release --no-restore
-        dotnet publish --configuration Release -o ../dotnet-webapp --runtime win-x86 --self-contained true /p:UseAppHost=true
+        dotnet publish -c Release -o ../dotnet-webapp --runtime win-x86 --self-contained true /p:UseAppHost=true
         
     #- name: Test
     #  working-directory: ${{env.WORKING_DIRECTORY}}
