@@ -67,3 +67,5 @@ void ConfigureLogging(WebApplicationBuilder webApplicationBuilder)
         // .Seq("http://localhost:5341"); //todo kibana, pod³aczyæ appinsights
     });
 }
+
+public partial class Program { }

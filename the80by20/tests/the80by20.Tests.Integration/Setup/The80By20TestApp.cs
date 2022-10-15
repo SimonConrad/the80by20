@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace the80by20.Tests.Integration
+namespace the80by20.Tests.Integration.Setup
 {
     internal sealed class The80By20TestApp : WebApplicationFactory<Program>
     {
@@ -16,7 +16,7 @@ namespace the80by20.Tests.Integration
                 {
                     builder.ConfigureServices(services);
                 }
-            
+
                 builder.UseEnvironment("automatictests");
             }).CreateClient();
         }

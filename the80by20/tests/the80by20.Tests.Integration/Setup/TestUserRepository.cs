@@ -1,12 +1,12 @@
 ﻿using the80by20.Users.App.Ports;
 using the80by20.Users.Domain.UserEntity;
 
-namespace the80by20.Tests.Integration;
+namespace the80by20.Tests.Integration.Setup;
 
 internal sealed class TestUserRepository : IUserRepository
 {
     private readonly List<User> _users = new();
-    
+
     public async Task<User> GetByIdAsync(UserId id)
     {
         await Task.CompletedTask;

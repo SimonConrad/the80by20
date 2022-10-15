@@ -1,7 +1,10 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
+using System.Data;
+using the80by20.Tests.Integration.Setup;
 using Xunit;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace the80by20.Tests.Integration.Controllers;
 
@@ -24,15 +27,18 @@ namespace the80by20.Tests.Integration.Controllers;
 // they got all the calls they were expecting.
 
 
-
+// INFO to run tests sequentially - otherwise database problems
+[Collection(nameof(SystemTestCollectionDefinition))]
 public class HomeControllerTests : ControllerTests, IDisposable
 {
-    private SqliteConnection _connection;
-    private IWithCoreDbContext _testDatabase;
+
+    public SqliteConnection Connection { get; private set; }
 
     [Fact]
     public async Task get_base_endpoint_should_return_200_ok_status_code_and_api_name()
     {
+        SqlLiteIneMemoryManager.RecreateDbs(Connection);
+
         var response = await Client.GetAsync("/api");
         var content = await response.Content.ReadAsStringAsync();
         content.ShouldBe("\"The 80 by 20 [test]\"");
@@ -42,21 +48,23 @@ public class HomeControllerTests : ControllerTests, IDisposable
     {
     }
 
+
+    // INFO run before each tests - before UsersControllerTests as this method is inoked in ControllerTests
     protected override void ConfigureServices(IServiceCollection services)
     {
-        ApplySqlLite(services);
+        Connection = new SqliteConnection("Filename=:memory:");
+        Connection.Open();
+
+        SqlLiteIneMemoryManager.SetupIoCContainer(services, Connection);
     }
 
-    private void ApplySqlLite(IServiceCollection services)
-    {
-        var components = SqlLiteIneMemoryComponentsSetupper.Setup(services);
-        _connection = components.connection;
-        _testDatabase = components.ctxt;
-    }
-
+    // INFO run after each test
     public void Dispose()
     {
-        _testDatabase.Dispose();
-        _connection.Dispose();
+        if (Connection.State == ConnectionState.Open)
+        {
+            Connection.Close();
+            Connection.Dispose();
+        }
     }
 }

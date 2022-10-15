@@ -1,145 +1,127 @@
-﻿//// TODO make tests working with real database work, also on ci/cd sqllite ine memory has problems with applying migrations if multiple contexts and schemas
+﻿// TODO make tests working with real database work, also on ci/cd sqllite ine memory has problems with applying migrations if multiple contexts and schemas
 
-//using System.Net;
-//using System.Net.Http.Json;
-//using Microsoft.AspNetCore.Identity;
-//using Microsoft.Data.Sqlite;
-//using Microsoft.EntityFrameworkCore;
-//using Microsoft.Extensions.DependencyInjection;
-//using Shouldly;
-//using the80by20.Masterdata.App.CategoryCrud;
-//using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
-//using the80by20.Shared.Infrastucture.Time;
-//using the80by20.Solution.App.Commands.ProblemCommands;
-//using the80by20.Users.Domain.UserEntity;
-//using the80by20.Users.Infrastructure.Security;
-//using Xunit;
+using System.Data;
+using System.Net;
+using System.Net.Http.Json;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Shouldly;
+using the80by20.Masterdata.App.CategoryCrud;
+using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
+using the80by20.Shared.Infrastucture.Time;
+using the80by20.Solution.App.Commands.ProblemCommands;
+using the80by20.Tests.Integration.Setup;
+using the80by20.Users.Domain.UserEntity;
+using the80by20.Users.Infrastructure.Security;
+using Xunit;
 
-//namespace the80by20.Tests.Integration.Controllers;
+namespace the80by20.Tests.Integration.Controllers;
 
-//public class ProblemsControllerTests : ControllerTests, IDisposable
-//{
+// INFO to run tests sequentially - otherwise database problems
+[Collection(nameof(SystemTestCollectionDefinition))]
+public class ProblemsControllerTests : ControllerTests, IDisposable
+{
+    public SqliteConnection Connection { get; private set; }
 
-//    private IWithCoreDbContext _testDatabase;
-//    private SqliteConnection _connection;
+    public ProblemsControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
+    {
+    }
 
-//   [Fact]
-//    public async Task post_problem_should_return_201_problem_created_and_data_is_persisted_in_write_and_read_store()
-//    {
-//        // Arrange
-//        var passwordManager = new PasswordManager(new PasswordHasher<User>());
-//        var clock = new Clock();
-//        const string password = "secret";
+    // INFO run before each tests - before UsersControllerTests as this method is inoked in ControllerTests
+    protected override void ConfigureServices(IServiceCollection services)
+    {
+        Connection = new SqliteConnection("Filename=:memory:");
+        Connection.Open();
 
-//        var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
-//            "test-user1", passwordManager.Secure(password), "Test Jon", Role.User(), clock.Current());
+        SqlLiteIneMemoryManager.SetupIoCContainer(services, Connection);
+    }
 
-//        await ApplyMigrations();
-//        await _testDatabase.UsersDbContext.Users.AddAsync(user);
-//        // comment when normal sql db used in tests beacouse then it is done using dtabaseinitializer class
-//        await _testDatabase.MasterDataDbContext.Categories.AddRangeAsync(GetCategories());
+    // INFO run after each test
+    public void Dispose()
+    {
+        if (Connection.State == ConnectionState.Open)
+        {
+            Connection.Close();
+            Connection.Dispose();
+        }
+    }
 
-//        await _testDatabase.MasterDataDbContext.SaveChangesAsync();
-//        await _testDatabase.UsersDbContext.SaveChangesAsync();
+    //[Fact]
+    public async Task post_problem_should_return_201_problem_created_and_data_is_persisted_in_write_and_read_store()
+    {
+        SqlLiteIneMemoryManager.RecreateDbs(Connection);
 
-//        // Act
-//        Authorize(user.Id, user.Role);
+        // Arrange
+        var passwordManager = new PasswordManager(new PasswordHasher<User>());
+        var clock = new Clock();
+        const string password = "secret";
 
-//        string description = "I need help with creating model of the system, based on which I will do implmentation " +
-//                             "I would like to divide into domains, subbdomains and then into bounded context which can be implemented as modules. " +
-//                             "I would like to create model by utylising technique of event storming big picture, process and design level" +
-//                             "I would like to include in model models of aggregates which secure invariants, " +
-//                             "to achive small aggregates I would like to us edomain service to coordinate" +
-//                             "based on event of persisted state of aggregate  corresponding readmodels should be updated" +
-//                             "I would like to present on model waht architecture styles to use in each module and what kind of  messaging is between them";
+        var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
+            "test-user1", passwordManager.Secure(password), "Test Jon", Role.User(), clock.Current());
 
-//        var command = new CreateProblemCommand(description,
-//            Guid.Parse("00000000-0000-0000-0000-000000000004"),
-//            user.Id,
-//            new SolutionType[] { SolutionType.TheoryOfConceptWithExample });
+        await SqlLiteIneMemoryManager.UsersDbContext.Users.AddAsync(user);
+        await SqlLiteIneMemoryManager.UsersDbContext.SaveChangesAsync();
+        
+        // cannot find table name categories, for users it is working, maybe due to sqllite in memory schema name problems
+        // // solution?- in dbcontext maybe base on test-app-config set or not schema name?
+        await SqlLiteIneMemoryManager.MasterDataDbContext.Categories.AddRangeAsync(GetCategories());
+        await SqlLiteIneMemoryManager.MasterDataDbContext.SaveChangesAsync();
+        
 
-//        // todo dont know how to test due to in CreateProblemCommandHandler which creates new scope _ = Task.Run(async () =>
-//        var response = await Client.PostAsJsonAsync("solution-to-problem/problems", command);
+        // Act
+        Authorize(user.Id, user.Role);
 
-//        // Assert
-//        response.StatusCode.ShouldBe(HttpStatusCode.Created);
+        string description = "I need help with creating model of the system, based on which I will do implmentation " +
+                             "I would like to divide into domains, subbdomains and then into bounded context which can be implemented as modules. " +
+                             "I would like to create model by utylising technique of event storming big picture, process and design level" +
+                             "I would like to include in model models of aggregates which secure invariants, " +
+                             "to achive small aggregates I would like to us edomain service to coordinate" +
+                             "based on event of persisted state of aggregate  corresponding readmodels should be updated" +
+                             "I would like to present on model waht architecture styles to use in each module and what kind of  messaging is between them";
 
-//        var problemAggregateId = Guid.Parse(response.Headers.Location.Segments.Last());
+        var command = new CreateProblemCommand(description,
+            Guid.Parse("00000000-0000-0000-0000-000000000004"),
+            user.Id,
+            new SolutionType[] { SolutionType.TheoryOfConceptWithExample });
 
-//        _testDatabase.SolutionDbContext.ProblemsAggregates.ShouldHaveSingleItem();
-//        _testDatabase.SolutionDbContext.ProblemsCrudData.ShouldHaveSingleItem();
-//        _testDatabase.SolutionDbContext.SolutionsToProblemsReadModel.ShouldHaveSingleItem();
-//    }
+        // todo dont know how to test due to in CreateProblemCommandHandler which creates new scope _ = Task.Run(async () =>
+        var response = await Client.PostAsJsonAsync("solution-to-problem/problems", command);
 
-//    private async Task ApplyMigrations()
-//    {
-//        if (_testDatabase.MasterDataDbContext.Database.GetPendingMigrations().Any())
-//        {
-//            await _testDatabase.MasterDataDbContext.Database.MigrateAsync();
-//        }
+        // Assert
+        response.StatusCode.ShouldBe(HttpStatusCode.Created);
 
-//        //if (_testDatabase.SolutionDbContext.Database.GetPendingMigrations().Any())
-//        //{
-//        //    await _testDatabase.SolutionDbContext.Database.MigrateAsync();
-//        //}
+        var problemAggregateId = Guid.Parse(response.Headers.Location.Segments.Last());
 
+        SqlLiteIneMemoryManager.SolutionDbContext.ProblemsAggregates.ShouldHaveSingleItem();
+        SqlLiteIneMemoryManager.SolutionDbContext.ProblemsCrudData.ShouldHaveSingleItem();
+        SqlLiteIneMemoryManager.SolutionDbContext.SolutionsToProblemsReadModel.ShouldHaveSingleItem();
+    }
 
+    public List<Category> GetCategories()
+    {
+        var categories = new List<Category>
+        {
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000001"), "typescript and angular"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000002"), "css and html"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000003"), "sql server"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000004"), "system analysis"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000005"), "buisness analysis"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000006"), "architecture"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000007"), "messaging"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000008"), "docker"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000009"), "craftsmanship"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000010"), "tests"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000011"), "ci / cd"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000012"), "deployment"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000013"), "azure"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000014"), "aws"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000015"), "monitoring"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000016"), "support"),
+            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000017"), ".net and c#")
+        };
 
-
-
-//        //if (_testDatabase.UsersDbContext.Database.GetPendingMigrations().Any())
-//        //{
-//        //    await _testDatabase.UsersDbContext.Database.MigrateAsync();
-//        //}
-//    }
-
-//    public ProblemsControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
-//    {
-//        // uncomment this and comment ApplySqlLite when using sql normal for tests
-//        //_testDatabase = new TestDatabase();
-//    }
-
-//    protected override void ConfigureServices(IServiceCollection services)
-//    {
-//        ApplySqlLite(services);
-//    }
-
-//    private void ApplySqlLite(IServiceCollection services)
-//    {
-//        var components = SqlLiteIneMemoryComponentsSetupper.Setup(services);
-//        _connection = components.connection;
-//        _testDatabase = components.ctxt;
-//    }
-
-//    public void Dispose()
-//    {
-//        _testDatabase.Dispose();
-//        _connection.Dispose();
-//    }
-
-//    public List<Category> GetCategories()
-//    {
-//        var categories = new List<Category>
-//        {
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000001"), "typescript and angular"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000002"), "css and html"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000003"), "sql server"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000004"), "system analysis"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000005"), "buisness analysis"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000006"), "architecture"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000007"), "messaging"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000008"), "docker"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000009"), "craftsmanship"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000010"), "tests"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000011"), "ci / cd"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000012"), "deployment"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000013"), "azure"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000014"), "aws"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000015"), "monitoring"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000016"), "support"),
-//            Category.WithCustomId(Guid.Parse("00000000-0000-0000-0000-000000000017"), ".net and c#")
-//        };
-
-//        return categories;
-//    }
-//}
+        return categories;
+    }
+}
