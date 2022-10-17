@@ -9,33 +9,6 @@ namespace the80by20.Bootstrapper
 {
     public static class Extensions
     {
-        public static WebApplication UseBootstarapper(this WebApplication app, IConfiguration configuration)
-        {
-            app.UseMiddleware<ExceptionMiddleware>();
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));
-
-            //todo
-            //app.UseReDoc(reDoc =>
-            //{
-            //    reDoc.RoutePrefix = "docs";
-            //    reDoc.SpecUrl("/swagger/v1/swagger.json");
-            //    reDoc.DocumentTitle = "MySpot API";
-            //});
-            //app.UseAuthentication();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-            app.MapControllers();
-
-
-            app.UseCors();
-
-
-            return app;
-        }
-
         public static IServiceCollection AddBootsrapper(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
@@ -49,7 +22,6 @@ namespace the80by20.Bootstrapper
             services.AddHttpContextAccessor();
 
             services.AddSingleton<IClock, Clock>();
-
 
             services.AddEndpointsApiExplorer(); // todo
             services.AddSwaggerGen(swagger =>
@@ -104,6 +76,31 @@ namespace the80by20.Bootstrapper
 
 
             return services;
+        }
+
+        public static WebApplication UseBootstarapper(this WebApplication app, IConfiguration configuration)
+        {
+            app.UseMiddleware<ExceptionMiddleware>();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));
+
+            //todo
+            //app.UseReDoc(reDoc =>
+            //{
+            //    reDoc.RoutePrefix = "docs";
+            //    reDoc.SpecUrl("/swagger/v1/swagger.json");
+            //    reDoc.DocumentTitle = "MySpot API";
+            //});
+            //app.UseAuthentication();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.MapControllers();
+
+            app.UseCors();
+
+            return app;
         }
     }
 }
