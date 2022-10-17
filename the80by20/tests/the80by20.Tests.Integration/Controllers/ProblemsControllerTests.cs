@@ -63,9 +63,10 @@ public class ProblemsControllerTests : ControllerTests, IDisposable
 
         await SqlLiteIneMemoryManager.UsersDbContext.Users.AddAsync(user);
         await SqlLiteIneMemoryManager.UsersDbContext.SaveChangesAsync();
-        
+
         // cannot find table name categories, for users it is working, maybe due to sqllite in memory schema name problems
-        // // solution?- in dbcontext maybe base on test-app-config set or not schema name?
+        // // solution?- in dbcontext based on test-app-config set or not schema name?
+        // read about other constarinats of inmemoemory sqlite, chnage to normal db and run integration test in container
         await SqlLiteIneMemoryManager.MasterDataDbContext.Categories.AddRangeAsync(GetCategories());
         await SqlLiteIneMemoryManager.MasterDataDbContext.SaveChangesAsync();
         
