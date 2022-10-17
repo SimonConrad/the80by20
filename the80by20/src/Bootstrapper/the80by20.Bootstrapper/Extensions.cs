@@ -9,7 +9,7 @@ namespace the80by20.Bootstrapper
 {
     public static class Extensions
     {
-        public static WebApplication UseBootstartpper(this WebApplication app, IConfiguration configuration)
+        public static WebApplication UseBootstarapper(this WebApplication app, IConfiguration configuration)
         {
             app.UseMiddleware<ExceptionMiddleware>();
 

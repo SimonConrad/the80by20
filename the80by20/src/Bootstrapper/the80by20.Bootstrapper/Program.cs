@@ -24,16 +24,13 @@ builder.Services.AddHostedService<DatabaseInitializer>();
 ConfigureLogging(builder);
 
 var app = builder.Build();
-
-app.UseBootstartpper(builder.Configuration);
-
+app.UseBootstarapper(builder.Configuration);
 app.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
-
 await app.RunAsync();
 
-void ConfigureLogging(WebApplicationBuilder webApplicationBuilder)
+void ConfigureLogging(WebApplicationBuilder builder)
 {
-    webApplicationBuilder.Host.UseSerilog((context, loggerConfiguration) =>
+    builder.Host.UseSerilog((context, loggerConfiguration) =>
     {
         // todo make  serilog read from appseettings.ENV.json so that logging levels are overriden by this what we have in appseetings (based on application environment)
         loggerConfiguration
@@ -49,7 +46,7 @@ void ConfigureLogging(WebApplicationBuilder webApplicationBuilder)
 
         loggerConfiguration
             .Enrich.FromLogContext()
-            .WriteTo.File(webApplicationBuilder.Configuration.GetValue<string>("LogFilePath"),
+            .WriteTo.File(builder.Configuration.GetValue<string>("LogFilePath"),
                 rollingInterval: RollingInterval.Day,
                 rollOnFileSizeLimit: true,
                 retainedFileCountLimit: 10,
