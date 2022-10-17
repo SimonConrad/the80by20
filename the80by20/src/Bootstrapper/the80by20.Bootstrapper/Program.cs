@@ -29,7 +29,7 @@ app.UseBootstartpper(builder.Configuration);
 
 app.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
 
-app.Run();
+await app.RunAsync();
 
 void ConfigureLogging(WebApplicationBuilder webApplicationBuilder)
 {
