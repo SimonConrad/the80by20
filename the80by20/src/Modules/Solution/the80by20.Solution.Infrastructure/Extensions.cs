@@ -11,8 +11,7 @@ using the80by20.Solution.Domain.Operations.Solution;
 using the80by20.Solution.Infrastructure.Behaviors;
 using the80by20.Solution.Infrastructure.EF.Repositories;
 using the80by20.Solution.Infrastructure.EF;
-
-using the80by20.Solution.App.CommandsHandlers.ProblemHandlers;
+using the80by20.Solution.App.Commands.Problem.Handlers;
 
 namespace the80by20.Solution.Infrastructure
 {

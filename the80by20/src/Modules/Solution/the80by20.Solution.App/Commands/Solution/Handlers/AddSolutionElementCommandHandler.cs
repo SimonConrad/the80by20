@@ -1,34 +1,30 @@
 ﻿using MediatR;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Solution.App.Commands.SolutionCommands;
 using the80by20.Solution.App.Events.SolutionEvents;
-using the80by20.Solution.Domain.Operations.DomainServices;
 using the80by20.Solution.Domain.Operations.Solution;
 
-namespace the80by20.Solution.App.CommandsHandlers.SolutionHandlers;
+namespace the80by20.Solution.App.Commands.Solution.Handlers;
 
 [CommandDdd]
-public class SetBasePriceOfSolutionCommandHandler
-    : IRequestHandler<SetBasePriceOfSolutionCommand, SolutionToProblemId>
+public class AddSolutionElementCommandHandler
+    : IRequestHandler<AddSolutionElementCommand, SolutionToProblemId>
 {
-    private readonly SetBasePriceForSolutionToProblemDomainService _domainService;
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
     private readonly IMediator _mediator;
 
-    public SetBasePriceOfSolutionCommandHandler(SetBasePriceForSolutionToProblemDomainService domainService,
+    public AddSolutionElementCommandHandler(
         ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
         IMediator mediator)
     {
-        _domainService = domainService;
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
         _mediator = mediator;
     }
 
-    public async Task<SolutionToProblemId> Handle(SetBasePriceOfSolutionCommand command,
+    public async Task<SolutionToProblemId> Handle(AddSolutionElementCommand command,
         CancellationToken cancellationToken)
     {
         var solution = await _solutionToProblemAggregateRepository.Get(command.SolutionToProblemId);
-        _domainService.SetBasePrice(solution);
+        solution.AddSolutionElement(command.SolutionElement);
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
 
         await UpdateReadModel(solution.Id, cancellationToken);

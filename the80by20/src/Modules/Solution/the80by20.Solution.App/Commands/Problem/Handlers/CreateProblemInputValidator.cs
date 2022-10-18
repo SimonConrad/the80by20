@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
-using the80by20.Solution.App.Commands.ProblemCommands;
 
-namespace the80by20.Solution.App.CommandsHandlers.ProblemHandlers;
+namespace the80by20.Solution.App.Commands.Problem.Handlers;
 
 public sealed class CreateProblemInputValidator : AbstractValidator<CreateProblemCommand>
 {

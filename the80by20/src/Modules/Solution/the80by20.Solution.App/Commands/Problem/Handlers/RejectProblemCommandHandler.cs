@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Solution.App.Commands.ProblemCommands;
+using the80by20.Solution.App.Commands.Problem;
 using the80by20.Solution.App.Events.ProblemEvents;
 using the80by20.Solution.Domain.Operations.DomainServices;
 using the80by20.Solution.Domain.Operations.Problem;
 using the80by20.Solution.Domain.Operations.Solution;
 
-namespace the80by20.Solution.App.CommandsHandlers.ProblemHandlers;
+namespace the80by20.Solution.App.Commands.Problem.Handlers;
 
 [CommandDdd]
 public class RejectProblemCommandHandler : IRequestHandler<RejectProblemCommand, ProblemId>
