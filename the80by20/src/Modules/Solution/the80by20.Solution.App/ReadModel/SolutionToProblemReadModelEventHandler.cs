@@ -24,13 +24,13 @@ public class SolutionToProblemReadModelEventHandler :
     private readonly ISolutionToProblemReadModelQueries _readModelQueries;
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
     private readonly IProblemAggregateRepository _problemAggregateRepository;
-    private readonly ICategoryCrudRepository _categoryCrudRepository;
+    private readonly ICategoryRepository _categoryCrudRepository;
 
     public SolutionToProblemReadModelEventHandler(ISolutionToProblemReadModelUpdates readModelUpdates,
         ISolutionToProblemReadModelQueries readModelQueries,
         IProblemAggregateRepository problemAggregateRepository,
         ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
-        ICategoryCrudRepository categoryCrudRepository)
+        ICategoryRepository categoryCrudRepository)
     {
         _readModelUpdates = readModelUpdates;
         _readModelQueries = readModelQueries;

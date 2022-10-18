@@ -14,11 +14,11 @@ namespace the80by20.Solution.Infrastructure.EF.Repositories
     public class EfSolutionToProblemReadModelRepository : ISolutionToProblemReadModelQueries, ISolutionToProblemReadModelUpdates
     {
         private readonly SolutionDbContext _coreDbContext;
-        private readonly ICategoryCrudRepository categoryCrudRepository;
+        private readonly ICategoryRepository categoryCrudRepository;
 
         // todo pobrać kategorie przez interfejs w warstwie plaikacyjnej modulu masterdata
         public EfSolutionToProblemReadModelRepository(SolutionDbContext coreDbContext,
-            ICategoryCrudRepository categoryCrudRepository)
+            ICategoryRepository categoryCrudRepository)
         {
             _coreDbContext = coreDbContext;
             this.categoryCrudRepository = categoryCrudRepository;

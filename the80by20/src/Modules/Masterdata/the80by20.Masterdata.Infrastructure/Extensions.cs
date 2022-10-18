@@ -18,7 +18,7 @@ namespace the80by20.Masterdata.Infrastructure
             AddDbCtxt(services, configuration);
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<ICategoryCrudRepository, CategoryCrudRepository>();
+            services.AddScoped<ICategoryRepository, CategoryCrudRepository>();
 
             return services;
         }

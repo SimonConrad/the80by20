@@ -8,7 +8,7 @@ namespace the80by20.Masterdata.Infrastructure.EF.Repositories;
 // thanks to this design we achieve taht app layer is not denpdant upon infra layer (application logic is
 // not dependat upon implementaion detailas)
 // ioc in bootstraper (done in webapi)
-public class CategoryCrudRepository : GenericRepository<Category>, ICategoryCrudRepository
+public class CategoryCrudRepository : GenericRepository<Category>, ICategoryRepository
 {
     public CategoryCrudRepository(MasterDataDbContext dbCtxt) : base(dbCtxt)
     {
