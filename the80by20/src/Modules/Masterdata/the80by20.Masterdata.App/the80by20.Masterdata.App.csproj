@@ -9,4 +9,11 @@
     <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Policies\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

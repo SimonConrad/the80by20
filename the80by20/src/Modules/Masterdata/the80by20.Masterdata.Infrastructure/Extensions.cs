@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using the80by20.Masterdata.App.CategoryCrud.Ports;
+using the80by20.Masterdata.App.Repositories;
 using the80by20.Masterdata.Infrastructure.EF;
 using the80by20.Masterdata.Infrastructure.EF.Repositories;
 using the80by20.Shared.Abstractions.Dal;

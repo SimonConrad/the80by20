@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using the80by20.Masterdata.App.CategoryCrud;
+using the80by20.Masterdata.App.Entities;
 using the80by20.Shared.Abstractions.Dal;
 
 // todo podzaił kontrolerów jak modułów

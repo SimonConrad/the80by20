@@ -1,6 +1,6 @@
 ﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Masterdata.App.CategoryCrud;
+namespace the80by20.Masterdata.App.Entities;
 // todo show concpet of soft delete in this crud module, inrerceptor setting isdeleted whene remove from dbcotxt, interceptor don returns is-delted
 // todo show audit mechanism in thi crud-module
 [CrudEntity]

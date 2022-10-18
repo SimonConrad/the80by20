@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using the80by20.Masterdata.App.CategoryCrud.Ports;
+using the80by20.Masterdata.App.Repositories;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Solution.App.Events.Problem;
 using the80by20.Solution.App.Events.Solution;

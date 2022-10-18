@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
-using the80by20.Masterdata.App.CategoryCrud;
+using the80by20.Masterdata.App.Entities;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 using the80by20.Shared.Infrastucture.Time;
 using the80by20.Solution.App.Commands.Problem;

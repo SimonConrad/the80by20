@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.Masterdata.App.CategoryCrud;
+using the80by20.Masterdata.App.Entities;
 
 namespace the80by20.Masterdata.Infrastructure.EF.Configurations;
 
