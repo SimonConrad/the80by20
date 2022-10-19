@@ -12,13 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.1.0" />
-    <PackageReference Include="MediatR" Version="10.0.1" />
-    <PackageReference Include="Scrutor" Version="4.2.0" />
+    <Folder Include="Messaging.Ports\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Messaging.Ports\" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
   </ItemGroup>
 
   <ItemGroup>

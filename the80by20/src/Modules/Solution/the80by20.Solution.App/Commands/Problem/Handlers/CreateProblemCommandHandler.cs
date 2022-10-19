@@ -7,6 +7,8 @@ using the80by20.Solution.Domain.Operations.Problem;
 
 namespace the80by20.Solution.App.Commands.Problem.Handlers;
 
+// TODO create kind of IDispatcherBastraction to eliminate depndecy on mediatR nuget package in this application layer proje ct
+
 [CommandDdd]
 public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand, ProblemId>
 {

@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="34.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\the80by20.Solution.App\the80by20.Solution.App.csproj" />
     <ProjectReference Include="..\the80by20.Solution.Domain\the80by20.Solution.Domain.csproj" />
     <ProjectReference Include="..\the80by20.Solution.Infrastructure\the80by20.Solution.Infrastructure.csproj" />
