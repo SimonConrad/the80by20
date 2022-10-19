@@ -29,17 +29,8 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.Api\the80by20.Masterdata.Api.csproj" />
-	  <ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.App\the80by20.Masterdata.App.csproj" />
-	  <ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.Infrastructure\the80by20.Masterdata.Infrastructure.csproj" />
 	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.Api\the80by20.Solution.Api.csproj" />
-	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.App\the80by20.Solution.App.csproj" />
-	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.Domain\the80by20.Solution.Domain.csproj" />
-	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.Infrastructure\the80by20.Solution.Infrastructure.csproj" />
 	  <ProjectReference Include="..\..\Modules\Users\the80by20.Users.Api\the80by20.Users.Api.csproj" />
-	  <ProjectReference Include="..\..\Modules\Users\the80by20.Users.App\the80by20.Users.App.csproj" />
-	  <ProjectReference Include="..\..\Modules\Users\the80by20.Users.Domain\the80by20.Users.Domain.csproj" />
-	  <ProjectReference Include="..\..\Modules\Users\the80by20.Users.Infrastructure\the80by20.Users.Infrastructure.csproj" />
-	  <ProjectReference Include="..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
 	  <ProjectReference Include="..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
 	</ItemGroup>
 

@@ -3,6 +3,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.Masterdata.App.Repositories;
+using the80by20.Masterdata.App.Services;
 using the80by20.Masterdata.Infrastructure.EF;
 using the80by20.Masterdata.Infrastructure.EF.Repositories;
 using the80by20.Shared.Abstractions.Dal;
@@ -19,6 +20,7 @@ namespace the80by20.Masterdata.Infrastructure
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<ICategoryRepository, CategoryCrudRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             return services;
         }
