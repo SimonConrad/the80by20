@@ -16,13 +16,6 @@
     <PackageReference Include="Humanizer" Version="2.14.1" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
   </ItemGroup>
@@ -34,6 +27,12 @@
 	  <ProjectReference Include="..\..\Masterdata\the80by20.Masterdata.App\the80by20.Masterdata.App.csproj" />
 	  <ProjectReference Include="..\the80by20.Solution.App\the80by20.Solution.App.csproj" />
 	  <ProjectReference Include="..\the80by20.Solution.Domain\the80by20.Solution.Domain.csproj" />
+	</ItemGroup>
+
+
+
+	<ItemGroup>
+	  <Folder Include="EF\Migrations\" />
 	</ItemGroup>
 
 </Project>

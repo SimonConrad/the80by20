@@ -12,15 +12,15 @@ using the80by20.Users.Infrastructure.EF;
 namespace the80by20.Users.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20221013185718_Initial-Create")]
-    partial class InitialCreate
+    [Migration("20221019060152_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("users")
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);

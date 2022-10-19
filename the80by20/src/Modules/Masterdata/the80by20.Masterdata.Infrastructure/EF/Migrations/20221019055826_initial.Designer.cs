@@ -12,20 +12,20 @@ using the80by20.Masterdata.Infrastructure.EF;
 namespace the80by20.Masterdata.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(MasterDataDbContext))]
-    [Migration("20221013185919_Initial-Create")]
-    partial class InitialCreate
+    [Migration("20221019055826_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("masterdata")
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("the80by20.Masterdata.App.CategoryCrud.Category", b =>
+            modelBuilder.Entity("the80by20.Masterdata.App.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
