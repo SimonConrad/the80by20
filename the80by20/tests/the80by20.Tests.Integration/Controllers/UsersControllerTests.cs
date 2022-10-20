@@ -54,7 +54,7 @@ public class UsersControllerTests: ControllerTests, IDisposable
 
         var command = new SignUp(Guid.Empty, "test-user1@wp.pl", "test-user1", "secret",
             "Test Jon", "user");
-        var response = await Client.PostAsJsonAsync("security/users", command);
+        var response = await Client.PostAsJsonAsync("users/users", command);
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
     }
 
@@ -76,7 +76,7 @@ public class UsersControllerTests: ControllerTests, IDisposable
 
         // Act
         var command = new SignIn(user.Email, password);
-        var response = await Client.PostAsJsonAsync("security/users/sign-in", command);
+        var response = await Client.PostAsJsonAsync("users/users/sign-in", command);
         var jwt = await response.Content.ReadFromJsonAsync<JwtDto>();
 
         // Assert
@@ -103,7 +103,7 @@ public class UsersControllerTests: ControllerTests, IDisposable
 
         // Act
         Authorize(user.Id, user.Role);
-        var userDto = await Client.GetFromJsonAsync<UserDto>("security/users/me");
+        var userDto = await Client.GetFromJsonAsync<UserDto>("users/users/me");
 
         // Assert
         userDto.ShouldNotBeNull();
