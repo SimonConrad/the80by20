@@ -14,7 +14,7 @@ namespace the80by20.Solution.Api.Security;
 // todo is convention userscontroller vs usercontroller
 
 [ApiController] // info  bacouse of inheriting from ControllerBase and marking controllre as [ApiController] attributes: FromRoute, FromQuery, FromBody can be removed
-[Route("security/[controller]")]
+[Route("users/[controller]")]
 public class UsersController : ControllerBase
 {
     private readonly IQueryHandler<GetUsers, IEnumerable<UserDto>> _getUsersHandler;
