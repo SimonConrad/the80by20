@@ -7,10 +7,10 @@
 GET {{url}}/api
 
 ###
-GET {{url}}/security/users/{{userId}}
+GET {{url}}/users/users/{{userId}}
 
 ###
-POST {{url}}/security/users
+POST {{url}}/users/users
 Content-Type: application/json
 
 {
@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 
 ###
-POST {{url}}/security/users
+POST {{url}}/users/users
 Content-Type: application/json
 
 {
@@ -35,7 +35,7 @@ Content-Type: application/json
 
 ###
 # @name sign_in
-POST {{url}}/security/users/sign-in
+POST {{url}}/users/users/sign-in
 Content-Type: application/json
 
 {
@@ -45,7 +45,7 @@ Content-Type: application/json
 
 ###
 # @name sign_in
-POST {{url}}/security/users/sign-in
+POST {{url}}/users/users/sign-in
 Content-Type: application/json
 
 {
@@ -57,18 +57,18 @@ Content-Type: application/json
 @accessToken = {{sign_in.response.body.$.accessToken}}
 
 ###
-GET {{url}}/security/users/me
+GET {{url}}/users/users/me
 Authorization: Bearer {{accessToken}}
 
 // only-admin
 ###
-GET {{url}}/security/users
+GET {{url}}/users/users
 Authorization: Bearer {{accessToken}}
 
 // only-admin
 ###
 @admin-id = a3469e46-fbc5-44a3-8579-b2a7d810cfcb
-GET {{url}}/security/users/{{admin-id}}
+GET {{url}}/users/users/{{admin-id}}
 Authorization: Bearer {{accessToken}}
 
 ###
