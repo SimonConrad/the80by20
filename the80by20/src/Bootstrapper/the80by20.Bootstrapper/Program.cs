@@ -2,22 +2,18 @@ using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
 using the80by20.Bootstrapper;
-using the80by20.Masterdata.Infrastructure;
+using the80by20.Masterdata.Api;
 using the80by20.Shared.Infrastucture;
-using the80by20.Solution.Domain;
-using the80by20.Solution.Infrastructure;
-using the80by20.Users.App;
-using the80by20.Users.Infrastructure;
+using the80by20.Solution.Api;
+using the80by20.Users.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddSolutionDomain()
-    .AddSolutionInfrastructure(builder.Configuration)
-    .AddMasterdataInfrastructure(builder.Configuration)
-    .AddUsersApp()
-    .AddUsersInfrastructure(builder.Configuration)
-    .AddBootsrapper(builder.Configuration);
+    .AddBootstrapper(builder.Configuration)
+    .AddSolution(builder.Configuration)
+    .AddMasterdata(builder.Configuration)
+    .AddUsers(builder.Configuration);
 
 builder.Services.AddHostedService<DatabaseInitializer>();
 

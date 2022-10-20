@@ -12,18 +12,17 @@ using the80by20.Solution.Infrastructure.Behaviors;
 using the80by20.Solution.Infrastructure.EF.Repositories;
 using the80by20.Solution.Infrastructure.EF;
 using the80by20.Solution.App.Commands.Problem.Handlers;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("the80by20.Solution.Api")]
 namespace the80by20.Solution.Infrastructure
 {
-    public static class Extensions
+    internal static class Extensions
     {
-        public const string OptionsSectionAppName = "app";
-        private const string OptionsDataBaseName = "dataBase";
-
-        public static IServiceCollection AddSolutionInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-           
             AddDbCtxt(services, configuration);
+
             AddSolutionToProblemDal(services);
 
             AddMediatRStaff(services);
@@ -33,8 +32,10 @@ namespace the80by20.Solution.Infrastructure
 
         private static void AddMediatRStaff(IServiceCollection services)
         {
-            // todo w zwi¹zku z tym, ¿e mediator mocno pl¹cze koncpet query i command, nie sa on oddzielone lepiej chyba przpi¹c siê na rozwi¹zanie od devmentors np te w mysport
+            // todo w zwi¹zku z tym, ¿e mediator mocno pl¹cze koncpet query i command, (nie sa on oddzielone)
+            // to lepiej chyba przpi¹c siê na rozwi¹zanie od devmentors np te w myspot
             // albo rozdzielic w ramach mediar jako: https://cezarypiatek.github.io/post/why-i-dont-use-mediatr-for-cqrs/
+
             services.AddMediatR(typeof(SolutionToProblemReadModelEventHandler));
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
@@ -43,8 +44,6 @@ namespace the80by20.Solution.Infrastructure
             services.AddValidatorsFromAssembly(typeof(CreateProblemInputValidator).Assembly);
             // info more problems with this then pozytku services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkBehavior<,>));
         }
-
-        
 
         private static void AddDbCtxt(IServiceCollection services, IConfiguration configuration)
         {
@@ -62,6 +61,5 @@ namespace the80by20.Solution.Infrastructure
 
             services.AddScoped<IProblemAggregateRepository, EfProblemAggregateRepository>();
         }
-
     }
 }

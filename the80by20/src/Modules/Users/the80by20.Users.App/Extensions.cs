@@ -1,13 +1,20 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.CompilerServices;
 using the80by20.Shared.Abstractions.AppLayer;
-using the80by20.Shared.Infrastucture.Decorators;
-using the80by20.Shared.Infrastucture.EF;
 
+[assembly: InternalsVisibleTo("the80by20.Users.Api")]
 namespace the80by20.Users.App
 {
-    public static class Extensions
+    internal static class Extensions
     {
-        public static IServiceCollection AddUsersApp(this IServiceCollection services)
+        public static IServiceCollection AddApp(this IServiceCollection services)
+        {
+            AddCommandHandlers(services);
+
+            return services;
+        }
+
+        private static void AddCommandHandlers(IServiceCollection services)
         {
             // INFO CQRS commandhandlers registration
             var applicationAssembly = typeof(Extensions).Assembly;
@@ -15,11 +22,7 @@ namespace the80by20.Users.App
                 .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
-
-            return services;
         }
-
-        
     }
 }
 

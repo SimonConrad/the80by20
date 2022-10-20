@@ -9,7 +9,7 @@ namespace the80by20.Bootstrapper
 {
     public static class Extensions
     {
-        public static IServiceCollection AddBootsrapper(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddBootstrapper(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
 

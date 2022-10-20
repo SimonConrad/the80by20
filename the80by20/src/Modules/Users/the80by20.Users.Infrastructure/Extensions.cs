@@ -18,12 +18,14 @@ using the80by20.Users.Infrastructure.EF;
 using the80by20.Shared.Abstractions.AppLayer;
 using the80by20.Shared.Infrastucture.Decorators;
 using the80by20.Shared.Infrastucture.EF;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("the80by20.Users.Api")]
 namespace the80by20.Users.Infrastructure
 {
-    public static class Extensions
+    internal static class Extensions
     {
-        public static IServiceCollection AddUsersInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddValidatorsFromAssemblyContaining<SignUpInputValidator>();
 
@@ -31,19 +33,23 @@ namespace the80by20.Users.Infrastructure
 
             AddAuth(services, configuration);
 
-            AddCommandHAndlersDecorators(services);
+            AddCommandHandlersDecorators(services);
 
+            AddQueryHandlers(services);
 
             AddDbCtxt(services, configuration);
 
+            return services;
+        }
+
+        private static void AddQueryHandlers(IServiceCollection services)
+        {
             // INFO CQRS queryhandlers registration
             var infrastructureAssembly = typeof(Extensions).Assembly;
             services.Scan(s => s.FromAssemblies(infrastructureAssembly)
                .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
                .AsImplementedInterfaces()
                .WithScopedLifetime());
-
-            return services;
         }
 
         private static void AddDbCtxt(IServiceCollection services, IConfiguration configuration)
@@ -64,7 +70,7 @@ namespace the80by20.Users.Infrastructure
                 .AddSingleton<IPasswordManager, PasswordManager>();
         }
 
-        private static void AddCommandHAndlersDecorators(IServiceCollection services)
+        private static void AddCommandHandlersDecorators(IServiceCollection services)
         {
             // info only used in commands done like the80by20.App.Abstractions.ICommand
             services.AddScoped<IUnitOfWork, EfUnitOfWork>();

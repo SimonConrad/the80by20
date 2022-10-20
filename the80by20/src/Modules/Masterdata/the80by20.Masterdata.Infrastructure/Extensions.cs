@@ -2,6 +2,7 @@
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.CompilerServices;
 using the80by20.Masterdata.App.Repositories;
 using the80by20.Masterdata.App.Services;
 using the80by20.Masterdata.Infrastructure.EF;
@@ -10,11 +11,12 @@ using the80by20.Shared.Abstractions.Dal;
 using the80by20.Shared.Infrastucture;
 using the80by20.Shared.Infrastucture.Configuration;
 
+[assembly: InternalsVisibleTo("the80by20.Masterdata.Api")]
 namespace the80by20.Masterdata.Infrastructure
 {
-    public static class Extensions
+    internal static class Extensions
     {
-        public static IServiceCollection AddMasterdataInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             AddDbCtxt(services, configuration);
 
