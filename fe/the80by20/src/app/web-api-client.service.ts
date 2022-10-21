@@ -16,7 +16,7 @@ export class WebApiClientService {
 
   private readonly baseUrl: string = environment.baseApiUrl;
   private readonly appApiUrl: string = `${this.baseUrl}/api`;
-  private readonly usersApiUrl: string = `${this.baseUrl}/security/users/`;
+  private readonly usersApiUrl: string = `${this.baseUrl}/users/users/`;
   private readonly problemsApiUrl: string = `${this.baseUrl}/solution-to-problem/problems/`;
 
   constructor(private http: HttpClient) { }
@@ -34,7 +34,7 @@ export class WebApiClientService {
   }
   //#endregion
 
-  //#region security
+  //#region users
   signIn(userData: any) {
     if (this.useInMemoryWebApi) {
       //INFO generated at https://jwt.io/
@@ -61,8 +61,6 @@ export class WebApiClientService {
 
   register(userData: any) {
     // if(this.useInMemoryWebApi) { 
-
-
   //     {
   //       "email": "admin@wp.pl",
   //       "username": "admin",
@@ -78,10 +76,6 @@ export class WebApiClientService {
   //     "fullName": "Jan Jo",
   //     "role": "user"
   // }
-  
-    
-
-
     // } else{
 
     // }
@@ -158,5 +152,4 @@ export class WebApiClientService {
     }
   }
   //#endregion
-
 }
