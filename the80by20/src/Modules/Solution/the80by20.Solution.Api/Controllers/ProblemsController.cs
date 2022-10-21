@@ -11,7 +11,7 @@ namespace the80by20.Solution.Api.Controllers
     [ApiController]
     [Route("solution-to-problem/[controller]")]
     [Authorize]
-    public class ProblemsController : ControllerBase
+    public class ProblemsController : ControllerBase // todo make internal like the80by20.Masterdata.Api.Controllers.HomeController, but keep in mind tests (maybe mark as [assembly: InternalsVisibleTo("test assmebly")]) / or do this in csproj
     {
         private readonly ILogger<ProblemsController> _logger;
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;

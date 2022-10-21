@@ -11,7 +11,7 @@ namespace the80by20.Masterdata.Api.Controllers;
 [ApiController]
 [Authorize(Policy = "is-admin")]
 [Route("master-data/[controller]")]
-public class CategoriesController : ControllerBase
+internal class CategoriesController : ControllerBase
 {
     private readonly ILogger<CategoriesController> _logger;
     private readonly IGenericRepository<Category> _categoryCrud;

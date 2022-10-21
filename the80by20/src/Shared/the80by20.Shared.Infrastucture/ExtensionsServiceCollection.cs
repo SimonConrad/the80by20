@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System.Runtime.CompilerServices;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
+using the80by20.Shared.Infrastucture.Api;
 using the80by20.Shared.Infrastucture.Configuration;
 using the80by20.Shared.Infrastucture.Exceptions;
 using the80by20.Shared.Infrastucture.Time;
@@ -14,7 +15,11 @@ namespace the80by20.Shared.Infrastucture
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .ConfigureApplicationPartManager(manager => 
+                {
+                    manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
+                });  
 
             //var appOptions = configuration.GetOptions<AppOptions>(sectionName:"app");
             //services.AddSingleton(appOptions);
