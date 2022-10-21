@@ -69,7 +69,7 @@ namespace the80by20.Shared.Infrastucture
 
             var appOptions = configuration.GetOptions<AppOptions>("app");
 
-            // INFO Do cors in proper way https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-6.0
+            // INFO CORS configuration based on ms-docs: https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-6.0
             // Default Policy
             services.AddCors(options =>
             {
@@ -100,9 +100,10 @@ namespace the80by20.Shared.Infrastucture
             //    reDoc.DocumentTitle = "MySpot API";
             //});
             //app.UseAuthentication();
-            
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -112,8 +113,6 @@ namespace the80by20.Shared.Infrastucture
                 endpoints.MapControllers();
                 endpoints.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
             });
-
-            app.UseCors();
 
             return app;
         }
