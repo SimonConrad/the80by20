@@ -56,6 +56,8 @@ namespace the80by20.Masterdata.App.Services
             }
 
             category.Update(dto.Name, dto.Description); // TODO think if can change name of the category, maybe not or only based on policy
+
+            await categoryRepository.UpdateAsync(category);
         }
 
         public async Task DeleteAsync(Guid id)

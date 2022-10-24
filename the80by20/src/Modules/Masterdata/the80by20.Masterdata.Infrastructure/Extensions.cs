@@ -17,8 +17,9 @@ namespace the80by20.Masterdata.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             AddDbCtxt(services, configuration);
-            //services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddSingleton<ICategoryRepository, InMemoryCategoryRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            
+            //services.AddSingleton<ICategoryRepository, InMemoryCategoryRepository>();
 
             return services;
         }

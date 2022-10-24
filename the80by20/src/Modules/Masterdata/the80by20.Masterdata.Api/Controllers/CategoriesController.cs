@@ -9,7 +9,7 @@ using the80by20.Masterdata.App.Services;
 namespace the80by20.Masterdata.Api.Controllers;
 // info CancellationToken can be passed in controller action method, passed down to async/await ef methods
 [ApiController]
-//[Authorize(Policy = "is-admin")]
+[Authorize(Policy = "is-admin")]
 internal class CategoriesController : BaseController
 {
     private readonly ILogger<CategoriesController> _logger;
