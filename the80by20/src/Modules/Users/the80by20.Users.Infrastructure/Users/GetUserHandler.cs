@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.Shared.Abstractions.AppLayer;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Queries;
 using the80by20.Users.App.Queries;
 using the80by20.Users.Domain.UserEntity;
 using the80by20.Users.Infrastructure.EF;

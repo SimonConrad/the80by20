@@ -1,4 +1,4 @@
-﻿using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
+﻿using the80by20.Shared.Abstractions.Time;
 
 namespace the80by20.Shared.Infrastucture.Time;
 

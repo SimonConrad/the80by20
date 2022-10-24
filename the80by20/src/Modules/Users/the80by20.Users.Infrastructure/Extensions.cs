@@ -15,10 +15,12 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using the80by20.Shared.Infrastucture;
 using the80by20.Users.Infrastructure.EF;
-using the80by20.Shared.Abstractions.AppLayer;
 using the80by20.Shared.Infrastucture.Decorators;
 using the80by20.Shared.Infrastucture.EF;
 using System.Runtime.CompilerServices;
+using the80by20.Shared.Abstractions.Dal;
+using the80by20.Shared.Abstractions.Queries;
+using the80by20.Shared.Abstractions.Commands;
 
 [assembly: InternalsVisibleTo("the80by20.Users.Api")]
 namespace the80by20.Users.Infrastructure

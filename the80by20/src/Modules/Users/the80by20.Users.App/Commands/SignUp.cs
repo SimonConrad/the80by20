@@ -1,4 +1,4 @@
-﻿using the80by20.Shared.Abstractions.AppLayer;
+﻿using the80by20.Shared.Abstractions.Commands;
 
 namespace the80by20.Users.App.Commands;
 

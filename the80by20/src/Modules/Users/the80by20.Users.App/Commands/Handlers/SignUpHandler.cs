@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using the80by20.Shared.Abstractions.AppLayer;
-using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
+using the80by20.Shared.Abstractions.Commands;
+using the80by20.Shared.Abstractions.Time;
 using the80by20.Users.App.Commands.Exceptions;
 using the80by20.Users.App.Ports;
 using the80by20.Users.Domain.UserEntity;

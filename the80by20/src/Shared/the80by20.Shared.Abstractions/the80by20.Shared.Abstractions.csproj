@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ArchitectureBuildingBlocks\Misc\" />
+    <Compile Remove="ArchitectureBuildingBlocks\Misc\**" />
+    <EmbeddedResource Remove="ArchitectureBuildingBlocks\Misc\**" />
+    <None Remove="ArchitectureBuildingBlocks\Misc\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Messaging\" />
   </ItemGroup>
 

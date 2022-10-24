@@ -1,4 +1,5 @@
-﻿using the80by20.Masterdata.App.Entities;
+﻿using the80by20.Masterdata.App.DTO;
+using the80by20.Masterdata.App.Entities;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 using the80by20.Solution.Domain.Operations.Problem;
@@ -12,7 +13,7 @@ namespace the80by20.Solution.App.ReadModel;
 [ReadModelDdd]
 public interface ISolutionToProblemReadModelQueries
 {
-    Task<Category[]> GetProblemsCategories();
+    Task<CategoryDto[]> GetProblemsCategories();
 
     IEnumerable<SolutionType> GetSolutionElementTypes();
 

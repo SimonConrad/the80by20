@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Masterdata.App.Entities;
 using the80by20.Masterdata.Infrastructure.EF;
-using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
+using the80by20.Shared.Abstractions.Time;
 using the80by20.Solution.Infrastructure.EF;
 using the80by20.Users.Infrastructure.EF;
 

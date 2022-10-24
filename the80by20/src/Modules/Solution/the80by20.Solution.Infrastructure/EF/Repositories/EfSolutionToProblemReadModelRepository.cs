@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using the80by20.Masterdata.App.DTO;
 using the80by20.Masterdata.App.Entities;
 using the80by20.Masterdata.App.Repositories;
+using the80by20.Masterdata.App.Services;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 using the80by20.Solution.App.ReadModel;
@@ -14,19 +16,18 @@ namespace the80by20.Solution.Infrastructure.EF.Repositories
     public class EfSolutionToProblemReadModelRepository : ISolutionToProblemReadModelQueries, ISolutionToProblemReadModelUpdates
     {
         private readonly SolutionDbContext _coreDbContext;
-        private readonly ICategoryRepository categoryCrudRepository;
+        private readonly ICategoryService _categoryService;
 
-        // todo pobrać kategorie przez interfejs w warstwie plaikacyjnej modulu masterdata
         public EfSolutionToProblemReadModelRepository(SolutionDbContext coreDbContext,
-            ICategoryRepository categoryCrudRepository)
+            ICategoryService categoryService)
         {
             _coreDbContext = coreDbContext;
-            this.categoryCrudRepository = categoryCrudRepository;
+            _categoryService = categoryService;
         }
 
-        public async Task<Category[]> GetProblemsCategories()
+        public async Task<CategoryDto[]> GetProblemsCategories()
         {
-            IEnumerable<Category> res = await categoryCrudRepository.GetAll();
+            IEnumerable<CategoryDto> res = await _categoryService.GetAllAsync();
 
             return res.ToArray();
         }

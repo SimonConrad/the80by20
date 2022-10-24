@@ -1,4 +1,5 @@
-﻿using the80by20.Shared.Abstractions.AppLayer;
+﻿using the80by20.Shared.Abstractions.Commands;
+using the80by20.Shared.Abstractions.Dal;
 
 namespace the80by20.Shared.Infrastucture.Decorators
 {

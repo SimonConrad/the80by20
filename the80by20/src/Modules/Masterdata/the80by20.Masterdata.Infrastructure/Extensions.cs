@@ -4,10 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
 using the80by20.Masterdata.App.Repositories;
-using the80by20.Masterdata.App.Services;
 using the80by20.Masterdata.Infrastructure.EF;
 using the80by20.Masterdata.Infrastructure.EF.Repositories;
-using the80by20.Shared.Abstractions.Dal;
 using the80by20.Shared.Infrastucture;
 using the80by20.Shared.Infrastucture.Configuration;
 
@@ -19,10 +17,8 @@ namespace the80by20.Masterdata.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             AddDbCtxt(services, configuration);
-
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<ICategoryRepository, CategoryCrudRepository>();
-            services.AddScoped<ICategoryService, CategoryService>();
+            //services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddSingleton<ICategoryRepository, InMemoryCategoryRepository>();
 
             return services;
         }

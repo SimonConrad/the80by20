@@ -1,4 +1,4 @@
-﻿namespace the80by20.Shared.Abstractions.AppLayer;
+﻿namespace the80by20.Shared.Abstractions.Dal;
 
 public interface IUnitOfWork
 {

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System.Runtime.CompilerServices;
-using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
+using the80by20.Shared.Abstractions.Time;
 using the80by20.Shared.Infrastucture.Api;
 using the80by20.Shared.Infrastucture.Configuration;
 using the80by20.Shared.Infrastucture.Exceptions;

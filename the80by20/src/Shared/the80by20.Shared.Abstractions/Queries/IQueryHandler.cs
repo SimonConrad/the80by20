@@ -1,4 +1,4 @@
-﻿namespace the80by20.Shared.Abstractions.AppLayer;
+﻿namespace the80by20.Shared.Abstractions.Queries;
 
 public interface IQueryHandler<in TQuery, TResult> where TQuery : class, IQuery<TResult>
 {

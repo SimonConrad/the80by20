@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.Shared.Abstractions.AppLayer;
+using the80by20.Shared.Abstractions.Dal;
 using the80by20.Users.Infrastructure.EF;
 
 namespace the80by20.Shared.Infrastucture.EF

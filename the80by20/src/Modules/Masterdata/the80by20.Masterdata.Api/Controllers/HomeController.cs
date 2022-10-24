@@ -2,8 +2,8 @@
 
 namespace the80by20.Masterdata.Api.Controllers
 {
-    [Route("master-data")]
-    internal class HomeController : ControllerBase
+    [Route(MasterDataModule.BasePath)]
+    internal class HomeController : BaseController
     {
         [HttpGet]
         public ActionResult<string> Get() => "Master Data API";
