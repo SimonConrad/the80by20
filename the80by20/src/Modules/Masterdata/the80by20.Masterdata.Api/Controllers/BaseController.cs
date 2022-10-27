@@ -5,7 +5,7 @@
 namespace the80by20.Masterdata.Api.Controllers;
 
 [ApiController]
-[Route(MasterDataModule.BasePath + "/[controller]")]
+[Route(MasterDataModule.BasePath + "/[controller]")] // TODO apply this in all controller
 internal class BaseController : ControllerBase
 {
     protected ActionResult<T> OkOrNotFound<T>(T model)

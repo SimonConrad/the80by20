@@ -1,79 +1,58 @@
 @url = http://localhost:5000/master-data
+@urlbase = http://localhost:5000
 #@url = https://the80by20.azurewebsites.net/master-data
 
-# @hostId = c80079cc-b3a6-4e3e-9577-cb08ae894a5a
-# @conferenceId = f37742be-b5d0-4724-840d-8ead403e0539
+@categoryId = 62df350e-e13a-4130-b874-bacebf6fcb34
 # @accessToken = secret
 
 ###
 GET {{url}}
 
-# ###
-# POST {{url}}/hosts
-# Authorization: Bearer {{accessToken}}
-# Content-Type: application/json
+###
+# @name sign_in
+POST {{urlbase}}/users/users/sign-in
+Content-Type: application/json
 
-# {
-#   "name": "Host #1",
-#   "description": "Lorem ipsum"
-# }
+{
+    "email": "",
+    "password": ""
+}
 
-# ###
-# GET {{url}}/hosts
+###
+@accessToken = {{sign_in.response.body.$.accessToken}}
 
-# ###
-# GET {{url}}/hosts/{{hostId}}
+###
+GET {{urlbase}}/users/users/me
+Authorization: Bearer {{accessToken}}
 
-# ###
-# PUT {{url}}/hosts/{{hostId}}
-# Authorization: Bearer {{accessToken}}
-# Content-Type: application/json
+###
+POST {{url}}/categories
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
 
-# {
-#   "name": "Host #1"
-# }
+{    
+    "name": "test-category-name",
+    "description": "test-description-name"
+}
 
-# ###
-# DELETE {{url}}/hosts/{{hostId}}
-# Authorization: Bearer {{accessToken}}
+###
+GET {{url}}/categories
+Authorization: Bearer {{accessToken}}
 
-# ###
-# POST {{url}}/conferences
-# Authorization: Bearer {{accessToken}}
-# Content-Type: application/json
+###
+GET {{url}}/categories/{{categoryId}}
+Authorization: Bearer {{accessToken}}
 
-# {
-#   "hostId": "{{hostId}}",
-#   "name": "Conference #1",
-#   "description": "Lorem ipsum",
-#   "location": "Test 123",
-#   "from": "2021-05-01",
-#   "to": "2021-05-02",
-#   "participantsLimit": 100,
-#   "logoUrl": null
-# }
+###
+PUT {{url}}/categories/{{categoryId}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
 
-# ###
-# GET {{url}}/conferences
+{
+  "name": "updated-name",
+  "description": "updated-description-name"
+}
 
-# ###
-# GET {{url}}/conferences/{{conferenceId}}
-
-# ###
-# PUT {{url}}/conferences/{{conferenceId}}
-# Authorization: Bearer {{accessToken}}
-# Content-Type: application/json
-
-# {
-#   "name": "Conference #2",
-#   "description": "Lorem ipsum",
-#   "location": "Test 123",
-#   "from": "2021-05-01",
-#   "to": "2021-05-02",
-#   "participantsLimit": 100,
-#   "logoUrl": null
-# }
-
-# ###
-# DELETE {{url}}/conferences/{{conferenceId}}
-# Authorization: Bearer {{accessToken}}
+###
+DELETE {{url}}/categories/{{categoryId}}
+Authorization: Bearer {{accessToken}}

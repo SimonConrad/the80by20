@@ -9,28 +9,16 @@ GET {{url}}/api
 ###
 GET {{url}}/users/users/{{userId}}
 
+
+
 ###
-POST {{url}}/users/users
+# @name sign_in
+POST {{url}}/users/users/sign-in
 Content-Type: application/json
 
 {
-    "email": "user1@wp.pl",
-    "username": "user1",
-    "password": "secret",
-    "fullName": "Jan Jo",
-    "role": "user"
-}
-
-###
-POST {{url}}/users/users
-Content-Type: application/json
-
-{
-    "email": "admin@wp.pl",
-    "username": "admin",
-    "password": "secret",
-    "fullName": "Admin",
-    "role": "admin"
+    "email": "",
+    "password": ""
 }
 
 ###
@@ -39,18 +27,8 @@ POST {{url}}/users/users/sign-in
 Content-Type: application/json
 
 {
-    "email": "user1@wp.pl",
-    "password": "secret"
-}
-
-###
-# @name sign_in
-POST {{url}}/users/users/sign-in
-Content-Type: application/json
-
-{
-    "email": "admin@wp.pl",
-    "password": "secret"
+    "email": "",
+    "password": ""
 }
 
 ###

@@ -42,14 +42,9 @@ export class WebApiClientService {
       return of(token);
     } else {
       const signInPayload = {
-        email: "admin@wp.pl",
-        password: "secret"
+        email: userData.email,
+        password: userData.password
       }
-
-      // const signInPayload = {
-      //   email: "user1@wp.pl",
-      //   password: "secret"
-      // }
 
       return this.http.post(`${this.usersApiUrl}sign-in`, signInPayload)
         .pipe(map(token => {
@@ -60,25 +55,6 @@ export class WebApiClientService {
   }
 
   register(userData: any) {
-    // if(this.useInMemoryWebApi) { 
-  //     {
-  //       "email": "admin@wp.pl",
-  //       "username": "admin",
-  //       "password": "secret",
-  //       "fullName": "Admin",
-  //       "role": "admin"
-  //   }
-
-  //   {
-  //     "email": "user1@wp.pl",
-  //     "username": "user1",
-  //     "password": "secret",
-  //     "fullName": "Jan Jo",
-  //     "role": "user"
-  // }
-    // } else{
-
-    // }
     // TODO
     return this.http.post(`${this.usersApiUrl}`, userData);
   }

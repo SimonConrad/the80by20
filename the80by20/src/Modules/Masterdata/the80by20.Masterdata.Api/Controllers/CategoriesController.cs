@@ -4,10 +4,8 @@ using Microsoft.Extensions.Logging;
 using the80by20.Masterdata.App.DTO;
 using the80by20.Masterdata.App.Services;
 
-// todo podzaił kontrolerów jak modułów
-
 namespace the80by20.Masterdata.Api.Controllers;
-// info CancellationToken can be passed in controller action method, passed down to async/await ef methods
+// INFO CancellationToken can be passed in controller action method, web-api client can pass it , and passed down to async/await ef methods
 [ApiController]
 [Authorize(Policy = "is-admin")]
 internal class CategoriesController : BaseController
