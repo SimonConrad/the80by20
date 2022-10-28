@@ -2,7 +2,7 @@
 
 namespace the80by20.Users.App.Commands.Exceptions;
 
-public sealed class UsernameAlreadyInUseException : CustomException
+public sealed class UsernameAlreadyInUseException : The80by20Exception
 {
     public string Username { get; }
 

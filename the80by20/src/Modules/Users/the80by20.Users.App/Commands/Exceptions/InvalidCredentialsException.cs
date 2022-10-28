@@ -2,7 +2,7 @@
 
 namespace the80by20.Users.App.Commands.Exceptions;
 
-public class InvalidCredentialsException : CustomException
+public class InvalidCredentialsException : The80by20Exception
 {
     public InvalidCredentialsException() : base("Invalid credentials.")
     {

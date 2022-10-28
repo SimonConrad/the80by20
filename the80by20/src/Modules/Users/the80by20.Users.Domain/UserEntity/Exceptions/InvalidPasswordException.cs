@@ -2,7 +2,7 @@
 
 namespace the80by20.Users.Domain.UserEntity.Exceptions;
 
-public sealed class InvalidPasswordException : CustomException
+public sealed class InvalidPasswordException : The80by20Exception
 {
     public InvalidPasswordException() : base("Invalid password.")
     {

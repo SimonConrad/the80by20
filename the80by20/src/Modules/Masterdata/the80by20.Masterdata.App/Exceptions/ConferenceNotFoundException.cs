@@ -2,7 +2,7 @@
 
 namespace the80by20.Masterdata.App.Exceptions
 {
-    public class ConferenceNotFoundException : CustomException
+    public class ConferenceNotFoundException : The80by20Exception
     {
         public Guid Id { get; }
 

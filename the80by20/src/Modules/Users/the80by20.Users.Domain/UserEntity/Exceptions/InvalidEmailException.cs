@@ -2,7 +2,7 @@
 
 namespace the80by20.Users.Domain.UserEntity.Exceptions;
 
-public sealed class InvalidEmailException : CustomException
+public sealed class InvalidEmailException : The80by20Exception
 {
     public string Email { get; }
 

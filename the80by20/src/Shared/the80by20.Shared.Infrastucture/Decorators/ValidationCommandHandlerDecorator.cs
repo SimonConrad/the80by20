@@ -43,7 +43,7 @@ namespace the80by20.Shared.Infrastucture.Decorators
         }
     }
 
-    public class InputValidationException : CustomException
+    public class InputValidationException : The80by20Exception
     {
         public InputValidationException(string message) : base(message)
         {

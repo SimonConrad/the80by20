@@ -2,7 +2,7 @@
 
 namespace the80by20.Users.Domain.UserEntity.Exceptions;
 
-public sealed class InvalidFullNameException : CustomException
+public sealed class InvalidFullNameException : The80by20Exception
 {
     public string FullName { get; }
 

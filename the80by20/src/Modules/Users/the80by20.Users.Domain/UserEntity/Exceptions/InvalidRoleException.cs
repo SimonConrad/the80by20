@@ -2,7 +2,7 @@
 
 namespace the80by20.Users.Domain.UserEntity.Exceptions;
 
-public sealed class InvalidRoleException : CustomException
+public sealed class InvalidRoleException : The80by20Exception
 {
     public string Role { get; }
 

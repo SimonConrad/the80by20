@@ -2,7 +2,7 @@
 
 namespace the80by20.Users.App.Commands.Exceptions;
 
-public sealed class EmailAlreadyInUseException : CustomException
+public sealed class EmailAlreadyInUseException : The80by20Exception
 {
     public string Email { get; }
 
