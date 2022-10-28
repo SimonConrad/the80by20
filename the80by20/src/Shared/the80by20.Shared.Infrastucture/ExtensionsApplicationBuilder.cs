@@ -15,19 +15,10 @@ namespace the80by20.Shared.Infrastucture
     {
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app, IConfiguration configuration)
         {
-            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseErrorHandling();
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));
-
-            //todo
-            //app.UseReDoc(reDoc =>
-            //{
-            //    reDoc.RoutePrefix = "docs";
-            //    reDoc.SpecUrl("/swagger/v1/swagger.json");
-            //    reDoc.DocumentTitle = "MySpot API";
-            //});
-            //app.UseAuthentication();
 
             app.UseRouting();
 
@@ -78,7 +69,7 @@ namespace the80by20.Shared.Infrastucture
                 // .WriteTo
                 // .File("logs.txt")
                 // .WriteTo
-                // .Seq("http://localhost:5341"); //todo kibana, podłaczyć appinsights
+                // .Seq("http://localhost:5341"); //todo kibana and appinsights
             });
         }
     }

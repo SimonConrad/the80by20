@@ -16,21 +16,32 @@ namespace the80by20.Shared.Infrastucture
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers()
-                .ConfigureApplicationPartManager(manager => 
+                .ConfigureApplicationPartManager(manager =>
                 {
                     manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
-                });  
+                });
 
             //var appOptions = configuration.GetOptions<AppOptions>(sectionName:"app");
             //services.AddSingleton(appOptions);
             services.Configure<AppOptions>(configuration.GetRequiredSection(key: "app"));
 
-            services.AddSingleton<ExceptionMiddleware>();
+            services.AddErrorHandling();
+
             services.AddHttpContextAccessor();
 
             services.AddSingleton<IClock, Clock>();
 
-            services.AddEndpointsApiExplorer(); // todo
+            services.AddEndpointsApiExplorer(); // todo what for?
+
+            AddSwagger(services);
+
+            AddCors(services, configuration);
+
+            return services;
+        }
+
+        private static void AddSwagger(IServiceCollection services)
+        {
             services.AddSwaggerGen(swagger =>
             {
                 swagger.SwaggerDoc("v1", new OpenApiInfo
@@ -65,9 +76,11 @@ namespace the80by20.Shared.Infrastucture
                 }
                 });
             });
+        }
 
+        private static void AddCors(IServiceCollection services, IConfiguration configuration)
+        {
             var appOptions = configuration.GetOptions<AppOptions>("app");
-
             // INFO CORS configuration based on ms-docs: https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-6.0
             // Default Policy
             services.AddCors(options =>
@@ -80,8 +93,6 @@ namespace the80by20.Shared.Infrastucture
                                             .AllowAnyMethod();
                     });
             });
-
-            return services;
-        }       
+        }
     }
 }

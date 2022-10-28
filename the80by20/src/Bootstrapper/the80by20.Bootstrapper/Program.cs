@@ -18,11 +18,6 @@ builder.AddLogging();
 var app = builder.Build();
 app.UseInfrastructure(builder.Configuration);
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-
 await app.RunAsync();
 
 public partial class Program { }

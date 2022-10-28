@@ -5,11 +5,11 @@ using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
 
 namespace the80by20.Shared.Infrastucture.Exceptions
 {
-    public sealed class ExceptionMiddleware : IMiddleware
+    public sealed class ErrorHandlerMiddleware : IMiddleware
     {
-        private readonly ILogger<ExceptionMiddleware> _logger;
+        private readonly ILogger<ErrorHandlerMiddleware> _logger;
 
-        public ExceptionMiddleware(ILogger<ExceptionMiddleware> logger)
+        public ErrorHandlerMiddleware(ILogger<ErrorHandlerMiddleware> logger)
         {
             _logger = logger;
         }
@@ -23,17 +23,18 @@ namespace the80by20.Shared.Infrastucture.Exceptions
             catch (Exception exception)
             {
                 _logger.LogError(exception, exception.Message);
-                await HandleExceptionAsync(exception, context);
+                await HandleErrorAsync(exception, context);
             }
         }
 
-        private async Task HandleExceptionAsync(Exception exception, HttpContext context)
+        private async Task HandleErrorAsync(Exception exception, HttpContext context)
         {
             var (statusCode, error) = exception switch
             {
-                CustomException => (StatusCodes.Status400BadRequest,
-                    new Error(exception.GetType().Name.Underscore().Replace("_exception", string.Empty), exception.Message)),
-                _ => (StatusCodes.Status500InternalServerError, new Error("error", "There was an error."))
+                CustomException => 
+                    (StatusCodes.Status400BadRequest, new Error(exception.GetType().Name.Underscore().Replace("_exception", string.Empty), exception.Message)),
+                _ => 
+                    (StatusCodes.Status500InternalServerError, new Error("error", "There was an error."))
             };
 
             context.Response.StatusCode = statusCode;
