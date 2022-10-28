@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <Folder Include="Messaging\" />
+    <Folder Include="SqlServer\" />
   </ItemGroup>
 
   <ItemGroup>

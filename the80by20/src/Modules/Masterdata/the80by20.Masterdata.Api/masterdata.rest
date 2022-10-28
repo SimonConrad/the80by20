@@ -1,6 +1,7 @@
-@url = http://localhost:5000/master-data
-@urlbase = http://localhost:5000
-#@url = https://the80by20.azurewebsites.net/master-data
+#@url = http://localhost:5000/master-data
+@url = https://the80by20.azurewebsites.net/master-data
+#@urlbase = http://localhost:5000
+@urlbase = https://the80by20.azurewebsites.net
 
 @categoryId = 62df350e-e13a-4130-b874-bacebf6fcb34
 # @accessToken = secret
