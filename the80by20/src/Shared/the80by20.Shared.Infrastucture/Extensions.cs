@@ -1,17 +1,23 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Events;
 using System.Runtime.CompilerServices;
 using the80by20.Shared.Abstractions.Time;
 using the80by20.Shared.Infrastucture.Api;
-using the80by20.Shared.Infrastucture.Configuration;
 using the80by20.Shared.Infrastucture.Exceptions;
+using the80by20.Shared.Infrastucture.SqlServer;
 using the80by20.Shared.Infrastucture.Time;
 
 [assembly: InternalsVisibleTo("the80by20.Bootstrapper")]
 namespace the80by20.Shared.Infrastucture
 {
-    internal static class ExtensionsServiceCollection
+    // todo compare with Confab.Shared.Infrastructure
+    internal static class Extensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
@@ -28,6 +34,8 @@ namespace the80by20.Shared.Infrastucture
             services.AddErrorHandling();
 
             services.AddHttpContextAccessor();
+
+            services.AddSqlServer();
 
             services.AddSingleton<IClock, Clock>();
 
@@ -92,6 +100,80 @@ namespace the80by20.Shared.Infrastucture
                                             .AllowAnyHeader()
                                             .AllowAnyMethod();
                     });
+            });
+        }
+
+        public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app, IConfiguration configuration)
+        {
+            app.UseErrorHandling();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));
+
+            app.UseRouting();
+
+            app.UseCors();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
+            });
+
+            return app;
+        }
+
+        public static T GetOptions<T>(this IServiceCollection services, string sectionName) where T : new()
+        {
+            using var serviceProvider = services.BuildServiceProvider();
+            var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+            return configuration.GetOptions<T>(sectionName);
+        }
+
+        public static T GetOptions<T>(this IConfiguration configuration, string sectionName) where T : new()
+        {
+            var options = new T();
+            configuration.GetSection(sectionName).Bind(options);
+            return options;
+        }
+
+        public static void AddLogging(this WebApplicationBuilder builder)
+        {
+            builder.Host.UseSerilog((context, loggerConfiguration) =>
+            {
+                // todo make  serilog read from appseettings.ENV.json so that logging levels are overriden by this what we have in appseetings (based on application environment)
+                loggerConfiguration
+                    .MinimumLevel.Information()
+                    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information);
+                //"Microsoft.EntityFrameworkCore.Database.Command": "Warning",
+                //"Microsoft.EntityFrameworkCore.Infrastructure": "Warning"
+
+                loggerConfiguration
+                    .WriteTo
+                    .Console();
+                //info can use outputTemplate, like below
+
+                loggerConfiguration
+                    .Enrich.FromLogContext()
+                    .WriteTo.File(builder.Configuration.GetValue<string>("LogFilePath"),
+                        rollingInterval: RollingInterval.Day,
+                        rollOnFileSizeLimit: true,
+                        retainedFileCountLimit: 10,
+                        fileSizeLimitBytes: 4194304, // 4MB
+                                                     //restrictedToMinimumLevel: LogEventLevel.Information,
+                        outputTemplate:
+                        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] ({SourceContext}.{Method}) {Message}{NewLine}{Exception}");
+
+                // todo .{Method} is not logging method name
+                //loggerConfiguration.ReadFrom.Configuration(builder.Configuration);
+
+                // .WriteTo
+                // .File("logs.txt")
+                // .WriteTo
+                // .Seq("http://localhost:5341"); //todo kibana and appinsights
             });
         }
     }

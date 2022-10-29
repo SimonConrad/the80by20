@@ -1,4 +1,4 @@
-﻿namespace the80by20.Shared.Infrastucture;
+﻿namespace the80by20.Shared.Infrastucture.SqlServer;
 
 public class DatabaseOptions
 {

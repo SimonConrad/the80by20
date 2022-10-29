@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using the80by20.Shared.Infrastucture.Configuration;
 using the80by20.Users.App.Commands.Handlers;
 using the80by20.Users.App.Ports;
 using the80by20.Users.Domain.UserEntity;
@@ -13,7 +12,6 @@ using the80by20.Users.Infrastructure.EF.Repositories;
 using the80by20.Users.Infrastructure.Security;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using the80by20.Shared.Infrastucture;
 using the80by20.Users.Infrastructure.EF;
 using the80by20.Shared.Infrastucture.Decorators;
 using the80by20.Shared.Infrastucture.EF;
@@ -21,6 +19,7 @@ using System.Runtime.CompilerServices;
 using the80by20.Shared.Abstractions.Dal;
 using the80by20.Shared.Abstractions.Queries;
 using the80by20.Shared.Abstractions.Commands;
+using the80by20.Shared.Infrastucture.SqlServer;
 
 [assembly: InternalsVisibleTo("the80by20.Users.Api")]
 namespace the80by20.Users.Infrastructure
@@ -39,7 +38,7 @@ namespace the80by20.Users.Infrastructure
 
             AddQueryHandlers(services);
 
-            AddDbCtxt(services, configuration);
+            services.AddSqlServer<UsersDbContext>();
 
             return services;
         }
@@ -52,14 +51,6 @@ namespace the80by20.Users.Infrastructure
                .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
                .AsImplementedInterfaces()
                .WithScopedLifetime());
-        }
-
-        private static void AddDbCtxt(IServiceCollection services, IConfiguration configuration)
-        {
-            const string OptionsDataBaseName = "dataBase";
-            services.Configure<DatabaseOptions>(configuration.GetRequiredSection(OptionsDataBaseName));
-            var dataBaseOptions = configuration.GetOptions<DatabaseOptions>(OptionsDataBaseName);
-            services.AddDbContext<UsersDbContext>(x => x.UseSqlServer(dataBaseOptions.ConnectionString));
         }
 
         private static void AddSecurity(IServiceCollection services)
@@ -86,7 +77,8 @@ namespace the80by20.Users.Infrastructure
         private static void AddAuth(IServiceCollection services, IConfiguration configuration)
         {
             const string OptionsSectionName = "auth";
-            var options = configuration.GetOptions<AuthOptions>(OptionsSectionName);
+            var options = new AuthOptions();
+            configuration.GetSection(OptionsSectionName).Bind(options);
 
             services
                 .Configure<AuthOptions>(configuration.GetRequiredSection(OptionsSectionName))

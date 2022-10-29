@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using the80by20.Shared.Infrastucture.Configuration;
 
 namespace the80by20.Tests.Integration.Setup;
 
@@ -12,7 +11,12 @@ public sealed class OptionsProvider
         _configuration = GetConfigurationRoot();
     }
 
-    public T Get<T>(string sectionName) where T : class, new() => _configuration.GetOptions<T>(sectionName);
+    public T Get<T>(string sectionName) where T : class, new()
+    {
+        var options = new T();
+        _configuration.GetSection(sectionName).Bind(options);
+        return options;
+    }
 
     private static IConfigurationRoot GetConfigurationRoot()
         => new ConfigurationBuilder()

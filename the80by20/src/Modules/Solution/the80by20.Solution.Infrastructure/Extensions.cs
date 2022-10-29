@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
-using the80by20.Shared.Infrastucture;
-using the80by20.Shared.Infrastucture.Configuration;
 using the80by20.Solution.App.ReadModel;
 using the80by20.Solution.Domain.Operations.Problem;
 using the80by20.Solution.Domain.Operations.Solution;
@@ -13,6 +11,7 @@ using the80by20.Solution.Infrastructure.EF.Repositories;
 using the80by20.Solution.Infrastructure.EF;
 using the80by20.Solution.App.Commands.Problem.Handlers;
 using System.Runtime.CompilerServices;
+using the80by20.Shared.Infrastucture.SqlServer;
 
 [assembly: InternalsVisibleTo("the80by20.Solution.Api")]
 namespace the80by20.Solution.Infrastructure
@@ -21,7 +20,7 @@ namespace the80by20.Solution.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            AddDbCtxt(services, configuration);
+            services.AddSqlServer<SolutionDbContext>();
 
             AddSolutionToProblemDal(services);
 
@@ -43,14 +42,6 @@ namespace the80by20.Solution.Infrastructure
 
             services.AddValidatorsFromAssembly(typeof(CreateProblemInputValidator).Assembly);
             // info more problems with this then pozytku services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkBehavior<,>));
-        }
-
-        private static void AddDbCtxt(IServiceCollection services, IConfiguration configuration)
-        {
-            const string OptionsDataBaseName = "dataBase";
-            services.Configure<DatabaseOptions>(configuration.GetRequiredSection(OptionsDataBaseName));
-            var dataBaseOptions = configuration.GetOptions<DatabaseOptions>(OptionsDataBaseName);
-            services.AddDbContext<SolutionDbContext>(x => x.UseSqlServer(dataBaseOptions.ConnectionString));
         }
 
         private static void AddSolutionToProblemDal(IServiceCollection services)
