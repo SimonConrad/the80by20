@@ -28,7 +28,7 @@ namespace the80by20.Masterdata.Infrastructure.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("masterdata");
-            CategoryConfiguration.MapUsing(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
     }
 }

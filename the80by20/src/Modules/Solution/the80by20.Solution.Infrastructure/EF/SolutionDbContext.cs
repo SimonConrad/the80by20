@@ -43,8 +43,7 @@ namespace the80by20.Solution.Infrastructure.EF
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.HasDefaultSchema("solutions");
-
-            SolutionToProblemConfiguration.MapUsing(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
     }
 }
