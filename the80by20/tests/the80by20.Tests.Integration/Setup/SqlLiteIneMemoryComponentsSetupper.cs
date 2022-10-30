@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using System.Data;
 using the80by20.Bootstrapper;
 using the80by20.Masterdata.Infrastructure.EF;
+using the80by20.Shared.Infrastucture.Services;
 using the80by20.Solution.Infrastructure.EF;
 using the80by20.Users.Infrastructure.EF;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -93,7 +94,8 @@ internal static class SqlLiteIneMemoryManager
         //DatabaseInitializer
         var dbInitializerDescriptor = services.SingleOrDefault(
             d => d.ServiceType ==
-                typeof(IHostedService) && d.ImplementationType == typeof(DatabaseInitializer));
+                //typeof(IHostedService) && d.ImplementationType == typeof(DatabaseInitializer));
+                typeof(IHostedService) && d.ImplementationType == typeof(AppInitializer));
         if (dbInitializerDescriptor != null)
         {
             services.Remove(dbInitializerDescriptor);

@@ -4,7 +4,7 @@
     {
         public static IServiceCollection AddBootstrapper(this IServiceCollection services)
         {
-            services.AddHostedService<DatabaseInitializer>();
+            //services.AddHostedService<DatabaseInitializer>();
 
             return services;
         }

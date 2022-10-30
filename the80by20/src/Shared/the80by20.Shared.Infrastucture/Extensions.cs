@@ -10,17 +10,25 @@ using System.Runtime.CompilerServices;
 using the80by20.Shared.Abstractions.Time;
 using the80by20.Shared.Infrastucture.Api;
 using the80by20.Shared.Infrastucture.Exceptions;
+using the80by20.Shared.Infrastucture.Services;
 using the80by20.Shared.Infrastucture.SqlServer;
 using the80by20.Shared.Infrastucture.Time;
 
 [assembly: InternalsVisibleTo("the80by20.Bootstrapper")]
+[assembly: InternalsVisibleTo("the80by20.Tests.Integration")]
 namespace the80by20.Shared.Infrastucture
 {
-    // todo compare with Confab.Shared.Infrastructure
+    // TODO compare with Confab.Shared.Infrastructure
     internal static class Extensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddErrorHandling();
+
+            services.AddSingleton<IClock, Clock>();
+
+            services.AddHostedService<AppInitializer>();
+
             services.AddControllers()
                 .ConfigureApplicationPartManager(manager =>
                 {
@@ -31,13 +39,9 @@ namespace the80by20.Shared.Infrastucture
             //services.AddSingleton(appOptions);
             services.Configure<AppOptions>(configuration.GetRequiredSection(key: "app"));
 
-            services.AddErrorHandling();
-
             services.AddHttpContextAccessor();
 
             services.AddSqlServer();
-
-            services.AddSingleton<IClock, Clock>();
 
             services.AddEndpointsApiExplorer(); // todo what for?
 
