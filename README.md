@@ -1,16 +1,26 @@
 # the80by20
 real buisness system, created in the end to end way, in purpose to master by doing following developer toolbox's elemenets: 
 - event storming model + implementation; 
-- adr, c4, uml, other forms of visualization, miro 
-- ddd,  
-- cqrs, modular monolith, messaging, distrubuted system, rabbit mq, event-driven 
-- tests 
-- ci/cd, security, powershell, github actions, azure services, containers
-- git
-- .net, ef, asp.net, c#, usefull packages, donet cli 
-- typescript, angular, css layout, rxjs, extnsions in vscode and vscode master, linters, angular cli, npm
-- sql server, sql
+- adr, c4, uml, other forms of design and architecture visualization, using tools: miro, lucidchart 
+
+
+- ddd (strategic, tactical)  
+- cqrs, modular monolith, messaging, distrubuted system, rabbit mq, event-driven
 - solid, low coupling, high cohesion, grasp, craftsmanship, pragmatic design patterns, 
+
+- tests (unit, integration, end2end)
+
+- ci/cd, github actions, azure services, containers
+- security
+- powershell
+- git
+
+- .net 6+, ef, asp.net, c#, usefull packages, donet cli 
+
+- typescript, angular, css layout, rxjs, extensions in vscode and vscode master, linters, angular cli, npm
+- 
+- sql server, sql
+
 - tools vs, vs code, ssms, chrome, postman, vscode restclient, swagger
 
 and these ones:
