@@ -12,7 +12,9 @@
     <None Remove="Core.SolutionSale.Adapters\**" />
   </ItemGroup>
 
-
+	<ItemGroup>
+		<InternalsVisibleTo Include="the80by20.Solution.Api" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />

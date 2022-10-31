@@ -5,7 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
+		<InternalsVisibleTo Include="the80by20.Masterdata.Api" />
+	</ItemGroup>
+
+	<ItemGroup>
     <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
   </ItemGroup>
 

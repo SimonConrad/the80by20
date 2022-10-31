@@ -10,6 +10,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<InternalsVisibleTo Include="the80by20.Bootstrapper" />
+		<InternalsVisibleTo Include="the80by20.Tests.Integration" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Folder Include="Messaging\" />
 	</ItemGroup>
 

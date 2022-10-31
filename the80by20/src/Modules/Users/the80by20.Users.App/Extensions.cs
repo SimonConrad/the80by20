@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.CompilerServices;
 using the80by20.Shared.Abstractions.Commands;
 
-[assembly: InternalsVisibleTo("the80by20.Users.Api")]
+
 namespace the80by20.Users.App
 {
     internal static class Extensions

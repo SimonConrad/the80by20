@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using System.Runtime.CompilerServices;
 using the80by20.Shared.Abstractions.Time;
 using the80by20.Shared.Infrastucture.Api;
 using the80by20.Shared.Infrastucture.Exceptions;
@@ -10,8 +9,8 @@ using the80by20.Shared.Infrastucture.Services;
 using the80by20.Shared.Infrastucture.SqlServer;
 using the80by20.Shared.Infrastucture.Time;
 
-[assembly: InternalsVisibleTo("the80by20.Bootstrapper")]
-[assembly: InternalsVisibleTo("the80by20.Tests.Integration")]
+//[assembly: InternalsVisibleTo("the80by20.Bootstrapper")]
+//[assembly: InternalsVisibleTo("the80by20.Tests.Integration")]
 namespace the80by20.Shared.Infrastucture
 {
     // TODO compare with Confab.Shared.Infrastructure

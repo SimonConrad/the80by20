@@ -5,7 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
+		<InternalsVisibleTo Include="the80by20.Masterdata.Api" />
+	</ItemGroup>
+
+	<ItemGroup>
     <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
     <ProjectReference Include="..\the80by20.Masterdata.App\the80by20.Masterdata.App.csproj" />
   </ItemGroup>

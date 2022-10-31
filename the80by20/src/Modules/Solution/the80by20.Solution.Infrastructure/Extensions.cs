@@ -9,10 +9,9 @@ using the80by20.Solution.Infrastructure.Behaviors;
 using the80by20.Solution.Infrastructure.EF.Repositories;
 using the80by20.Solution.Infrastructure.EF;
 using the80by20.Solution.App.Commands.Problem.Handlers;
-using System.Runtime.CompilerServices;
 using the80by20.Shared.Infrastucture.SqlServer;
 
-[assembly: InternalsVisibleTo("the80by20.Solution.Api")]
+
 namespace the80by20.Solution.Infrastructure
 {
     internal static class Extensions
