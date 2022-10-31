@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-// todo podzaił kontrolerów jak modułów
-
 namespace the80by20.Masterdata.Api.Controllers;
 
 [ApiController]

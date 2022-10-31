@@ -2,8 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using the80by20.Shared.Abstractions;
 
 namespace the80by20.Shared.Infrastucture.Services
 {

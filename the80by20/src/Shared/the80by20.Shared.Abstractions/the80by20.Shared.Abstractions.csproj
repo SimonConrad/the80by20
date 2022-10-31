@@ -1,24 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="ArchitectureBuildingBlocks\Misc\**" />
-    <EmbeddedResource Remove="ArchitectureBuildingBlocks\Misc\**" />
-    <None Remove="ArchitectureBuildingBlocks\Misc\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="ArchitectureBuildingBlocks\Misc\**" />
+		<EmbeddedResource Remove="ArchitectureBuildingBlocks\Misc\**" />
+		<None Remove="ArchitectureBuildingBlocks\Misc\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Messaging\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Messaging\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="11.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
 </Project>

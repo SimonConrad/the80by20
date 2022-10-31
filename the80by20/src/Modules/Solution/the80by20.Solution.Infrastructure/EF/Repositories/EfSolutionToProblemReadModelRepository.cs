@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Masterdata.App.DTO;
-using the80by20.Masterdata.App.Entities;
-using the80by20.Masterdata.App.Repositories;
 using the80by20.Masterdata.App.Services;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;

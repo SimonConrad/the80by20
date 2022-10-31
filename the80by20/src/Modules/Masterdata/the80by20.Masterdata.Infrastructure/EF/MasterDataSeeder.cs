@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.Masterdata.App.Entities;
-using the80by20.Shared.Abstractions;
+using the80by20.Shared.Infrastucture.Services;
 
 namespace the80by20.Masterdata.Infrastructure.EF
 {

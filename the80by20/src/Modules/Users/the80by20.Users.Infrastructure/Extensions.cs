@@ -11,7 +11,6 @@ using the80by20.Users.Infrastructure.Auth;
 using the80by20.Users.Infrastructure.EF.Repositories;
 using the80by20.Users.Infrastructure.Security;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using the80by20.Users.Infrastructure.EF;
 using the80by20.Shared.Infrastucture.Decorators;
 using the80by20.Shared.Infrastucture.EF;

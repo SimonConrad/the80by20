@@ -1,5 +1,4 @@
 ﻿using the80by20.Masterdata.App.DTO;
-using the80by20.Masterdata.App.Entities;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
 using the80by20.Solution.Domain.Operations.Problem;

@@ -4,7 +4,6 @@ using Shouldly;
 using System.Data;
 using the80by20.Tests.Integration.Setup;
 using Xunit;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace the80by20.Tests.Integration.Controllers;
 

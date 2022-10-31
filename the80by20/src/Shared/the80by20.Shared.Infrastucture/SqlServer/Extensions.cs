@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Dal;
 
 namespace the80by20.Shared.Infrastucture.SqlServer

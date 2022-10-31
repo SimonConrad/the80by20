@@ -1,8 +1,6 @@
-﻿using Humanizer;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Net;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
 using the80by20.Shared.Abstractions.Exceptions;
 
 namespace the80by20.Shared.Infrastucture.Exceptions

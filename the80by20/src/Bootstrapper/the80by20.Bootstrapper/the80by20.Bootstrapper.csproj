@@ -1,33 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-  </PropertyGroup>
-
-
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
+	</PropertyGroup>
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="the80by20.Tests.Integration" />
 	</ItemGroup>
 
-
-
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	  </PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
-
-
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.Api\the80by20.Masterdata.Api.csproj" />
-	  <ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.Api\the80by20.Solution.Api.csproj" />
-	  <ProjectReference Include="..\..\Modules\Users\the80by20.Users.Api\the80by20.Users.Api.csproj" />
-	  <ProjectReference Include="..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
+		<ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.Api\the80by20.Masterdata.Api.csproj" />
+		<ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.Api\the80by20.Solution.Api.csproj" />
+		<ProjectReference Include="..\..\Modules\Users\the80by20.Users.Api\the80by20.Users.Api.csproj" />
+		<ProjectReference Include="..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
 	</ItemGroup>
 
 </Project>

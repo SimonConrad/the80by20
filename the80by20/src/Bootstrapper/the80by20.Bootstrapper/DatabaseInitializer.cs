@@ -8,6 +8,8 @@ using the80by20.Users.Infrastructure.EF;
 namespace the80by20.Bootstrapper;
 
 // todo enebaled only in development environmetn in test, prod disabled and custom cli for running migratinons and seeding with data
+
+// INFO not used, instead AppInitializer is used to migrate dbschema chnages and seed data
 public class DatabaseInitializer : IHostedService
 {
     // Service locator "anti-pattern" however needs to be there

@@ -2,7 +2,6 @@
 using the80by20.Solution.App.ReadModel;
 using the80by20.Solution.Domain.Operations.Problem;
 using the80by20.Solution.Domain.Operations.Solution;
-using the80by20.Solution.Infrastructure.EF.Configurations;
 
 // todo do command handler decorator that wrpas into unit of worka transaction - like in my-spot
 
@@ -29,8 +28,8 @@ namespace the80by20.Solution.Infrastructure.EF
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // todo move to extensions
-            optionsBuilder
-                .LogTo(Console.WriteLine);
+            //optionsBuilder
+            //    .LogTo(Console.WriteLine);
             //.EnableSensitiveDataLogging()
             //.EnableDetailedErrors();
 

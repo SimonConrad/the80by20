@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Masterdata.App.Entities;
-using the80by20.Masterdata.Infrastructure.EF.Configurations;
 
 // todo soft delete, using ef mechanism, maybe with: interceptor setting is-deleted whene remove from dbcotxt, interceptor not returns is-delted
 // todo audit mechanism, using ef mechanism set inset-timestamp, update-tiemstamp, user-id
@@ -17,8 +16,8 @@ namespace the80by20.Masterdata.Infrastructure.EF
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // todo move to extensions
-            optionsBuilder
-                .LogTo(Console.WriteLine);
+            //optionsBuilder
+            //    .LogTo(Console.WriteLine);
             //.EnableSensitiveDataLogging()
             //.EnableDetailedErrors();
 
