@@ -1,5 +1,4 @@
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 using the80by20.Solution.App.ReadModel;
@@ -16,7 +15,7 @@ namespace the80by20.Solution.Infrastructure
 {
     internal static class Extensions
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddSqlServer<SolutionDbContext>();
 
