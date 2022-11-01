@@ -41,16 +41,17 @@ jobs:
       env:
         dataBase.connectionString: ${{ secrets.connection_string }}      
     
-    - name: Install dependencies
-      working-directory: ${{env.WORKING_DIRECTORY}}
-      run: dotnet restore
+    # - name: Install dependencies
+    #   working-directory: ${{env.WORKING_DIRECTORY}}
+    #   run: dotnet restore
       
     - name: Build
       # working-directory: ${{env.WORKING_DIRECTORY}}
       run: |
         cd './the80by20/src/Bootstrapper/the80by20.Bootstrapper'
-        dotnet build --configuration Release --no-restore
-        # https://learn.microsoft.com/en-us/dotnet/core/deploying/
+        # dotnet build --configuration Release --no-restore
+        dotnet build --configuration Release
+        # https://learn.microsoft.com/en-us/dotnet/core/deploying/  
         dotnet publish -c Release -o ../dotnet-webapp --runtime win-x64 --self-contained true /p:UseAppHost=true
 
 
