@@ -1,5 +1,7 @@
 ﻿using Serilog;
 using System.Reflection;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 using the80by20.Shared.Abstractions.Modules;
 
 namespace the80by20.Bootstrapper
@@ -20,6 +22,16 @@ namespace the80by20.Bootstrapper
 
             AddIfAssmebly(assemblies, files);
 
+            foreach (var file in files)
+            {
+                if (IsAssembly(file))
+                {
+                    var assemblyName = AssemblyName.GetAssemblyName(file);
+                    var assembly = AppDomain.CurrentDomain.Load(assemblyName);
+                    assemblies.Add(assembly);
+                }
+            }
+
             return assemblies;
         }
 
@@ -38,6 +50,23 @@ namespace the80by20.Bootstrapper
                     continue;
                 }
             }
+        }
+
+        static bool IsAssembly(string path)
+        {
+            using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+            // Try to read CLI metadata from the PE file.
+            using var peReader = new PEReader(fs);
+
+            if (!peReader.HasMetadata)
+            {
+                return false; // File does not have CLI metadata.
+            }
+
+            // Check that file has an assembly manifest.
+            MetadataReader reader = peReader.GetMetadataReader();
+            return reader.IsAssembly;
         }
 
         public static IList<IModule> LoadModules(IEnumerable<Assembly> assemblies)
