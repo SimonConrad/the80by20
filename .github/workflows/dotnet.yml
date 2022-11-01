@@ -44,7 +44,16 @@ jobs:
     # - name: Install dependencies
     #   working-directory: ${{env.WORKING_DIRECTORY}}
     #   run: dotnet restore
-      
+    - name: Test
+      # working-directory: ${{env.WORKING_DIRECTORY}}
+      #run: dotnet test --verbosity normal --filter FullyQualifiedName!~the80by20.Sandbox
+      run:  |
+        cd './the80by20/tests'
+        dotnet test ./the80by20.Tests.Integration/
+        dotnet test ./the80by20.Tests.Unit/
+        # dotnet test --filter FullyQualifiedName!~the80by20.Sandbox
+      #run: dotnet test ---filter "FullyQualifiedName!~the80by20.Sandbox\&FullyQualifiedName!~the80by20.Tests.Integration"
+
     - name: Build
       # working-directory: ${{env.WORKING_DIRECTORY}}
       run: |
@@ -53,14 +62,6 @@ jobs:
         dotnet build --configuration Release
         # https://learn.microsoft.com/en-us/dotnet/core/deploying/  
         dotnet publish -c Release -o ../dotnet-webapp --runtime win-x64 --self-contained true /p:UseAppHost=true
-
-
-        
-    - name: Test
-      working-directory: ${{env.WORKING_DIRECTORY}}
-      #run: dotnet test --verbosity normal --filter FullyQualifiedName!~the80by20.Sandbox
-      run: dotnet test --filter FullyQualifiedName!~the80by20.Sandbox
-      #run: dotnet test ---filter "FullyQualifiedName!~the80by20.Sandbox\&FullyQualifiedName!~the80by20.Tests.Integration"
       
     - uses: azure/webapps-deploy@v2
       name: Deploy
