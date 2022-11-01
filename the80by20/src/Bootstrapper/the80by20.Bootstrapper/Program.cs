@@ -50,6 +50,7 @@ public partial class Program
         }
         finally
         {
+            Log.Logger.Information("Application ended");
             Log.CloseAndFlush();
         }
     }
