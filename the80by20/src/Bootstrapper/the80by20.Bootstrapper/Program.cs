@@ -86,10 +86,6 @@ public partial class Program
         builder.Services
             .AddInfrastructure(builder.Configuration);
 
-        builder.Services
-            .AddSolution(builder.Configuration)
-            .AddUsers(builder.Configuration);
-
         foreach (var module in modules)
         {
             module.Register(builder.Services);

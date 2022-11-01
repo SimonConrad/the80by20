@@ -20,7 +20,7 @@ namespace the80by20.Bootstrapper
             //var filesdlls = $"Files: {string.Join(Environment.NewLine, files.Select(x => x))}";
             //Log.Logger.Information($"Filesdlls: {filesdlls}");
 
-            AddIfAssmebly(assemblies, files);
+            //AddIfAssmebly(assemblies, files);
 
             foreach (var file in files)
             {
