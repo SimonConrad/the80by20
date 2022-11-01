@@ -7,11 +7,12 @@ using the80by20.Users.Infrastructure;
 
 namespace the80by20.Users.Api
 {
+    // TODO apply base controller and other module mechanisms from masterdatamodule
     internal class UsersModule : IModule
     {
         public const string BasePath = "solution";
 
-        public string Name => "Solution";
+        public string Name => "Users";
 
         public string Path => BasePath;
 

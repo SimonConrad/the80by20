@@ -6,6 +6,7 @@ using the80by20.Solution.Infrastructure;
 
 namespace the80by20.Solution.Api
 {
+    // TODO apply base controller and other module mechanisms from masterdatamodule
     internal class SolutionModule : IModule
     {
         public const string BasePath = "solution";
