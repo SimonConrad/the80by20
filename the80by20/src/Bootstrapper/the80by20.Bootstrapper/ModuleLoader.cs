@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Serilog;
+using System.Reflection;
 using the80by20.Shared.Abstractions.Modules;
 
 namespace the80by20.Bootstrapper
@@ -10,13 +11,33 @@ namespace the80by20.Bootstrapper
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
             var locations = assemblies.Where(x => !x.IsDynamic).Select(x => x.Location).ToArray();
             var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll")
-                 .Where(x =>( x.Contains("Masterdata") || x.Contains("Solution") || x.Contains("Users")) // todo fix this hack, without <RuntimeIdentifier>win-x64</RuntimeIdentifier> in bootstrapper csproj this code is not needed as far more less files
-                 && !locations.Contains(x, StringComparer.InvariantCultureIgnoreCase))
+                 .Where(x =>
+                  !locations.Contains(x, StringComparer.InvariantCultureIgnoreCase))
                  .ToList();
 
-            files.ForEach(x => assemblies.Add(AppDomain.CurrentDomain.Load(AssemblyName.GetAssemblyName(x))));
+            //var filesdlls = $"Files: {string.Join(Environment.NewLine, files.Select(x => x))}";
+            //Log.Logger.Information($"Filesdlls: {filesdlls}");
+
+            AddIfAssmebly(assemblies, files);
 
             return assemblies;
+        }
+
+        private static void AddIfAssmebly(List<Assembly> assemblies, List<string> files)
+        {
+            foreach (var file in files)
+            {
+                try
+                {
+                    var assemblyName = AssemblyName.GetAssemblyName(file);
+                    var assembly = AppDomain.CurrentDomain.Load(assemblyName);
+                    assemblies.Add(assembly);
+                }
+                catch (BadImageFormatException) // INFO https://learn.microsoft.com/en-us/dotnet/standard/assembly/identify
+                {
+                    continue;
+                }
+            }
         }
 
         public static IList<IModule> LoadModules(IEnumerable<Assembly> assemblies)

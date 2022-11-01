@@ -4,7 +4,6 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-		<!--<RuntimeIdentifier>win-x86</RuntimeIdentifier>-->
 	</PropertyGroup>
 
 	<ItemGroup>

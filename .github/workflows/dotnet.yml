@@ -50,8 +50,10 @@ jobs:
       run: |
         cd './the80by20/src/Bootstrapper/the80by20.Bootstrapper'
         dotnet build --configuration Release --no-restore
+        # https://learn.microsoft.com/en-us/dotnet/core/deploying/
         dotnet publish -c Release -o ../dotnet-webapp --runtime win-x64 --self-contained true /p:UseAppHost=true
-        #dotnet publish -c Release -o ../dotnet-webapp
+
+
         
     - name: Test
       working-directory: ${{env.WORKING_DIRECTORY}}

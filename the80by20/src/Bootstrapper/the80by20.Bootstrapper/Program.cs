@@ -37,7 +37,14 @@ public partial class Program
         }
         catch (Exception ex)
         {
-            Log.Fatal(ex, "Host terminated unexpectedly");
+            // INFO workaround for exception thrown by ef migrations https://github.com/dotnet/runtime/issues/60600
+            string type = ex.GetType().Name;
+            if (type.Equals("StopTheHostException", StringComparison.Ordinal))
+            {
+                throw;
+            }
+
+            Log.Logger.Fatal(ex, "Unhandled exception");
             await Task.CompletedTask;
         }
         finally

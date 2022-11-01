@@ -37,7 +37,7 @@ in package manager console set defualt project to  `the80by20.Users.Infrastructu
 
 `Update-Database -context UsersDbContext`
 
-#### using ditnet cli
+#### using dotnet ef cli
 
 using powershell console go to `C:\the80by20\the80by20\src\Modules\Masterdata\the80by20.Masterdata.Infrastructure>` check if `dotnet ef` is working
 
@@ -45,6 +45,20 @@ add migration
 
 `dotnet ef migrations add test-migration --context MasterDataDbContext --startup-project ..\..\..\Bootstrapper\the80by20.Bootstrapper\ -o ./EF/Migrations`
 
+remove last migration
+
+`dotnet ef migrations remove --context MasterDataDbContext --startup-project ..\..\..\Bootstrapper\the80by20.Bootstrapper\`
+
+
+update database
+
+`dotnet ef database update --context MasterDataDbContext --startup-project ..\..\..\Bootstrapper\the80by20.Bootstrapper\`
+
+use help
+
+`dotnet ef --help`
+`dotnet ef migrations --help`
+`dotnet ef database --help`
 ## SQL
 
 ### delete rows in transaction
