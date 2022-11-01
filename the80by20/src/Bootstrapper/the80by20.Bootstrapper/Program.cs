@@ -16,6 +16,7 @@ public partial class Program
 
         Log.Logger = CreateLogger(builder);
 
+        builder.Host.UseSerilog();
         try
         {
             Log.Information("Starting host");
@@ -98,6 +99,7 @@ public partial class Program
     private static WebApplication UseMiddlewares(WebApplicationBuilder builder, IList<IModule> modules)
     {
         var app = builder.Build();
+
         app.UseInfrastructure(builder.Configuration);
 
         foreach (var module in modules)
