@@ -29,6 +29,7 @@ public partial class Program
             Log.Information("Starting host");
 
             var configuration = builder.Configuration;
+            var env = builder.Environment;
 
             IList<Assembly> assemblies = ModuleLoader.LoadAssemblies(configuration);
             IList<IModule> modules = ModuleLoader.LoadModules(assemblies);
@@ -38,6 +39,7 @@ public partial class Program
 
             AddServices(builder, modules);
 
+            
             WebApplication app = builder.Build();
             UseMiddlewares(app, builder.Configuration, modules);
 
