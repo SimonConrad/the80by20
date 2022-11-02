@@ -13,24 +13,26 @@ public partial class Program
     private static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        var configuration = builder.Configuration;
 
         Log.Logger = CreateLogger(builder);
-
         builder.Host.UseSerilog();
+
         try
         {
             Log.Information("Starting host");
 
-            IList<Assembly> assemblies = ModuleLoader.LoadAssemblies(builder.Configuration);
+            IList<Assembly> assemblies = ModuleLoader.LoadAssemblies(configuration);
             IList<IModule> modules = ModuleLoader.LoadModules(assemblies);
 
             // INFO https://github.com/serilog/serilog-extensions-hosting 
-            // Log.Logger is assigned implicitly in UseSerilog invoked by  builder.AddLogging, and closed when the app is shut down.
             Log.Logger.Information($"Modules: {string.Join(", ", modules.Select(x => x.Name))}");
 
             AddServices(builder, modules);
 
-            WebApplication app = UseMiddlewares(builder, modules);
+            WebApplication app = builder.Build();
+            UseMiddlewares(app, builder.Configuration, modules);
+
             assemblies.Clear();
             modules.Clear();
 
@@ -93,11 +95,9 @@ public partial class Program
         }
     }
 
-    private static WebApplication UseMiddlewares(WebApplicationBuilder builder, IList<IModule> modules)
+    private static WebApplication UseMiddlewares(WebApplication app, IConfiguration configuration, IList<IModule> modules)
     {
-        var app = builder.Build();
-
-        app.UseInfrastructure(builder.Configuration);
+        app.UseInfrastructure(configuration);
 
         foreach (var module in modules)
         {

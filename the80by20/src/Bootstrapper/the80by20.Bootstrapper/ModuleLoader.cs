@@ -20,8 +20,6 @@ namespace the80by20.Bootstrapper
             //var filesdlls = $"Files: {string.Join(Environment.NewLine, files.Select(x => x))}";
             //Log.Logger.Information($"Filesdlls: {filesdlls}");
 
-            //AddIfAssmebly(assemblies, files);
-
             foreach (var file in files)
             {
                 if (IsAssembly(file))
@@ -35,25 +33,9 @@ namespace the80by20.Bootstrapper
             return assemblies;
         }
 
-        private static void AddIfAssmebly(List<Assembly> assemblies, List<string> files)
-        {
-            foreach (var file in files)
-            {
-                try
-                {
-                    var assemblyName = AssemblyName.GetAssemblyName(file);
-                    var assembly = AppDomain.CurrentDomain.Load(assemblyName);
-                    assemblies.Add(assembly);
-                }
-                catch (BadImageFormatException) // INFO https://learn.microsoft.com/en-us/dotnet/standard/assembly/identify
-                {
-                    continue;
-                }
-            }
-        }
-
         static bool IsAssembly(string path)
         {
+            // INFO https://learn.microsoft.com/en-us/dotnet/standard/assembly/identify
             using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
 
             // Try to read CLI metadata from the PE file.
@@ -77,5 +59,23 @@ namespace the80by20.Bootstrapper
                .Select(Activator.CreateInstance)
                .Cast<IModule>()
                .ToList();
+
+        private static void AddIfAssmebly(List<Assembly> assemblies, List<string> files)
+        {
+            // INFO https://learn.microsoft.com/en-us/dotnet/standard/assembly/identify
+            foreach (var file in files)
+            {
+                try
+                {
+                    var assemblyName = AssemblyName.GetAssemblyName(file);
+                    var assembly = AppDomain.CurrentDomain.Load(assemblyName);
+                    assemblies.Add(assembly);
+                }
+                catch (BadImageFormatException)
+                {
+                    continue;
+                }
+            }
+        }
     }
 }
