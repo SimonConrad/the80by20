@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!--<Nullable>enable</Nullable>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="module.users.Development.json" />
+    <None Remove="module.users.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="module.users.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="module.users.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="the80by20.Bootstrapper" />
+	</ItemGroup>
+
+	<ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
+    <ProjectReference Include="..\the80by20.Users.App\the80by20.Modules.Users.App.csproj" />
+    <ProjectReference Include="..\the80by20.Users.Domain\the80by20.Modules.Users.Domain.csproj" />
+    <ProjectReference Include="..\the80by20.Users.Infrastructure\the80by20.Modules.Users.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

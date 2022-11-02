@@ -26,9 +26,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bootstrapper\the80by20.Bootstrapper\the80by20.Bootstrapper.csproj" />
-    <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Solution.App\the80by20.Solution.App.csproj" />
-    <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Solution.Domain\the80by20.Solution.Domain.csproj" />
-    <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Solution.Infrastructure\the80by20.Solution.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Solution.App\the80by20.Modules.Solution.App.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Solution.Domain\the80by20.Modules.Solution.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Solution.Infrastructure\the80by20.Modules.Solution.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
   </ItemGroup>
 

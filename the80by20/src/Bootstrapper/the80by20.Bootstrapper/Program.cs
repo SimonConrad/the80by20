@@ -5,22 +5,30 @@ using System.Reflection;
 using the80by20.Bootstrapper;
 using the80by20.Shared.Abstractions.Modules;
 using the80by20.Shared.Infrastucture;
+using the80by20.Shared.Infrastucture.Modules;
 using the80by20.Solution.Api;
 using the80by20.Users.Api;
 
 public partial class Program
 {
+    private static IList<Assembly> assemblies;
+    private static IList<IModule> modules;
+
     private static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        var configuration = builder.Configuration;
 
         Log.Logger = CreateLogger(builder);
-        builder.Host.UseSerilog();
+        
+        builder.Host
+            .UseSerilog()
+            .ConfigureModules();
 
         try
         {
             Log.Information("Starting host");
+
+            var configuration = builder.Configuration;
 
             IList<Assembly> assemblies = ModuleLoader.LoadAssemblies(configuration);
             IList<IModule> modules = ModuleLoader.LoadModules(assemblies);
@@ -87,7 +95,7 @@ public partial class Program
     private static void AddServices(WebApplicationBuilder builder, IList<IModule> modules)
     {
         builder.Services
-            .AddInfrastructure(builder.Configuration);
+            .AddInfrastructure(builder.Configuration, assemblies, modules);
 
         foreach (var module in modules)
         {
@@ -111,8 +119,6 @@ public partial class Program
         });
         return app;
     }
-
-
 }
 
 

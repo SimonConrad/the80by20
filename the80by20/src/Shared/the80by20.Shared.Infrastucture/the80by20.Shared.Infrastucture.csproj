@@ -5,6 +5,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+
+
 	<ItemGroup>
 		<ProjectReference Include="..\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
 	</ItemGroup>
@@ -12,10 +14,6 @@
 	<ItemGroup>
 		<InternalsVisibleTo Include="the80by20.Bootstrapper" />
 		<InternalsVisibleTo Include="the80by20.Tests.Integration" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Messaging\" />
 	</ItemGroup>
 
 	<ItemGroup>

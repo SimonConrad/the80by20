@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Solution.Domain\the80by20.Solution.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Solution.Domain\the80by20.Modules.Solution.Domain.csproj" />
     <ProjectReference Include="..\..\src\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
   </ItemGroup>
 

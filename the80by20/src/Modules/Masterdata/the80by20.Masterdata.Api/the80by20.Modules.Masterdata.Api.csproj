@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="module.masterdata.Development.json" />
+    <None Remove="module.masterdata.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="module.masterdata.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="module.masterdata.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
+    <ProjectReference Include="..\the80by20.Masterdata.App\the80by20.Modules.Masterdata.App.csproj" />
+    <ProjectReference Include="..\the80by20.Masterdata.Infrastructure\the80by20.Modules.Masterdata.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

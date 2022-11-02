@@ -8,6 +8,8 @@ namespace the80by20.Bootstrapper
 {
     internal static class ModuleLoader
     {
+        const string modulePart = "the80by20.Modules.";
+
         public static IList<Assembly> LoadAssemblies(IConfiguration configuration)
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
@@ -20,17 +22,59 @@ namespace the80by20.Bootstrapper
             //var filesdlls = $"Files: {string.Join(Environment.NewLine, files.Select(x => x))}";
             //Log.Logger.Information($"Filesdlls: {filesdlls}");
 
+            FilterToAssemeblies(files);
+
+            FilterToEnabledModules(configuration, files);
+
             foreach (var file in files)
             {
-                if (IsAssembly(file))
-                {
-                    var assemblyName = AssemblyName.GetAssemblyName(file);
-                    var assembly = AppDomain.CurrentDomain.Load(assemblyName);
-                    assemblies.Add(assembly);
-                }
+                var assemblyName = AssemblyName.GetAssemblyName(file);
+                var assembly = AppDomain.CurrentDomain.Load(assemblyName);
+                assemblies.Add(assembly);
             }
 
             return assemblies;
+        }
+
+        private static void FilterToEnabledModules(IConfiguration configuration, List<string> files)
+        {
+            var disabledModules = new List<string>();
+            foreach (var file in files)
+            {
+                if (!file.Contains(modulePart))
+                {
+                    continue;
+                }
+
+                var moduleName = file.Split(modulePart)[1].Split(".")[0].ToLowerInvariant();
+                var enabled = configuration.GetValue<bool>($"{moduleName}:module:enabled");
+                if (!enabled)
+                {
+                    disabledModules.Add(file);
+                }
+            }
+
+            foreach (var disabledModule in disabledModules)
+            {
+                files.Remove(disabledModule);
+            }
+        }
+
+        private static void FilterToAssemeblies(List<string> files)
+        {
+            var notAssemblyFiles = new List<string>();
+            foreach (var file in files)
+            {
+                if (!IsAssembly(file))
+                {
+                    notAssemblyFiles.Add(file);
+                }
+            }
+
+            foreach (var notAssembly in notAssemblyFiles)
+            {
+                files.Remove(notAssembly);
+            }
         }
 
         static bool IsAssembly(string path)

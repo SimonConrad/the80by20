@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,10 +6,16 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="the80by20.Masterdata.Api" />
+		<InternalsVisibleTo Include="the80by20.Modules.Solution.Api" />
 	</ItemGroup>
+	
+  <ItemGroup>
+    <Compile Remove="Core.SolutionSale\**" />
+    <EmbeddedResource Remove="Core.SolutionSale\**" />
+    <None Remove="Core.SolutionSale\**" />
+  </ItemGroup>
 
-	<ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
   </ItemGroup>
 
