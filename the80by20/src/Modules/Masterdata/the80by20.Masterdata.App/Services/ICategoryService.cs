@@ -1,7 +1,7 @@
-﻿using the80by20.Masterdata.App.DTO;
+﻿using the80by20.Modules.Masterdata.App.DTO;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Masterdata.App.Services
+namespace the80by20.Modules.Masterdata.App.Services
 {
 
     // INFO
@@ -21,11 +21,11 @@ namespace the80by20.Masterdata.App.Services
         Task AddAsync(CategoryDto dto);
 
         Task<CategoryDetailsDto> GetAsync(Guid id);
-        
+
         Task<IReadOnlyList<CategoryDto>> GetAllAsync();
-        
+
         Task UpdateAsync(CategoryDetailsDto dto);
-        
+
         Task DeleteAsync(Guid id);
     }
 }

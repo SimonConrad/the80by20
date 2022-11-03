@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using the80by20.Modules.Solution.App.Events.Problem;
+using the80by20.Modules.Solution.Domain.Operations;
+using the80by20.Modules.Solution.Domain.Operations.Problem;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Solution.App.Events.Problem;
-using the80by20.Solution.Domain.Operations;
-using the80by20.Solution.Domain.Operations.Problem;
 
-namespace the80by20.Solution.App.Commands.Problem.Handlers;
+namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
 
 // TODO create kind of IDispatcherBastraction to eliminate depndecy on mediatR nuget package in this application layer proje ct
 

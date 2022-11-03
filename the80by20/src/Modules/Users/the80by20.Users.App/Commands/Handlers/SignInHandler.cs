@@ -1,9 +1,9 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+﻿using the80by20.Modules.Users.App.Commands.Exceptions;
+using the80by20.Modules.Users.App.Ports;
+using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Commands;
-using the80by20.Users.App.Commands.Exceptions;
-using the80by20.Users.App.Ports;
 
-namespace the80by20.Users.App.Commands.Handlers;
+namespace the80by20.Modules.Users.App.Commands.Handlers;
 
 [CommandHandlerCqrs]
 internal sealed class SignInHandler : ICommandHandler<SignIn>

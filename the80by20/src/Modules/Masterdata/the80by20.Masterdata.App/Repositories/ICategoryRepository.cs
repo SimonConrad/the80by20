@@ -1,6 +1,6 @@
-﻿using the80by20.Masterdata.App.Entities;
+﻿using the80by20.Modules.Masterdata.App.Entities;
 
-namespace the80by20.Masterdata.App.Repositories;
+namespace the80by20.Modules.Masterdata.App.Repositories;
 
 // INFO
 // Alternative way - use ICategoryRepository : IGenericRepository<Category>

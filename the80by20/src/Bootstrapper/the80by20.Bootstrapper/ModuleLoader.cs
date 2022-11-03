@@ -1,5 +1,4 @@
-﻿using Serilog;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using the80by20.Shared.Abstractions.Modules;

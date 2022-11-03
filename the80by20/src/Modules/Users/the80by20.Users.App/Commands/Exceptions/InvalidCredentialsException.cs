@@ -1,6 +1,6 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
+﻿using the80by20.Shared.Abstractions.Exceptions;
 
-namespace the80by20.Users.App.Commands.Exceptions;
+namespace the80by20.Modules.Users.App.Commands.Exceptions;
 
 public class InvalidCredentialsException : The80by20Exception
 {

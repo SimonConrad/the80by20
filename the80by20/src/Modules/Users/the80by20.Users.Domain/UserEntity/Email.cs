@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
+using the80by20.Modules.Users.Domain.UserEntity.Exceptions;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Users.Domain.UserEntity.Exceptions;
 
-namespace the80by20.Users.Domain.UserEntity;
+namespace the80by20.Modules.Users.Domain.UserEntity;
 
 [ValueObjectDdd]
 public sealed record Email

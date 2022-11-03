@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using the80by20.Modules.Solution.Domain.Operations;
+using the80by20.Modules.Solution.Domain.Operations.Problem;
 using the80by20.Shared.Infrastucture.EF;
-using the80by20.Solution.Domain.Operations;
-using the80by20.Solution.Domain.Operations.Problem;
 
-namespace the80by20.Solution.Infrastructure.EF.Configurations
+namespace the80by20.Modules.Solution.Infrastructure.EF.Configurations
 {
     public class ProblemAggregateConfiguration : IEntityTypeConfiguration<ProblemAggregate>
     {

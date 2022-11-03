@@ -2,7 +2,7 @@
 using MediatR;
 using the80by20.Shared.Infrastucture.Decorators;
 
-namespace the80by20.Solution.Infrastructure.Behaviors
+namespace the80by20.Modules.Solution.Infrastructure.Behaviors
 {
     // todo ipiplinepreprocessor sprawidzic czy nie lepszy niżli IPipelineBehavior
     // https://github.com/jbogard/MediatR/wiki/Behaviors

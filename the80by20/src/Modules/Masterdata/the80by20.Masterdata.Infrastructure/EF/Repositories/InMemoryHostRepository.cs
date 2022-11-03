@@ -1,7 +1,7 @@
-﻿using the80by20.Masterdata.App.Entities;
-using the80by20.Masterdata.App.Repositories;
+﻿using the80by20.Modules.Masterdata.App.Entities;
+using the80by20.Modules.Masterdata.App.Repositories;
 
-namespace the80by20.Masterdata.Infrastructure.EF.Repositories
+namespace the80by20.Modules.Masterdata.Infrastructure.EF.Repositories
 {
     internal class InMemoryCategoryRepository : ICategoryRepository
     {

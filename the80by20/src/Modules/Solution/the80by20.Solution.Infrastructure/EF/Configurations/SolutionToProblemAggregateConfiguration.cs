@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
+using the80by20.Modules.Solution.Domain.Capabilities;
+using the80by20.Modules.Solution.Domain.Operations;
+using the80by20.Modules.Solution.Domain.Operations.Problem;
+using the80by20.Modules.Solution.Domain.Operations.Solution;
+using the80by20.Shared.Abstractions.SharedKernel.Capabilities;
 using the80by20.Shared.Infrastucture.EF;
-using the80by20.Solution.Domain.Capabilities;
-using the80by20.Solution.Domain.Operations;
-using the80by20.Solution.Domain.Operations.Problem;
-using the80by20.Solution.Domain.Operations.Solution;
 
-namespace the80by20.Solution.Infrastructure.EF.Configurations
+namespace the80by20.Modules.Solution.Infrastructure.EF.Configurations
 {
     public class SolutionToProblemAggregateConfiguration : IEntityTypeConfiguration<SolutionToProblemAggregate>
     {

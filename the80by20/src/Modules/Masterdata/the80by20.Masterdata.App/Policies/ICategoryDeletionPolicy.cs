@@ -1,6 +1,6 @@
-﻿using the80by20.Masterdata.App.Entities;
+﻿using the80by20.Modules.Masterdata.App.Entities;
 
-namespace the80by20.Masterdata.App.Policies
+namespace the80by20.Modules.Masterdata.App.Policies
 {
     public interface ICategoryDeletionPolicy
     {

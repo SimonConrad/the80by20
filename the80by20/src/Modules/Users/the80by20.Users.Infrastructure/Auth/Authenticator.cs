@@ -3,10 +3,10 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using the80by20.Modules.Users.App.Ports;
 using the80by20.Shared.Abstractions.Time;
-using the80by20.Users.App.Ports;
 
-namespace the80by20.Users.Infrastructure.Auth
+namespace the80by20.Modules.Users.Infrastructure.Auth
 {
     public sealed class Authenticator : IAuthenticator
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using the80by20.Masterdata.App.DTO;
-using the80by20.Masterdata.App.Services;
+using the80by20.Modules.Masterdata.App.DTO;
+using the80by20.Modules.Masterdata.App.Services;
 
-namespace the80by20.Masterdata.Api.Controllers;
+namespace the80by20.Modules.Masterdata.Api.Controllers;
 // INFO CancellationToken can be passed in controller action method, web-api client can pass it , and passed down to async/await ef methods
 [ApiController]
 [Authorize(Policy = "is-admin")]
@@ -21,11 +21,11 @@ internal class CategoriesController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<CategoryDto>>> Get() 
+    public async Task<ActionResult<IReadOnlyList<CategoryDto>>> Get()
         => Ok(await categoryService.GetAllAsync());
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<CategoryDetailsDto>> Get(Guid id) 
+    public async Task<ActionResult<CategoryDetailsDto>> Get(Guid id)
         => OkOrNotFound(await categoryService.GetAsync(id));
 
 

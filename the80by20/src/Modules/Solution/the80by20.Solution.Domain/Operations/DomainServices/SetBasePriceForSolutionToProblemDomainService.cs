@@ -1,9 +1,9 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
+﻿using the80by20.Modules.Solution.Domain.Operations.Solution;
+using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.SharedKernel.Capabilities;
 using the80by20.Shared.Abstractions.Time;
-using the80by20.Solution.Domain.Operations.Solution;
 
-namespace the80by20.Solution.Domain.Operations.DomainServices;
+namespace the80by20.Modules.Solution.Domain.Operations.DomainServices;
 
 [DomainServiceDdd]
 public sealed class SetBasePriceForSolutionToProblemDomainService

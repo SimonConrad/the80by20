@@ -1,10 +1,10 @@
-﻿using the80by20.Masterdata.App.DTO;
+﻿using the80by20.Modules.Masterdata.App.DTO;
+using the80by20.Modules.Solution.Domain.Operations.Problem;
+using the80by20.Modules.Solution.Domain.Operations.Solution;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
-using the80by20.Solution.Domain.Operations.Problem;
-using the80by20.Solution.Domain.Operations.Solution;
+using the80by20.Shared.Abstractions.SharedKernel.Capabilities;
 
-namespace the80by20.Solution.App.ReadModel;
+namespace the80by20.Modules.Solution.App.ReadModel;
 
 // port
 // INFO port in hexagon arch, its adapter in dal, IoC - so that app layer do not relay on dal

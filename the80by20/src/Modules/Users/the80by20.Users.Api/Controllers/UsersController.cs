@@ -3,20 +3,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
+using the80by20.Modules.Users.App.Commands;
+using the80by20.Modules.Users.App.Ports;
+using the80by20.Modules.Users.App.Queries;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Queries;
 using the80by20.Shared.Infrastucture;
-using the80by20.Users.App.Commands;
-using the80by20.Users.App.Ports;
-using the80by20.Users.App.Queries;
 
-namespace the80by20.Solution.Api.Security;
+namespace the80by20.Modules.Users.Api.Controllers;
 
-// todo is convention userscontroller vs usercontroller
-
-[ApiController] // info  bacouse of inheriting from ControllerBase and marking controllre as [ApiController] attributes: FromRoute, FromQuery, FromBody can be removed
-[Route("users/[controller]")]
-public class UsersController : ControllerBase
+internal class UsersController : BaseController
 {
     private readonly IQueryHandler<GetUsers, IEnumerable<UserDto>> _getUsersHandler;
     private readonly IQueryHandler<GetUser, UserDto> _getUserHandler;

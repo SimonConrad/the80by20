@@ -1,8 +1,8 @@
 ﻿using MediatR;
+using the80by20.Modules.Solution.Infrastructure.EF;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Solution.Infrastructure.EF;
 
-namespace the80by20.Solution.Infrastructure.Behaviors
+namespace the80by20.Modules.Solution.Infrastructure.Behaviors
 {
     // todo test 
     // https://github.com/jbogard/MediatR/wiki/Behaviors todo check if instead of IPipelineBehavior use preprocessor and posprocessobehavior

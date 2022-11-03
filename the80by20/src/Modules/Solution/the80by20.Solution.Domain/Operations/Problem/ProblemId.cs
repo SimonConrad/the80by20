@@ -1,7 +1,7 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Exceptions;
 
-namespace the80by20.Solution.Domain.Operations.Problem;
+namespace the80by20.Modules.Solution.Domain.Operations.Problem;
 
 [ValueObjectDdd]
 public sealed record ProblemId

@@ -2,7 +2,7 @@
 
 // INFO Due to the fact that this entity, and this module (masterdata) has no deep logic and it is basically simple crud
 // then it maybe good idea (from pragmatic and kiss reason) to just create there anemic entity without encapsulation (no private setters) and without factory methods
-namespace the80by20.Masterdata.App.Entities;
+namespace the80by20.Modules.Masterdata.App.Entities;
 [CrudEntity]
 public class Category
 {

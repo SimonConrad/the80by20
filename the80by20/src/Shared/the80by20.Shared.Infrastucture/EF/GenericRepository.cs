@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using the80by20.Shared.Abstractions.Dal;
 
-namespace the80by20.Masterdata.Infrastructure.EF.Repositories;
+namespace the80by20.Shared.Infrastucture.EF;
 
 // INFO generic repository https://codewithmukesh.com/blog/repository-pattern-in-aspnet-core/
 public class GenericRepository<T> : IGenericRepository<T> where T : class

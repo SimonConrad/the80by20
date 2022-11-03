@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Solution.Infrastructure.Behaviors
+namespace the80by20.Modules.Solution.Infrastructure.Behaviors
 {
     [HandlerDecorator]
     public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>

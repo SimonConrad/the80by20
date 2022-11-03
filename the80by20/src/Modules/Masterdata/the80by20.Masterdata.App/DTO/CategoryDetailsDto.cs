@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace the80by20.Masterdata.App.DTO
+namespace the80by20.Modules.Masterdata.App.DTO
 {
     // INFO there due to crud level logic and simple use cases inheritance is used, however watch out for inheritance, 
     // often better way is not to inherit information (properties) or behavior (methods) and just copy (event if it seems like duplication and repetition),
@@ -16,4 +16,4 @@ namespace the80by20.Masterdata.App.DTO
         [StringLength(1000)]
         public string Description { get; set; }
     }
-}   
+}

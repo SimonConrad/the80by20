@@ -1,4 +1,4 @@
-﻿namespace the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
+﻿namespace the80by20.Shared.Abstractions.Exceptions;
 
 public class DomainException : The80by20Exception
 {

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using FluentValidation;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
 using the80by20.Shared.Abstractions.Commands;
+using the80by20.Shared.Abstractions.Exceptions;
 
 namespace the80by20.Shared.Infrastucture.Decorators
 {

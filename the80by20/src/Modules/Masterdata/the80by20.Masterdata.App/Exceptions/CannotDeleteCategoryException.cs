@@ -1,6 +1,6 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
+﻿using the80by20.Shared.Abstractions.Exceptions;
 
-namespace the80by20.Masterdata.App.Exceptions
+namespace the80by20.Modules.Masterdata.App.Exceptions
 {
     public class CannotDeleteCategoryException : The80by20Exception
     {

@@ -1,6 +1,6 @@
 ﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Solution.Domain.Operations.Problem;
+namespace the80by20.Modules.Solution.Domain.Operations.Problem;
 
 [Port]
 [AggregateRepositoryDdd]

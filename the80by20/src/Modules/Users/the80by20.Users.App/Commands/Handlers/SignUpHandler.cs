@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
+using the80by20.Modules.Users.App.Commands.Exceptions;
+using the80by20.Modules.Users.App.Ports;
+using the80by20.Modules.Users.Domain.UserEntity;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Time;
-using the80by20.Users.App.Commands.Exceptions;
-using the80by20.Users.App.Ports;
-using the80by20.Users.Domain.UserEntity;
 
-namespace the80by20.Users.App.Commands.Handlers;
+namespace the80by20.Modules.Users.App.Commands.Handlers;
 
 internal sealed class SignUpHandler : ICommandHandler<SignUp>
 {

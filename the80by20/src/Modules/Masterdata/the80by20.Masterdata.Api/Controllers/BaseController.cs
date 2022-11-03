@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace the80by20.Masterdata.Api.Controllers;
+namespace the80by20.Modules.Masterdata.Api.Controllers;
 
 [ApiController]
 [Route(MasterDataModule.BasePath + "/[controller]")] // TODO apply this in all controller

@@ -3,10 +3,10 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using the80by20.Masterdata.Infrastructure.EF;
+using the80by20.Modules.Masterdata.Infrastructure.EF;
+using the80by20.Modules.Solution.Infrastructure.EF;
+using the80by20.Modules.Users.Infrastructure.EF;
 using the80by20.Shared.Infrastucture.Services;
-using the80by20.Solution.Infrastructure.EF;
-using the80by20.Users.Infrastructure.EF;
 
 namespace the80by20.Tests.Integration.Setup;
 

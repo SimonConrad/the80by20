@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using the80by20.Modules.Solution.Domain;
+using the80by20.Modules.Solution.Infrastructure;
 using the80by20.Shared.Abstractions.Modules;
-using the80by20.Solution.Domain;
-using the80by20.Solution.Infrastructure;
 
-namespace the80by20.Solution.Api
+namespace the80by20.Modules.Solution.Api
 {
     // TODO apply base controller and other module mechanisms from masterdatamodule
     internal class SolutionModule : IModule

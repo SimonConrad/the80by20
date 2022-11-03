@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using the80by20.Masterdata.App.Entities;
+using the80by20.Modules.Masterdata.App.Entities;
 
-namespace the80by20.Masterdata.Infrastructure.EF.Configurations;
+namespace the80by20.Modules.Masterdata.Infrastructure.EF.Configurations;
 
 public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 {

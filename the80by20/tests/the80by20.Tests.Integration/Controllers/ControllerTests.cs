@@ -1,10 +1,10 @@
 ﻿using System.Net.Http.Headers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using the80by20.Modules.Users.App.Ports;
+using the80by20.Modules.Users.Infrastructure.Auth;
 using the80by20.Shared.Infrastucture.Time;
 using the80by20.Tests.Integration.Setup;
-using the80by20.Users.App.Ports;
-using the80by20.Users.Infrastructure.Auth;
 using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;

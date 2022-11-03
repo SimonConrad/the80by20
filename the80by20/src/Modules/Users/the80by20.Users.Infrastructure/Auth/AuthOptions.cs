@@ -1,4 +1,4 @@
-﻿namespace the80by20.Users.Infrastructure.Auth
+﻿namespace the80by20.Modules.Users.Infrastructure.Auth
 {
     public sealed class AuthOptions
     {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using the80by20.Users.Infrastructure.EF;
+using the80by20.Modules.Users.Infrastructure.EF;
 
 #nullable disable
 

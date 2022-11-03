@@ -1,6 +1,6 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
+﻿using the80by20.Shared.Abstractions.Exceptions;
 
-namespace the80by20.Users.Domain.UserEntity.Exceptions;
+namespace the80by20.Modules.Users.Domain.UserEntity.Exceptions;
 
 public sealed class InvalidFullNameException : The80by20Exception
 {

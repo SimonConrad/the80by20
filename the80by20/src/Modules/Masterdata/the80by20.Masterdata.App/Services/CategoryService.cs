@@ -1,11 +1,11 @@
-﻿using the80by20.Masterdata.App.DTO;
-using the80by20.Masterdata.App.Entities;
-using the80by20.Masterdata.App.Exceptions;
-using the80by20.Masterdata.App.Policies;
-using the80by20.Masterdata.App.Repositories;
+﻿using the80by20.Modules.Masterdata.App.DTO;
+using the80by20.Modules.Masterdata.App.Entities;
+using the80by20.Modules.Masterdata.App.Exceptions;
+using the80by20.Modules.Masterdata.App.Policies;
+using the80by20.Modules.Masterdata.App.Repositories;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Masterdata.App.Services
+namespace the80by20.Modules.Masterdata.App.Services
 {
     [Adapter]
     public class CategoryService : ICategoryService

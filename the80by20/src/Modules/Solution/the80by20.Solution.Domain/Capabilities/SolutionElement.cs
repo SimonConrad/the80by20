@@ -1,7 +1,7 @@
 ﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.DomainLayer.SharedKernel.Capabilities;
+using the80by20.Shared.Abstractions.SharedKernel.Capabilities;
 
-namespace the80by20.Solution.Domain.Capabilities;
+namespace the80by20.Modules.Solution.Domain.Capabilities;
 
 [ValueObjectDdd]
 public sealed record SolutionElement

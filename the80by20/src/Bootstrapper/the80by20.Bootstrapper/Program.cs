@@ -6,8 +6,6 @@ using the80by20.Bootstrapper;
 using the80by20.Shared.Abstractions.Modules;
 using the80by20.Shared.Infrastucture;
 using the80by20.Shared.Infrastucture.Modules;
-using the80by20.Solution.Api;
-using the80by20.Users.Api;
 
 public partial class Program
 {
@@ -19,7 +17,7 @@ public partial class Program
         var builder = WebApplication.CreateBuilder(args);
 
         Log.Logger = CreateLogger(builder);
-        
+
         builder.Host
             .UseSerilog()
             .ConfigureModules();
@@ -31,15 +29,15 @@ public partial class Program
             var configuration = builder.Configuration;
             var env = builder.Environment;
 
-            IList<Assembly> assemblies = ModuleLoader.LoadAssemblies(configuration);
-            IList<IModule> modules = ModuleLoader.LoadModules(assemblies);
+            assemblies = ModuleLoader.LoadAssemblies(configuration);
+            modules = ModuleLoader.LoadModules(assemblies);
 
             // INFO https://github.com/serilog/serilog-extensions-hosting 
             Log.Logger.Information($"Modules: {string.Join(", ", modules.Select(x => x.Name))}");
 
             AddServices(builder, modules);
 
-            
+
             WebApplication app = builder.Build();
             UseMiddlewares(app, builder.Configuration, modules);
 
@@ -69,22 +67,22 @@ public partial class Program
 
     private static Serilog.Core.Logger CreateLogger(WebApplicationBuilder builder)
     {
-       return new LoggerConfiguration()
-                .MinimumLevel.Information()
-                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
-                //"Microsoft.EntityFrameworkCore.Database.Command": "Warning",
-                //"Microsoft.EntityFrameworkCore.Infrastructure": "Warning"
-                .WriteTo
-                .Console()
-                .Enrich.FromLogContext()
-                .WriteTo.File(builder.Configuration.GetValue<string>("LogFilePath"),
-                        rollingInterval: RollingInterval.Day,
-                        rollOnFileSizeLimit: true,
-                        retainedFileCountLimit: 10,
-                        fileSizeLimitBytes: 4194304, // 4MB
-                                                     //restrictedToMinimumLevel: LogEventLevel.Information,
-                        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] ({SourceContext}.{Method}) {Message}{NewLine}{Exception}")
-                .CreateLogger();
+        return new LoggerConfiguration()
+                 .MinimumLevel.Information()
+                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
+                 //"Microsoft.EntityFrameworkCore.Database.Command": "Warning",
+                 //"Microsoft.EntityFrameworkCore.Infrastructure": "Warning"
+                 .WriteTo
+                 .Console()
+                 .Enrich.FromLogContext()
+                 .WriteTo.File(builder.Configuration.GetValue<string>("LogFilePath"),
+                         rollingInterval: RollingInterval.Day,
+                         rollOnFileSizeLimit: true,
+                         retainedFileCountLimit: 10,
+                         fileSizeLimitBytes: 4194304, // 4MB
+                                                      //restrictedToMinimumLevel: LogEventLevel.Information,
+                         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] ({SourceContext}.{Method}) {Message}{NewLine}{Exception}")
+                 .CreateLogger();
         // todo .{Method} is not logging method name
         //loggerConfiguration.ReadFrom.Configuration(builder.Configuration);
 
@@ -96,8 +94,7 @@ public partial class Program
 
     private static void AddServices(WebApplicationBuilder builder, IList<IModule> modules)
     {
-        builder.Services
-            .AddInfrastructure(builder.Configuration, assemblies, modules);
+        builder.Services.AddInfrastructure(builder.Configuration, assemblies, modules);
 
         foreach (var module in modules)
         {
@@ -119,6 +116,7 @@ public partial class Program
             endpoints.MapControllers();
             endpoints.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
         });
+
         return app;
     }
 }

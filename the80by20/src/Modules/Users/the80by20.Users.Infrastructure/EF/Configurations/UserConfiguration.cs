@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using the80by20.Users.Domain.UserEntity;
+using the80by20.Modules.Users.Domain.UserEntity;
 
-namespace the80by20.Users.Infrastructure.EF.Configurations
+namespace the80by20.Modules.Users.Infrastructure.EF.Configurations
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {

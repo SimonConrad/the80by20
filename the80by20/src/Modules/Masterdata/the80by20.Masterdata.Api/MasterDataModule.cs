@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using the80by20.Masterdata.App;
-using the80by20.Masterdata.Infrastructure;
+using the80by20.Modules.Masterdata.App;
+using the80by20.Modules.Masterdata.Infrastructure;
 using the80by20.Shared.Abstractions.Modules;
 
-namespace the80by20.Masterdata.Api
+namespace the80by20.Modules.Masterdata.Api
 {
     internal class MasterDataModule : IModule
     {

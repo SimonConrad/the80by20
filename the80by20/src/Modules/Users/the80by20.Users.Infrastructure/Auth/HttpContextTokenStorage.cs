@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using the80by20.Users.App.Ports;
+using the80by20.Modules.Users.App.Ports;
 
-namespace the80by20.Users.Infrastructure.Auth
+namespace the80by20.Modules.Users.Infrastructure.Auth
 {
     internal sealed class HttpContextTokenStorage : ITokenStorage
     {

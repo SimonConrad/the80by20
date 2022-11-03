@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.Masterdata.App.Entities;
-using the80by20.Masterdata.Infrastructure.EF;
+using the80by20.Modules.Masterdata.App.Entities;
+using the80by20.Modules.Masterdata.Infrastructure.EF;
+using the80by20.Modules.Solution.Infrastructure.EF;
+using the80by20.Modules.Users.Infrastructure.EF;
 using the80by20.Shared.Abstractions.Time;
-using the80by20.Solution.Infrastructure.EF;
-using the80by20.Users.Infrastructure.EF;
 
 namespace the80by20.Bootstrapper;
 

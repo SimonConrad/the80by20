@@ -1,12 +1,12 @@
 ﻿using MediatR;
-using the80by20.Masterdata.App.Services;
+using the80by20.Modules.Masterdata.App.Services;
+using the80by20.Modules.Solution.App.Events.Problem;
+using the80by20.Modules.Solution.App.Events.Solution;
+using the80by20.Modules.Solution.Domain.Operations.Problem;
+using the80by20.Modules.Solution.Domain.Operations.Solution;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Solution.App.Events.Problem;
-using the80by20.Solution.App.Events.Solution;
-using the80by20.Solution.Domain.Operations.Problem;
-using the80by20.Solution.Domain.Operations.Solution;
 
-namespace the80by20.Solution.App.ReadModel;
+namespace the80by20.Modules.Solution.App.ReadModel;
 
 /// <summary>
 /// TODO: in production rather do alternative to this read model handling problems / solutions updates mechanism

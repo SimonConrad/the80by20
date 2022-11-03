@@ -1,8 +1,8 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
+﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Exceptions;
+using the80by20.Shared.Abstractions.SharedKernel;
 
-namespace the80by20.Solution.Domain.Operations.Problem;
+namespace the80by20.Modules.Solution.Domain.Operations.Problem;
 
 [AggregateDdd]
 public class ProblemAggregate : Versionable, IEquatable<ProblemAggregate>

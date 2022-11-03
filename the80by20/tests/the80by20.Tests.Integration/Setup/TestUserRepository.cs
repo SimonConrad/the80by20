@@ -1,5 +1,5 @@
-﻿using the80by20.Users.App.Ports;
-using the80by20.Users.Domain.UserEntity;
+﻿using the80by20.Modules.Users.App.Ports;
+using the80by20.Modules.Users.Domain.UserEntity;
 
 namespace the80by20.Tests.Integration.Setup;
 

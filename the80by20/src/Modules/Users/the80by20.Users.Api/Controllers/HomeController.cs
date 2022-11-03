@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace the80by20.Masterdata.Api.Controllers
+namespace the80by20.Modules.Users.Api.Controllers
 {
-    [Route("users")]
-    internal class HomeController
+    [Route(UsersModule.BasePath)]
+    internal class HomeController : BaseController
     {
         [HttpGet]
         public ActionResult<string> Get() => "Users API";

@@ -1,6 +1,6 @@
 ﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Solution.App.ReadModel;
+namespace the80by20.Modules.Solution.App.ReadModel;
 
 /// <summary>
 /// info denormalized (in db) model, optimized for fast queries without unecessary joins, on event storming model a decision data for doing or not command

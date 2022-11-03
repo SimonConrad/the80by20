@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using the80by20.Modules.Users.App.Queries;
+using the80by20.Modules.Users.Domain.UserEntity;
+using the80by20.Modules.Users.Infrastructure.EF;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Queries;
-using the80by20.Users.App.Queries;
-using the80by20.Users.Domain.UserEntity;
-using the80by20.Users.Infrastructure.EF;
 
-namespace the80by20.Users.Infrastructure.Users;
+namespace the80by20.Modules.Users.Infrastructure.Users;
 
 [QueryHandlerCqrs]
 public sealed class GetUserHandler : IQueryHandler<GetUser, UserDto>

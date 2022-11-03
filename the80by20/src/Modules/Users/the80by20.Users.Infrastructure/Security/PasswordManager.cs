@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using the80by20.Modules.Users.App.Ports;
+using the80by20.Modules.Users.Domain.UserEntity;
 
-using the80by20.Users.App.Ports;
-using the80by20.Users.Domain.UserEntity;
-
-namespace the80by20.Users.Infrastructure.Security
+namespace the80by20.Modules.Users.Infrastructure.Security
 {
     // todo di internal sealed like in myspot-api
     //internal sealed class PasswordManager : IPasswordManager

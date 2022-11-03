@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.Users.App.Ports;
-using the80by20.Users.Domain.UserEntity;
+using the80by20.Modules.Users.App.Ports;
+using the80by20.Modules.Users.Domain.UserEntity;
 
 
-namespace the80by20.Users.Infrastructure.EF.Repositories
+namespace the80by20.Modules.Users.Infrastructure.EF.Repositories
 {
     public sealed class UserRepository : IUserRepository
     {

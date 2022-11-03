@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.Solution.App.ReadModel;
-using the80by20.Solution.Domain.Operations.Problem;
-using the80by20.Solution.Domain.Operations.Solution;
+using the80by20.Modules.Solution.App.ReadModel;
+using the80by20.Modules.Solution.Domain.Operations.Problem;
+using the80by20.Modules.Solution.Domain.Operations.Solution;
 
 // todo do command handler decorator that wrpas into unit of worka transaction - like in my-spot
 
-namespace the80by20.Solution.Infrastructure.EF
+namespace the80by20.Modules.Solution.Infrastructure.EF
 {
     // in future do some in memory or not in memopry sqllite for testing purposes
     public class SolutionDbContext : DbContext

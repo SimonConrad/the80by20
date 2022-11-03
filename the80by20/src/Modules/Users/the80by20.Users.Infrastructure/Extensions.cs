@@ -4,23 +4,21 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using the80by20.Users.App.Commands.Handlers;
-using the80by20.Users.App.Ports;
-using the80by20.Users.Domain.UserEntity;
-using the80by20.Users.Infrastructure.Auth;
-using the80by20.Users.Infrastructure.EF.Repositories;
-using the80by20.Users.Infrastructure.Security;
 using FluentValidation;
-using the80by20.Users.Infrastructure.EF;
 using the80by20.Shared.Infrastucture.Decorators;
-using the80by20.Shared.Infrastucture.EF;
 using the80by20.Shared.Abstractions.Dal;
 using the80by20.Shared.Abstractions.Queries;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Infrastucture.SqlServer;
-using the80by20.Shared.Infrastucture;
+using the80by20.Modules.Users.App.Ports;
+using the80by20.Modules.Users.Infrastructure.Auth;
+using the80by20.Modules.Users.Infrastructure.EF;
+using the80by20.Modules.Users.Infrastructure.Security;
+using the80by20.Modules.Users.Domain.UserEntity;
+using the80by20.Modules.Users.App.Commands.Handlers;
+using the80by20.Modules.Users.Infrastructure.EF.Repositories;
 
-namespace the80by20.Users.Infrastructure
+namespace the80by20.Modules.Users.Infrastructure
 {
     internal static class Extensions
     {

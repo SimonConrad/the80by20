@@ -1,4 +1,4 @@
-﻿namespace the80by20.Users.App.Queries;
+﻿namespace the80by20.Modules.Users.App.Queries;
 
 public class UserDto
 {

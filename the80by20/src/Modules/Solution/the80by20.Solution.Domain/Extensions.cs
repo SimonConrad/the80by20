@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using the80by20.Solution.Domain.Operations.DomainServices;
+using the80by20.Modules.Solution.Domain.Operations.DomainServices;
 
-namespace the80by20.Solution.Domain
+namespace the80by20.Modules.Solution.Domain
 {
     internal static class Extensions
     {

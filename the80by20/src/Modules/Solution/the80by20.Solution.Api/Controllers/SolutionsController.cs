@@ -3,9 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using the80by20.Solution.App.ReadModel;
+using the80by20.Modules.Solution.App.ReadModel;
 
-namespace the80by20.Solution.Api.Controllers
+namespace the80by20.Modules.Solution.Api.Controllers
 {
     [ApiController]
     [Route("solution-to-problem/[controller]")]

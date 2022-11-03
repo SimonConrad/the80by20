@@ -1,11 +1,11 @@
 ﻿using MediatR;
+using the80by20.Modules.Solution.App.Events.Solution;
+using the80by20.Modules.Solution.Domain.Operations.DomainServices;
+using the80by20.Modules.Solution.Domain.Operations.Problem;
+using the80by20.Modules.Solution.Domain.Operations.Solution;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Solution.App.Events.Solution;
-using the80by20.Solution.Domain.Operations.DomainServices;
-using the80by20.Solution.Domain.Operations.Problem;
-using the80by20.Solution.Domain.Operations.Solution;
 
-namespace the80by20.Solution.App.Commands.Solution.Handlers;
+namespace the80by20.Modules.Solution.App.Commands.Solution.Handlers;
 
 [CommandDdd]
 public class StartWorkingOnSolutionCommandHandler

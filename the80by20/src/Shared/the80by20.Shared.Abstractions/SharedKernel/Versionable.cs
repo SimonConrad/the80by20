@@ -1,4 +1,4 @@
-﻿namespace the80by20.Shared.Abstractions.DomainLayer.SharedKernel;
+﻿namespace the80by20.Shared.Abstractions.SharedKernel;
 
 public class Versionable
 {

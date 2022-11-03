@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
+using the80by20.Modules.Users.App.Commands;
+using the80by20.Modules.Users.App.Ports;
+using the80by20.Modules.Users.App.Queries;
+using the80by20.Modules.Users.Domain.UserEntity;
+using the80by20.Modules.Users.Infrastructure.Security;
 using the80by20.Shared.Infrastucture.Time;
 using the80by20.Tests.Integration.Setup;
-using the80by20.Users.App.Commands;
-using the80by20.Users.App.Ports;
-using the80by20.Users.App.Queries;
-using the80by20.Users.Domain.UserEntity;
-using the80by20.Users.Infrastructure.Security;
 using Xunit;
 
 namespace the80by20.Tests.Integration.Controllers;

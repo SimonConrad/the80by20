@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using the80by20.Masterdata.App.Entities;
+using the80by20.Modules.Masterdata.App.Entities;
 using the80by20.Shared.Infrastucture.Services;
 
-namespace the80by20.Masterdata.Infrastructure.EF
+namespace the80by20.Modules.Masterdata.Infrastructure.EF
 {
     public class MasterDataSeeder : IDataSeeder
     {

@@ -1,6 +1,6 @@
 ﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Users.Domain.UserEntity;
+namespace the80by20.Modules.Users.Domain.UserEntity;
 
 [EntityDdd]
 public class User

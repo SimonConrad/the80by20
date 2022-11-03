@@ -1,6 +1,6 @@
-﻿using the80by20.Users.Domain.UserEntity;
+﻿using the80by20.Modules.Users.Domain.UserEntity;
 
-namespace the80by20.Users.App.Ports;
+namespace the80by20.Modules.Users.App.Ports;
 
 public interface IUserRepository
 {

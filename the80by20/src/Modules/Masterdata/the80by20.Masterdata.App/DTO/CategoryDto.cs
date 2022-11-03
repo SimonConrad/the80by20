@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace the80by20.Masterdata.App.DTO
+namespace the80by20.Modules.Masterdata.App.DTO
 {
     public class CategoryDto
     {
@@ -10,4 +10,4 @@ namespace the80by20.Masterdata.App.DTO
         [StringLength(100, MinimumLength = 3)]
         public string Name { get; set; }
     }
-}   
+}

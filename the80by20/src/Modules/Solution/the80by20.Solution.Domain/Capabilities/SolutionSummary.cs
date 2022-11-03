@@ -1,7 +1,7 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.Exceptions;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Exceptions;
 
-namespace the80by20.Solution.Domain.Capabilities;
+namespace the80by20.Modules.Solution.Domain.Capabilities;
 
 [ValueObjectDdd]
 public sealed record SolutionSummary
