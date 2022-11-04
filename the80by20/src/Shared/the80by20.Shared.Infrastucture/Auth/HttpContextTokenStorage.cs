@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using the80by20.Modules.Users.App.Ports;
+using the80by20.Shared.Abstractions.Auth;
 
-namespace the80by20.Modules.Users.Infrastructure.Auth
+namespace the80by20.Shared.Infrastucture.Auth
 {
     internal sealed class HttpContextTokenStorage : ITokenStorage
     {
@@ -13,9 +13,9 @@ namespace the80by20.Modules.Users.Infrastructure.Auth
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public void Set(JwtDto jwt) => _httpContextAccessor.HttpContext?.Items.TryAdd(TokenKey, jwt);
+        public void Set(JsonWebToken jwt) => _httpContextAccessor.HttpContext?.Items.TryAdd(TokenKey, jwt);
 
-        public JwtDto Get()
+        public JsonWebToken Get()
         {
             if (_httpContextAccessor.HttpContext is null)
             {
@@ -24,7 +24,7 @@ namespace the80by20.Modules.Users.Infrastructure.Auth
 
             if (_httpContextAccessor.HttpContext.Items.TryGetValue(TokenKey, out var jwt))
             {
-                return jwt as JwtDto;
+                return jwt as JsonWebToken;
             }
 
             return null;

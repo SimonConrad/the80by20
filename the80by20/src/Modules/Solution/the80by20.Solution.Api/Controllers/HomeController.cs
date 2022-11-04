@@ -2,8 +2,8 @@
 
 namespace the80by20.Modules.Solution.Api.Controllers
 {
-    [Route("solution-to-problem")]
-    internal class HomeController
+    [Route(SolutionModule.BasePath)]
+    internal class HomeController : BaseController
     {
         [HttpGet]
         public ActionResult<string> Get() => "Solution To Problem API";

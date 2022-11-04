@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Headers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using the80by20.Modules.Users.App.Ports;
-using the80by20.Modules.Users.Infrastructure.Auth;
+using the80by20.Shared.Abstractions.Auth;
+using the80by20.Shared.Infrastucture.Auth;
 using the80by20.Shared.Infrastucture.Time;
 using the80by20.Tests.Integration.Setup;
 using Xunit;
@@ -12,12 +12,12 @@ namespace the80by20.Tests.Integration.Controllers;
 [Collection("api")]
 public abstract class ControllerTests : IClassFixture<OptionsProvider>
 {
-    private readonly IAuthenticator _authenticator;
+    private readonly IAuthManager _authenticator;
     protected HttpClient Client { get; }
 
-    protected JwtDto Authorize(Guid userId, string role)
+    protected JsonWebToken Authorize(Guid userId, string role)
     {
-        var jwt = _authenticator.CreateToken(userId, role, "username");
+        var jwt = _authenticator.CreateToken(userId.ToString(), role, "username");
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt.AccessToken);
 
         return jwt;
@@ -26,7 +26,7 @@ public abstract class ControllerTests : IClassFixture<OptionsProvider>
     public ControllerTests(OptionsProvider optionsProvider)
     {
         var authOptions = optionsProvider.Get<AuthOptions>("auth");
-        _authenticator = new Authenticator(new OptionsWrapper<AuthOptions>(authOptions), new Clock());
+        _authenticator = new AuthManager(authOptions, new Clock());
         var app = new The80By20TestApp(ConfigureServices);
         Client = app.Client;
     }

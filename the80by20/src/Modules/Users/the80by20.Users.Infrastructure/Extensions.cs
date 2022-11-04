@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using FluentValidation;
 using the80by20.Shared.Infrastucture.Decorators;
 using the80by20.Shared.Abstractions.Dal;
@@ -11,7 +7,6 @@ using the80by20.Shared.Abstractions.Queries;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Infrastucture.SqlServer;
 using the80by20.Modules.Users.App.Ports;
-using the80by20.Modules.Users.Infrastructure.Auth;
 using the80by20.Modules.Users.Infrastructure.EF;
 using the80by20.Modules.Users.Infrastructure.Security;
 using the80by20.Modules.Users.Domain.UserEntity;
@@ -22,13 +17,16 @@ namespace the80by20.Modules.Users.Infrastructure
 {
     internal static class Extensions
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddValidatorsFromAssemblyContaining<SignUpInputValidator>();
 
-            AddSecurity(services);
+            services.AddScoped<IUserRepository, UserRepository>();
 
-            AddAuth(services, configuration);
+            services
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
+                .AddSingleton<IPasswordManager, PasswordManager>();
 
             AddCommandHandlersDecorators(services);
 
@@ -49,16 +47,6 @@ namespace the80by20.Modules.Users.Infrastructure
                .WithScopedLifetime());
         }
 
-        private static void AddSecurity(IServiceCollection services)
-        {
-            services.AddScoped<IUserRepository, UserRepository>();
-
-            services
-                .AddScoped<IUserRepository, UserRepository>()
-                .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
-                .AddSingleton<IPasswordManager, PasswordManager>();
-        }
-
         private static void AddCommandHandlersDecorators(IServiceCollection services)
         {
             // info only used in commands done like the80by20.App.Abstractions.ICommand
@@ -68,43 +56,6 @@ namespace the80by20.Modules.Users.Infrastructure
             services.TryDecorate(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
 
             services.TryDecorate(typeof(ICommandHandler<>), typeof(LoggingCommandHandlerDecorator<>));
-        }
-
-        private static void AddAuth(IServiceCollection services, IConfiguration configuration)
-        {
-            const string OptionsSectionName = "auth";
-            var options = new AuthOptions();
-            configuration.GetSection(OptionsSectionName).Bind(options);
-
-            services
-                .Configure<AuthOptions>(configuration.GetRequiredSection(OptionsSectionName))
-                .AddSingleton<IAuthenticator, Authenticator>()
-                .AddSingleton<ITokenStorage, HttpContextTokenStorage>()
-                .AddAuthentication(o =>
-                {
-                    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(o =>
-                {
-                    o.Audience = options.Audience;
-                    o.IncludeErrorDetails = true;
-                    o.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidIssuer = options.Issuer,
-                        ClockSkew = TimeSpan.Zero,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.SigningKey))
-                    };
-                });
-
-            // TODO do more asp.net identity api with requiremnt based on udemy asp.net identity security; chapsas; .net docs
-            services.AddAuthorization(authorization =>
-            {
-                authorization.AddPolicy("is-admin", policy =>
-                {
-                    policy.RequireRole("admin");
-                });
-            });
         }
     }
 }

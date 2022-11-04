@@ -31,7 +31,7 @@ public sealed class SetBasePriceForSolutionToProblemDomainService
     [FactoryDdd]
     public IDiscountPolicy CreatePolicy()
     {
-        var month = _clock.Current().Month;
+        var month = _clock.CurrentDate().Month;
 
         return month switch
         {

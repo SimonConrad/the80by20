@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Humanizer;
 using the80by20.Modules.Users.App.Commands.Exceptions;
 using the80by20.Modules.Users.App.Ports;
 using the80by20.Modules.Users.Domain.UserEntity;
@@ -22,7 +23,6 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         _clock = clock;
     }
 
-    // todo version with CancellationToken 
     public async Task HandleAsync(SignUp command)
     {
         var userId = new UserId(command.UserId);
@@ -31,6 +31,7 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         var password = new Password(command.Password);
         var fullName = new FullName(command.FullName);
         var role = string.IsNullOrWhiteSpace(command.Role) ? Role.User() : new Role(command.Role);
+        var claims = command.Claims ?? new Dictionary<string, IEnumerable<string>>();
 
         if (await _userRepository.GetByEmailAsync(email) is not null)
         {
@@ -42,10 +43,11 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
             throw new UsernameAlreadyInUseException(username);
         }
 
-        var securedPassword = _passwordManager.Secure(password);
-        var user = new User(userId, email, username, securedPassword, fullName, role, _clock.Current());
+        var securedPassword = _passwordManager.HashPassword(password);
+        var user = new User(userId, email, username, securedPassword, fullName, role, _clock.CurrentDate(), claims, isActive: true);
         await _userRepository.AddAsync(user);
 
+        // await _messageBroker.PublishAsync(new SignedUp(user.Id, user.Email));
     }
 }
 
@@ -59,9 +61,5 @@ public sealed class SignUpInputValidator : AbstractValidator<SignUp>
             .WithMessage("Username is required.")
             .MinimumLength(2)
             .WithMessage("Username min length is 2");
-
-        // todo add rest input validation
     }
 }
-
-//internal sealed class SignUpCommandHandler : IRequestHandler<SignUpCommand>

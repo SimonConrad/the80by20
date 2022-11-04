@@ -37,7 +37,6 @@ public partial class Program
 
             AddServices(builder, modules);
 
-
             WebApplication app = builder.Build();
             UseMiddlewares(app, builder.Configuration, modules);
 

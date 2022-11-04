@@ -12,9 +12,11 @@ public class User
     public FullName FullName { get; private set; }
     public Role Role { get; private set; }
     public DateTime CreatedAt { get; private set; }
+    public Dictionary<string, IEnumerable<string>> Claims { get; private set; } // TODO entity-configuration + migrations
+    public bool IsActive { get; private set; } // TODO entity-configuration + migrations
 
     public User(UserId id, Email email, Username username, Password password, FullName fullName, Role role,
-        DateTime createdAt)
+        DateTime createdAt, Dictionary<string, IEnumerable<string>> claims, bool isActive)
     {
         Id = id;
         Email = email;
@@ -23,5 +25,7 @@ public class User
         FullName = fullName;
         Role = role;
         CreatedAt = createdAt;
+        Claims = claims;
+        IsActive = isActive;
     }
 }

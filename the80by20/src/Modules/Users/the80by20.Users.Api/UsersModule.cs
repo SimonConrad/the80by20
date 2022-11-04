@@ -15,17 +15,20 @@ namespace the80by20.Modules.Users.Api
 
         public string Path => BasePath;
 
+        public IEnumerable<string> Policies { get; } = new[]
+        {
+            "users"
+        };
+
         public void Register(IServiceCollection services)
         {
             // INFO if needed service can be obtain by such code:
-            // using var scope = serviceProvider.CreateScope();
-            // scope.ServiceProvider.GetService...
+            // using var scope = services.BuildServiceProvider();
+            // var configuration = scope.GetService<IConfiguration>();
             // so we don't need to create a constructor with passed to it dependencies
-            using var scope = services.BuildServiceProvider();
-            var configuration = scope.GetService<IConfiguration>();
 
             services.AddApp();
-            services.AddInfrastructure(configuration);
+            services.AddInfrastructure();
         }
 
         public void Use(IApplicationBuilder app)

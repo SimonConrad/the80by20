@@ -7,11 +7,12 @@ using the80by20.Modules.Solution.App.ReadModel;
 
 namespace the80by20.Modules.Solution.Api.Controllers
 {
-    [ApiController]
-    [Route("solution-to-problem/[controller]")]
-    [Authorize]
-    public class SolutionsController : ControllerBase
+
+    [Authorize(Policy = Policy)]
+    internal class SolutionsController : BaseController
     {
+        private const string Policy = "solution";
+
         private readonly ILogger<SolutionsController> _logger;
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
         private readonly IMediator _mediator;

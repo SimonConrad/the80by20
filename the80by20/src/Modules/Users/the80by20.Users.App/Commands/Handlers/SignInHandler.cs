@@ -1,6 +1,7 @@
 ﻿using the80by20.Modules.Users.App.Commands.Exceptions;
 using the80by20.Modules.Users.App.Ports;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Auth;
 using the80by20.Shared.Abstractions.Commands;
 
 namespace the80by20.Modules.Users.App.Commands.Handlers;
@@ -9,12 +10,12 @@ namespace the80by20.Modules.Users.App.Commands.Handlers;
 internal sealed class SignInHandler : ICommandHandler<SignIn>
 {
     private readonly IUserRepository _userRepository;
-    private readonly IAuthenticator _authenticator;
+    private readonly IAuthManager _authenticator;
     private readonly IPasswordManager _passwordManager;
     private readonly ITokenStorage _tokenStorage;
 
     public SignInHandler(IUserRepository userRepository,
-        IAuthenticator authenticator,
+        IAuthManager authenticator,
         IPasswordManager passwordManager,
         ITokenStorage tokenStorage)
     {
@@ -33,14 +34,21 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
             throw new InvalidCredentialsException();
         }
 
-        if (!_passwordManager.Validate(command.Password, user.Password))
+        if (!_passwordManager.VerifyHashedPassword(command.Password, user.Password))
         {
             throw new InvalidCredentialsException();
         }
 
-        var jwt = _authenticator.CreateToken(user.Id, user.Role, user.Username);
+        if (!user.IsActive)
+        {
+            throw new UserNotActiveException(user.Id);
+        }
+
+        // INFO https://jwt.io/
+        var jwt = _authenticator.CreateToken(user.Id.Value.ToString(), user.Role, claims: user.Claims);
+        jwt.Email = user.Email;
+
         _tokenStorage.Set(jwt);
+        //await _messageBroker.PublishAsync(new SignedIn(user.Id));
     }
 }
-
-//public class SignInCommandHandler : IRequestHandler<SignInCommand>

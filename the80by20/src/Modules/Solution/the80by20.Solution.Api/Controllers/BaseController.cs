@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using the80by20.Modules.Solution.Api;
 
-namespace the80by20.Modules.Masterdata.Api.Controllers;
+namespace the80by20.Modules.Solution.Api.Controllers;
 
 [ApiController]
-[Route(MasterDataModule.BasePath + "/[controller]")]
+[Route(SolutionModule.BasePath + "/[controller]")]
 internal class BaseController : ControllerBase
 {
     protected ActionResult<T> OkOrNotFound<T>(T model)

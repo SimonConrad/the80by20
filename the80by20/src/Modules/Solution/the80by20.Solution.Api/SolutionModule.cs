@@ -9,11 +9,16 @@ namespace the80by20.Modules.Solution.Api
     // TODO apply base controller and other module mechanisms from masterdatamodule
     internal class SolutionModule : IModule
     {
-        public const string BasePath = "solution";
+        public const string BasePath = "solution-to-problem";
 
         public string Name => "Solution";
 
         public string Path => BasePath;
+
+        public IEnumerable<string> Policies { get; } = new[]
+        {
+            "solution"
+        };
 
         public void Register(IServiceCollection services)
         {

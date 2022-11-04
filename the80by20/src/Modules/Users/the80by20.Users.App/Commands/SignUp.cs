@@ -8,7 +8,8 @@ public record SignUp(Guid UserId,
     string Username,
     string Password,
     string FullName,
-    string Role) : ICommand;
+    string Role,
+    Dictionary<string, IEnumerable<string>> Claims) : ICommand;
 
 
 //public record SignUpCommand(Guid UserId, 

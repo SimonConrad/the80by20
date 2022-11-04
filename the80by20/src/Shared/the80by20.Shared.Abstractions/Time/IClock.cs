@@ -2,5 +2,5 @@
 
 public interface IClock
 {
-    DateTime Current();
+    DateTime CurrentDate();
 }

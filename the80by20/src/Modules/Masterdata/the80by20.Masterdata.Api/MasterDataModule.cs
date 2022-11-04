@@ -14,6 +14,11 @@ namespace the80by20.Modules.Masterdata.Api
 
         public string Path => BasePath;
 
+        public IEnumerable<string> Policies { get; } = new[]
+        {
+            "masterdata"
+        };
+
         public void Register(IServiceCollection services)
         {
             // INFO if needed service can be obtain by such code:

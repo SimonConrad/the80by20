@@ -1,19 +1,13 @@
-@url = http://localhost:5000
-#@url = https://the80by20.azurewebsites.net
+@url = http://localhost:5000/solution-to-problem
+#@url = https://the80by20.azurewebsites.net/solution-to-problem
 
-###
 @accessToken = secret
 
 ###
-GET {{url}}/api
+GET {{url}}
 
 ###
-GET {{url}}/users/users/me
-Authorization: Bearer {{accessToken}}
-
-
-###
-POST {{url}}/solution-to-problem/problems
+POST {{url}}/problems
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 

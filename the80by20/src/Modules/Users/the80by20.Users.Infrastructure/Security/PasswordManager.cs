@@ -15,9 +15,9 @@ namespace the80by20.Modules.Users.Infrastructure.Security
             _passwordHasher = passwordHasher;
         }
 
-        public string Secure(string password) => _passwordHasher.HashPassword(default, password);
+        public string HashPassword(string password) => _passwordHasher.HashPassword(default, password);
 
-        public bool Validate(string password, string securedPassword)
+        public bool VerifyHashedPassword(string password, string securedPassword)
             => _passwordHasher.VerifyHashedPassword(default, securedPassword, password) ==
                PasswordVerificationResult.Success;
     }

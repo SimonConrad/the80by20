@@ -4,16 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
 using the80by20.Modules.Users.App.Commands;
-using the80by20.Modules.Users.App.Ports;
 using the80by20.Modules.Users.App.Queries;
+using the80by20.Shared.Abstractions.Auth;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Queries;
 using the80by20.Shared.Infrastucture;
 
 namespace the80by20.Modules.Users.Api.Controllers;
 
+[Authorize(Policy = Policy)]
 internal class UsersController : BaseController
 {
+    private const string Policy = "users";
+
     private readonly IQueryHandler<GetUsers, IEnumerable<UserDto>> _getUsersHandler;
     private readonly IQueryHandler<GetUser, UserDto> _getUserHandler;
     private readonly ICommandHandler<SignIn> _signInHandler;
@@ -40,25 +43,35 @@ internal class UsersController : BaseController
         _appOptionsMonitor = appOptionsMonitor; // reflect values in json without restarting app
     }
 
-    [Authorize(Policy = "is-admin")]
-    [HttpGet("{userId:guid}")]
-    [ProducesResponseType(StatusCodes.Status200OK)] // todo check what it gives - swagger?
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<UserDto>> Get([FromRoute] Guid userId)
-    {
-        var user = await _getUserHandler.HandleAsync(new GetUser() { UserId = userId });
-        if (user is null)
-        {
-            return NotFound();
-        }
 
-        return user;
+    [AllowAnonymous]
+    [HttpPost]
+    [SwaggerOperation("Create the user account")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> Post([FromBody] SignUp command)
+    {
+        command = command with { UserId = Guid.NewGuid() }; // INFO creating record by copying it and adding UserId
+        await _signUpHandler.HandleAsync(command);
+        return CreatedAtAction(nameof(Get), new { command.UserId }, null);
     }
 
-    [Authorize]
+    [AllowAnonymous]
+    [HttpPost("sign-in")]
+    [SwaggerOperation("Sign in the user and return the JSON Web Token")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<JsonWebToken>> Post([FromBody] SignIn command)
+    {
+        // todo add claims before encoding jwt token like username and role
+        await _signInHandler.HandleAsync(command);
+        var jwt = _tokenStorage.Get();
+        return jwt;
+    }
+
+    [HttpGet("me")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [HttpGet("me")]
     public async Task<ActionResult<UserDto>> Get()
     {
         if (string.IsNullOrWhiteSpace(User.Identity?.Name))
@@ -72,35 +85,28 @@ internal class UsersController : BaseController
         return user;
     }
 
+    [Authorize(Policy = "is-admin")]
     [HttpGet]
     [SwaggerOperation("Get list of all the users")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    [Authorize(Policy = "is-admin")] // todo apply other staff from asp.net identity like requirements etc
     public async Task<ActionResult<IEnumerable<UserDto>>> Get([FromQuery] GetUsers query)
-        => Ok(await _getUsersHandler.HandleAsync(new GetUsers()));
+       => Ok(await _getUsersHandler.HandleAsync(new GetUsers()));
 
-    [HttpPost]
-    [SwaggerOperation("Create the user account")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Post([FromBody] SignUp command)
+    
+    [Authorize(Policy = "is-admin")] // INFO module level policy 'users' and action level policy 'is-admin' needed 
+    [HttpGet("{userId:guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK)] // todo check what it gives - swagger?
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<UserDto>> Get([FromRoute] Guid userId)
     {
-        command = command with { UserId = Guid.NewGuid() }; // INFO creating record by copying it and adding UserId
-        await _signUpHandler.HandleAsync(command);
-        return CreatedAtAction(nameof(Get), new { command.UserId }, null);
-    }
+        var user = await _getUserHandler.HandleAsync(new GetUser() { UserId = userId });
+        if (user is null)
+        {
+            return NotFound();
+        }
 
-    [HttpPost("sign-in")]
-    [SwaggerOperation("Sign in the user and return the JSON Web Token")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<JwtDto>> Post([FromBody] SignIn command)
-    {
-        // todo add claims before encoding jwt token like username and role
-        await _signInHandler.HandleAsync(command);
-        var jwt = _tokenStorage.Get();
-        return jwt;
+        return user;
     }
 }

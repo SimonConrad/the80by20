@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,13 +8,12 @@ using System.Reflection;
 using the80by20.Shared.Abstractions.Modules;
 using the80by20.Shared.Abstractions.Time;
 using the80by20.Shared.Infrastucture.Api;
+using the80by20.Shared.Infrastucture.Auth;
 using the80by20.Shared.Infrastucture.Exceptions;
 using the80by20.Shared.Infrastucture.Services;
 using the80by20.Shared.Infrastucture.SqlServer;
 using the80by20.Shared.Infrastucture.Time;
 
-//[assembly: InternalsVisibleTo("the80by20.Bootstrapper")]
-//[assembly: InternalsVisibleTo("the80by20.Tests.Integration")]
 namespace the80by20.Shared.Infrastucture
 {
     // TODO compare with Confab.Shared.Infrastructure
@@ -41,12 +41,15 @@ namespace the80by20.Shared.Infrastucture
                 }
             }
 
+            AddCors(services, configuration);
+            AddSwagger(services);
+
+            services.AddHttpContextAccessor();
+            services.AddAuth(modules);
             services.AddErrorHandling();
-
+            services.AddSqlServer();
             services.AddSingleton<IClock, Clock>();
-
             services.AddHostedService<AppInitializer>();
-
             services.AddControllers()
                 .ConfigureApplicationPartManager(manager =>
                 {
@@ -66,19 +69,7 @@ namespace the80by20.Shared.Infrastucture
                     manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
                 });
 
-            //var appOptions = configuration.GetOptions<AppOptions>(sectionName:"app");
-            //services.AddSingleton(appOptions);
             services.Configure<AppOptions>(configuration.GetRequiredSection(key: "app"));
-
-            services.AddHttpContextAccessor();
-
-            services.AddSqlServer();
-
-            services.AddEndpointsApiExplorer(); // todo what for?
-
-            AddSwagger(services);
-
-            AddCors(services, configuration);
 
             return services;
         }
@@ -140,16 +131,12 @@ namespace the80by20.Shared.Infrastucture
 
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app, IConfiguration configuration)
         {
-            app.UseErrorHandling();
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));
-
-            app.UseRouting();
-
             app.UseCors();
-
+            app.UseErrorHandling();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));           
             app.UseAuthentication();
+            app.UseRouting();
             app.UseAuthorization();
 
             return app;

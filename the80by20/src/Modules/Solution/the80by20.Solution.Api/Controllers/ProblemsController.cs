@@ -8,11 +8,11 @@ using the80by20.Modules.Solution.App.ReadModel;
 
 namespace the80by20.Modules.Solution.Api.Controllers
 {
-    [ApiController]
-    [Route("solution-to-problem/[controller]")]
-    [Authorize]
-    public class ProblemsController : ControllerBase // todo make internal like the80by20.Masterdata.Api.Controllers.HomeController, but keep in mind tests (maybe mark as [assembly: InternalsVisibleTo("test assmebly")]) / or do this in csproj
+    [Authorize(Policy = Policy)]
+    internal class ProblemsController : BaseController
     {
+        private const string Policy = "solution";
+
         private readonly ILogger<ProblemsController> _logger;
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
         private readonly IMediator _mediator;

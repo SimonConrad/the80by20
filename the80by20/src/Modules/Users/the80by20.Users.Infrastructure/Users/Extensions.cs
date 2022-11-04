@@ -9,8 +9,13 @@ namespace the80by20.Modules.Users.Infrastructure.Users
             => new()
             {
                 Id = entity.Id,
+                Email = entity.Email,
                 Username = entity.Username,
-                FullName = entity.FullName
+                FullName = entity.FullName,
+                Role = entity.Role,
+                IsActive = entity.IsActive,
+                Claims = entity.Claims,
+                CreatedAt = entity.CreatedAt
             };
     }
 }

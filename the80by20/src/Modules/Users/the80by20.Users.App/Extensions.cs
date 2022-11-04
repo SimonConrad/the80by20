@@ -28,4 +28,3 @@ namespace the80by20.Modules.Users.App
 // todo udekorowac handlera logownica i transakcja https://github.com/jasontaylordev/CleanArchitecture/blob/main/src/Application/ConfigureServices.cs
 // todo wlaidacja wejscia fluent validator
 // todo otwarte taby w my-spot
-

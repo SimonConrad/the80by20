@@ -8,10 +8,10 @@ using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using the80by20.Modules.Users.App.Commands;
-using the80by20.Modules.Users.App.Ports;
 using the80by20.Modules.Users.App.Queries;
 using the80by20.Modules.Users.Domain.UserEntity;
 using the80by20.Modules.Users.Infrastructure.Security;
+using the80by20.Shared.Abstractions.Auth;
 using the80by20.Shared.Infrastucture.Time;
 using the80by20.Tests.Integration.Setup;
 using Xunit;
@@ -53,7 +53,7 @@ public class UsersControllerTests: ControllerTests, IDisposable
         SqlLiteIneMemoryManager.RecreateDbs(Connection);
 
         var command = new SignUp(Guid.Empty, "test-user1@wp.pl", "test-user1", "secret",
-            "Test Jon", "user");
+            "Test Jon", "user", new Dictionary<string, IEnumerable<string>>());
         var response = await Client.PostAsJsonAsync("users/users", command);
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
     }
@@ -69,7 +69,8 @@ public class UsersControllerTests: ControllerTests, IDisposable
         const string password = "secret";
 
         var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
-            "test-user1", passwordManager.Secure(password), "Test Jon", Role.User(), clock.Current());
+            "test-user1", passwordManager.HashPassword(password), "Test Jon", Role.User(), clock.CurrentDate(), 
+            new Dictionary<string, IEnumerable<string>>(), true);
 
         await SqlLiteIneMemoryManager.UsersDbContext.AddAsync(user);
         await SqlLiteIneMemoryManager.UsersDbContext.SaveChangesAsync();
@@ -77,7 +78,7 @@ public class UsersControllerTests: ControllerTests, IDisposable
         // Act
         var command = new SignIn(user.Email, password);
         var response = await Client.PostAsJsonAsync("users/users/sign-in", command);
-        var jwt = await response.Content.ReadFromJsonAsync<JwtDto>();
+        var jwt = await response.Content.ReadFromJsonAsync<JsonWebToken>();
 
         // Assert
         jwt.ShouldNotBeNull();
@@ -95,7 +96,8 @@ public class UsersControllerTests: ControllerTests, IDisposable
         const string password = "secret";
 
         var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
-            "test-user1", passwordManager.Secure(password), "Test Jon", Role.User(), clock.Current());
+            "test-user1", passwordManager.HashPassword(password), "Test Jon", Role.User(), clock.CurrentDate(), 
+            new Dictionary<string, IEnumerable<string>>(), true);
 
 
         await SqlLiteIneMemoryManager.UsersDbContext.Users.AddAsync(user);

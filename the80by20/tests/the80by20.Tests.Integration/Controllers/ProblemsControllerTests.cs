@@ -58,7 +58,7 @@ public class ProblemsControllerTests : ControllerTests, IDisposable
         const string password = "secret";
 
         var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
-            "test-user1", passwordManager.Secure(password), "Test Jon", Role.User(), clock.Current());
+            "test-user1", passwordManager.HashPassword(password), "Test Jon", Role.User(), clock.CurrentDate(), null, true);
 
         await SqlLiteIneMemoryManager.UsersDbContext.Users.AddAsync(user);
         await SqlLiteIneMemoryManager.UsersDbContext.SaveChangesAsync();

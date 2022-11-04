@@ -30,4 +30,9 @@ internal sealed class TestUserRepository : IUserRepository
         _users.Add(user);
         await Task.CompletedTask;
     }
+
+    public Task UpdateAsync(User user)
+    {
+        throw new NotImplementedException();
+    }
 }

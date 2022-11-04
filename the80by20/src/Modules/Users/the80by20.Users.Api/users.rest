@@ -1,0 +1,49 @@
+@url = http://localhost:5000/users
+#@url = https://the80by20.azurewebsites.net/users
+
+@userId = 00000000-0000-0000-0000-000000000001
+
+###
+GET {{url}}
+
+###
+# @name sign_up
+POST {{url}}/users
+Content-Type: application/json
+ 
+{
+    "email": "",
+    "username": "admin",
+    "password": "",
+    "fullName": "jan1",
+    "role": "admin",
+    "claims": {
+    "permissions": ["masterdata", "solution", "users"]
+  }
+}
+
+###
+# @name sign_in
+POST {{url}}/users/sign-in
+Content-Type: application/json
+ 
+{
+    "email": "",
+    "password": ""
+}
+
+###
+@accessToken = {{sign_in.response.body.$.accessToken}}
+
+###
+GET {{url}}/users/me
+Authorization: Bearer {{accessToken}}
+
+###
+GET {{url}}/users
+Authorization: Bearer {{accessToken}}
+
+###
+GET {{url}}/users/{{userId}}
+Authorization: Bearer {{accessToken}}
+
