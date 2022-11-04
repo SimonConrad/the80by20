@@ -41,7 +41,7 @@ export class AuthService {
   private saveToken(token: any): any {
     let res = jwt.decodeToken(token);
     res.role = res["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]; //role
-    res.username = res["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]; //username
+    res.username = res.email;
     this.decodedToken = {...res};
 
     console.log(`username: ${this.decodedToken.username}`);

@@ -43,9 +43,9 @@
     </button>
     <div class="center" >
       <ng-container *ngIf="!auth.isAuthenticated()">
-        <a routerLink="/auth/login" style="text-decoration: none;">Login</a>
+        <a routerLink="/auth/login" style="text-decoration: none;">SignIn </a>
         <span>/</span>
-        <a routerLink="/auth/register" style="text-decoration: none;">Register</a>
+        <a routerLink="/auth/register" style="text-decoration: none;"> SignUp</a>
       </ng-container>
       <ng-container *ngIf="auth.isAuthenticated()">
         <a class="nav-link" style="text-decoration: none;">
