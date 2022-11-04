@@ -15,9 +15,9 @@ public abstract class ControllerTests : IClassFixture<OptionsProvider>
     private readonly IAuthManager _authenticator;
     protected HttpClient Client { get; }
 
-    protected JsonWebToken Authorize(Guid userId, string role)
+    protected JsonWebToken Authorize(Guid userId, string role, IDictionary<string, IEnumerable<string>> claims = null)
     {
-        var jwt = _authenticator.CreateToken(userId.ToString(), role, "username");
+        var jwt = _authenticator.CreateToken(userId.ToString(), role, "username", claims: claims);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt.AccessToken);
 
         return jwt;

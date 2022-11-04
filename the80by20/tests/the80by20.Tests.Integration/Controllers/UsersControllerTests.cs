@@ -95,16 +95,22 @@ public class UsersControllerTests: ControllerTests, IDisposable
         var clock = new Clock();
         const string password = "secret";
 
+
+        var claims = new Dictionary<string, IEnumerable<string>>()
+        {
+            ["permissions"] = new []{ "users" }
+        };
+
         var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
-            "test-user1", passwordManager.HashPassword(password), "Test Jon", Role.User(), clock.CurrentDate(), 
-            new Dictionary<string, IEnumerable<string>>(), true);
+            "test-user1", passwordManager.HashPassword(password), "Test Jon", Role.User(), clock.CurrentDate(),
+            claims, true);
 
 
         await SqlLiteIneMemoryManager.UsersDbContext.Users.AddAsync(user);
         await SqlLiteIneMemoryManager.UsersDbContext.SaveChangesAsync();
 
         // Act
-        Authorize(user.Id, user.Role);
+        Authorize(user.Id, user.Role, claims : user.Claims);
         var userDto = await Client.GetFromJsonAsync<UserDto>("users/users/me");
 
         // Assert
