@@ -3,6 +3,7 @@
 using System.Data;
 using System.Net;
 using System.Net.Http.Json;
+using System.Runtime.Intrinsics.X86;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
@@ -110,7 +111,7 @@ public class UsersControllerTests: ControllerTests, IDisposable
         await SqlLiteIneMemoryManager.UsersDbContext.SaveChangesAsync();
 
         // Act
-        Authorize(user.Id, user.Role, claims : user.Claims);
+        Authorize(user.Id, user.Role, claims : user.Claims, email: "test-user1@wp.pl");
         var userDto = await Client.GetFromJsonAsync<UserDto>("users/users/me");
 
         // Assert

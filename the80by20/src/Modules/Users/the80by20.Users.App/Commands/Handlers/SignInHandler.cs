@@ -45,7 +45,7 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
         }
 
         // INFO https://jwt.io/
-        var jwt = _authenticator.CreateToken(user.Id.Value.ToString(), user.Role, claims: user.Claims);
+        var jwt = _authenticator.CreateToken(user.Id.Value.ToString(), user.Role, claims: user.Claims, email: user.Email);
         jwt.Email = user.Email;
 
         _tokenStorage.Set(jwt);

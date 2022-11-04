@@ -30,7 +30,7 @@ namespace the80by20.Shared.Infrastucture.Auth
         }
 
         public JsonWebToken CreateToken(string userId, string role = null, string audience = null,
-            IDictionary<string, IEnumerable<string>> claims = null)
+            IDictionary<string, IEnumerable<string>> claims = null, string email = null)
         {
 
             if (string.IsNullOrWhiteSpace(userId))
@@ -43,6 +43,7 @@ namespace the80by20.Shared.Infrastucture.Auth
             {
                 new(JwtRegisteredClaimNames.Sub, userId),
                 new(JwtRegisteredClaimNames.UniqueName, userId),
+                new(JwtRegisteredClaimNames.Email, email),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeMilliseconds().ToString())
             };

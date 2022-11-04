@@ -1,5 +1,5 @@
-@url = http://localhost:5000
-#@url = https://the80by20.azurewebsites.net
+#@url = http://localhost:5000
+@url = https://the80by20.azurewebsites.net
 
 ###
 @accessToken = secret
