@@ -5,10 +5,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using the80by20.Shared.Abstractions.Contexts;
 using the80by20.Shared.Abstractions.Modules;
 using the80by20.Shared.Abstractions.Time;
 using the80by20.Shared.Infrastucture.Api;
 using the80by20.Shared.Infrastucture.Auth;
+using the80by20.Shared.Infrastucture.Context;
 using the80by20.Shared.Infrastucture.Exceptions;
 using the80by20.Shared.Infrastucture.Modules;
 using the80by20.Shared.Infrastucture.Services;
@@ -49,7 +51,11 @@ namespace the80by20.Shared.Infrastucture
             AddCors(services, configuration);
             AddSwagger(services);
 
+            // todo move to extensions in infrastruture/context
+            services.AddSingleton<IContextFactory, ContextFactory>();
             services.AddHttpContextAccessor();
+            services.AddTransient<IContext>(sp => sp.GetRequiredService<IContextFactory>().Create());
+
             services.AddModuleInfo(modules);
             services.AddAuth(modules);
             services.AddErrorHandling();

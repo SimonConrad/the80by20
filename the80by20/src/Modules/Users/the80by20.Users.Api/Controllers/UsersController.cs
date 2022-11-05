@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
 using the80by20.Modules.Users.App.Commands;
 using the80by20.Modules.Users.App.Queries;
 using the80by20.Shared.Abstractions.Auth;
 using the80by20.Shared.Abstractions.Commands;
+using the80by20.Shared.Abstractions.Contexts;
 using the80by20.Shared.Abstractions.Queries;
 using the80by20.Shared.Infrastucture;
 
@@ -24,14 +26,17 @@ internal class UsersController : BaseController
     private readonly ITokenStorage _tokenStorage;
     private readonly AppOptions _appOptions;
     private readonly IOptionsMonitor<AppOptions> _appOptionsMonitor;
+    private readonly IContext _context;
 
-    public UsersController(IQueryHandler<GetUsers, IEnumerable<UserDto>> getUsersHandler,
+    public UsersController(
+        IQueryHandler<GetUsers, IEnumerable<UserDto>> getUsersHandler,
         IQueryHandler<GetUser, UserDto> getUserHandler,
         ICommandHandler<SignIn> signInHandler,
         ICommandHandler<SignUp> signUpHandler,
         ITokenStorage tokenStorage,
         IOptions<AppOptions> appOptions,
-        IOptionsMonitor<AppOptions> appOptionsMonitor)
+        IOptionsMonitor<AppOptions> appOptionsMonitor,
+        IContext context)
     {
         _getUsersHandler = getUsersHandler;
         _getUserHandler = getUserHandler;
@@ -40,7 +45,9 @@ internal class UsersController : BaseController
         _tokenStorage = tokenStorage;
 
         _appOptions = appOptions.Value;
-        _appOptionsMonitor = appOptionsMonitor; // reflect values in json without restarting app
+        _appOptionsMonitor = appOptionsMonitor; // INFO reflect values in json without restarting app
+        
+        _context = context;
     }
 
 
@@ -74,13 +81,12 @@ internal class UsersController : BaseController
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<UserDto>> Get()
     {
-        if (string.IsNullOrWhiteSpace(User.Identity?.Name))
+        if (string.IsNullOrWhiteSpace(_context.Identity.Id.ToString()))
         {
-            return NotFound();
+            return NotFound(); // TODO refactor to use OkOrNotFound from base controller
         }
 
-        var userId = Guid.Parse(User.Identity?.Name);
-        var user = await _getUserHandler.HandleAsync(new GetUser() { UserId = userId });
+        var user = await _getUserHandler.HandleAsync(new GetUser() { UserId = _context.Identity.Id });
 
         return user;
     }
