@@ -19,6 +19,8 @@ namespace the80by20.Shared.Infrastucture
     // TODO compare with Confab.Shared.Infrastructure
     internal static class Extensions
     {
+        private const string CorsPolicy = "cors";
+
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration,
             IList<Assembly> assemblies, IList<IModule> modules)
         {
@@ -115,23 +117,20 @@ namespace the80by20.Shared.Infrastucture
         private static void AddCors(IServiceCollection services, IConfiguration configuration)
         {
             var appOptions = configuration.GetOptions<AppOptions>("app");
-            // INFO CORS configuration based on ms-docs: https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-6.0
-            // Default Policy
-            services.AddCors(options =>
+            services.AddCors(corsOptions =>
             {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins(appOptions.FrontUrl)
-                                            .AllowAnyHeader()
-                                            .AllowAnyMethod();
-                    });
+                corsOptions.AddPolicy(CorsPolicy, x =>
+                {
+                    x.WithOrigins(appOptions.FrontUrl) // info to allow all: .WithOrigins("*")
+                     .WithMethods("POST", "PUT", "DELETE")
+                     .WithHeaders("Content-Type", "Authorization");
+                });
             });
         }
 
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app, IConfiguration configuration)
         {
-            app.UseCors();
+            app.UseCors(CorsPolicy);
             app.UseErrorHandling();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));           
