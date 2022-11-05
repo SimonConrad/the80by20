@@ -2,7 +2,7 @@
   "users": {
     "module": {
       "name": "Users",
-      "enabled": true // INFO feature switch steering id module starts or not
+      "enabled": true
     }
   }
 }

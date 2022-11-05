@@ -114,6 +114,7 @@ public partial class Program
         {
             endpoints.MapControllers();
             endpoints.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
+            endpoints.MapModuleInfo();
         });
 
         return app;

@@ -2,7 +2,7 @@
   "masterdata": {
     "module": {
       "name": "Masterdata",
-      "enabled": true
+      "enabled": true // INFO as solution module is depndant upon masterdata this module cannot be set to enabled: false when solution module is enabled
     }
   }
 }

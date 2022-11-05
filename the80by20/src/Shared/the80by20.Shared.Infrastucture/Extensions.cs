@@ -10,6 +10,7 @@ using the80by20.Shared.Abstractions.Time;
 using the80by20.Shared.Infrastucture.Api;
 using the80by20.Shared.Infrastucture.Auth;
 using the80by20.Shared.Infrastucture.Exceptions;
+using the80by20.Shared.Infrastucture.Modules;
 using the80by20.Shared.Infrastucture.Services;
 using the80by20.Shared.Infrastucture.SqlServer;
 using the80by20.Shared.Infrastucture.Time;
@@ -21,8 +22,10 @@ namespace the80by20.Shared.Infrastucture
     {
         private const string CorsPolicy = "cors";
 
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration,
-            IList<Assembly> assemblies, IList<IModule> modules)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, 
+            IConfiguration configuration,
+            IList<Assembly> assemblies,
+            IList<IModule> modules)
         {
 
             var disabledModules = new List<string>();
@@ -47,6 +50,7 @@ namespace the80by20.Shared.Infrastucture
             AddSwagger(services);
 
             services.AddHttpContextAccessor();
+            services.AddModuleInfo(modules);
             services.AddAuth(modules);
             services.AddErrorHandling();
             services.AddSqlServer();
