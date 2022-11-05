@@ -97,6 +97,8 @@ namespace the80by20.Modules.Solution.Api.Controllers
             res[2].IsConfirmed = true;
             res[2].IsRejected = false;
 
+            //modelling process with event storming; and implementing this model it into application and domain layers
+
             var resFromdb = await _solutionToProblemReadModelQueries.GetByUserId(Guid.Parse(User.Identity?.Name));
 
             res.AddRange(resFromdb);

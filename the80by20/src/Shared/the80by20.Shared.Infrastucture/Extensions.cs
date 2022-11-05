@@ -80,11 +80,18 @@ namespace the80by20.Shared.Infrastucture
         {
             services.AddSwaggerGen(swagger =>
             {
+                swagger.CustomSchemaIds(x => x.FullName);
+
                 swagger.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Version = "v1",
                     Title = "The 80 by 20",
-                    Description = "system created from model to implementaion; model done used event storming, implemntaion done with ddd (strategic, tactical), architectural patterns based on modules drivers; high cohesion low coupling; tests; infrastructure"
+                    Version = "v1",
+                    Description = "system created from model to implementaion; " +
+                    "model done used event storming, " +
+                    "implemntaion done with ddd (strategic, tactical), architectural patterns based on each modules architectural drivers;" +
+                    "high cohesion low coupling; " +
+                    "tests; " +
+                    "infrastructure"
                 });
                 swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -99,17 +106,17 @@ namespace the80by20.Shared.Infrastucture
                 });
                 swagger.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                {
-                    new OpenApiSecurityScheme
                     {
-                        Reference = new OpenApiReference
+                        new OpenApiSecurityScheme
                         {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    new string[] { }
-                }
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] { }
+                    }
                 });
             });
         }
@@ -133,7 +140,13 @@ namespace the80by20.Shared.Infrastucture
             app.UseCors(CorsPolicy);
             app.UseErrorHandling();
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));           
+            //app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "The 80 by 20"));
+            app.UseReDoc(reDoc =>
+            {
+                reDoc.RoutePrefix = "docs";
+                reDoc.SpecUrl("/swagger/v1/swagger.json");
+                reDoc.DocumentTitle = "Confab API";
+            });
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
