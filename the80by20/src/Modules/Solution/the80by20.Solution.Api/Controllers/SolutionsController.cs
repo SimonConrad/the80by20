@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using the80by20.Modules.Solution.App.ReadModel;
+using the80by20.Modules.Solution.Messages.Events;
+using the80by20.Shared.Abstractions.Events;
 
 namespace the80by20.Modules.Solution.Api.Controllers
 {
 
-    [Authorize(Policy = Policy)]
+    //todo use: [Authorize(Policy = Policy)]
     internal class SolutionsController : BaseController
     {
         private const string Policy = "solution";
@@ -16,15 +18,18 @@ namespace the80by20.Modules.Solution.Api.Controllers
         private readonly ILogger<SolutionsController> _logger;
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
         private readonly IMediator _mediator;
+        private readonly IEventDispatcher _eventDispatcher;
 
         public SolutionsController(ILogger<SolutionsController> logger,
             ISolutionToProblemReadModelQueries solutionToProblemReadModelQueries,
-            IMediator mediator)
+            IMediator mediator,
+            IEventDispatcher eventDispatcher)
         {
             _logger = logger;
 
             _solutionToProblemReadModelQueries = solutionToProblemReadModelQueries;
             _mediator = mediator;
+            _eventDispatcher = eventDispatcher;
         }
 
         // todo swagger attributes and proper methods like notfound etc
@@ -47,6 +52,15 @@ namespace the80by20.Modules.Solution.Api.Controllers
             var res = faker.Generate(10);
 
             return Ok(res);
+        }
+
+        [HttpPost("FinishSolutionMocked")]
+        public async Task<ActionResult> FinishSolutionMocked()
+        {
+            // todo should go first to finishsolutinhandler and from there to dispatcher
+            await _eventDispatcher.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
+
+            return Ok();
         }
     }
 }

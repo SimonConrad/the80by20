@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
     <ProjectReference Include="..\..\Masterdata\the80by20.Masterdata.App\the80by20.Modules.Masterdata.App.csproj" />
+    <ProjectReference Include="..\the80by20.Modules.Solution.Messages\the80by20.Modules.Solution.Messages.csproj" />
     <ProjectReference Include="..\the80by20.Solution.Domain\the80by20.Modules.Solution.Domain.csproj" />
   </ItemGroup>
 

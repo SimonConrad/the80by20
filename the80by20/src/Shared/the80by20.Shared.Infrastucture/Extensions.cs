@@ -11,6 +11,7 @@ using the80by20.Shared.Abstractions.Time;
 using the80by20.Shared.Infrastucture.Api;
 using the80by20.Shared.Infrastucture.Auth;
 using the80by20.Shared.Infrastucture.Context;
+using the80by20.Shared.Infrastucture.Events;
 using the80by20.Shared.Infrastucture.Exceptions;
 using the80by20.Shared.Infrastucture.Modules;
 using the80by20.Shared.Infrastucture.Services;
@@ -59,6 +60,7 @@ namespace the80by20.Shared.Infrastucture
             services.AddModuleInfo(modules);
             services.AddAuth(modules);
             services.AddErrorHandling();
+            services.AddEvents(assemblies);
             services.AddSqlServer();
             services.AddSingleton<IClock, Clock>();
             services.AddHostedService<AppInitializer>();

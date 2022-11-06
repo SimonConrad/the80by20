@@ -14,7 +14,7 @@ namespace the80by20.Modules.Solution.Domain.Operations.Solution
         }
 
         public SolutionToProblemId Id { get; private set; }
-        // INFO alternative will have one id for problem and solutiontoproblem as problem entity BECOMES solutionToProblem entit
+        // INFO alternative way - have one id for ProblemAggregate and SolutionToProblemAggregate as problem entity BECOMES solutionToProblem entity
         public ProblemId ProblemId { get; private set; }
         public RequiredSolutionTypes RequiredSolutionTypes { get; private set; } = RequiredSolutionTypes.Empty();
 
