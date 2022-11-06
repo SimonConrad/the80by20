@@ -1,9 +1,10 @@
 ﻿using MediatR;
+using the80by20.Modules.Solution.App.Events.External;
 using the80by20.Modules.Solution.App.Events.Solution;
 using the80by20.Modules.Solution.Domain.Operations.Solution;
-using the80by20.Modules.Solution.Messages.Events;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Events;
+using the80by20.Shared.Abstractions.Modules;
 
 namespace the80by20.Modules.Solution.App.Commands.Solution.Handlers;
 
@@ -13,15 +14,15 @@ public class FinishSolutionCommandHandler
 {
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
     private readonly IMediator _mediator;
-    private readonly IEventDispatcher _eventDispatcher;
+    private readonly IModuleClient _moduleClient;
 
     public FinishSolutionCommandHandler(ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
         IMediator mediator,
-        IEventDispatcher eventDispatcher)
+        IModuleClient moduleClient)
     {
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
         _mediator = mediator;
-        _eventDispatcher = eventDispatcher;
+        _moduleClient = moduleClient;
     }
 
     public async Task<SolutionToProblemId> Handle(FinishSolutionCommand command,
@@ -33,8 +34,7 @@ public class FinishSolutionCommandHandler
 
         await UpdateReadModel(solution.Id, cancellationToken);
 
-        // todo: await _eventDispatcher.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
-        // above is happen synchronously if want asynchronous call without await ore use _eventDispatcher.Publish
+        // todo: await _moduleClient.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
 
         return solution.Id;
     }

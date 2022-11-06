@@ -1,6 +1,6 @@
 ﻿using the80by20.Shared.Abstractions.Events;
 
-namespace the80by20.Modules.Solution.Messages.Events
+namespace the80by20.Modules.Solution.App.Events.External
 {
     // INFO
     // seems that good idea is not to sent in paload only id
@@ -16,8 +16,8 @@ namespace the80by20.Modules.Solution.Messages.Events
     public record SolutionToProblemFinished(
         Guid solutionId,
         Guid userThatRequestedSolution,
-        string SolutionSummary, 
-        string SolutionElementsGDriveLink, 
-        decimal price) : IEvent; 
-        
+        string SolutionSummary,
+        string SolutionElementsGDriveLink,
+        decimal price) : IEvent;
+
 }

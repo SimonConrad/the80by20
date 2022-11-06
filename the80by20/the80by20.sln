@@ -83,8 +83,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Modules.Sale.Doma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Modules.Sale.Infrastructure", "src\Modules\Sale\the80by20.Modules.Sale.Infrastructure\the80by20.Modules.Sale.Infrastructure.csproj", "{42E83346-ACDD-4473-83D5-BA3499E101C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Modules.Solution.Messages", "src\Modules\Solution\the80by20.Modules.Solution.Messages\the80by20.Modules.Solution.Messages.csproj", "{DF641AAC-A664-4641-B03D-A1758FA9BB4F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -183,10 +181,6 @@ Global
 		{42E83346-ACDD-4473-83D5-BA3499E101C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42E83346-ACDD-4473-83D5-BA3499E101C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42E83346-ACDD-4473-83D5-BA3499E101C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF641AAC-A664-4641-B03D-A1758FA9BB4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF641AAC-A664-4641-B03D-A1758FA9BB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF641AAC-A664-4641-B03D-A1758FA9BB4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF641AAC-A664-4641-B03D-A1758FA9BB4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -224,7 +218,6 @@ Global
 		{1DA74F2F-4B17-4791-9DB0-47794B060E13} = {6C6DD75F-7B77-4C4C-AAA8-430BF815E3A7}
 		{5D939DC7-8D48-4858-8096-3FCEB8276CFE} = {6C6DD75F-7B77-4C4C-AAA8-430BF815E3A7}
 		{42E83346-ACDD-4473-83D5-BA3499E101C7} = {6C6DD75F-7B77-4C4C-AAA8-430BF815E3A7}
-		{DF641AAC-A664-4641-B03D-A1758FA9BB4F} = {9E9C7C1E-9663-44EF-85AF-58FA9336F6E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EF83377-9D3D-407D-89DA-82A9D7E6B66C}

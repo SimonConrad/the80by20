@@ -1,5 +1,4 @@
-﻿using the80by20.Modules.Solution.Messages.Events;
-using the80by20.Shared.Abstractions.Events;
+﻿using the80by20.Shared.Abstractions.Events;
 
 namespace the80by20.Modules.Sale.App.Events.External.Handlers
 {
