@@ -12,18 +12,19 @@ namespace the80by20.Modules.Sale.App.Events.External.Handlers
             _logger = logger;
         }
 
-        public Task HandleAsync(SolutionToProblemFinished @event)
+        public async Task HandleAsync(SolutionToProblemFinished @event)
         {
             // INFO
-            // create product, can be with same id as problem becomes solution becomes product
+            // create product, can be with same id as solution, caouse problem becomes solution becomes product
             // send user who created problem notification taht he / she
             // can start the order - add product to the order
-            // order the agregate?
+            // order is the agregate?
 
 
             // TODO
             // INFO
-            // archive the problem , archive solution, create product via event send to sale module - objects lifecycle; same id in all 3 candidate for saga / process manager
+            // archive the problem , archive solution, create product via event send to sale module - objects lifecycle;
+            // same id in all 3 candidate for saga / process manager
             // send event solution-to-problem-finished to module sale
 
             // data: prolem / solution becomes product with informations: SolutionSummary, SolutionElements, Price, additional infos from aggregates: problem and solutio
@@ -31,8 +32,8 @@ namespace the80by20.Modules.Sale.App.Events.External.Handlers
             // invariants: ?
             // another aggregate / entity - order - event storming
 
+            //await Task.Delay(10_000); // INFO Background dispatcher is used so publisher of the event will no wai
             _logger.LogInformation($"Product created {@event.solutionId}");
-            return Task.CompletedTask;
         }
     }
 }
