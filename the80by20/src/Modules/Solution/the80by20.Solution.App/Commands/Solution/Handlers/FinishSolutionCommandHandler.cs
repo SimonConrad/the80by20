@@ -4,6 +4,7 @@ using the80by20.Modules.Solution.App.Events.Solution;
 using the80by20.Modules.Solution.Domain.Operations.Solution;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Events;
+using the80by20.Shared.Abstractions.Messaging;
 using the80by20.Shared.Abstractions.Modules;
 
 namespace the80by20.Modules.Solution.App.Commands.Solution.Handlers;
@@ -14,15 +15,15 @@ public class FinishSolutionCommandHandler
 {
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
     private readonly IMediator _mediator;
-    private readonly IModuleClient _moduleClient;
+    private readonly IMessageBroker _messageBroker;
 
     public FinishSolutionCommandHandler(ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
         IMediator mediator,
-        IModuleClient moduleClient)
+        IMessageBroker messageBroker)
     {
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
         _mediator = mediator;
-        _moduleClient = moduleClient;
+        _messageBroker = messageBroker;
     }
 
     public async Task<SolutionToProblemId> Handle(FinishSolutionCommand command,
@@ -43,7 +44,7 @@ public class FinishSolutionCommandHandler
         // pros: quite easy, cons: coupling: sale module hase dependecy on solution module (project reference)
 
         //todo: 
-        await _moduleClient.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
+        await _messageBroker.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
 
         return solution.Id;
     }

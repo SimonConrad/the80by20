@@ -13,6 +13,7 @@ using the80by20.Shared.Infrastucture.Auth;
 using the80by20.Shared.Infrastucture.Context;
 using the80by20.Shared.Infrastucture.Events;
 using the80by20.Shared.Infrastucture.Exceptions;
+using the80by20.Shared.Infrastucture.Messaging;
 using the80by20.Shared.Infrastucture.Modules;
 using the80by20.Shared.Infrastucture.Services;
 using the80by20.Shared.Infrastucture.SqlServer;
@@ -62,6 +63,7 @@ namespace the80by20.Shared.Infrastucture
             services.AddAuth(modules);
             services.AddErrorHandling();
             services.AddEvents(assemblies);
+            services.AddMessaging();
             services.AddSqlServer();
             services.AddSingleton<IClock, Clock>();
             services.AddHostedService<AppInitializer>();

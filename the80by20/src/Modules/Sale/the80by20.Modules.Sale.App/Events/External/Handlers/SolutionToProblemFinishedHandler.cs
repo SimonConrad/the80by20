@@ -1,9 +1,17 @@
-﻿using the80by20.Shared.Abstractions.Events;
+﻿using Microsoft.Extensions.Logging;
+using the80by20.Shared.Abstractions.Events;
 
 namespace the80by20.Modules.Sale.App.Events.External.Handlers
 {
     internal class SolutionToProblemFinishedHandler : IEventHandler<SolutionToProblemFinished>
     {
+        private readonly ILogger<SolutionToProblemFinishedHandler> _logger;
+
+        public SolutionToProblemFinishedHandler(ILogger<SolutionToProblemFinishedHandler> logger)
+        {
+            _logger = logger;
+        }
+
         public Task HandleAsync(SolutionToProblemFinished @event)
         {
             // INFO
@@ -22,6 +30,8 @@ namespace the80by20.Modules.Sale.App.Events.External.Handlers
             // behaviors: user can buy it
             // invariants: ?
             // another aggregate / entity - order - event storming
+
+            _logger.LogInformation($"Product created {@event.solutionId}");
             return Task.CompletedTask;
         }
     }

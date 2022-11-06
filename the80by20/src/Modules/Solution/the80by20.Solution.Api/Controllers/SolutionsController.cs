@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using the80by20.Modules.Solution.App.Events.External;
 using the80by20.Modules.Solution.App.ReadModel;
 using the80by20.Shared.Abstractions.Events;
+using the80by20.Shared.Abstractions.Messaging;
 using the80by20.Shared.Abstractions.Modules;
 
 namespace the80by20.Modules.Solution.Api.Controllers
@@ -19,18 +20,18 @@ namespace the80by20.Modules.Solution.Api.Controllers
         private readonly ILogger<SolutionsController> _logger;
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
         private readonly IMediator _mediator;
-        private readonly IModuleClient _moduleClient;
+        private readonly IMessageBroker _messageBroker;
 
         public SolutionsController(ILogger<SolutionsController> logger,
             ISolutionToProblemReadModelQueries solutionToProblemReadModelQueries,
             IMediator mediator,
-            IModuleClient moduleClient)
+            IMessageBroker messageBroker)
         {
             _logger = logger;
 
             _solutionToProblemReadModelQueries = solutionToProblemReadModelQueries;
             _mediator = mediator;
-            _moduleClient = moduleClient;
+            _messageBroker = messageBroker;
         }
 
         // todo swagger attributes and proper methods like notfound etc
@@ -62,7 +63,7 @@ namespace the80by20.Modules.Solution.Api.Controllers
             // move to FinishSolutionCommandHandler
             // should go first to FinishSolutionCommandHandler and after successfully command handled in this handler call below
 
-            await _moduleClient.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
+            await _messageBroker.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
             return Ok();
         }
     }
