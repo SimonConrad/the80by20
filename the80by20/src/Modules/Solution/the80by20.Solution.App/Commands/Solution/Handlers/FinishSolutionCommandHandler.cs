@@ -34,7 +34,16 @@ public class FinishSolutionCommandHandler
 
         await UpdateReadModel(solution.Id, cancellationToken);
 
-        // todo: await _moduleClient.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
+        // INFO
+        // approach with shared contracts:
+        // add project the80by20.Modules.Solution.Messages and there in catalog Events add SolutionToProblemFinished
+        // add above project as dependency in Sale.App
+        // in Solution module send event via
+        // await IEventDispatcher.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
+        // pros: quite easy, cons: coupling: sale module hase dependecy on solution module (project reference)
+
+        //todo: 
+        await _moduleClient.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
 
         return solution.Id;
     }

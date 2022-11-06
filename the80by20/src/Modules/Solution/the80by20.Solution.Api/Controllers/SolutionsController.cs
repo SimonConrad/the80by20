@@ -58,13 +58,6 @@ namespace the80by20.Modules.Solution.Api.Controllers
         [HttpPost("FinishSolutionMocked")]
         public async Task<ActionResult> FinishSolutionMocked()
         {
-            // INFO
-            // approach with shared contracts:
-            // add project the80by20.Modules.Solution.Messages and there in catalog Events add SolutionToProblemFinished
-            // add above project as dependency in Sale.App
-            // in Solution module send event via
-            // await IEventDispatcher.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
-
             // todo
             // move to FinishSolutionCommandHandler
             // should go first to FinishSolutionCommandHandler and after successfully command handled in this handler call below
