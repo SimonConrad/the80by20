@@ -6,12 +6,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="Core.SolutionSale\**" />
-		<EmbeddedResource Remove="Core.SolutionSale\**" />
-		<None Remove="Core.SolutionSale\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="MediatR" Version="10.0.1" />
 	</ItemGroup>
 

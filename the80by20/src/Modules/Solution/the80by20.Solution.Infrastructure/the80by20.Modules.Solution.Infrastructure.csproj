@@ -7,12 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="Core.SolutionSale.Adapters\**" />
-		<EmbeddedResource Remove="Core.SolutionSale.Adapters\**" />
-		<None Remove="Core.SolutionSale.Adapters\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<InternalsVisibleTo Include="the80by20.Modules.Solution.Api" />
 	</ItemGroup>
 

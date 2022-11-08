@@ -10,12 +10,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Remove="Core.SolutionSale\**" />
-		<EmbeddedResource Remove="Core.SolutionSale\**" />
-		<None Remove="Core.SolutionSale\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
 	</ItemGroup>
 
