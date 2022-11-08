@@ -2,7 +2,7 @@
 # https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/azure-apps/?view=aspnetcore-6.0&tabs=netcore-cli
 
 # todo set appservice to run on linux
-name: CI/CD .net backend to azure
+name: ci and cd of backend to azure-app-service
 
 env:
     AZURE_WEBAPP_NAME: the80by20        # set this to the name of your Azure Web App
