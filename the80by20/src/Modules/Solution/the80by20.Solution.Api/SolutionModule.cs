@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using the80by20.Modules.Solution.App;
 using the80by20.Modules.Solution.Domain;
 using the80by20.Modules.Solution.Infrastructure;
 using the80by20.Shared.Abstractions.Modules;
@@ -28,6 +29,7 @@ namespace the80by20.Modules.Solution.Api
             // so we don't need to create a constructor with passed to it dependencies
 
             services.AddDomain();
+            services.AddApplication();
             services.AddInfrastructure();
         }
 

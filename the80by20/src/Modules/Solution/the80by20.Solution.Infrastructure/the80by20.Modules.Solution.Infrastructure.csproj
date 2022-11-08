@@ -1,30 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-	  <ImplicitUsings>enable</ImplicitUsings>
-	  <OutputType>Library</OutputType>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Core.SolutionSale.Adapters\**" />
-    <EmbeddedResource Remove="Core.SolutionSale.Adapters\**" />
-    <None Remove="Core.SolutionSale.Adapters\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Core.SolutionSale.Adapters\**" />
+		<EmbeddedResource Remove="Core.SolutionSale.Adapters\**" />
+		<None Remove="Core.SolutionSale.Adapters\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="the80by20.Modules.Solution.Api" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
-	  <ProjectReference Include="..\the80by20.Solution.App\the80by20.Modules.Solution.App.csproj" />
+		<ProjectReference Include="..\..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
+		<ProjectReference Include="..\the80by20.Solution.App\the80by20.Modules.Solution.App.csproj" />
 	</ItemGroup>
 
-
-
 	<ItemGroup>
-	  <Folder Include="EF\Migrations\" />
+		<Folder Include="EF\Migrations\" />
 	</ItemGroup>
 
 </Project>
