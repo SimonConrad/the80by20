@@ -1,7 +1,7 @@
 ﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.SharedKernel;
 
-namespace the80by20.Modules.Solution.Domain.Operations.Problem
+namespace the80by20.Modules.Solution.Domain.Problem
 {
     /// <summary>
     /// it is not completely separate from aggregate, like anemic entity

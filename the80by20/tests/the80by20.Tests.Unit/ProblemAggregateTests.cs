@@ -1,6 +1,6 @@
 using Shouldly;
-using the80by20.Modules.Solution.Domain.Operations;
-using the80by20.Modules.Solution.Domain.Operations.Problem;
+using the80by20.Modules.Solution.Domain.Problem;
+using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.Exceptions;
 
 // info look at test from 3 perpsectives

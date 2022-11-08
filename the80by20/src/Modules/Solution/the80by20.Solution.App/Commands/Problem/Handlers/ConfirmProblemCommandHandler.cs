@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using the80by20.Modules.Solution.App.Events.Problem;
-using the80by20.Modules.Solution.Domain.Operations.Problem;
+using the80by20.Modules.Solution.Domain.Problem;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
@@ -27,6 +27,9 @@ public class ConfirmProblemCommandHandler : IRequestHandler<ConfirmProblemComman
 
         await UpdateReadModel(command.ProblemId, cancellationToken);
 
+        // INFO
+        // maybe at this moment publish event problem-confirmed, and handler creates solution with same id and needed in its context informations
+        // only then start-working-on-solution-command is possible
         return problem.Id;
     }
 
