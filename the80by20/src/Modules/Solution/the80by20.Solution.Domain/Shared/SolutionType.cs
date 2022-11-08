@@ -1,6 +1,6 @@
 ﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Shared.Abstractions.SharedKernel.Capabilities;
+namespace the80by20.Modules.Solution.Domain.Shared;
 
 [DomainEnumDdd]
 public enum SolutionType

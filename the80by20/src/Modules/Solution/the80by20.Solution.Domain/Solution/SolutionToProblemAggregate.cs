@@ -2,8 +2,8 @@
 using the80by20.Modules.Solution.Domain.Problem;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.SharedKernel;
-using the80by20.Shared.Abstractions.SharedKernel.Capabilities;
+using the80by20.Shared.Abstractions.Kernel.Capabilities;
+using the80by20.Shared.Abstractions.Kernel;
 
 namespace the80by20.Modules.Solution.Domain.Solution
 {

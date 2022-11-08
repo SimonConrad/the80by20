@@ -1,7 +1,7 @@
 ﻿namespace the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
 /// <summary>
-/// agregat  - model true invariants in consistency boundaries according to real business rules.
+/// agregat  - model true invariants in consistency boundaries according to real business rules. it is entity it has identity
 ///
 /// 
 /// Aggregates designing rules

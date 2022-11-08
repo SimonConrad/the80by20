@@ -3,7 +3,6 @@ using System.Text.Json;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Exceptions;
-using the80by20.Shared.Abstractions.SharedKernel.Capabilities;
 
 namespace the80by20.Modules.Solution.Domain.Solution;
 
