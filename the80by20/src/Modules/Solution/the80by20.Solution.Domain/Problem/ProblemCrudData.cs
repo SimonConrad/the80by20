@@ -3,6 +3,12 @@ using the80by20.Shared.Abstractions.Kernel;
 
 namespace the80by20.Modules.Solution.Domain.Problem
 {
+    // INFO
+    // maybe Description information should be directly inside ProblemAggregate as there is invariant that "problem cannot be without description"
+    // putting description inside problem-aggregate guards against unconsistent state in which problem is peristsed without description
+
+    // TODO refactor to above
+
     /// <summary>
     /// it is not completely separate from aggregate, like anemic entity
     /// </summary>
