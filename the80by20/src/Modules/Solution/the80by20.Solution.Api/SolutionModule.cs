@@ -27,7 +27,6 @@ namespace the80by20.Modules.Solution.Api
             // scope.ServiceProvider.GetService...
             // so we don't need to create a constructor with passed to it dependencies
 
-
             services.AddDomain();
             services.AddInfrastructure();
         }
