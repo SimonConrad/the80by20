@@ -1,4 +1,4 @@
-name: CI/CD to Azure Static Web Apps 
+name: ci and cd of frontend to azure-static-web-app
 
 on:
   push:
