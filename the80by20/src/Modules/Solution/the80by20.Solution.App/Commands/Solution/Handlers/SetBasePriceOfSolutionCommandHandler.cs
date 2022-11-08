@@ -3,6 +3,7 @@ using the80by20.Modules.Solution.App.Events.Solution;
 using the80by20.Modules.Solution.Domain.Shared.DomainServices;
 using the80by20.Modules.Solution.Domain.Solution;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Kernel.Types;
 
 namespace the80by20.Modules.Solution.App.Commands.Solution.Handlers;
 
@@ -30,9 +31,9 @@ public class SetBasePriceOfSolutionCommandHandler
         _domainService.SetBasePrice(solution);
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
 
-        await UpdateReadModel(solution.Id, cancellationToken);
+        await UpdateReadModel(solution.Id.Value, cancellationToken);
 
-        return solution.Id;
+        return solution.Id.Value;
     }
 
     public async Task UpdateReadModel(SolutionToProblemId id, CancellationToken ct)

@@ -4,6 +4,7 @@ using the80by20.Modules.Solution.Domain.Problem;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Modules.Solution.Domain.Solution;
 using the80by20.Shared.Abstractions.Kernel.Capabilities;
+using the80by20.Shared.Abstractions.Kernel.Types;
 using the80by20.Shared.Infrastucture.EF;
 
 namespace the80by20.Modules.Solution.Infrastructure.EF.Configurations
@@ -12,43 +13,47 @@ namespace the80by20.Modules.Solution.Infrastructure.EF.Configurations
     {
         public void Configure(EntityTypeBuilder<SolutionToProblemAggregate> builder)
         {
-            builder.MapTechnicalProperties();
+            // was before: builder.MapTechnicalProperties();
+            builder
+               .Property(x => x.Version)
+               .IsConcurrencyToken();
 
-            builder.HasKey(a => a.Id);
-            builder.Property(a => a.Id)
-                .HasConversion(
-                    a => a.Value,
-                    a => new SolutionToProblemId(a));
+            builder.HasKey(x => x.Id);
 
-            builder.Property(a => a.ProblemId)
+            builder.Property(x => x.Id)
                 .HasConversion(
-                    a => a.Value,
-                    a => new ProblemId(a));
+                    x => x.Value,
+                    x => new AggregateId(x));
+
+            builder.Property(x => x.ProblemId)
+                .HasConversion(
+                    x => x.Value,
+                    x => new ProblemId(x));
 
             builder.Property(a => a.SolutionSummary)
                 .HasConversion(
-                    a => a.Content,
-                    a => SolutionSummary.FromContent(a));
+                    x => x.Content,
+                    x => SolutionSummary.FromContent(x));
 
             builder.Property(a => a.BasePrice)
                 .HasConversion(
-                    a => a.Value,
-                    a => Money.FromValue(a));
+                    x => x.Value,
+                    x => Money.FromValue(x));
 
             builder.Property(a => a.AddtionalPrice)
                 .HasConversion(
-                    a => a.Value,
-                    a => Money.FromValue(a));
+                    x => x.Value,
+                    x => Money.FromValue(x));
 
             builder.Property(a => a.RequiredSolutionTypes)
                 .HasConversion(
-                    a => a.ToSnapshotInJson(),
-                    a => RequiredSolutionTypes.FromSnapshotInJson(a));
+                    x => x.ToSnapshotInJson(),
+                    x => RequiredSolutionTypes.FromSnapshotInJson(x));
 
             builder.Property(a => a.SolutionElements)
                 .HasConversion(
-                    a => a.ToSnapshotInJson(),
-                    a => SolutionElements.FromSnapshotInJson(a));
+                    x => x.ToSnapshotInJson(),
+                    x => SolutionElements.FromSnapshotInJson(x));
         }
     }
 }

@@ -4,6 +4,7 @@ using the80by20.Modules.Solution.Domain.Problem;
 using the80by20.Modules.Solution.Domain.Shared.DomainServices;
 using the80by20.Modules.Solution.Domain.Solution;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Kernel.Types;
 
 namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
 
@@ -34,7 +35,7 @@ public class RejectProblemCommandHandler : IRequestHandler<RejectProblemCommand,
 
         await UpdateReadModel(command.ProblemId, cancellationToken);
 
-        return problem.Id;
+        return problem.Id.Value;
     }
 
     private async Task UpdateReadModel(ProblemId problemId, CancellationToken cancellationToken)

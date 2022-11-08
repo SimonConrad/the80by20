@@ -3,6 +3,7 @@ using the80by20.Modules.Solution.App.Events.Problem;
 using the80by20.Modules.Solution.Domain.Problem;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Kernel.Types;
 
 namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
 
@@ -38,9 +39,9 @@ public class UpdateProblemCommandHandler : IRequestHandler<UpdateProblemCommand,
         problem.Update(requiredSolutionTypes);
         await _problemAggregateRepository.SaveAggragate(problem);
 
-        await UpdateReadModel(problem.Id, cancellationToken);
+        await UpdateReadModel(problem.Id.Value, cancellationToken);
 
-        return problem.Id;
+        return problem.Id.Value;
     }
 
     private async Task UpdateData(UpdateProblemCommand command)

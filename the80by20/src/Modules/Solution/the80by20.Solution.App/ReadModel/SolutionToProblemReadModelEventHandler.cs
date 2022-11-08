@@ -100,7 +100,7 @@ public class SolutionToProblemReadModelEventHandler :
     {
         var solution = await _solutionToProblemAggregateRepository.Get(@event.SolutionToProblemId);
 
-        var rm = await _readModelQueries.GetBySolutionId(solution.Id);
+        var rm = await _readModelQueries.GetBySolutionId(solution.Id.Value);
 
         rm.Price = solution.Price;
         rm.SolutionSummary = solution.SolutionSummary.Content;

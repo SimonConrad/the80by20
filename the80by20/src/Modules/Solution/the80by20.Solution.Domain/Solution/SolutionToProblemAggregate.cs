@@ -4,17 +4,17 @@ using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Kernel.Capabilities;
 using the80by20.Shared.Abstractions.Kernel;
+using the80by20.Shared.Abstractions.Kernel.Types;
 
 namespace the80by20.Modules.Solution.Domain.Solution
 {
     [AggregateDdd]
-    public class SolutionToProblemAggregate : Versionable, IEquatable<SolutionToProblemAggregate>
+    public class SolutionToProblemAggregate : AggregateRoot
     {
         protected SolutionToProblemAggregate() // INFO for EF purpose
         {
         }
 
-        public SolutionToProblemId Id { get; private set; }
         // INFO alternative way - have one id for ProblemAggregate and SolutionToProblemAggregate as problem entity BECOMES solutionToProblem entity
         public ProblemId ProblemId { get; private set; }
         public RequiredSolutionTypes RequiredSolutionTypes { get; private set; } = RequiredSolutionTypes.Empty();
@@ -27,9 +27,9 @@ namespace the80by20.Modules.Solution.Domain.Solution
         public bool WorkingOnSolutionEnded { get; private set; }
 
         public static SolutionToProblemAggregate New(ProblemId problemId, RequiredSolutionTypes requiredSolutionTypes)
-            => new(SolutionToProblemId.New(), problemId, requiredSolutionTypes);
+            => new(new Guid(), problemId, requiredSolutionTypes);
 
-        private SolutionToProblemAggregate(SolutionToProblemId id,
+        private SolutionToProblemAggregate(AggregateId id,
             ProblemId problemId,
             RequiredSolutionTypes requiredSolutionTypes)
         {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Modules.Solution.Domain.Problem;
+using the80by20.Shared.Abstractions.Kernel.Types;
 
 namespace the80by20.Modules.Solution.Infrastructure.EF.Repositories
 {
@@ -21,7 +22,7 @@ namespace the80by20.Modules.Solution.Infrastructure.EF.Repositories
 
         public async Task<ProblemAggregate> Get(ProblemId id)
         {
-            return await _context.ProblemsAggregates.SingleAsync(a => a.Id == id);
+            return await _context.ProblemsAggregates.SingleAsync(a => a.Id == id.Value);
         }
 
         public async Task<ProblemCrudData> GetCrudData(ProblemId id)

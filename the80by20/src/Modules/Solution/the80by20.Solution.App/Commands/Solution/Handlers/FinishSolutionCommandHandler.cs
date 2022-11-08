@@ -4,6 +4,7 @@ using the80by20.Modules.Solution.App.Events.Solution;
 using the80by20.Modules.Solution.Domain.Solution;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Events;
+using the80by20.Shared.Abstractions.Kernel.Types;
 using the80by20.Shared.Abstractions.Messaging;
 using the80by20.Shared.Abstractions.Modules;
 
@@ -33,7 +34,7 @@ public class FinishSolutionCommandHandler
         solution.FinishWorkOnSolutionToProblem();
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
 
-        await UpdateReadModel(solution.Id, cancellationToken);
+        await UpdateReadModel(solution.Id.Value, cancellationToken);
 
         // INFO
         // approach with shared contracts:
@@ -46,7 +47,7 @@ public class FinishSolutionCommandHandler
         //todo: 
         await _messageBroker.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
 
-        return solution.Id;
+        return solution.Id.Value;
     }
 
     public async Task UpdateReadModel(SolutionToProblemId id, CancellationToken ct)

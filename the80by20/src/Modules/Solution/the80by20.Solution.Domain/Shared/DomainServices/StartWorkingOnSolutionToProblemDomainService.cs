@@ -22,7 +22,7 @@ public class StartWorkingOnSolutionToProblemDomainService
                                       "when problem have no defined requirmed solution types");
 
 
-        var solutionToProblemAggregate = SolutionToProblemAggregate.New(problemAggregate.Id,
+        var solutionToProblemAggregate = SolutionToProblemAggregate.New(problemAggregate.Id.Value,
             problemAggregate.RequiredSolutionTypes.Copy());
 
 

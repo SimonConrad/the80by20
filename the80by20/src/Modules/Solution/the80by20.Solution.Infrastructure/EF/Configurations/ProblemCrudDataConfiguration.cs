@@ -11,8 +11,7 @@ namespace the80by20.Modules.Solution.Infrastructure.EF.Configurations
         {
             builder.MapTechnicalProperties();
 
-            builder.HasKey(d => d.AggregateId);
-
+            builder.HasKey(x => x.AggregateId);
         }
     }
 }

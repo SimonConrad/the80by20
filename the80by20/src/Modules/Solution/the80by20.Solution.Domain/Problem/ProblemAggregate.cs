@@ -2,30 +2,31 @@
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Exceptions;
 using the80by20.Shared.Abstractions.Kernel;
+using the80by20.Shared.Abstractions.Kernel.Types;
 
 namespace the80by20.Modules.Solution.Domain.Problem;
 
 [AggregateDdd]
-public class ProblemAggregate : Versionable, IEquatable<ProblemAggregate>
+public class ProblemAggregate : AggregateRoot
 {
     protected ProblemAggregate()
     {
     }
 
-    public ProblemId Id { get; private set; }
     public RequiredSolutionTypes RequiredSolutionTypes { get; private set; } = RequiredSolutionTypes.Empty();
+    
     public bool Confirmed { get; private set; }
+    
     public bool Rejected { get; private set; }
 
-
-    private ProblemAggregate(ProblemId id, RequiredSolutionTypes requiredSolutionTypes)
+    private ProblemAggregate(AggregateId id, RequiredSolutionTypes requiredSolutionTypes)
     {
         Id = id;
         RequiredSolutionTypes = requiredSolutionTypes;
     }
 
     public static ProblemAggregate New(RequiredSolutionTypes requiredSolutionTypes)
-        => new ProblemAggregate(ProblemId.New(), requiredSolutionTypes);
+        => new ProblemAggregate(new Guid(), requiredSolutionTypes);
 
     public void Update(RequiredSolutionTypes requiredSolutionTypes)
     {
