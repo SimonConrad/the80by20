@@ -12,7 +12,7 @@ using the80by20.Modules.Solution.Infrastructure.EF;
 
 namespace the80by20.Modules.Solution.Infrastructure
 {
-    internal static class Extensions
+    public static class Extensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {

@@ -19,10 +19,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
- <ItemGroup>
-		<InternalsVisibleTo Include="the80by20.Bootstrapper" />
-	</ItemGroup>
 	
   <ItemGroup>
     <ProjectReference Include="..\the80by20.Solution.Infrastructure\the80by20.Modules.Solution.Infrastructure.csproj" />
