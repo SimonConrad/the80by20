@@ -33,7 +33,7 @@ in package manager console set defualt project to  `the80by20.Masterdata.Infrast
 
 in package manager console set defualt project to  `the80by20.Users.Infrastructure`
 
-`Add-Migration test -Context UsersDbContext -o "EF/Migrations"`
+`Add-Migration initial -Context UsersDbContext -o "EF/Migrations"`
 
 `Update-Database -context UsersDbContext`
 

@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace the80by20.Solution.Infrastructure.EF.Migrations
+namespace the80by20.Modules.Solution.Infrastructure.EF.Migrations
 {
     public partial class initial : Migration
     {
@@ -20,7 +21,7 @@ namespace the80by20.Solution.Infrastructure.EF.Migrations
                     RequiredSolutionTypes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Confirmed = table.Column<bool>(type: "bit", nullable: false),
                     Rejected = table.Column<bool>(type: "bit", nullable: false),
-                    Version = table.Column<int>(type: "int", rowVersion: true, nullable: true)
+                    Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,7 +58,7 @@ namespace the80by20.Solution.Infrastructure.EF.Migrations
                     AddtionalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     BasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     WorkingOnSolutionEnded = table.Column<bool>(type: "bit", nullable: false),
-                    Version = table.Column<int>(type: "int", rowVersion: true, nullable: true)
+                    Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

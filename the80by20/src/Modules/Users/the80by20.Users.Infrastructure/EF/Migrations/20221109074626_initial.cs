@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace the80by20.Users.Infrastructure.EF.Migrations
+namespace the80by20.Modules.Users.Infrastructure.EF.Migrations
 {
     public partial class initial : Migration
     {
@@ -22,7 +23,9 @@ namespace the80by20.Users.Infrastructure.EF.Migrations
                     Password = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Role = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Claims = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

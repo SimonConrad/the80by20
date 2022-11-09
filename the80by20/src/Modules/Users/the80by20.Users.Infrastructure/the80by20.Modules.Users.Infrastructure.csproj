@@ -7,10 +7,6 @@
     <!--<Nullable>enable</Nullable>-->
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="EF\Migrations\" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<InternalsVisibleTo Include="the80by20.Modules.Users.Api" />
 	</ItemGroup>

@@ -9,11 +9,11 @@ using the80by20.Modules.Masterdata.Infrastructure.EF;
 
 #nullable disable
 
-namespace the80by20.Masterdata.Infrastructure.EF.Migrations
+namespace the80by20.Modules.Masterdata.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(MasterDataDbContext))]
-    [Migration("20221024050226_add-column-description")]
-    partial class addcolumndescription
+    [Migration("20221109074521_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,7 +25,7 @@ namespace the80by20.Masterdata.Infrastructure.EF.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("the80by20.Masterdata.App.Entities.Category", b =>
+            modelBuilder.Entity("the80by20.Modules.Masterdata.App.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

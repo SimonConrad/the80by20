@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using the80by20.Modules.Solution.Domain.Problem;
+using the80by20.Modules.Solution.Domain.Problem.Entities;
+using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Shared.Abstractions.Kernel.Types;
 
 namespace the80by20.Modules.Solution.Infrastructure.EF.Repositories

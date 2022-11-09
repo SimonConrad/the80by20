@@ -12,8 +12,8 @@ using the80by20.Modules.Users.Infrastructure.EF;
 namespace the80by20.Modules.Users.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20221103111510_users-new-columns")]
-    partial class usersnewcolumns
+    [Migration("20221109074626_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.Modules.Solution.App.Events.Problem;
-using the80by20.Modules.Solution.Domain.Problem;
+using the80by20.Modules.Solution.Domain.Problem.Entities;
+using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Kernel.Types;

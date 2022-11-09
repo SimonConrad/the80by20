@@ -1,27 +1,6 @@
 #@url = http://localhost:5000
 @url = https://the80by20.azurewebsites.net
 
-###
-@accessToken = secret
 
 ###
 GET {{url}}/api
-
-###
-GET {{url}}/users/users/me
-Authorization: Bearer {{accessToken}}
-
-
-###
-POST {{url}}/solution-to-problem/problems
-Authorization: Bearer {{accessToken}}
-Content-Type: application/json
-
-{
-  "description": "",
-  "category": "00000000-0000-0000-0000-000000000003",
-  "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  "solutionElementTypes": [
-    0
-  ]
-}

@@ -1,8 +1,9 @@
 ﻿using the80by20.Modules.Solution.Domain.Problem;
+using the80by20.Modules.Solution.Domain.Solution.Entities;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Kernel.Types;
 
-namespace the80by20.Modules.Solution.Domain.Solution
+namespace the80by20.Modules.Solution.Domain.Solution.Repositories
 {
     /// <summary>
     /// INFO save and restore always via aggregate

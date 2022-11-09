@@ -8,7 +8,7 @@ using the80by20.Modules.Users.Infrastructure.EF;
 
 #nullable disable
 
-namespace the80by20.Users.Infrastructure.EF.Migrations
+namespace the80by20.Modules.Users.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
     partial class UsersDbContextModelSnapshot : ModelSnapshot

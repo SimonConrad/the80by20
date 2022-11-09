@@ -1,7 +1,8 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+﻿using the80by20.Modules.Solution.Domain.Problem.Entities;
+using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Kernel.Types;
 
-namespace the80by20.Modules.Solution.Domain.Problem;
+namespace the80by20.Modules.Solution.Domain.Problem.Repositories;
 
 [Port]
 [AggregateRepositoryDdd]

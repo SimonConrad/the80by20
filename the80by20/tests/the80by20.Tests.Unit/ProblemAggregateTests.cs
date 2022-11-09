@@ -1,5 +1,6 @@
 using Shouldly;
-using the80by20.Modules.Solution.Domain.Problem;
+using the80by20.Modules.Solution.Domain.Problem.Entities;
+using the80by20.Modules.Solution.Domain.Problem.Exceptions;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.Exceptions;
 
@@ -25,7 +26,7 @@ namespace the80by20.Tests.Unit
 
             // assert
             exception.ShouldNotBeNull();
-            exception.ShouldBeOfType<DomainException>(); // todo custom exception
+            exception.ShouldBeOfType<ProblemException>(); // todo custom exception
         }
     }
 }

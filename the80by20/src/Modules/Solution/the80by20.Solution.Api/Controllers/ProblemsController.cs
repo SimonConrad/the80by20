@@ -97,6 +97,12 @@ namespace the80by20.Modules.Solution.Api.Controllers
             res[2].IsConfirmed = true;
             res[2].IsRejected = false;
 
+            res[2].RequiredSolutionTypes = "TheoryOfConceptWithExample; PocInCode";
+            res[2].Description = "modelling process with event storming; and implementing this model it into application and domain layers)";
+            res[2].CategoryId = new Guid("00000000-0000-0000-0000-000000000010");
+            res[2].IsConfirmed = true;
+            res[2].IsRejected = false;
+
             //modelling process with event storming; and implementing this model it into application and domain layers
 
             var resFromdb = await _solutionToProblemReadModelQueries.GetByUserId(Guid.Parse(User.Identity?.Name));

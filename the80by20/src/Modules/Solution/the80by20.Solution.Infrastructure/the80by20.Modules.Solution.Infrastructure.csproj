@@ -11,8 +11,4 @@
 		<ProjectReference Include="..\the80by20.Solution.App\the80by20.Modules.Solution.App.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="EF\Migrations\" />
-	</ItemGroup>
-
 </Project>

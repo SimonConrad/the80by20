@@ -2,8 +2,8 @@
 using the80by20.Modules.Masterdata.App.Services;
 using the80by20.Modules.Solution.App.Events.Problem;
 using the80by20.Modules.Solution.App.Events.Solution;
-using the80by20.Modules.Solution.Domain.Problem;
-using the80by20.Modules.Solution.Domain.Solution;
+using the80by20.Modules.Solution.Domain.Problem.Repositories;
+using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
 namespace the80by20.Modules.Solution.App.ReadModel;

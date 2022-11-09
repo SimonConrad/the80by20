@@ -7,8 +7,8 @@ using the80by20.Modules.Solution.App.ReadModel;
 using the80by20.Modules.Solution.Infrastructure.Behaviors;
 using the80by20.Modules.Solution.App.Commands.Problem.Handlers;
 using the80by20.Modules.Solution.Infrastructure.EF;
-using the80by20.Modules.Solution.Domain.Problem;
-using the80by20.Modules.Solution.Domain.Solution;
+using the80by20.Modules.Solution.Domain.Problem.Repositories;
+using the80by20.Modules.Solution.Domain.Solution.Repositories;
 
 namespace the80by20.Modules.Solution.Infrastructure
 {

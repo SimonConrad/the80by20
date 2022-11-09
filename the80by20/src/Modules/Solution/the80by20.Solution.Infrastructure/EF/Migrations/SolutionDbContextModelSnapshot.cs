@@ -8,7 +8,7 @@ using the80by20.Modules.Solution.Infrastructure.EF;
 
 #nullable disable
 
-namespace the80by20.Solution.Infrastructure.EF.Migrations
+namespace the80by20.Modules.Solution.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(SolutionDbContext))]
     partial class SolutionDbContextModelSnapshot : ModelSnapshot
@@ -23,7 +23,7 @@ namespace the80by20.Solution.Infrastructure.EF.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("the80by20.Solution.App.ReadModel.SolutionToProblemReadModel", b =>
+            modelBuilder.Entity("the80by20.Modules.Solution.App.ReadModel.SolutionToProblemReadModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,7 +73,7 @@ namespace the80by20.Solution.Infrastructure.EF.Migrations
                     b.ToTable("SolutionsToProblemsReadModel", "solutions");
                 });
 
-            modelBuilder.Entity("the80by20.Solution.Domain.Operations.Problem.ProblemAggregate", b =>
+            modelBuilder.Entity("the80by20.Modules.Solution.Domain.Problem.Entities.ProblemAggregate", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -87,9 +87,8 @@ namespace the80by20.Solution.Infrastructure.EF.Migrations
                     b.Property<string>("RequiredSolutionTypes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Version")
+                    b.Property<int>("Version")
                         .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -97,7 +96,7 @@ namespace the80by20.Solution.Infrastructure.EF.Migrations
                     b.ToTable("ProblemsAggregates", "solutions");
                 });
 
-            modelBuilder.Entity("the80by20.Solution.Domain.Operations.Problem.ProblemCrudData", b =>
+            modelBuilder.Entity("the80by20.Modules.Solution.Domain.Problem.Entities.ProblemCrudData", b =>
                 {
                     b.Property<Guid>("AggregateId")
                         .ValueGeneratedOnAdd()
@@ -125,7 +124,7 @@ namespace the80by20.Solution.Infrastructure.EF.Migrations
                     b.ToTable("ProblemsCrudData", "solutions");
                 });
 
-            modelBuilder.Entity("the80by20.Solution.Domain.Operations.Solution.SolutionToProblemAggregate", b =>
+            modelBuilder.Entity("the80by20.Modules.Solution.Domain.Solution.Entities.SolutionToProblemAggregate", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -148,9 +147,8 @@ namespace the80by20.Solution.Infrastructure.EF.Migrations
                     b.Property<string>("SolutionSummary")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Version")
+                    b.Property<int>("Version")
                         .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int");
 
                     b.Property<bool>("WorkingOnSolutionEnded")

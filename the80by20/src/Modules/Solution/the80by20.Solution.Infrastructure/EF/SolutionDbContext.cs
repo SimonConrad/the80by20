@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using the80by20.Modules.Solution.App.ReadModel;
-using the80by20.Modules.Solution.Domain.Problem;
-using the80by20.Modules.Solution.Domain.Solution;
+using the80by20.Modules.Solution.Domain.Problem.Entities;
+using the80by20.Modules.Solution.Domain.Solution.Entities;
 
 // todo do command handler decorator that wrpas into unit of worka transaction - like in my-spot
 
