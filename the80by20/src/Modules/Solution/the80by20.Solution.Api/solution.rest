@@ -1,28 +1,12 @@
 @url = http://localhost:5000/solution-to-problem
 #@url = https://the80by20.azurewebsites.net/solution-to-problem
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzYTE5YWI5ZS04MzYzLTQ4ZTAtYmVjZi0wMzVjMmY4MWQxZTYiLCJ1bmlxdWVfbmFtZSI6IjNhMTlhYjllLTgzNjMtNDhlMC1iZWNmLTAzNWMyZjgxZDFlNiIsImVtYWlsIjoiYWRtaW5Ad3AucGwiLCJqdGkiOiIyNjc2YTRjNy03MmM4LTRiZGUtOTk4MS04YTg1MGI0OTliMzciLCJpYXQiOiIxNjY3OTgwMjcwOTg5IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJwZXJtaXNzaW9ucyI6WyJtYXN0ZXJkYXRhIiwic29sdXRpb24iLCJ1c2VycyJdLCJuYmYiOjE2Njc5ODAyNzAsImV4cCI6MTY2ODAxNjI3MCwiaXNzIjoidGhlODBieTIwIn0.CRvhkK96DDMMDGMS2dm_K0Mg4eO5zBbLFCF4Hjia5dg
+@accessToken = token
 
 ###
 GET {{url}}
 
-###
-POST {{url}}/problems
-Authorization: Bearer {{accessToken}}
-Content-Type: application/json
 
-{
-  "description": "description",
-  "category": "00000000-0000-0000-0000-000000000003",
-  "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  "solutionElementTypes": [
-    0
-  ]
-}
-
-###
-GET {{url}}/problems
-Authorization: Bearer {{accessToken}}
 
 ###
 POST {{url}}/solutions/FinishSolutionMocked
