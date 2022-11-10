@@ -23,8 +23,6 @@ internal class UsersController : BaseController
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
 
-    private readonly IQueryHandler<GetUsers, IEnumerable<UserDto>> _getUsersHandler;
-    private readonly IQueryHandler<GetUser, UserDto> _getUserHandler;
 
     private readonly ITokenStorage _tokenStorage;
     private readonly AppOptions _appOptions;
@@ -34,10 +32,6 @@ internal class UsersController : BaseController
     public UsersController(
         ICommandDispatcher commandDispatcher,
         IQueryDispatcher queryDispatcher,
-
-        //IQueryHandler<GetUsers, IEnumerable<UserDto>> getUsersHandler,
-        //IQueryHandler<GetUser, UserDto> getUserHandler,
-
         ITokenStorage tokenStorage,
         IOptions<AppOptions> appOptions,
         IOptionsMonitor<AppOptions> appOptionsMonitor,
@@ -45,14 +39,9 @@ internal class UsersController : BaseController
     {
         _commandDispatcher = commandDispatcher;
         _queryDispatcher = queryDispatcher;
-        //_getUsersHandler = getUsersHandler;
-        //_getUserHandler = getUserHandler;
-
         _tokenStorage = tokenStorage;
-
         _appOptions = appOptions.Value;
         _appOptionsMonitor = appOptionsMonitor; // INFO reflect values in json without restarting app
-        
         _context = context;
     }
 
