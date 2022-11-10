@@ -1,7 +1,9 @@
-﻿using the80by20.Shared.Abstractions.Events;
+﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Events;
 
-namespace the80by20.Modules.Sale.App.Events.External
+namespace the80by20.Modules.Sale.App.Solution.Events.External
 {
+    [IntegrationEvent]
     public record SolutionToProblemFinished(
         Guid solutionId,
         Guid userThatRequestedSolution,

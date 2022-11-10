@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using the80by20.Modules.Sale.App.Solution.Events.External;
 using the80by20.Shared.Abstractions.Events;
 
-namespace the80by20.Modules.Sale.App.Events.External.Handlers
+namespace the80by20.Modules.Sale.App.Solution.Events.External.Handlers
 {
     internal class SolutionToProblemFinishedHandler : IEventHandler<SolutionToProblemFinished>
     {

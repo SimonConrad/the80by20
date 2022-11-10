@@ -1,4 +1,5 @@
-﻿using the80by20.Shared.Abstractions.Events;
+﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Events;
 
 namespace the80by20.Modules.Solution.App.Events.External
 {
@@ -13,6 +14,8 @@ namespace the80by20.Modules.Solution.App.Events.External
     // so we avoid one entity / table taht has all data and methods for problem / solution / sale
 
     // process flow of what happens in the SolutionToProblemFinished handler is also modelled in es, bacouse this is process logic / application logic based upon buisness prcess
+
+    [IntegrationEvent]
     public record SolutionToProblemFinished(
         Guid solutionId,
         Guid userThatRequestedSolution,

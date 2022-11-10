@@ -12,7 +12,7 @@ using the80by20.Shared.Abstractions.Modules;
 namespace the80by20.Modules.Solution.Api.Controllers
 {
 
-    //todo use: [Authorize(Policy = Policy)]
+    [Authorize(Policy = Policy)]
     internal class SolutionsController : BaseController
     {
         private const string Policy = "solution";
@@ -60,7 +60,7 @@ namespace the80by20.Modules.Solution.Api.Controllers
         public async Task<ActionResult> FinishSolutionMocked()
         {
             // todo
-            // move to FinishSolutionCommandHandler
+            // move to FinishSolutionCommandHandler (API layer or DAL Layer in the repo after save-changes)
             // should go first to FinishSolutionCommandHandler and after successfully command handled in this handler call below
 
             await _messageBroker.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));

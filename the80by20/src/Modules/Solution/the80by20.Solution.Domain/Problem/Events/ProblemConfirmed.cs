@@ -1,4 +1,5 @@
 ﻿using the80by20.Modules.Solution.Domain.Problem.Entities;
+using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Kernel;
 
 namespace the80by20.Modules.Solution.Domain.Problem.Events
@@ -8,6 +9,7 @@ namespace the80by20.Modules.Solution.Domain.Problem.Events
     // create solution-to-problem aggregate in handling code
 
     // TODO do above
+    [DomainEvent]
     public record ProblemConfirmed(ProblemAggregate problem) : IDomainEvent;
 
 }

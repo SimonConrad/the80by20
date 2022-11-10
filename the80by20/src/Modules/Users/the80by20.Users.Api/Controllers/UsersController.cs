@@ -76,6 +76,8 @@ internal class UsersController : BaseController
         return jwt;
     }
 
+    // TODO sign-out
+
     [HttpGet("me")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
