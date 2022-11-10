@@ -27,7 +27,6 @@ namespace the80by20.Modules.Users.Api
             // var configuration = scope.GetService<IConfiguration>();
             // so we don't need to create a constructor with passed to it dependencies
 
-            services.AddApp();
             services.AddInfrastructure();
         }
 

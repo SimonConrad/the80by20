@@ -10,6 +10,7 @@ using the80by20.Shared.Abstractions.Modules;
 using the80by20.Shared.Abstractions.Time;
 using the80by20.Shared.Infrastucture.Api;
 using the80by20.Shared.Infrastucture.Auth;
+using the80by20.Shared.Infrastucture.Commands;
 using the80by20.Shared.Infrastucture.Context;
 using the80by20.Shared.Infrastucture.Events;
 using the80by20.Shared.Infrastucture.Exceptions;
@@ -62,6 +63,7 @@ namespace the80by20.Shared.Infrastucture
             services.AddModuleRequests(assemblies);
             services.AddAuth(modules);
             services.AddErrorHandling();
+            services.AddCommands(assemblies);
             services.AddEvents(assemblies);
             services.AddMessaging();
             services.AddSqlServer();

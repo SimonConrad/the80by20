@@ -19,29 +19,31 @@ internal class UsersController : BaseController
 {
     private const string Policy = "users";
 
+    private readonly ICommandDispatcher _commandDispatcher;
+
     private readonly IQueryHandler<GetUsers, IEnumerable<UserDto>> _getUsersHandler;
     private readonly IQueryHandler<GetUser, UserDto> _getUserHandler;
-    private readonly ICommandHandler<SignIn> _signInHandler;
-    private readonly ICommandHandler<SignUp> _signUpHandler;
+
     private readonly ITokenStorage _tokenStorage;
     private readonly AppOptions _appOptions;
     private readonly IOptionsMonitor<AppOptions> _appOptionsMonitor;
     private readonly IContext _context;
 
     public UsersController(
+        ICommandDispatcher commandDispatcher,
+
         IQueryHandler<GetUsers, IEnumerable<UserDto>> getUsersHandler,
         IQueryHandler<GetUser, UserDto> getUserHandler,
-        ICommandHandler<SignIn> signInHandler,
-        ICommandHandler<SignUp> signUpHandler,
+
         ITokenStorage tokenStorage,
         IOptions<AppOptions> appOptions,
         IOptionsMonitor<AppOptions> appOptionsMonitor,
         IContext context)
     {
+        _commandDispatcher = commandDispatcher;
         _getUsersHandler = getUsersHandler;
         _getUserHandler = getUserHandler;
-        _signInHandler = signInHandler;
-        _signUpHandler = signUpHandler;
+
         _tokenStorage = tokenStorage;
 
         _appOptions = appOptions.Value;
@@ -49,7 +51,6 @@ internal class UsersController : BaseController
         
         _context = context;
     }
-
 
     [AllowAnonymous]
     [HttpPost]
@@ -59,7 +60,8 @@ internal class UsersController : BaseController
     public async Task<ActionResult> Post([FromBody] SignUp command)
     {
         command = command with { UserId = Guid.NewGuid() }; // INFO creating record by copying it and adding UserId
-        await _signUpHandler.HandleAsync(command);
+        await _commandDispatcher.SendAsync(command);
+
         return CreatedAtAction(nameof(Get), new { command.UserId }, null);
     }
 
@@ -70,13 +72,14 @@ internal class UsersController : BaseController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<JsonWebToken>> Post([FromBody] SignIn command)
     {
-        // todo add claims before encoding jwt token like username and role
-        await _signInHandler.HandleAsync(command);
+        await _commandDispatcher.SendAsync(command);
+
         var jwt = _tokenStorage.Get();
         return jwt;
     }
 
-    // TODO sign-out
+    // TODO
+    // sign-out
 
     [HttpGet("me")]
     [ProducesResponseType(StatusCodes.Status200OK)]

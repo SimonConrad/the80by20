@@ -3,11 +3,13 @@ using Humanizer;
 using the80by20.Modules.Users.App.Commands.Exceptions;
 using the80by20.Modules.Users.App.Ports;
 using the80by20.Modules.Users.Domain.UserEntity;
+using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Time;
 
 namespace the80by20.Modules.Users.App.Commands.Handlers;
 
+[CommandHandlerCqrs]
 internal sealed class SignUpHandler : ICommandHandler<SignUp>
 {
     private readonly IUserRepository _userRepository;
@@ -46,8 +48,6 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         var securedPassword = _passwordManager.HashPassword(password);
         var user = new User(userId, email, username, securedPassword, fullName, role, _clock.CurrentDate(), claims, isActive: true);
         await _userRepository.AddAsync(user);
-
-        // await _messageBroker.PublishAsync(new SignedUp(user.Id, user.Email));
     }
 }
 

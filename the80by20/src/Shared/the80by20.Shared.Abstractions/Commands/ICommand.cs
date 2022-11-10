@@ -1,6 +1,8 @@
-﻿namespace the80by20.Shared.Abstractions.Commands;
+﻿using the80by20.Shared.Abstractions.Messaging;
 
-// todo unify cqrs style with this, add dispatcher
-public interface ICommand
+namespace the80by20.Shared.Abstractions.Commands;
+
+
+public interface ICommand :  IMessage
 {
 }

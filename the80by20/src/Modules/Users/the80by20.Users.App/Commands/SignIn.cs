@@ -5,5 +5,3 @@ namespace the80by20.Modules.Users.App.Commands;
 
 [CommandCqrs]
 public record SignIn(string Email, string Password) : ICommand;
-
-//public record SignInCommand(string Email, string Password) : IRequest;

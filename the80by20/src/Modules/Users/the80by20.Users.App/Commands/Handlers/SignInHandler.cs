@@ -25,7 +25,8 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
         _tokenStorage = tokenStorage;
     }
 
-    // todo version with cancelationtoken
+    // TODO
+    // version with cancelation-token
     public async Task HandleAsync(SignIn command)
     {
         var user = await _userRepository.GetByEmailAsync(command.Email);
@@ -44,11 +45,11 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
             throw new UserNotActiveException(user.Id);
         }
 
-        // INFO https://jwt.io/
+        // INFO
+        // https://jwt.io/
         var jwt = _authenticator.CreateToken(user.Id.Value.ToString(), user.Role, claims: user.Claims, email: user.Email);
         jwt.Email = user.Email;
 
         _tokenStorage.Set(jwt);
-        //await _messageBroker.PublishAsync(new SignedIn(user.Id));
     }
 }
