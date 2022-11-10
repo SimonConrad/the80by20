@@ -30,21 +30,9 @@ namespace the80by20.Modules.Users.Infrastructure
 
             AddCommandHandlersDecorators(services);
 
-            AddQueryHandlers(services);
-
             services.AddSqlServer<UsersDbContext>();
 
             return services;
-        }
-
-        private static void AddQueryHandlers(IServiceCollection services)
-        {
-            // INFO CQRS queryhandlers registration
-            var infrastructureAssembly = typeof(Extensions).Assembly;
-            services.Scan(s => s.FromAssemblies(infrastructureAssembly)
-               .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
-               .AsImplementedInterfaces()
-               .WithScopedLifetime());
         }
 
         private static void AddCommandHandlersDecorators(IServiceCollection services)

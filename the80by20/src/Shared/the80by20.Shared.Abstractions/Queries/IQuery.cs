@@ -1,5 +1,10 @@
 ﻿namespace the80by20.Shared.Abstractions.Queries;
 
-public interface IQuery<TResult>
+//Marker
+public interface IQuery
+{
+}
+
+public interface IQuery<T> : IQuery
 {
 }

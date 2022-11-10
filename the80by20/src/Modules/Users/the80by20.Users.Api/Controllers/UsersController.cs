@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
 using the80by20.Modules.Users.App.Commands;
+using the80by20.Modules.Users.App.DTO;
 using the80by20.Modules.Users.App.Queries;
 using the80by20.Shared.Abstractions.Auth;
 using the80by20.Shared.Abstractions.Commands;
@@ -20,6 +21,7 @@ internal class UsersController : BaseController
     private const string Policy = "users";
 
     private readonly ICommandDispatcher _commandDispatcher;
+    private readonly IQueryDispatcher _queryDispatcher;
 
     private readonly IQueryHandler<GetUsers, IEnumerable<UserDto>> _getUsersHandler;
     private readonly IQueryHandler<GetUser, UserDto> _getUserHandler;
@@ -31,9 +33,10 @@ internal class UsersController : BaseController
 
     public UsersController(
         ICommandDispatcher commandDispatcher,
+        IQueryDispatcher queryDispatcher,
 
-        IQueryHandler<GetUsers, IEnumerable<UserDto>> getUsersHandler,
-        IQueryHandler<GetUser, UserDto> getUserHandler,
+        //IQueryHandler<GetUsers, IEnumerable<UserDto>> getUsersHandler,
+        //IQueryHandler<GetUser, UserDto> getUserHandler,
 
         ITokenStorage tokenStorage,
         IOptions<AppOptions> appOptions,
@@ -41,8 +44,9 @@ internal class UsersController : BaseController
         IContext context)
     {
         _commandDispatcher = commandDispatcher;
-        _getUsersHandler = getUsersHandler;
-        _getUserHandler = getUserHandler;
+        _queryDispatcher = queryDispatcher;
+        //_getUsersHandler = getUsersHandler;
+        //_getUserHandler = getUserHandler;
 
         _tokenStorage = tokenStorage;
 
@@ -91,7 +95,7 @@ internal class UsersController : BaseController
             return NotFound(); // TODO refactor to use OkOrNotFound from base controller
         }
 
-        var user = await _getUserHandler.HandleAsync(new GetUser() { UserId = _context.Identity.Id });
+        var user = await _queryDispatcher.QueryAsync(new GetUser() { UserId = _context.Identity.Id });
 
         return user;
     }
@@ -103,7 +107,8 @@ internal class UsersController : BaseController
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult<IEnumerable<UserDto>>> Get([FromQuery] GetUsers query)
-       => Ok(await _getUsersHandler.HandleAsync(new GetUsers()));
+       //=> Ok(await _getUsersHandler.HandleAsync(new GetUsers()));
+       => Ok(await _queryDispatcher.QueryAsync(new GetUsers()));
 
     
     [Authorize(Policy = "is-admin")] // INFO module level policy 'users' and action level policy 'is-admin' needed 
@@ -112,7 +117,7 @@ internal class UsersController : BaseController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<UserDto>> Get([FromRoute] Guid userId)
     {
-        var user = await _getUserHandler.HandleAsync(new GetUser() { UserId = userId });
+        var user = await _queryDispatcher.QueryAsync(new GetUser() { UserId = userId });
         if (user is null)
         {
             return NotFound();

@@ -9,7 +9,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using the80by20.Modules.Users.App.Commands;
-using the80by20.Modules.Users.App.Queries;
+using the80by20.Modules.Users.App.DTO;
 using the80by20.Modules.Users.Domain.UserEntity;
 using the80by20.Modules.Users.Infrastructure.Security;
 using the80by20.Shared.Abstractions.Auth;

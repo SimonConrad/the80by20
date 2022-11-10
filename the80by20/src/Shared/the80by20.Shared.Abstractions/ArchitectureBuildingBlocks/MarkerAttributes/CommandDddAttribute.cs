@@ -13,5 +13,6 @@ public class CommandHandlerCqrsAttribute : Attribute
 public class QueryHandlerCqrsAttribute : Attribute
 { }
 
+// INFO Query do not modify application state do not have any side effects
 public class QueryCqrsAttribute : Attribute
 { }
