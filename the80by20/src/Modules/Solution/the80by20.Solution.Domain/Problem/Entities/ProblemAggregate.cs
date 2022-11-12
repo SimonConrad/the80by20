@@ -28,9 +28,9 @@ public class ProblemAggregate : AggregateRoot // TODO make as sealed domain type
 
     private ProblemAggregate(AggregateId id) => Id = id;
 
-    public static ProblemAggregate New(RequiredSolutionTypes requiredSolutionTypes)
+    public static ProblemAggregate New(Guid id, RequiredSolutionTypes requiredSolutionTypes)
     {
-        var problem = new ProblemAggregate(Guid.NewGuid());
+        var problem = new ProblemAggregate(id);
         problem.Update(requiredSolutionTypes);
         problem.ClearEvents();
         problem.Version = 0;

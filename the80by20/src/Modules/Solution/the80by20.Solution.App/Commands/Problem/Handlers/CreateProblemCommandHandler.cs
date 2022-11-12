@@ -5,14 +5,13 @@ using the80by20.Modules.Solution.Domain.Problem.Entities;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Kernel.Types;
 
 namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
 
-// TODO create kind of IDispatcherBastraction to eliminate depndecy on mediatR nuget package in this application layer proje ct
 
-[CommandDdd]
-public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand, ProblemId>
+public class CreateProblemCommandHandler : ICommandHandler<CreateProblemCommand>
 {
     private readonly IProblemAggregateRepository _repository;
     private readonly IMediator _mediator;
@@ -28,28 +27,25 @@ public class CreateProblemCommandHandler : IRequestHandler<CreateProblemCommand,
         _servicesScopeFactory = servicesScopeFactory;
     }
 
-    // INFO application logic - coordinates flow + cross cuttings:
-    // todo wrap with db transaction - handler decorator or aspect oriented - but maybe problem with fire and forget updatereadmodel
-    // todo wrap with try catch logger, and logger informaing about command received
-    public async Task<ProblemId> Handle(CreateProblemCommand command, CancellationToken cancellationToken)
+
+    // INFO application logic - coordinates flow + cross cuttings
+    public async Task HandleAsync(CreateProblemCommand command)
     {
         // INFO Creation of the aggregate
         // INFO Domain logic (have in mind different levels of domain logic)
-        var problemAggregate = ProblemAggregate.New(RequiredSolutionTypes.From(command.SolutionElementTypes));
+        var problemAggregate = ProblemAggregate.New(command.Id, RequiredSolutionTypes.From(command.SolutionElementTypes));
 
         ProblemCrudData problemCrudData =
             new(problemAggregate.Id, command.UserId, DateTime.Now, command.Description, command.Category);
 
         await _repository.Create(problemAggregate, problemCrudData);
 
-        await UpdateReadModel(problemAggregate.Id.Value, cancellationToken);
-
-        return problemAggregate.Id.Value;
+        await UpdateReadModel(problemAggregate.Id.Value);
     }
 
-    public async Task UpdateReadModel(ProblemId id, CancellationToken cancellationToken)
+    public async Task UpdateReadModel(ProblemId id)
     {
-        await _mediator.Publish(new ProblemCreated(id), cancellationToken);
+        await _mediator.Publish(new ProblemCreated(id));
     }
 
     // TODO found solution on .net docs that to do fire and forget do _ = Task.Run and method is not async,

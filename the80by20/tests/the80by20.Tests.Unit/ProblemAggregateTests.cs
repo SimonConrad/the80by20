@@ -19,7 +19,7 @@ namespace the80by20.Tests.Unit
         {
             // arrange
             var problem =
-                ProblemAggregate.New(RequiredSolutionTypes.Empty());
+                ProblemAggregate.New(Guid.NewGuid(), RequiredSolutionTypes.Empty());
 
             // act
             var exception = Record.Exception(() => problem.Confirm());

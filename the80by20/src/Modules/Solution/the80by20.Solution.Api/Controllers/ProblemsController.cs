@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using the80by20.Modules.Solution.App.Commands.Problem;
 using the80by20.Modules.Solution.App.ReadModel;
+using the80by20.Shared.Abstractions.Commands;
 
 namespace the80by20.Modules.Solution.Api.Controllers
 {
@@ -15,15 +16,18 @@ namespace the80by20.Modules.Solution.Api.Controllers
 
         private readonly ILogger<ProblemsController> _logger;
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
+        private readonly ICommandDispatcher _commandDispatcher;
         private readonly IMediator _mediator;
 
         public ProblemsController(ILogger<ProblemsController> logger,
             ISolutionToProblemReadModelQueries solutionToProblemReadModelQueries,
+            ICommandDispatcher commandDispatcher,
             IMediator mediator)
         {
             _logger = logger;
 
             _solutionToProblemReadModelQueries = solutionToProblemReadModelQueries;
+            _commandDispatcher = commandDispatcher;
             _mediator = mediator;
         }
 
@@ -39,10 +43,14 @@ namespace the80by20.Modules.Solution.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateProblemCommand createProblemCommand, CancellationToken token)
         {
-            createProblemCommand = createProblemCommand with { UserId = Guid.Parse(User.Identity?.Name) };
-            var problemId = await _mediator.Send(createProblemCommand, token);
+            createProblemCommand = createProblemCommand with
+            {
+                UserId = Guid.Parse(User.Identity?.Name),
+                Id = Guid.NewGuid()
+            };
+            await _commandDispatcher.SendAsync(createProblemCommand);
 
-            return CreatedAtAction(nameof(Get), new { problemId }, null);
+            return CreatedAtAction(nameof(Get), new { createProblemCommand.Id }, null);
         }
 
         [HttpPut]
