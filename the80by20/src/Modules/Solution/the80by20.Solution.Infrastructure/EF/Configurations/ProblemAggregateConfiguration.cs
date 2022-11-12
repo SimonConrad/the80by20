@@ -7,6 +7,8 @@ using the80by20.Shared.Infrastucture.EF;
 
 namespace the80by20.Modules.Solution.Infrastructure.EF.Configurations
 {
+    // INFO 
+    // Lazy loading should not be enebaled for aggregates
     public class ProblemAggregateConfiguration : IEntityTypeConfiguration<ProblemAggregate>
     {
         public void Configure(EntityTypeBuilder<ProblemAggregate> builder)

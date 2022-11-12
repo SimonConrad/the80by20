@@ -9,6 +9,8 @@ using the80by20.Shared.Infrastucture.EF;
 
 namespace the80by20.Modules.Solution.Infrastructure.EF.Configurations
 {
+    // INFO
+    // Lazy loading should not be enebaled for aggregates, bacouse - concurrent access to  aggregate + lazy loading can caouse inconsistent state
     public class SolutionToProblemAggregateConfiguration : IEntityTypeConfiguration<SolutionToProblemAggregate>
     {
         public void Configure(EntityTypeBuilder<SolutionToProblemAggregate> builder)
