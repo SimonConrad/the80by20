@@ -14,6 +14,7 @@ using the80by20.Shared.Infrastucture.Commands;
 using the80by20.Shared.Infrastucture.Context;
 using the80by20.Shared.Infrastucture.Events;
 using the80by20.Shared.Infrastucture.Exceptions;
+using the80by20.Shared.Infrastucture.Kernel;
 using the80by20.Shared.Infrastucture.Messaging;
 using the80by20.Shared.Infrastucture.Modules;
 using the80by20.Shared.Infrastucture.Queries;
@@ -66,6 +67,7 @@ namespace the80by20.Shared.Infrastucture
             services.AddErrorHandling();
             services.AddCommands(assemblies);
             services.AddQueries(assemblies);
+            services.AddDomainEvents(assemblies);
             services.AddEvents(assemblies);
             services.AddMessaging();
             services.AddSqlServer();

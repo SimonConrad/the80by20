@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using the80by20.Modules.Solution.App.Commands.Problem;
 using the80by20.Modules.Solution.App.ReadModel;
 using the80by20.Shared.Abstractions.Commands;
+using the80by20.Shared.Abstractions.Contexts;
 
 namespace the80by20.Modules.Solution.Api.Controllers
 {
@@ -18,17 +19,20 @@ namespace the80by20.Modules.Solution.Api.Controllers
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IMediator _mediator;
+        private readonly IContext _context;
 
         public ProblemsController(ILogger<ProblemsController> logger,
             ISolutionToProblemReadModelQueries solutionToProblemReadModelQueries,
             ICommandDispatcher commandDispatcher,
-            IMediator mediator)
+            IMediator mediator,
+            IContext context)
         {
             _logger = logger;
 
             _solutionToProblemReadModelQueries = solutionToProblemReadModelQueries;
             _commandDispatcher = commandDispatcher;
             _mediator = mediator;
+            _context = context;
         }
 
         [HttpGet("categories-and-solution-types")]
@@ -45,7 +49,7 @@ namespace the80by20.Modules.Solution.Api.Controllers
         {
             createProblemCommand = createProblemCommand with
             {
-                UserId = Guid.Parse(User.Identity?.Name),
+                UserId = _context.Identity.Id,
                 Id = Guid.NewGuid()
             };
             await _commandDispatcher.SendAsync(createProblemCommand);

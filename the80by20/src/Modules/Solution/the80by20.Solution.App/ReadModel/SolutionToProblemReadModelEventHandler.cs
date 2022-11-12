@@ -15,7 +15,6 @@ namespace the80by20.Modules.Solution.App.ReadModel;
 /// </summary>
 [ReadModelDdd]
 public class SolutionToProblemReadModelEventHandler :
-    INotificationHandler<ProblemCreated>,
     INotificationHandler<ProblemUpdated>,
     INotificationHandler<StartedWorkingOnSolution>,
     INotificationHandler<UpdatedSolution>
@@ -37,29 +36,6 @@ public class SolutionToProblemReadModelEventHandler :
         _problemAggregateRepository = problemAggregateRepository;
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
         _categoryService = categoryService;
-    }
-
-    public async Task Handle(ProblemCreated @event, CancellationToken cancellationToken)
-    {
-        var problem = await _problemAggregateRepository.Get(@event.ProblemId);
-        var problemData = await _problemAggregateRepository.GetCrudData(@event.ProblemId);
-        var category = await _categoryService.GetAsync(problemData.Category);
-
-        var readmodel = new SolutionToProblemReadModel()
-        {
-            Id = problem.Id,
-            RequiredSolutionTypes = string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray()),
-            IsConfirmed = problem.Confirmed,
-            IsRejected = problem.Rejected,
-
-            Description = problemData.Description,
-            UserId = problemData.UserId,
-            CreatedAt = problemData.CreatedAt,
-            Category = category.Name,
-            CategoryId = category.Id,
-        };
-
-        await _readModelUpdates.Create(readmodel);
     }
 
     public async Task Handle(ProblemUpdated @event, CancellationToken cancellationToken)
