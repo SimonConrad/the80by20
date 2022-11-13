@@ -1,4 +1,5 @@
 ﻿using the80by20.Modules.Solution.Domain.Shared;
+using the80by20.Modules.Solution.Domain.Solution.Events;
 using the80by20.Modules.Solution.Domain.Solution.Exceptions;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Kernel.Capabilities;
@@ -109,6 +110,9 @@ namespace the80by20.Modules.Solution.Domain.Solution.Entities
             }
 
             WorkingOnSolutionEnded = true;
+
+            AddEvent(new SolutionFinished(this));
+
             IncrementVersion();
         }
 

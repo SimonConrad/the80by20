@@ -9,12 +9,12 @@ using the80by20.Shared.Abstractions.Kernel;
 namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
 
 
-public class CreateProblemCommandHandler : ICommandHandler<CreateProblemCommand>
+public class RequestProblemCommandHandler : ICommandHandler<RequestProblemCommand>
 {
     private readonly IProblemAggregateRepository _repository;
     private readonly IDomainEventDispatcher _domainEventDispatcher;
 
-    public CreateProblemCommandHandler(
+    public RequestProblemCommandHandler(
         IProblemAggregateRepository repository,
         IDomainEventDispatcher domainEventDispatcher)
     {
@@ -24,7 +24,7 @@ public class CreateProblemCommandHandler : ICommandHandler<CreateProblemCommand>
 
 
     // INFO application logic - coordinates flow + cross cuttings
-    public async Task HandleAsync(CreateProblemCommand command)
+    public async Task HandleAsync(RequestProblemCommand command)
     {
         // INFO Creation of the aggregate
         // INFO Domain logic (have in mind different levels of domain logic)

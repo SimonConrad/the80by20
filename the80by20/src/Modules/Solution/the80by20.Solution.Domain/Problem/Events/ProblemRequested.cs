@@ -3,6 +3,8 @@ using the80by20.Shared.Abstractions.Kernel;
 
 namespace the80by20.Modules.Solution.Domain.Problem.Events
 {
-    public record ProblemCreated(ProblemAggregate problem) : IDomainEvent;
+    // INFO
+    // Can map to events from event storming
+    public record ProblemRequested(ProblemAggregate problem) : IDomainEvent;
 
 }

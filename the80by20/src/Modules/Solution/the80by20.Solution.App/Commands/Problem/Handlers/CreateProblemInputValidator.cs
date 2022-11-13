@@ -2,7 +2,7 @@
 
 namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
 
-public sealed class CreateProblemInputValidator : AbstractValidator<CreateProblemCommand>
+public sealed class CreateProblemInputValidator : AbstractValidator<RequestProblemCommand>
 {
     public CreateProblemInputValidator()
     {

@@ -45,7 +45,7 @@ namespace the80by20.Modules.Solution.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateProblemCommand createProblemCommand, CancellationToken token)
+        public async Task<ActionResult> Create([FromBody] RequestProblemCommand createProblemCommand, CancellationToken token)
         {
             createProblemCommand = createProblemCommand with
             {
@@ -81,13 +81,12 @@ namespace the80by20.Modules.Solution.Api.Controllers
 
 
         [HttpGet()]
-        [AllowAnonymous]
         public async Task<ActionResult<SolutionToProblemReadModel[]>> Get()
         {
             // TODO dedicated dto, to not leak fragile properties like price etc - dedicated readmodel scope
             var faker = new Faker<SolutionToProblemReadModel>()
                 .RuleFor(d => d.Id, d => Guid.NewGuid())
-                .RuleFor(d => d.UserId, d => Guid.Parse(User.Identity?.Name));
+                .RuleFor(d => d.UserId, d => _context.Identity.Id);
 
             var res = faker.Generate(4);
 

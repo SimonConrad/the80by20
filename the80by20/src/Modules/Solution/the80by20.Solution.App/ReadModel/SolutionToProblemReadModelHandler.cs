@@ -2,9 +2,11 @@
 using the80by20.Modules.Masterdata.App.Services;
 using the80by20.Modules.Solution.App.Events.Problem;
 using the80by20.Modules.Solution.App.Events.Solution;
+using the80by20.Modules.Solution.Domain.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Kernel;
 
 namespace the80by20.Modules.Solution.App.ReadModel;
 
@@ -14,7 +16,10 @@ namespace the80by20.Modules.Solution.App.ReadModel;
 /// aggregate repos and administration category crud
 /// </summary>
 [ReadModelDdd]
-public class SolutionToProblemReadModelEventHandler :
+public class SolutionToProblemReadModelHandler :
+    IDomainEventHandler<ProblemRequested>,
+
+
     INotificationHandler<ProblemUpdated>,
     INotificationHandler<StartedWorkingOnSolution>,
     INotificationHandler<UpdatedSolution>
@@ -25,7 +30,7 @@ public class SolutionToProblemReadModelEventHandler :
     private readonly IProblemAggregateRepository _problemAggregateRepository;
     private readonly ICategoryService _categoryService;
 
-    public SolutionToProblemReadModelEventHandler(ISolutionToProblemReadModelUpdates readModelUpdates,
+    public SolutionToProblemReadModelHandler(ISolutionToProblemReadModelUpdates readModelUpdates,
         ISolutionToProblemReadModelQueries readModelQueries,
         IProblemAggregateRepository problemAggregateRepository,
         ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
@@ -36,6 +41,29 @@ public class SolutionToProblemReadModelEventHandler :
         _problemAggregateRepository = problemAggregateRepository;
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
         _categoryService = categoryService;
+    }
+
+    public async Task HandleAsync(ProblemRequested @event)
+    {
+        var problem = await _problemAggregateRepository.Get(@event.problem.Id.Value);
+        var problemData = await _problemAggregateRepository.GetCrudData(@event.problem.Id.Value);
+        var category = await _categoryService.GetAsync(problemData.Category);
+
+        var readmodel = new SolutionToProblemReadModel()
+        {
+            Id = problem.Id,
+            RequiredSolutionTypes = string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray()),
+            IsConfirmed = problem.Confirmed,
+            IsRejected = problem.Rejected,
+
+            Description = problemData.Description,
+            UserId = problemData.UserId,
+            CreatedAt = problemData.CreatedAt,
+            Category = category.Name,
+            CategoryId = category.Id,
+        };
+
+        await _readModelUpdates.Create(readmodel);
     }
 
     public async Task Handle(ProblemUpdated @event, CancellationToken cancellationToken)

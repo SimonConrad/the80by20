@@ -35,7 +35,7 @@ public class ProblemAggregate : AggregateRoot // TODO make as sealed domain type
         problem.ClearEvents();
         problem.Version = 0;
 
-        problem.AddEvent(new ProblemCreated(problem));
+        problem.AddEvent(new ProblemRequested(problem));
         return problem;
     }
 

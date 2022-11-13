@@ -4,6 +4,7 @@ using the80by20.Modules.Solution.App.Events.Solution;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Events;
+using the80by20.Shared.Abstractions.Kernel;
 using the80by20.Shared.Abstractions.Kernel.Types;
 using the80by20.Shared.Abstractions.Messaging;
 using the80by20.Shared.Abstractions.Modules;
@@ -16,15 +17,19 @@ public class FinishSolutionCommandHandler
 {
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
     private readonly IMediator _mediator;
+
+    private readonly IDomainEventDispatcher _domainEventDispatcher;
     private readonly IMessageBroker _messageBroker;
 
     public FinishSolutionCommandHandler(ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
         IMediator mediator,
-        IMessageBroker messageBroker)
+        IMessageBroker messageBroker,
+        IDomainEventDispatcher domainEventDispatcher)
     {
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
         _mediator = mediator;
         _messageBroker = messageBroker;
+        _domainEventDispatcher = domainEventDispatcher;
     }
 
     public async Task<SolutionToProblemId> Handle(FinishSolutionCommand command,
