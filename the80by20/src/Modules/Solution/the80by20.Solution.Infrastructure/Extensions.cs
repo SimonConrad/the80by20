@@ -31,7 +31,7 @@ namespace the80by20.Modules.Solution.Infrastructure
             // to lepiej chyba przpi¹c siê na rozwi¹zanie od devmentors np te w myspot
             // albo rozdzielic w ramach mediar jako: https://cezarypiatek.github.io/post/why-i-dont-use-mediatr-for-cqrs/
 
-            services.AddMediatR(typeof(SolutionToProblemReadModelHandler));
+            services.AddMediatR(typeof(ProblemReadModelHandler));
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using the80by20.Modules.Masterdata.App.Entities;
 using the80by20.Modules.Solution.App.Commands.Problem;
+using the80by20.Modules.Solution.App.Problem.Commands;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Modules.Users.Domain.UserEntity;
 using the80by20.Modules.Users.Infrastructure.Security;

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using the80by20.Modules.Solution.Domain.Shared.DomainServices;
 
 namespace the80by20.Modules.Solution.App
 {

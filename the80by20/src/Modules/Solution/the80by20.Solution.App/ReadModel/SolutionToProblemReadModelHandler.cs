@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using the80by20.Modules.Masterdata.App.Services;
-using the80by20.Modules.Solution.App.Events.Problem;
-using the80by20.Modules.Solution.App.Events.Solution;
+using the80by20.Modules.Solution.App.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
@@ -15,22 +14,25 @@ namespace the80by20.Modules.Solution.App.ReadModel;
 /// is just use readmodel queries that do  projection (returns SolutionToProblemReadModel) composed from data retrieved from
 /// aggregate repos and administration category crud
 /// </summary>
+/// 
+
+// INFO
+// Dedicated read model storing data in unnormalized table optimized for fast reads
+// it is not immediatly consistent with aggregata data but eventually consistent
 [ReadModelDdd]
-public class SolutionToProblemReadModelHandler :
+public class ProblemReadModelHandler :
     IDomainEventHandler<ProblemRequested>,
 
 
-    INotificationHandler<ProblemUpdated>,
-    INotificationHandler<StartedWorkingOnSolution>,
-    INotificationHandler<UpdatedSolution>
+    INotificationHandler<ProblemUpdated>
 {
     private readonly ISolutionToProblemReadModelUpdates _readModelUpdates;
     private readonly ISolutionToProblemReadModelQueries _readModelQueries;
-    private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
+
     private readonly IProblemAggregateRepository _problemAggregateRepository;
     private readonly ICategoryService _categoryService;
 
-    public SolutionToProblemReadModelHandler(ISolutionToProblemReadModelUpdates readModelUpdates,
+    public ProblemReadModelHandler(ISolutionToProblemReadModelUpdates readModelUpdates,
         ISolutionToProblemReadModelQueries readModelQueries,
         IProblemAggregateRepository problemAggregateRepository,
         ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
@@ -39,7 +41,6 @@ public class SolutionToProblemReadModelHandler :
         _readModelUpdates = readModelUpdates;
         _readModelQueries = readModelQueries;
         _problemAggregateRepository = problemAggregateRepository;
-        _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
         _categoryService = categoryService;
     }
 
@@ -81,35 +82,6 @@ public class SolutionToProblemReadModelHandler :
         rm.Description = problemData.Description;
         rm.Category = category.Name;
         rm.CategoryId = category.Id;
-
-        await _readModelUpdates.Update(rm);
-    }
-
-    public async Task Handle(StartedWorkingOnSolution @event, CancellationToken cancellationToken)
-    {
-        var solution = await _solutionToProblemAggregateRepository.Get(@event.SolutionToProblemId);
-
-        var rm = await _readModelQueries.GetByProblemId(solution.ProblemId);
-
-        rm.SolutionToProblemId = solution.Id;
-        rm.Price = solution.Price;
-        rm.SolutionSummary = solution.SolutionSummary.Content;
-        rm.SolutionElements = solution.SolutionElements.ToSnapshotInJson();
-        rm.WorkingOnSolutionEnded = solution.WorkingOnSolutionEnded;
-
-        await _readModelUpdates.Update(rm);
-    }
-
-    public async Task Handle(UpdatedSolution @event, CancellationToken cancellationToken)
-    {
-        var solution = await _solutionToProblemAggregateRepository.Get(@event.SolutionToProblemId);
-
-        var rm = await _readModelQueries.GetBySolutionId(solution.Id.Value);
-
-        rm.Price = solution.Price;
-        rm.SolutionSummary = solution.SolutionSummary.Content;
-        rm.SolutionElements = solution.SolutionElements.ToSnapshotInJson();
-        rm.WorkingOnSolutionEnded = solution.WorkingOnSolutionEnded;
 
         await _readModelUpdates.Update(rm);
     }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using the80by20.Modules.Solution.Api;
 using the80by20.Shared.Infrastucture.Api;
 
 namespace the80by20.Modules.Solution.Api.Controllers;
