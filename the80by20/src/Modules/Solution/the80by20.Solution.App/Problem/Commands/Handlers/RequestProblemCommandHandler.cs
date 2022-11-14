@@ -2,12 +2,13 @@
 using the80by20.Modules.Solution.Domain.Problem.Entities;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Shared;
+using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Kernel;
 
 namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
 
-
+[CommandHandlerCqrs]
 public class RequestProblemCommandHandler : ICommandHandler<RequestProblemCommand>
 {
     private readonly IProblemAggregateRepository _repository;
@@ -22,20 +23,27 @@ public class RequestProblemCommandHandler : ICommandHandler<RequestProblemComman
     }
 
 
-    // INFO application logic - coordinates flow + cross cuttings
+    // INFO
+    // application-logic: coordinates  buinsess-flow / data-flow of use case
+    // input-validation-logic: can be done using fluent-validator or attributes (model-state-isvalid)
+    // cross-cuttings: exception handling in exception-middelware; generic logging, db-transaction, validation in the handlers' decorators; audit / soft-delete in ef interceptor )
     public async Task HandleAsync(RequestProblemCommand command)
     {
-        // INFO Creation of the aggregate
-        // INFO Domain logic (have in mind different levels of domain logic)
+        // INFO
+        // domain-logic - in domain objects (have in mind different levels of domain logic)
         var problemAggregate = ProblemAggregate.New(command.Id, RequiredSolutionTypes.From(command.SolutionElementTypes));
 
+        // INFO
+        // consider to include this data / information in the aggreagate
         ProblemCrudData problemCrudData = new(problemAggregate.Id, command.UserId, DateTime.Now, command.Description, command.Category);
 
+        // INFO
+        // aggregate persistance
         await _repository.Create(problemAggregate, problemCrudData);
 
+        // INFO
+        // domain-events dispatching
         await _domainEventDispatcher.DispatchAsync(problemAggregate.Events.ToArray());
-
-        //await UpdateReadModel(problemAggregate.Id.Value);
     }
 
     //public async Task UpdateReadModel(ProblemId id)
@@ -73,6 +81,3 @@ public class RequestProblemCommandHandler : ICommandHandler<RequestProblemComman
     // it handles special case in which sqllite is used, to make it perisistant its connection is singleton (static field)
     // sqlLiteEnabled in appsettings.json
 }
-
-
-// INFO input validation logic, do not check db there it's reposoibility of application logic

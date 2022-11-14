@@ -112,8 +112,6 @@ namespace the80by20.Modules.Solution.Domain.Solution.Entities
             WorkingOnSolutionEnded = true;
 
             AddEvent(new SolutionFinished(this));
-
-            IncrementVersion();
         }
 
         // TODO remove in future and write intgrations test for testing mapping purposes

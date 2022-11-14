@@ -2,8 +2,6 @@
 using the80by20.Modules.Solution.Domain.Problem.Exceptions;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.Exceptions;
-using the80by20.Shared.Abstractions.Kernel;
 using the80by20.Shared.Abstractions.Kernel.Types;
 
 namespace the80by20.Modules.Solution.Domain.Problem.Entities;
@@ -45,7 +43,6 @@ public class ProblemAggregate : AggregateRoot // TODO make as sealed domain type
             throw new ProblemException("Cannot update confirmed problem", Id.Value); // TODO create dedicated exceptions
 
         RequiredSolutionTypes = requiredSolutionTypes;
-        IncrementVersion();
     }
 
     public void Confirm()
@@ -63,6 +60,7 @@ public class ProblemAggregate : AggregateRoot // TODO make as sealed domain type
     {
         Rejected = true;
         Confirmed = false;
-        IncrementVersion();
+
+        AddEvent(new ProblemRejected(this));
     }
 }

@@ -1,40 +1,32 @@
-﻿using MediatR;
+﻿
 using the80by20.Modules.Solution.App.Solution.Commands;
 using the80by20.Modules.Solution.App.Solution.Events;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.Kernel.Types;
+using the80by20.Shared.Abstractions.Commands;
+using the80by20.Shared.Abstractions.Events;
 
 namespace the80by20.Modules.Solution.App.Commands.Solution.Handlers;
 
-[CommandDdd]
 public class SetSolutionSummaryCommandHandler
-    : IRequestHandler<SetSolutionSummaryCommand, SolutionToProblemId>
+    : ICommandHandler<SetSolutionSummaryCommand>
 {
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
-    private readonly IMediator _mediator;
+    private readonly IEventDispatcher _eventDispatcher;
 
-    public SetSolutionSummaryCommandHandler(ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
-        IMediator mediator)
+    public SetSolutionSummaryCommandHandler(ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository
+, IEventDispatcher eventDispatcher)
     {
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
-        _mediator = mediator;
+        _eventDispatcher = eventDispatcher;
     }
 
-    public async Task<SolutionToProblemId> Handle(SetSolutionSummaryCommand command,
-        CancellationToken cancellationToken)
+    public async Task HandleAsync(SetSolutionSummaryCommand command)
     {
         var solution = await _solutionToProblemAggregateRepository.Get(command.SolutionToProblemId);
         solution.SetSummary(command.SolutionSummary);
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
 
-        await UpdateReadModel(solution.Id.Value, cancellationToken);
+        await _eventDispatcher.PublishAsync(new UpdatedSolution(command.SolutionToProblemId));
 
-        return solution.Id.Value;
-    }
-
-    public async Task UpdateReadModel(SolutionToProblemId id, CancellationToken ct)
-    {
-        await _mediator.Publish(new UpdatedSolution(id), ct);
     }
 }

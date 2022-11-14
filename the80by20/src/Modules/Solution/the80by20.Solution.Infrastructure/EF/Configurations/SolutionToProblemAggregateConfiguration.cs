@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using the80by20.Modules.Solution.Domain.Problem;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Modules.Solution.Domain.Solution.Entities;
 using the80by20.Shared.Abstractions.Kernel.Capabilities;
 using the80by20.Shared.Abstractions.Kernel.Types;
-using the80by20.Shared.Infrastucture.EF;
 
 namespace the80by20.Modules.Solution.Infrastructure.EF.Configurations
 {

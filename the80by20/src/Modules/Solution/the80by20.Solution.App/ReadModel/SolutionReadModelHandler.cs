@@ -1,24 +1,17 @@
-﻿using MediatR;
-using the80by20.Modules.Solution.App.Solution.Events;
+﻿using the80by20.Modules.Solution.App.Solution.Events;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Events;
 
 namespace the80by20.Modules.Solution.App.ReadModel;
-
-/// <summary>
-/// TODO: in production rather do alternative to this read model handling problems / solutions updates mechanism
-/// is just use readmodel queries that do  projection (returns SolutionToProblemReadModel) composed from data retrieved from
-/// aggregate repos and administration category crud
-/// </summary>
-/// 
 
 // INFO
 // Dedicated read model storing data in unnormalized table optimized for fast reads
 // it is not immediatly consistent with aggregata data but eventually consistent
 [ReadModelDdd]
 public class SolutionReadModelHandler :
-    INotificationHandler<StartedWorkingOnSolution>,
-    INotificationHandler<UpdatedSolution>
+    IEventHandler<StartedWorkingOnSolution>,
+    IEventHandler<UpdatedSolution>
 {
     private readonly ISolutionToProblemReadModelUpdates _readModelUpdates;
     private readonly ISolutionToProblemReadModelQueries _readModelQueries;
@@ -33,7 +26,7 @@ public class SolutionReadModelHandler :
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
     }
 
-    public async Task Handle(StartedWorkingOnSolution @event, CancellationToken cancellationToken)
+    public async Task HandleAsync(StartedWorkingOnSolution @event)
     {
         var solution = await _solutionToProblemAggregateRepository.Get(@event.SolutionToProblemId);
 
@@ -48,7 +41,7 @@ public class SolutionReadModelHandler :
         await _readModelUpdates.Update(rm);
     }
 
-    public async Task Handle(UpdatedSolution @event, CancellationToken cancellationToken)
+    public async Task HandleAsync(UpdatedSolution @event)
     {
         var solution = await _solutionToProblemAggregateRepository.Get(@event.SolutionToProblemId);
 

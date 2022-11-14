@@ -1,33 +1,32 @@
-﻿using MediatR;
-using the80by20.Modules.Solution.App.Problem.Commands;
-using the80by20.Modules.Solution.App.Problem.Events;
+﻿using the80by20.Modules.Solution.App.Problem.Commands;
+using the80by20.Modules.Solution.Domain.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Shared;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.Kernel.Types;
+using the80by20.Shared.Abstractions.Commands;
+using the80by20.Shared.Abstractions.Events;
 
 namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
 
-[CommandDdd]
-public class UpdateProblemCommandHandler : IRequestHandler<UpdateProblemCommand, ProblemId>
+public class UpdateProblemCommandHandler : ICommandHandler<UpdateProblemCommand>
 {
     private readonly IProblemAggregateRepository _problemAggregateRepository;
-    private readonly IMediator _mediator;
+    private readonly IEventDispatcher _eventDispatcher;
 
-    public UpdateProblemCommandHandler(IProblemAggregateRepository problemAggregateRepository,
-        IMediator mediator)
+    public UpdateProblemCommandHandler(
+        IProblemAggregateRepository problemAggregateRepository, 
+        IEventDispatcher eventDispatcher)
     {
         _problemAggregateRepository = problemAggregateRepository;
-        _mediator = mediator;
+        _eventDispatcher = eventDispatcher;
     }
 
-    public async Task<ProblemId> Handle(UpdateProblemCommand command, CancellationToken cancellationToken)
+    public async Task HandleAsync(UpdateProblemCommand command)
     {
         if (command.UpdateScope == UpdateDataScope.OnlyData)
         {
             await UpdateData(command);
-            await UpdateReadModel(command.ProblemId, cancellationToken);
-            return command.ProblemId;
+            await _eventDispatcher.PublishAsync(new ProblemUpdated(command.ProblemId));
+            return;
         }
 
         if (command.UpdateScope == UpdateDataScope.All)
@@ -40,9 +39,7 @@ public class UpdateProblemCommandHandler : IRequestHandler<UpdateProblemCommand,
         problem.Update(requiredSolutionTypes);
         await _problemAggregateRepository.SaveAggragate(problem);
 
-        await UpdateReadModel(problem.Id.Value, cancellationToken);
-
-        return problem.Id.Value;
+        await _eventDispatcher.PublishAsync(new ProblemUpdated(command.ProblemId));
     }
 
     private async Task UpdateData(UpdateProblemCommand command)
@@ -50,10 +47,5 @@ public class UpdateProblemCommandHandler : IRequestHandler<UpdateProblemCommand,
         var data = await _problemAggregateRepository.GetCrudData(command.ProblemId);
         data.Update(command.Description, command.Category);
         await _problemAggregateRepository.SaveData(data);
-    }
-
-    public async Task UpdateReadModel(ProblemId id, CancellationToken ct)
-    {
-        await _mediator.Publish(new ProblemUpdated(id), ct);
     }
 }

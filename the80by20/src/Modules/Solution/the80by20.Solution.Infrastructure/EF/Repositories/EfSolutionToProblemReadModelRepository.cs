@@ -2,9 +2,7 @@
 using the80by20.Modules.Masterdata.App.DTO;
 using the80by20.Modules.Masterdata.App.Services;
 using the80by20.Modules.Solution.App.ReadModel;
-using the80by20.Modules.Solution.Domain.Problem;
 using the80by20.Modules.Solution.Domain.Shared;
-using the80by20.Modules.Solution.Domain.Solution;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Kernel.Types;
 

@@ -1,20 +1,13 @@
-﻿using MediatR;
-using the80by20.Modules.Masterdata.App.Services;
-using the80by20.Modules.Solution.App.Problem.Events;
+﻿using the80by20.Modules.Masterdata.App.Services;
 using the80by20.Modules.Solution.Domain.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+using the80by20.Shared.Abstractions.Events;
 using the80by20.Shared.Abstractions.Kernel;
 
 namespace the80by20.Modules.Solution.App.ReadModel;
 
-/// <summary>
-/// TODO: in production rather do alternative to this read model handling problems / solutions updates mechanism
-/// is just use readmodel queries that do  projection (returns SolutionToProblemReadModel) composed from data retrieved from
-/// aggregate repos and administration category crud
-/// </summary>
-/// 
 
 // INFO
 // Dedicated read model storing data in unnormalized table optimized for fast reads
@@ -22,9 +15,7 @@ namespace the80by20.Modules.Solution.App.ReadModel;
 [ReadModelDdd]
 public class ProblemReadModelHandler :
     IDomainEventHandler<ProblemRequested>,
-
-
-    INotificationHandler<ProblemUpdated>
+    IEventHandler<ProblemUpdated>
 {
     private readonly ISolutionToProblemReadModelUpdates _readModelUpdates;
     private readonly ISolutionToProblemReadModelQueries _readModelQueries;
@@ -66,19 +57,18 @@ public class ProblemReadModelHandler :
 
         await _readModelUpdates.Create(readmodel);
     }
-
-    public async Task Handle(ProblemUpdated @event, CancellationToken cancellationToken)
+    
+    public async Task HandleAsync(ProblemUpdated @event)
     {
-        var problem = await _problemAggregateRepository.Get(@event.ProblemId);
-        var problemData = await _problemAggregateRepository.GetCrudData(@event.ProblemId);
+        var problemData = await _problemAggregateRepository.GetCrudData(@event.problemId);
         var category = await _categoryService.GetAsync(problemData.Category);
+        var problem = await _problemAggregateRepository.Get(@event.problemId);
+        var rm = await _readModelQueries.GetByProblemId(@event.problemId);
 
-        var rm = await _readModelQueries.GetByProblemId(@event.ProblemId);
-
-        rm.RequiredSolutionTypes =
-            string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray());
-        rm.IsConfirmed = problem.Confirmed;
         rm.IsRejected = problem.Rejected;
+        rm.IsConfirmed = problem.Confirmed;
+        rm.RequiredSolutionTypes = string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray());
+
         rm.Description = problemData.Description;
         rm.Category = category.Name;
         rm.CategoryId = category.Id;

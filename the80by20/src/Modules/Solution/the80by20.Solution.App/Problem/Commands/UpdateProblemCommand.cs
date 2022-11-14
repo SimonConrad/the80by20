@@ -1,12 +1,13 @@
-﻿using MediatR;
-using the80by20.Modules.Solution.Domain.Shared;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.Kernel.Types;
+﻿using the80by20.Modules.Solution.Domain.Shared;
+using the80by20.Shared.Abstractions.Commands;
 
 namespace the80by20.Modules.Solution.App.Problem.Commands;
 
-[CommandDdd]
-public sealed record UpdateProblemCommand(Guid ProblemId, string Description, Guid Category, SolutionType[] SolutionTypes, UpdateDataScope UpdateScope) : IRequest<ProblemId>;
+public sealed record UpdateProblemCommand(Guid ProblemId, 
+    string Description, 
+    Guid Category, 
+    SolutionType[] SolutionTypes, 
+    UpdateDataScope UpdateScope) : ICommand;
 
 public enum UpdateDataScope
 {

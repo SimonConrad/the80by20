@@ -1,44 +1,36 @@
-﻿using MediatR;
+﻿
 using the80by20.Modules.Solution.App.Solution.Commands;
 using the80by20.Modules.Solution.App.Solution.Events;
-using the80by20.Modules.Solution.Domain.Shared.DomainServices;
+using the80by20.Modules.Solution.Domain.Solution.DomainServicesPolicies;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
-using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.Kernel.Types;
+using the80by20.Shared.Abstractions.Commands;
+using the80by20.Shared.Abstractions.Events;
 
 namespace the80by20.Modules.Solution.App.Commands.Solution.Handlers;
 
-[CommandDdd]
 public class SetBasePriceOfSolutionCommandHandler
-    : IRequestHandler<SetBasePriceOfSolutionCommand, SolutionToProblemId>
+    : ICommandHandler<SetBasePriceOfSolutionCommand>
 {
     private readonly SetBasePriceForSolutionToProblemDomainService _domainService;
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
-    private readonly IMediator _mediator;
+    private readonly IEventDispatcher _eventDispatcher;
 
     public SetBasePriceOfSolutionCommandHandler(SetBasePriceForSolutionToProblemDomainService domainService,
         ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
-        IMediator mediator)
+        IEventDispatcher eventDispatcher)    
     {
         _domainService = domainService;
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;
-        _mediator = mediator;
+        _eventDispatcher = eventDispatcher;
     }
 
-    public async Task<SolutionToProblemId> Handle(SetBasePriceOfSolutionCommand command,
-        CancellationToken cancellationToken)
+    public async Task HandleAsync(SetBasePriceOfSolutionCommand command)
     {
         var solution = await _solutionToProblemAggregateRepository.Get(command.SolutionToProblemId);
         _domainService.SetBasePrice(solution);
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
 
-        await UpdateReadModel(solution.Id.Value, cancellationToken);
-
-        return solution.Id.Value;
+        await _eventDispatcher.PublishAsync(new UpdatedSolution(command.SolutionToProblemId));
     }
 
-    public async Task UpdateReadModel(SolutionToProblemId id, CancellationToken ct)
-    {
-        await _mediator.Publish(new UpdatedSolution(id), ct);
-    }
 }
