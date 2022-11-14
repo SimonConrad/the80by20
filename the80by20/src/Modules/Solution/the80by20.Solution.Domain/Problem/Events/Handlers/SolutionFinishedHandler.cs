@@ -21,7 +21,9 @@ namespace the80by20.Modules.Solution.Domain.Problem.Events.Handlers
             // when solution (problem becamoe solution) is finished then oringinating it problem end its lifecycle
 
             // TODO
-            //_repository.Archive(problemId)
+            // var problemAggregate = _repository.Get(@event.ProblemId)
+            // problemAggregate.Archive()
+            //_repository.Save(problemAggregate)
             return Task.FromResult(true);
 
         }
