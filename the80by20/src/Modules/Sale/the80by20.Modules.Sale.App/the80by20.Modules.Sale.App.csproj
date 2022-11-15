@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Clients\Solution\DTO\" />
+    <Folder Include="Commands\Handlers\" />
+    <Folder Include="DTO\" />
+    <Folder Include="Queries\Handlers\" />
   </ItemGroup>
 
 </Project>
