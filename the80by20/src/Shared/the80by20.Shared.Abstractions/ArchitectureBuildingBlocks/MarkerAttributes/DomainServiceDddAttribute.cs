@@ -3,7 +3,7 @@
 /// <summary>
 /// TODO use
 /// Logic that dont seems to fit straight into application logic but it starting repeating in may places
-/// cooridnates two aggragates
+/// cooridnates two or more aggragates
 /// for example żeby wypłacić 2k z karty musisz miec wlascicolestwo premium
 /// serwis domenowy sprawdza wlascicielstwo karty (agregat 1) jesli jestes wlascielem to zmienia stan kontat (agergat 2)
 /// jest to bestanowa funkcja - np zwrocic zmieniony
