@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using the80by20.Modules.Users.App;
 using the80by20.Modules.Users.Infrastructure;
 using the80by20.Shared.Abstractions.Modules;
 

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Humanizer;
 using the80by20.Modules.Users.App.Commands.Exceptions;
 using the80by20.Modules.Users.App.Ports;
 using the80by20.Modules.Users.Domain.UserEntity;

@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 using the80by20.Shared.Infrastucture.Decorators;
 using the80by20.Shared.Abstractions.Dal;
-using the80by20.Shared.Abstractions.Queries;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Infrastucture.SqlServer;
 using the80by20.Modules.Users.App.Ports;

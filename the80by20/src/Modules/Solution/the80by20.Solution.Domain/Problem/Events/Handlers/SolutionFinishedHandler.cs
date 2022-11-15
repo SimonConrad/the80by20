@@ -1,5 +1,4 @@
-﻿using the80by20.Modules.Solution.Domain.Problem.Events;
-using the80by20.Modules.Solution.Domain.Problem.Repositories;
+﻿using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Solution.Events;
 using the80by20.Shared.Abstractions.Kernel;
 

@@ -3,7 +3,6 @@
 using System.Data;
 using System.Net;
 using System.Net.Http.Json;
-using System.Runtime.Intrinsics.X86;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;

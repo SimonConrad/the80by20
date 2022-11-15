@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Headers;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using the80by20.Shared.Abstractions.Auth;
 using the80by20.Shared.Infrastucture.Auth;
 using the80by20.Shared.Infrastucture.Time;

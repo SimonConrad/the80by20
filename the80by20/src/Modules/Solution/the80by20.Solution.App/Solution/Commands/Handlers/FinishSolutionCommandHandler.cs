@@ -5,7 +5,6 @@ using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Events;
 using the80by20.Shared.Abstractions.Kernel;
-using the80by20.Shared.Abstractions.Kernel.Types;
 using the80by20.Shared.Abstractions.Messaging;
 
 namespace the80by20.Modules.Solution.App.Commands.Solution.Handlers;
@@ -49,18 +48,21 @@ public class FinishSolutionCommandHandler
         // await IEventDispatcher.PublishAsync(new SolutionToProblemFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
         // pros: quite easy, cons: coupling: sale module hase dependecy on solution module (project reference)
 
-        //todo: 
+        // TODO: do following 
 
         // INFO
-        // published to archive problem (soft-delete) // event: SolutionFinished
+        // published to archive problem (soft-delete) - end-of-life of the problem-aggregate object 
+        // event: SolutionFinished
         await _domainEventDispatcher.DispatchAsync(solution.Events.ToArray());
 
         // INFO
         // published to create product entity - handled in sale module // event: SolutionFinished
+        // perspective *becomes* aggregate solution becomes aggregate product
         var integrationEvents = _eventMapper.MapAll(solution.Events);
         await _messageBroker.PublishAsync(integrationEvents.ToArray());
 
-        // INFO published to update read-model
+        // INFO
+        // published to update read-model - optimized for reads, denormalized, eventuall consistnet (not immediate) on purpose
         await _eventDispatcher.PublishAsync(new UpdatedSolution(command.SolutionToProblemId));
     }
 }

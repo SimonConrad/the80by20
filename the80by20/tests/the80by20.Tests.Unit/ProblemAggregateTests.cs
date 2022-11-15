@@ -2,7 +2,6 @@ using Shouldly;
 using the80by20.Modules.Solution.Domain.Problem.Entities;
 using the80by20.Modules.Solution.Domain.Problem.Exceptions;
 using the80by20.Modules.Solution.Domain.Shared;
-using the80by20.Shared.Abstractions.Exceptions;
 
 // info look at test from 3 perpsectives
 // 1st testing like pure function give input and verify output
