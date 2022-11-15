@@ -10,7 +10,7 @@ namespace the80by20.Modules.Solution.App.Solution.Services
         public IMessage Map(IDomainEvent @event)
             => @event switch
             {
-                SolutionFinished e => new SolutionToProblemFinished(e.solution.Id, Guid.Empty, "", "", 0), // todo add rest of data
+                Domain.Solution.Events.SolutionFinished e => new Events.SolutionFinished(e.solution.Id, Guid.Empty, "", "", 0), // todo add rest of data
                 //SubmissionStatusChanged
                 //{ Status: SubmissionStatus.Approved } e => new SubmissionApproved(e.Submission.Id),
                 //SubmissionStatusChanged

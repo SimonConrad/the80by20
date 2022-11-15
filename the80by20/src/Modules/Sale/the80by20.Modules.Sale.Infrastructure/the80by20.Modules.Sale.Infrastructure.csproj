@@ -15,4 +15,8 @@
     <Folder Include="EF\Repositories\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\the80by20.Modules.Sale.App\the80by20.Modules.Sale.App.csproj" />
+  </ItemGroup>
+
 </Project>
