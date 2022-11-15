@@ -49,8 +49,7 @@ namespace the80by20.Modules.Solution.Api.Controllers
         {
             createProblemCommand = createProblemCommand with
             {
-                UserId = _context.Identity.Id,
-                Id = Guid.NewGuid()
+                UserId = _context.Identity.Id
             };
             await _commandDispatcher.SendAsync(createProblemCommand);
 

@@ -7,8 +7,10 @@ namespace the80by20.Modules.Solution.App.Problem.Commands;
 
 [CommandCqrs]
 public sealed record RequestProblemCommand(
-    Guid Id,
     string Description,
     Guid Category,
     Guid UserId,
-    SolutionType[] SolutionElementTypes) : ICommand;
+    SolutionType[] SolutionElementTypes) : ICommand
+{
+    public Guid Id = Guid.NewGuid();
+}

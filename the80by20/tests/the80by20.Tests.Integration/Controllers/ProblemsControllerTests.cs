@@ -82,7 +82,7 @@ public class ProblemsControllerTests : ControllerTests, IDisposable
                              "based on event of persisted state of aggregate  corresponding readmodels should be updated" +
                              "I would like to present on model waht architecture styles to use in each module and what kind of  messaging is between them";
 
-        var command = new RequestProblemCommand(Guid.NewGuid(), description,
+        var command = new RequestProblemCommand(description,
             Guid.Parse("00000000-0000-0000-0000-000000000004"),
             user.Id,
             new SolutionType[] { SolutionType.TheoryOfConceptWithExample });
