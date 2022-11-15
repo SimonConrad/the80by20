@@ -11,6 +11,11 @@ public class ProblemRejectionDomainService
     public async Task<ProblemAggregate> RejectProblem(ProblemAggregate problemAggregate,
         ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository)
     {
+
+        // TODO pass aggragate SolutionToProblemAggregate to this domain-service method, no its irepository and operate on aggragate
+        // chnage below to if(solutionToProblemAggregate.sTheSolutionAssignedToProblem())
+        // remove method IsTheSolutionAssignedToProblem from repo
+
         if (await solutionToProblemAggregateRepository.IsTheSolutionAssignedToProblem(problemAggregate.Id.Value))
             throw new DomainException("Cannot reject problem to which solution is assigned");
 

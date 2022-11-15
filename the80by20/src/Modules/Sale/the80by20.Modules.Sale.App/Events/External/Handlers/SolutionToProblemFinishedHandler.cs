@@ -3,16 +3,16 @@ using the80by20.Shared.Abstractions.Events;
 
 namespace the80by20.Modules.Sale.App.Solution.Events.External.Handlers
 {
-    internal class SolutionToProblemFinishedHandler : IEventHandler<SolutionToProblemFinished>
+    internal class SolutionFinishedSaleHandler : IEventHandler<SolutionFinished>
     {
-        private readonly ILogger<SolutionToProblemFinishedHandler> _logger;
+        private readonly ILogger<SolutionFinishedSaleHandler> _logger;
 
-        public SolutionToProblemFinishedHandler(ILogger<SolutionToProblemFinishedHandler> logger)
+        public SolutionFinishedSaleHandler(ILogger<SolutionFinishedSaleHandler> logger)
         {
             _logger = logger;
         }
 
-        public async Task HandleAsync(SolutionToProblemFinished @event)
+        public async Task HandleAsync(SolutionFinished @event)
         {
             // INFO
             // create product, can be with same id as solution, caouse problem becomes solution becomes product
