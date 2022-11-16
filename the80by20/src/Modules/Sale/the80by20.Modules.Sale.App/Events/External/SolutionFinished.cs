@@ -5,11 +5,6 @@ namespace the80by20.Modules.Sale.App.Solution.Events.External
 {
 
     [IntegrationEvent]
-    public record SolutionFinished(
-        Guid solutionId,
-        Guid userThatRequestedSolution,
-        string SolutionSummary,
-        string SolutionElementsGDriveLink,
-        decimal price) : IEvent;
+    public record SolutionFinished(Guid solutionId) : IEvent;
 
 }

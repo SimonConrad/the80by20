@@ -10,12 +10,7 @@ namespace the80by20.Modules.Sale.Infrastructure.Clients
 {
     internal class SolutionApiClient : ISolutionApiClient
     {
-        public Task<ProblemDto> GetProblemDto(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<SolutionDto> GetSolutionDto(Guid id)
+        public Task<SolutionToProblemDto> GetSolutionToProblemDto(Guid id)
         {
             throw new NotImplementedException();
         }

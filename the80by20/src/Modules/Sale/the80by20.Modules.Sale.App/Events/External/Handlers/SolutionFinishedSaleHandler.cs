@@ -27,8 +27,7 @@ namespace the80by20.Modules.Sale.App.Solution.Events.External.Handlers
             // todo
             // get more data using ISolutionApiClient
 
-            var problemDto =  await _solutionApiClient.GetProblemDto(@event.solutionId);
-            var solutionDto = await _solutionApiClient.GetSolutionDto(@event.solutionId);
+            var details =  await _solutionApiClient.GetSolutionToProblemDto(@event.solutionId);
 
 
             // data: prolem / solution becomes product with informations: SolutionSummary, SolutionElements, Price, additional infos from aggregates: problem and solutio

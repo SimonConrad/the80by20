@@ -16,11 +16,6 @@ namespace the80by20.Modules.Solution.App.Solution.Events
     // process flow of what happens in the SolutionToProblemFinished handler is also modelled in es, bacouse this is process logic / application logic based upon buisness prcess
 
     [IntegrationEvent]
-    public record SolutionFinished(
-        Guid solutionId,
-        Guid userThatRequestedSolution,
-        string SolutionSummary,
-        string SolutionElementsGDriveLink,
-        decimal price) : IEvent;
+    public record SolutionFinished(Guid solutionId) : IEvent;
 
 }

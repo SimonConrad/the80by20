@@ -61,7 +61,7 @@ namespace the80by20.Modules.Solution.Api.Controllers
             // move to FinishSolutionCommandHandler (API layer or DAL Layer in the repo after save-changes)
             // should go first to FinishSolutionCommandHandler and after successfully command handled in this handler call below
 
-            await _messageBroker.PublishAsync(new SolutionFinished(Guid.NewGuid(), Guid.NewGuid(), "", "", 0));
+            
             return Ok();
         }
     }

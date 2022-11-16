@@ -4,7 +4,6 @@ namespace the80by20.Modules.Sale.App.Clients.Solution
 {
     public interface ISolutionApiClient
     {
-        Task<ProblemDto> GetProblemDto(Guid id);
-        Task<SolutionDto> GetSolutionDto(Guid id);
+        Task<SolutionToProblemDto> GetSolutionToProblemDto(Guid id);
     }
 }
