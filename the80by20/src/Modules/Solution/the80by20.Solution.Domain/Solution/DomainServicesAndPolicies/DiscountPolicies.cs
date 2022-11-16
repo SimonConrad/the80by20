@@ -1,6 +1,6 @@
 ﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Modules.Solution.Domain.Solution.DomainServicesPolicies;
+namespace the80by20.Modules.Solution.Domain.Solution.DomainServicesAndPolicies;
 
 [PolicyDdd]
 public interface IDiscountPolicy
@@ -23,5 +23,5 @@ public class Percents10Policy : IDiscountPolicy
 [PolicyDdd]
 public class NoPercentsPolicy : IDiscountPolicy
 {
-    public int PercentageDiscount() => 10;
+    public int PercentageDiscount() => 0;
 }

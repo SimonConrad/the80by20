@@ -37,6 +37,11 @@ public sealed record Money
 
     public Money Percentage(int percentage)
     {
+        if (percentage == 0)
+        {
+            return new Money(Value);
+        }
+
         return new Money(Math.Round(percentage * Value / 100.0m));
     }
 

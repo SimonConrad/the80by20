@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using the80by20.Modules.Solution.Domain.Shared.DomainServices;
-using the80by20.Modules.Solution.Domain.Solution.DomainServicesPolicies;
+using the80by20.Modules.Solution.Domain.Solution.DomainServicesAndPolicies;
 
 namespace the80by20.Modules.Solution.Domain
 {
@@ -10,7 +10,7 @@ namespace the80by20.Modules.Solution.Domain
         {
             services.AddSingleton<ProblemRejectionDomainService>();
             services.AddSingleton<StartWorkingOnSolutionToProblemDomainService>();
-            services.AddSingleton<SetBasePriceForSolutionToProblemDomainService>();
+            services.AddSingleton<SetBasePriceForSolutionDomainService>();
 
             return services;
         }
