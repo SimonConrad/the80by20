@@ -60,7 +60,7 @@ namespace the80by20.Modules.Solution.Api.Controllers
             // todo
             // move to FinishSolutionCommandHandler (API layer or DAL Layer in the repo after save-changes)
             // should go first to FinishSolutionCommandHandler and after successfully command handled in this handler call below
-            _commandDispatcher.SendAsync(new FinishSolutionCommand(solutionId));
+            await  _commandDispatcher.SendAsync(new FinishSolutionCommand(solutionId));
 
 
             return Ok();
