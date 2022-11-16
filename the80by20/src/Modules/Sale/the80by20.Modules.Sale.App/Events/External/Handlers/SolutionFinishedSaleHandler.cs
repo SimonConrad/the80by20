@@ -2,14 +2,14 @@
 using the80by20.Modules.Sale.App.Clients.Solution;
 using the80by20.Shared.Abstractions.Events;
 
-namespace the80by20.Modules.Sale.App.Solution.Events.External.Handlers
+namespace the80by20.Modules.Sale.App.Events.External.Handlers
 {
     internal class SolutionFinishedSaleHandler : IEventHandler<SolutionFinished>
     {
         private readonly ILogger<SolutionFinishedSaleHandler> _logger;
         private readonly ISolutionApiClient _solutionApiClient;
 
-        public SolutionFinishedSaleHandler(ILogger<SolutionFinishedSaleHandler> logger, 
+        public SolutionFinishedSaleHandler(ILogger<SolutionFinishedSaleHandler> logger,
             ISolutionApiClient solutionApiClient)
         {
             _logger = logger;
@@ -27,7 +27,7 @@ namespace the80by20.Modules.Sale.App.Solution.Events.External.Handlers
             // todo
             // get more data using ISolutionApiClient
 
-            var details =  await _solutionApiClient.GetSolutionToProblemDto(@event.solutionId);
+            var details = await _solutionApiClient.GetSolutionToProblemDto(@event.solutionId);
 
 
             // data: prolem / solution becomes product with informations: SolutionSummary, SolutionElements, Price, additional infos from aggregates: problem and solutio

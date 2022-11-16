@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using the80by20.Modules.Solution.App.ReadModel;
 using the80by20.Modules.Solution.App.Solution.DTO;
 using the80by20.Modules.Solution.App.Solution.Queries;

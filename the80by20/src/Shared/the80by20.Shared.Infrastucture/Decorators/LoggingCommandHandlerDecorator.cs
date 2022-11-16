@@ -4,6 +4,7 @@ using the80by20.Shared.Abstractions.Commands;
 
 namespace the80by20.Shared.Infrastucture.Decorators
 {
+    [Decorator]
     public sealed class LoggingCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand> where TCommand : class, ICommand
     {
         private readonly ICommandHandler<TCommand> _commandHandler;

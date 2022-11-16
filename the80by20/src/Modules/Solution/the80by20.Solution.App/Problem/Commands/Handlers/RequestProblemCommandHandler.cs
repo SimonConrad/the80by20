@@ -1,12 +1,11 @@
-﻿using the80by20.Modules.Solution.App.Problem.Commands;
-using the80by20.Modules.Solution.Domain.Problem.Entities;
+﻿using the80by20.Modules.Solution.Domain.Problem.Entities;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Kernel;
 
-namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
+namespace the80by20.Modules.Solution.App.Solution.Problem.Commands.Handlers;
 
 [CommandHandlerCqrs]
 public class RequestProblemCommandHandler : ICommandHandler<RequestProblemCommand>
@@ -40,7 +39,7 @@ public class RequestProblemCommandHandler : ICommandHandler<RequestProblemComman
         // INFO
         // aggregate persistance
         await _repository.Create(problemAggregate, problemCrudData);
-
+        
         // INFO
         // domain-events dispatching
         await _domainEventDispatcher.DispatchAsync(problemAggregate.Events.ToArray());

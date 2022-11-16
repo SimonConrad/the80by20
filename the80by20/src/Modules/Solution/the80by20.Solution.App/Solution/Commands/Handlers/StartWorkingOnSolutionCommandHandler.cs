@@ -1,13 +1,11 @@
-﻿
-using the80by20.Modules.Solution.App.Solution.Commands;
-using the80by20.Modules.Solution.App.Solution.Events;
+﻿using the80by20.Modules.Solution.App.Solution.Events;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Shared.DomainServices;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Events;
 
-namespace the80by20.Modules.Solution.App.Commands.Solution.Handlers;
+namespace the80by20.Modules.Solution.App.Solution.Commands.Handlers;
 
 public class StartWorkingOnSolutionCommandHandler
     : ICommandHandler<StartWorkingOnSolutionCommand>

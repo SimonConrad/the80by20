@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using the80by20.Shared.Abstractions.Messaging;
 using the80by20.Shared.Infrastucture.Messaging.Brokers;
+using the80by20.Shared.Infrastucture.Messaging.Dispatchers;
 
 namespace the80by20.Shared.Infrastucture.Messaging
 {

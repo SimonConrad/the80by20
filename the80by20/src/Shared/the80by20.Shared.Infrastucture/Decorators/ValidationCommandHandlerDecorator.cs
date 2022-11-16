@@ -5,6 +5,7 @@ using the80by20.Shared.Abstractions.Exceptions;
 
 namespace the80by20.Shared.Infrastucture.Decorators
 {
+    [Decorator]
     public sealed class ValidationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand>
         where TCommand : class, ICommand
     {

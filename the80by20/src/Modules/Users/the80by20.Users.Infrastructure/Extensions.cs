@@ -37,12 +37,12 @@ namespace the80by20.Modules.Users.Infrastructure
         private static void AddCommandHandlersDecorators(IServiceCollection services)
         {
             // info only used in commands done like the80by20.App.Abstractions.ICommand
-            services.AddScoped<IUnitOfWork, EfUnitOfWork>();
-            services.TryDecorate(typeof(ICommandHandler<>), typeof(UnitOfWorkCommandHandlerDecorator<>));
+            //services.AddScoped<IUnitOfWork2, EfUnitOfWork>();
+            //services.TryDecorate(typeof(ICommandHandler<>), typeof(UnitOfWorkCommandHandlerDecorator<>));
 
-            services.TryDecorate(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
+            //services.TryDecorate(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
 
-            services.TryDecorate(typeof(ICommandHandler<>), typeof(LoggingCommandHandlerDecorator<>));
+            //services.TryDecorate(typeof(ICommandHandler<>), typeof(LoggingCommandHandlerDecorator<>));
         }
     }
 }

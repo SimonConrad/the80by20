@@ -1,11 +1,10 @@
-﻿using the80by20.Modules.Solution.App.Problem.Commands;
-using the80by20.Modules.Solution.Domain.Problem.Events;
+﻿using the80by20.Modules.Solution.App.Solution.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Events;
 
-namespace the80by20.Modules.Solution.App.Commands.Problem.Handlers;
+namespace the80by20.Modules.Solution.App.Solution.Problem.Commands.Handlers;
 
 public class UpdateProblemCommandHandler : ICommandHandler<UpdateProblemCommand>
 {
@@ -13,7 +12,7 @@ public class UpdateProblemCommandHandler : ICommandHandler<UpdateProblemCommand>
     private readonly IEventDispatcher _eventDispatcher;
 
     public UpdateProblemCommandHandler(
-        IProblemAggregateRepository problemAggregateRepository, 
+        IProblemAggregateRepository problemAggregateRepository,
         IEventDispatcher eventDispatcher)
     {
         _problemAggregateRepository = problemAggregateRepository;

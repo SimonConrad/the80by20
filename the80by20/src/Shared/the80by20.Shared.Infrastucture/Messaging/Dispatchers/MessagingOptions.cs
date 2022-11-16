@@ -1,4 +1,4 @@
-﻿namespace the80by20.Shared.Infrastucture.Messaging
+﻿namespace the80by20.Shared.Infrastucture.Messaging.Dispatchers
 {
     public class MessagingOptions
     {

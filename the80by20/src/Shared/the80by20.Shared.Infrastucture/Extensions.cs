@@ -70,6 +70,7 @@ namespace the80by20.Shared.Infrastucture
             services.AddEvents(assemblies);
             services.AddMessaging();
             services.AddSqlServer();
+            //INFO: services.AddTransactionalDecorators();
             services.AddSingleton<IClock, Clock>();
             services.AddHostedService<AppInitializer>();
             services.AddControllers()
@@ -186,6 +187,21 @@ namespace the80by20.Shared.Infrastucture
             var options = new T();
             configuration.GetSection(sectionName).Bind(options);
             return options;
+        }
+
+        public static string GetModuleName(this object value)
+           => value?.GetType().GetModuleName() ?? string.Empty;
+
+        public static string GetModuleName(this Type type)
+        {
+            if (type?.Namespace is null)
+            {
+                return string.Empty;
+            }
+
+            return type.Namespace.StartsWith("the80by20.Modules.")
+                ? type.Namespace.Split(".")[2].ToLowerInvariant()
+                : string.Empty;
         }
 
     }

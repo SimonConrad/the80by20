@@ -1,13 +1,11 @@
-﻿
-using the80by20.Modules.Solution.App.Solution.Commands;
-using the80by20.Modules.Solution.App.Solution.Events;
+﻿using the80by20.Modules.Solution.App.Solution.Events;
 using the80by20.Modules.Solution.Domain.Solution.DomainServicesAndPolicies;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Events;
 using the80by20.Shared.Abstractions.Time;
 
-namespace the80by20.Modules.Solution.App.Commands.Solution.Handlers;
+namespace the80by20.Modules.Solution.App.Solution.Commands.Handlers;
 
 public class SetBasePriceOfSolutionCommandHandler
     : ICommandHandler<SetBasePriceOfSolutionCommand>
@@ -20,7 +18,7 @@ public class SetBasePriceOfSolutionCommandHandler
     public SetBasePriceOfSolutionCommandHandler(SetBasePriceForSolutionDomainService domainService,
         ISolutionToProblemAggregateRepository solutionToProblemAggregateRepository,
         IEventDispatcher eventDispatcher,
-        IClock clock)    
+        IClock clock)
     {
         _domainService = domainService;
         _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;

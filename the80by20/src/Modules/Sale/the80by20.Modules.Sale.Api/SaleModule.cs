@@ -2,9 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.Modules.Sale.Infrastructure;
 using the80by20.Shared.Abstractions.Modules;
-using the80by20.Shared.Infrastucture.Modules;
 
-namespace the80by20.Modules.Masterdata.Api
+namespace the80by20.Modules.Sale.Api
 {
     internal class SaleModule : IModule
     {

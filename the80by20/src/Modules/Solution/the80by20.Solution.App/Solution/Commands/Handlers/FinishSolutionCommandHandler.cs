@@ -1,5 +1,4 @@
-﻿using the80by20.Modules.Solution.App.Solution.Commands;
-using the80by20.Modules.Solution.App.Solution.Events;
+﻿using the80by20.Modules.Solution.App.Solution.Events;
 using the80by20.Modules.Solution.App.Solution.Services;
 using the80by20.Modules.Solution.Domain.Solution.Entities;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
@@ -8,7 +7,7 @@ using the80by20.Shared.Abstractions.Events;
 using the80by20.Shared.Abstractions.Kernel;
 using the80by20.Shared.Abstractions.Messaging;
 
-namespace the80by20.Modules.Solution.App.Commands.Solution.Handlers;
+namespace the80by20.Modules.Solution.App.Solution.Commands.Handlers;
 
 
 public class FinishSolutionCommandHandler
@@ -27,7 +26,7 @@ public class FinishSolutionCommandHandler
         IEventDispatcher eventDispatcher,
         IEventMapper eventMapper)
     {
-        _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository;;
+        _solutionToProblemAggregateRepository = solutionToProblemAggregateRepository; ;
         _messageBroker = messageBroker;
         _domainEventDispatcher = domainEventDispatcher;
         _eventDispatcher = eventDispatcher;

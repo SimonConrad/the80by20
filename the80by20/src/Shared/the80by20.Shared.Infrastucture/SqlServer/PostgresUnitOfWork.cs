@@ -1,12 +1,12 @@
-﻿using the80by20.Shared.Abstractions.Dal;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace the80by20.Modules.Users.Infrastructure.EF
+namespace the80by20.Shared.Infrastucture.SqlServer
 {
-    public class EfUnitOfWork : IUnitOfWork2
+    public abstract class SqlServerUnitOfWork<T> : IUnitOfWork where T : DbContext
     {
-        private readonly UsersDbContext _dbContext;
+        private readonly T _dbContext;
 
-        public EfUnitOfWork(UsersDbContext dbContext)
+        protected SqlServerUnitOfWork(T dbContext)
         {
             _dbContext = dbContext;
         }
@@ -14,11 +14,9 @@ namespace the80by20.Modules.Users.Infrastructure.EF
         public async Task ExecuteAsync(Func<Task> action)
         {
             await using var transaction = await _dbContext.Database.BeginTransactionAsync();
-
             try
             {
                 await action();
-                await _dbContext.SaveChangesAsync();
                 await transaction.CommitAsync();
             }
             catch (Exception)

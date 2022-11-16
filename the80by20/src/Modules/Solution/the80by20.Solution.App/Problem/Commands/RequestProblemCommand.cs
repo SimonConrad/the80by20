@@ -2,7 +2,7 @@
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Commands;
 
-namespace the80by20.Modules.Solution.App.Problem.Commands;
+namespace the80by20.Modules.Solution.App.Solution.Problem.Commands;
 
 
 [CommandCqrs]

@@ -27,6 +27,7 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task UpdateAsync(Category host)
     {
+        // info check dbCtxt.ChangeTracker.DetectChanges(); in quick-watch ChangeTracker.DebugView.LongView
         categories.Update(host);
         await dbCtxt.SaveChangesAsync();
     }

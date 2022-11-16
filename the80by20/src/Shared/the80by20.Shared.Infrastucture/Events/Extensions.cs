@@ -11,8 +11,8 @@ namespace the80by20.Shared.Infrastucture.Events
             services.AddSingleton<IEventDispatcher, EventDispatcher>();
 
             services.Scan(s => s.FromAssemblies(assemblies)
-                .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>)))
-                    //.WithoutAttribute<DecoratorAttribute>())
+                .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>))
+                .WithoutAttribute<DecoratorAttribute>())
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 

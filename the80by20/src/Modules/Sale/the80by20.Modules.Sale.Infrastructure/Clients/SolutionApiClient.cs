@@ -1,7 +1,6 @@
 ﻿using the80by20.Modules.Sale.App.Clients.Solution;
 using the80by20.Modules.Sale.App.Clients.Solution.DTO;
 using the80by20.Modules.Sale.Infrastructure.Clients.Requests;
-using the80by20.Shared.Abstractions.Kernel.Types;
 using the80by20.Shared.Abstractions.Modules;
 
 namespace the80by20.Modules.Sale.Infrastructure.Clients

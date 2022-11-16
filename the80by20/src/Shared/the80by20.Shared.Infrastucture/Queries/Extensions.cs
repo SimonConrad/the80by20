@@ -11,8 +11,8 @@ namespace the80by20.Shared.Infrastucture.Queries
             services.AddSingleton<IQueryDispatcher, QueryDispatcher>();
 
             services.Scan(s => s.FromAssemblies(assemblies)
-                .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
-                    //.WithoutAttribute<DecoratorAttribute>())
+                .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>))
+                .WithoutAttribute<DecoratorAttribute>())
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
             return services;

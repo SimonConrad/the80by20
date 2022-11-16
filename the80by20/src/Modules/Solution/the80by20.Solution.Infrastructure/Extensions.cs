@@ -12,9 +12,13 @@ namespace the80by20.Modules.Solution.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddSqlServer<SolutionDbContext>();
-
-            AddSolutionToProblemDal(services);
+            services
+                .AddScoped<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>()
+                .AddScoped<ISolutionToProblemReadModelUpdates, EfSolutionToProblemReadModelRepository>()
+                .AddScoped<ISolutionToProblemReadModelQueries, EfSolutionToProblemReadModelRepository>()
+                .AddScoped<IProblemAggregateRepository, EfProblemAggregateRepository>()
+                .AddSqlServer<SolutionDbContext>();
+                // INFO: .AddUnitOfWork<ISolutionUnitOfWork, SolutionUnitOfWork>();
 
             //AddMediatRStaff(services);
 
@@ -30,15 +34,6 @@ namespace the80by20.Modules.Solution.Infrastructure
 
             //services.AddValidatorsFromAssembly(typeof(CreateProblemInputValidator).Assembly);
             // info more problems with this then pozytku services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkBehavior<,>));
-        }
-
-        private static void AddSolutionToProblemDal(IServiceCollection services)
-        {
-            services.AddScoped<ISolutionToProblemAggregateRepository, EfSolutionToProblemAggregateRepository>();
-            services.AddScoped<ISolutionToProblemReadModelUpdates, EfSolutionToProblemReadModelRepository>();
-            services.AddScoped<ISolutionToProblemReadModelQueries, EfSolutionToProblemReadModelRepository>();
-
-            services.AddScoped<IProblemAggregateRepository, EfProblemAggregateRepository>();
         }
     }
 }

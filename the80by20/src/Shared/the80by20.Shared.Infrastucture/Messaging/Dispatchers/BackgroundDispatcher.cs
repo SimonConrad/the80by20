@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using the80by20.Shared.Abstractions.Modules;
 
-namespace the80by20.Shared.Infrastucture.Messaging
+namespace the80by20.Shared.Infrastucture.Messaging.Dispatchers
 {
     internal sealed class BackgroundDispatcher : BackgroundService
     {

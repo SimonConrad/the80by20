@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace the80by20.Modules.Masterdata.Api.Controllers
+namespace the80by20.Modules.Sale.Api.Controllers
 {
     [Route(SaleModule.BasePath)]
     internal class HomeController : BaseController

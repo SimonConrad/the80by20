@@ -1,4 +1,5 @@
 ﻿using the80by20.Modules.Masterdata.App.Services;
+using the80by20.Modules.Solution.App.Solution.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
