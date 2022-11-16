@@ -1,11 +1,9 @@
 ﻿using the80by20.Modules.Masterdata.App.Services;
 using the80by20.Modules.Solution.App.Solution.Problem.Events;
-using the80by20.Modules.Solution.Domain.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Events;
-using the80by20.Shared.Abstractions.Kernel;
 
 namespace the80by20.Modules.Solution.App.ReadModel;
 
@@ -15,7 +13,7 @@ namespace the80by20.Modules.Solution.App.ReadModel;
 // it is not immediatly consistent with aggregata data but eventually consistent
 [ReadModelDdd]
 public class ProblemReadModelHandler :
-    IDomainEventHandler<ProblemRequested>,
+    IEventHandler<ProblemCreated>,
     IEventHandler<ProblemUpdated>
 {
     private readonly ISolutionToProblemReadModelUpdates _readModelUpdates;
@@ -36,10 +34,29 @@ public class ProblemReadModelHandler :
         _categoryService = categoryService;
     }
 
-    public async Task HandleAsync(ProblemRequested @event)
+    public async Task HandleAsync(ProblemUpdated @event)
     {
-        var problem = await _problemAggregateRepository.Get(@event.problem.Id.Value);
-        var problemData = await _problemAggregateRepository.GetCrudData(@event.problem.Id.Value);
+        var problemData = await _problemAggregateRepository.GetCrudData(@event.problemId);
+        var category = await _categoryService.GetAsync(problemData.Category);
+        var problem = await _problemAggregateRepository.Get(@event.problemId);
+        var rm = await _readModelQueries.GetByProblemId(@event.problemId);
+
+        rm.IsRejected = problem.Rejected;
+        rm.IsConfirmed = problem.Confirmed;
+        rm.RequiredSolutionTypes = string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray());
+
+        rm.Description = problemData.Description;
+        rm.Category = category.Name;
+        rm.CategoryId = category.Id;
+
+        await _readModelUpdates.Update(rm);
+    }
+
+    public async Task HandleAsync(ProblemCreated @event)
+    {
+        // TODO not working when in one transaction
+        var problem = await _problemAggregateRepository.Get(@event.problemId.Value);
+        var problemData = await _problemAggregateRepository.GetCrudData(@event.problemId.Value);
         var category = await _categoryService.GetAsync(problemData.Category);
 
         var readmodel = new SolutionToProblemReadModel()
@@ -57,23 +74,5 @@ public class ProblemReadModelHandler :
         };
 
         await _readModelUpdates.Create(readmodel);
-    }
-    
-    public async Task HandleAsync(ProblemUpdated @event)
-    {
-        var problemData = await _problemAggregateRepository.GetCrudData(@event.problemId);
-        var category = await _categoryService.GetAsync(problemData.Category);
-        var problem = await _problemAggregateRepository.Get(@event.problemId);
-        var rm = await _readModelQueries.GetByProblemId(@event.problemId);
-
-        rm.IsRejected = problem.Rejected;
-        rm.IsConfirmed = problem.Confirmed;
-        rm.RequiredSolutionTypes = string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray());
-
-        rm.Description = problemData.Description;
-        rm.Category = category.Name;
-        rm.CategoryId = category.Id;
-
-        await _readModelUpdates.Update(rm);
     }
 }

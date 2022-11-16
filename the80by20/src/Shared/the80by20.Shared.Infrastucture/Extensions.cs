@@ -70,7 +70,7 @@ namespace the80by20.Shared.Infrastucture
             services.AddEvents(assemblies);
             services.AddMessaging();
             services.AddSqlServer();
-            //INFO: services.AddTransactionalDecorators();
+            //services.AddTransactionalDecorators();
             services.AddSingleton<IClock, Clock>();
             services.AddHostedService<AppInitializer>();
             services.AddControllers()

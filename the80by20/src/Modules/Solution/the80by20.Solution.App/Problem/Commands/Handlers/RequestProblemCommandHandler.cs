@@ -1,8 +1,10 @@
-﻿using the80by20.Modules.Solution.Domain.Problem.Entities;
+﻿using the80by20.Modules.Solution.App.Solution.Problem.Events;
+using the80by20.Modules.Solution.Domain.Problem.Entities;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Commands;
+using the80by20.Shared.Abstractions.Events;
 using the80by20.Shared.Abstractions.Kernel;
 
 namespace the80by20.Modules.Solution.App.Solution.Problem.Commands.Handlers;
@@ -11,14 +13,14 @@ namespace the80by20.Modules.Solution.App.Solution.Problem.Commands.Handlers;
 public class RequestProblemCommandHandler : ICommandHandler<RequestProblemCommand>
 {
     private readonly IProblemAggregateRepository _repository;
-    private readonly IDomainEventDispatcher _domainEventDispatcher;
+    private readonly IEventDispatcher _eventDispatcher;
 
     public RequestProblemCommandHandler(
         IProblemAggregateRepository repository,
-        IDomainEventDispatcher domainEventDispatcher)
+        IEventDispatcher eventDispatcher)
     {
         _repository = repository;
-        _domainEventDispatcher = domainEventDispatcher;
+        _eventDispatcher = eventDispatcher;
     }
 
 
@@ -39,10 +41,10 @@ public class RequestProblemCommandHandler : ICommandHandler<RequestProblemComman
         // INFO
         // aggregate persistance
         await _repository.Create(problemAggregate, problemCrudData);
-        
+
         // INFO
-        // domain-events dispatching
-        await _domainEventDispatcher.DispatchAsync(problemAggregate.Events.ToArray());
+        // event dispatching for read-model handler
+        await _eventDispatcher.PublishAsync(new ProblemCreated(command.Id));
     }
 
     //public async Task UpdateReadModel(ProblemId id)
