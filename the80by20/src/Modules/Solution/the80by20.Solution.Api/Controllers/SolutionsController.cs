@@ -1,10 +1,8 @@
 using Bogus;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using the80by20.Modules.Solution.App.ReadModel;
-using the80by20.Modules.Solution.App.Solution.Events;
 using the80by20.Shared.Abstractions.Messaging;
 
 namespace the80by20.Modules.Solution.Api.Controllers
@@ -17,18 +15,15 @@ namespace the80by20.Modules.Solution.Api.Controllers
 
         private readonly ILogger<SolutionsController> _logger;
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
-        private readonly IMediator _mediator;
         private readonly IMessageBroker _messageBroker;
 
         public SolutionsController(ILogger<SolutionsController> logger,
             ISolutionToProblemReadModelQueries solutionToProblemReadModelQueries,
-            IMediator mediator,
             IMessageBroker messageBroker)
         {
             _logger = logger;
 
             _solutionToProblemReadModelQueries = solutionToProblemReadModelQueries;
-            _mediator = mediator;
             _messageBroker = messageBroker;
         }
 

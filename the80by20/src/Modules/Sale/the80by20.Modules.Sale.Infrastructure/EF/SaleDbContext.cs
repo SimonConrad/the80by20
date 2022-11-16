@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace the80by20.Modules.Sale.Infrastructure.EF
+﻿namespace the80by20.Modules.Sale.Infrastructure.EF
 {
     internal class SaleDbContext
     {

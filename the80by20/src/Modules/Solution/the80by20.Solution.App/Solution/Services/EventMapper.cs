@@ -1,6 +1,4 @@
-﻿using the80by20.Modules.Solution.App.Solution.Events;
-using the80by20.Modules.Solution.Domain.Solution.Events;
-using the80by20.Shared.Abstractions.Kernel;
+﻿using the80by20.Shared.Abstractions.Kernel;
 using the80by20.Shared.Abstractions.Messaging;
 
 namespace the80by20.Modules.Solution.App.Solution.Services

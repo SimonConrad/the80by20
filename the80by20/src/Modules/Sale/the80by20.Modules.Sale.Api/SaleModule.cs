@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using the80by20.Modules.Sale.Infrastructure;
 using the80by20.Shared.Abstractions.Modules;
 
 namespace the80by20.Modules.Masterdata.Api
@@ -23,6 +24,9 @@ namespace the80by20.Modules.Masterdata.Api
             // using var scope = serviceProvider.CreateScope();
             // scope.ServiceProvider.GetService...
             // so we don't need to create a constructor with passed to it dependencies
+
+            services
+               .AddInfrastructure();
         }
 
         public void Use(IApplicationBuilder app)

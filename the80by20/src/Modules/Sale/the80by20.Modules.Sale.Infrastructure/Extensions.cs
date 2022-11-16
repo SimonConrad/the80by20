@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
+using the80by20.Modules.Sale.App.Clients.Solution;
+using the80by20.Modules.Sale.Infrastructure.Clients;
 
 namespace the80by20.Modules.Sale.Infrastructure
 {
-    internal class Extensions
+    public static class Extensions
     {
+
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        {
+            services
+                .AddSingleton<ISolutionApiClient, SolutionApiClient>();
+            
+
+            return services;
+        }
     }
 }

@@ -1,5 +1,4 @@
 using Bogus;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,20 +17,17 @@ namespace the80by20.Modules.Solution.Api.Controllers
         private readonly ILogger<ProblemsController> _logger;
         private readonly ISolutionToProblemReadModelQueries _solutionToProblemReadModelQueries;
         private readonly ICommandDispatcher _commandDispatcher;
-        private readonly IMediator _mediator;
         private readonly IContext _context;
 
         public ProblemsController(ILogger<ProblemsController> logger,
             ISolutionToProblemReadModelQueries solutionToProblemReadModelQueries,
             ICommandDispatcher commandDispatcher,
-            IMediator mediator,
             IContext context)
         {
             _logger = logger;
 
             _solutionToProblemReadModelQueries = solutionToProblemReadModelQueries;
             _commandDispatcher = commandDispatcher;
-            _mediator = mediator;
             _context = context;
         }
 
@@ -59,9 +55,9 @@ namespace the80by20.Modules.Solution.Api.Controllers
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] UpdateProblemCommand updateProblemCommand, CancellationToken token)
         {
-            var problemId = await _mediator.Send(updateProblemCommand, token);
+           await _commandDispatcher.SendAsync(updateProblemCommand);
 
-            return Ok(new { id = problemId });
+            return Ok();
 
             // info more reststyle will be to:
             // - add id as action parameter with attribute fromroute
