@@ -1,13 +1,25 @@
 ﻿using the80by20.Modules.Sale.App.Clients.Solution;
 using the80by20.Modules.Sale.App.Clients.Solution.DTO;
+using the80by20.Modules.Sale.Infrastructure.Clients.Requests;
+using the80by20.Shared.Abstractions.Kernel.Types;
+using the80by20.Shared.Abstractions.Modules;
 
 namespace the80by20.Modules.Sale.Infrastructure.Clients
 {
     internal class SolutionApiClient : ISolutionApiClient
     {
-        public Task<SolutionToProblemDto> GetSolutionToProblemDto(Guid id)
+        private readonly IModuleClient _moduleClient;
+
+        public SolutionApiClient(IModuleClient moduleClient) // INFO if need to call external service instead of IModuleClient us IHttpClientFactory
         {
-            throw new NotImplementedException();
+            _moduleClient = moduleClient;
         }
+
+        public Task<SolutionToProblemDto> GetSolutionToProblemDto(Guid id)
+            => _moduleClient.SendAsync<SolutionToProblemDto>("solutions/get",
+                new GetSolutionToProblem
+                {
+                    SolutionToProblemId = id
+                });
     }
 }

@@ -19,7 +19,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-	
+
   <ItemGroup>
     <ProjectReference Include="..\the80by20.Solution.Infrastructure\the80by20.Modules.Solution.Infrastructure.csproj" />
   </ItemGroup>

@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Clients\Requests\" />
     <Folder Include="EF\Configurations\" />
     <Folder Include="EF\Migrations\" />
     <Folder Include="EF\Mappings\" />
@@ -16,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
     <ProjectReference Include="..\the80by20.Modules.Sale.App\the80by20.Modules.Sale.App.csproj" />
   </ItemGroup>
 

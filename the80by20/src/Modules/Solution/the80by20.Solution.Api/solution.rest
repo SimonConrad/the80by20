@@ -1,6 +1,8 @@
 @url = http://localhost:5000/solution-to-problem
 #@url = https://the80by20.azurewebsites.net/solution-to-problem
 
+@solutionId = 
+
 @accessToken = 
 
 ###
@@ -9,6 +11,6 @@ GET {{url}}
 
 
 ###
-POST {{url}}/solutions/FinishSolutionMocked
+POST {{url}}/solutions/FinishSolutionMocked/{{solutionId}}
 Authorization: Bearer {{accessToken}}
 

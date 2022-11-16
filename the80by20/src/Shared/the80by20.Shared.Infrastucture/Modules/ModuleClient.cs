@@ -13,21 +13,21 @@ namespace the80by20.Shared.Infrastucture.Modules
             _moduleSerializer = moduleSerializer;
         }
 
-        //public Task SendAsync(string path, object request) => SendAsync<object>(path, request);
+        public Task SendAsync(string path, object request) => SendAsync<object>(path, request);
 
-        //public async Task<TResult> SendAsync<TResult>(string path, object request) where TResult : class
-        //{
-        //    var registration = _moduleRegistry.GetRequestRegistration(path);
-        //    if (registration is null)
-        //    {
-        //        throw new InvalidOperationException($"No action has been defined for path: '{path}'.");
-        //    }
+        public async Task<TResult> SendAsync<TResult>(string path, object request) where TResult : class
+        {
+            var registration = _moduleRegistry.GetRequestRegistration(path);
+            if (registration is null)
+            {
+                throw new InvalidOperationException($"No action has been defined for path: '{path}'.");
+            }
 
-        //    var receiverRequest = TranslateType(request, registration.RequestType);
-        //    var result = await registration.Action(receiverRequest);
+            var receiverRequest = TranslateType(request, registration.RequestType);
+            var result = await registration.Action(receiverRequest);
 
-        //    return result is null ? null : TranslateType<TResult>(result);
-        //}
+            return result is null ? null : TranslateType<TResult>(result);
+        }
 
         public async Task PublishAsync(object message)
         {

@@ -10,7 +10,7 @@ using the80by20.Shared.Abstractions.Modules;
 
 namespace the80by20.Shared.Infrastucture.Modules
 {
-    internal static class Extensions
+    public static class Extensions
     {
         internal static IServiceCollection AddModuleInfo(this IServiceCollection services, 
             IList<IModule> modules)
@@ -58,13 +58,13 @@ namespace the80by20.Shared.Infrastucture.Modules
             services.AddModuleRegistry(assemblies);
             services.AddSingleton<IModuleClient, ModuleClient>();
             services.AddSingleton<IModuleSerializer, JsonModuleSerializer>();
-            //services.AddSingleton<IModuleSubscriber, ModuleSubscriber>();
+            services.AddSingleton<IModuleSubscriber, ModuleSubscriber>();
 
             return services;
         }
 
-        //public static IModuleSubscriber UseModuleRequests(this IApplicationBuilder app)
-        //    => app.ApplicationServices.GetRequiredService<IModuleSubscriber>();
+        public static IModuleSubscriber UseModuleRequests(this IApplicationBuilder app)
+            => app.ApplicationServices.GetRequiredService<IModuleSubscriber>();
 
         private static void AddModuleRegistry(this IServiceCollection services, IEnumerable<Assembly> assemblies)
         {

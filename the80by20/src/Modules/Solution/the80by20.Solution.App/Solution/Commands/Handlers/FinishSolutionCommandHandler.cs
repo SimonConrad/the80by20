@@ -1,6 +1,7 @@
 ﻿using the80by20.Modules.Solution.App.Solution.Commands;
 using the80by20.Modules.Solution.App.Solution.Events;
 using the80by20.Modules.Solution.App.Solution.Services;
+using the80by20.Modules.Solution.Domain.Solution.Entities;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Events;
@@ -35,10 +36,9 @@ public class FinishSolutionCommandHandler
 
     public async Task HandleAsync(FinishSolutionCommand command)
     {
-        var solution = await _solutionToProblemAggregateRepository.Get(command.SolutionToProblemId);
+        SolutionToProblemAggregate solution = await _solutionToProblemAggregateRepository.Get(command.SolutionToProblemId);
         solution.FinishWorkOnSolutionToProblem();
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
-
 
         // INFO
         // approach with shared contracts:

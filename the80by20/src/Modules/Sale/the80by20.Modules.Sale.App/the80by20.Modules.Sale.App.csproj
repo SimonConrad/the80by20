@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Commands\Handlers\" />
     <Folder Include="DTO\" />
     <Folder Include="Queries\Handlers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\the80by20.Modules.Sale.Domain\the80by20.Modules.Sale.Domain.csproj" />
   </ItemGroup>
 
 </Project>
