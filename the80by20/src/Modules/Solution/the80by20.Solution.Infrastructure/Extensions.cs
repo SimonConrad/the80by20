@@ -17,8 +17,8 @@ namespace the80by20.Modules.Solution.Infrastructure
                 .AddScoped<ISolutionToProblemReadModelUpdates, EfSolutionToProblemReadModelRepository>()
                 .AddScoped<ISolutionToProblemReadModelQueries, EfSolutionToProblemReadModelRepository>()
                 .AddScoped<IProblemAggregateRepository, EfProblemAggregateRepository>()
-                .AddSqlServer<SolutionDbContext>();
-                //.AddUnitOfWork<ISolutionUnitOfWork, SolutionUnitOfWork>();
+                .AddSqlServer<SolutionDbContext>()
+                .AddUnitOfWork<ISolutionUnitOfWork, SolutionUnitOfWork>();
 
             //AddMediatRStaff(services);
 

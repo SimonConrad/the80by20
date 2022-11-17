@@ -1,4 +1,5 @@
 ﻿using the80by20.Modules.Solution.App.Solution.Problem.Events;
+using the80by20.Modules.Solution.Domain.Problem.Entities;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.Commands;
@@ -19,15 +20,17 @@ public class UpdateProblemCommandHandler : ICommandHandler<UpdateProblemCommand>
         _eventDispatcher = eventDispatcher;
     }
 
+    // TODO refactor
     public async Task HandleAsync(UpdateProblemCommand command)
     {
         if (command.UpdateScope == UpdateDataScope.OnlyData)
         {
-            await UpdateData(command);
-            await _eventDispatcher.PublishAsync(new ProblemUpdated(command.ProblemId));
+            ProblemCrudData data = await UpdateData(command);
+            await _eventDispatcher.PublishAsync(new ProblemUpdated(command.ProblemId, null, data));
             return;
         }
 
+        ProblemCrudData data1 = null;
         if (command.UpdateScope == UpdateDataScope.All)
         {
             await UpdateData(command);
@@ -38,13 +41,15 @@ public class UpdateProblemCommandHandler : ICommandHandler<UpdateProblemCommand>
         problem.Update(requiredSolutionTypes);
         await _problemAggregateRepository.SaveAggragate(problem);
 
-        await _eventDispatcher.PublishAsync(new ProblemUpdated(command.ProblemId));
+        await _eventDispatcher.PublishAsync(new ProblemUpdated(command.ProblemId, problem, data1));
     }
 
-    private async Task UpdateData(UpdateProblemCommand command)
+    private async Task<ProblemCrudData> UpdateData(UpdateProblemCommand command)
     {
         var data = await _problemAggregateRepository.GetCrudData(command.ProblemId);
         data.Update(command.Description, command.Category);
         await _problemAggregateRepository.SaveData(data);
+
+        return data;
     }
 }

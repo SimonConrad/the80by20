@@ -28,7 +28,7 @@ public class ConfirmProblemCommandHandler : ICommandHandler<ConfirmProblemComman
         problem.Confirm();
         await _problemAggregateRepository.SaveAggragate(problem);
 
-        await _eventDispatcher.PublishAsync(new ProblemUpdated(command.ProblemId));
+        await _eventDispatcher.PublishAsync(new ProblemUpdated(command.ProblemId, problem, null));
     }
 
 }

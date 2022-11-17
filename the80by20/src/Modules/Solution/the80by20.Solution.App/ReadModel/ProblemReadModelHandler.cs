@@ -36,18 +36,24 @@ public class ProblemReadModelHandler :
 
     public async Task HandleAsync(ProblemUpdated @event)
     {
-        var problemData = await _problemAggregateRepository.GetCrudData(@event.problemId);
-        var category = await _categoryService.GetAsync(problemData.Category);
-        var problem = await _problemAggregateRepository.Get(@event.problemId);
         var rm = await _readModelQueries.GetByProblemId(@event.problemId);
 
-        rm.IsRejected = problem.Rejected;
-        rm.IsConfirmed = problem.Confirmed;
-        rm.RequiredSolutionTypes = string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray());
+        if (@event.problemAggregate != null)
+        {
+            var problem = @event.problemAggregate;
+            rm.IsRejected = problem.Rejected;
+            rm.IsConfirmed = problem.Confirmed;
+            rm.RequiredSolutionTypes = string.Join("--", problem.RequiredSolutionTypes.Elements.Select(t => t.ToString()).ToArray());
+        }
 
-        rm.Description = problemData.Description;
-        rm.Category = category.Name;
-        rm.CategoryId = category.Id;
+        if (@event.problemCrudData != null)
+        {
+            var problemData = @event.problemCrudData;
+            var category = await _categoryService.GetAsync(problemData.Category);
+            rm.Description = problemData.Description;
+            rm.Category = category.Name;
+            rm.CategoryId = category.Id;
+        }
 
         await _readModelUpdates.Update(rm);
     }
@@ -55,8 +61,9 @@ public class ProblemReadModelHandler :
     public async Task HandleAsync(ProblemCreated @event)
     {
         // TODO not working when in one transaction
-        var problem = await _problemAggregateRepository.Get(@event.problemId.Value);
-        var problemData = await _problemAggregateRepository.GetCrudData(@event.problemId.Value);
+        var problem = @event.problemAggregate;
+        var problemData = @event.problemCrudData;
+
         var category = await _categoryService.GetAsync(problemData.Category);
 
         var readmodel = new SolutionToProblemReadModel()

@@ -28,7 +28,7 @@ public class SolutionReadModelHandler :
 
     public async Task HandleAsync(StartedWorkingOnSolution @event)
     {
-        var solution = await _solutionToProblemAggregateRepository.Get(@event.SolutionToProblemId);
+        var solution = @event.solution;
 
         var rm = await _readModelQueries.GetByProblemId(solution.ProblemId);
 
@@ -43,7 +43,7 @@ public class SolutionReadModelHandler :
 
     public async Task HandleAsync(UpdatedSolution @event)
     {
-        var solution = await _solutionToProblemAggregateRepository.Get(@event.SolutionToProblemId);
+        var solution = @event.solution;
 
         var rm = await _readModelQueries.GetBySolutionId(solution.Id.Value);
 

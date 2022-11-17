@@ -62,6 +62,6 @@ public class FinishSolutionCommandHandler
 
         // INFO
         // published to update read-model - optimized for reads, denormalized, eventuall consistnet (not immediate) on purpose
-        await _eventDispatcher.PublishAsync(new UpdatedSolution(command.SolutionToProblemId));
+        await _eventDispatcher.PublishAsync(new UpdatedSolution(solution));
     }
 }

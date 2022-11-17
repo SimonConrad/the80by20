@@ -11,6 +11,7 @@ using the80by20.Shared.Infrastucture.Api;
 using the80by20.Shared.Infrastucture.Auth;
 using the80by20.Shared.Infrastucture.Commands;
 using the80by20.Shared.Infrastucture.Context;
+using the80by20.Shared.Infrastucture.Decorators;
 using the80by20.Shared.Infrastucture.Events;
 using the80by20.Shared.Infrastucture.Exceptions;
 using the80by20.Shared.Infrastucture.Kernel;
@@ -70,7 +71,8 @@ namespace the80by20.Shared.Infrastucture
             services.AddEvents(assemblies);
             services.AddMessaging();
             services.AddSqlServer();
-            //services.AddTransactionalDecorators();
+            services.AddTransactionalDecorators();
+            services.AddCommandHandlersDecorators();
             services.AddSingleton<IClock, Clock>();
             services.AddHostedService<AppInitializer>();
             services.AddControllers()

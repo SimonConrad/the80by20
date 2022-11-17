@@ -24,7 +24,7 @@ public class SetSolutionSummaryCommandHandler
         solution.SetSummary(command.SolutionSummary);
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
 
-        await _eventDispatcher.PublishAsync(new UpdatedSolution(command.SolutionToProblemId));
+        await _eventDispatcher.PublishAsync(new UpdatedSolution(solution));
 
     }
 }

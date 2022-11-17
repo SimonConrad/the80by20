@@ -33,6 +33,6 @@ public class StartWorkingOnSolutionCommandHandler
 
         await _solutionToProblemAggregateRepository.Create(solution);
 
-        await _eventDispatcher.PublishAsync(new StartedWorkingOnSolution(solution.Id.Value));
+        await _eventDispatcher.PublishAsync(new StartedWorkingOnSolution(solution));
     }
 }

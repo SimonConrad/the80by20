@@ -31,6 +31,6 @@ public class RejectProblemCommandHandler : ICommandHandler<RejectProblemCommand>
         problem = await _problemRejectionDomainService.RejectProblem(problem, _solutionToProblemAggregateRepository);
         await _problemAggregateRepository.SaveAggragate(problem);
 
-        await _eventDispatcher.PublishAsync(new ProblemUpdated(command.ProblemId));
+        await _eventDispatcher.PublishAsync(new ProblemUpdated(command.ProblemId, problem, null));
     }
 }

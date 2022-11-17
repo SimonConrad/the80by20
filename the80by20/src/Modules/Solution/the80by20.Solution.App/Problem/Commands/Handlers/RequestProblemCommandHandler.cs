@@ -5,7 +5,6 @@ using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Events;
-using the80by20.Shared.Abstractions.Kernel;
 
 namespace the80by20.Modules.Solution.App.Solution.Problem.Commands.Handlers;
 
@@ -44,7 +43,7 @@ public class RequestProblemCommandHandler : ICommandHandler<RequestProblemComman
 
         // INFO
         // event dispatching for read-model handler
-        await _eventDispatcher.PublishAsync(new ProblemCreated(command.Id));
+        await _eventDispatcher.PublishAsync(new ProblemCreated(problemAggregate, problemCrudData));
     }
 
     //public async Task UpdateReadModel(ProblemId id)
