@@ -7,18 +7,16 @@ using the80by20.Shared.Abstractions.Kernel.Types;
 
 namespace the80by20.Modules.Solution.Domain.Solution.Entities
 {
-    // INFO
-    // Aggregate defines boundary of data consistancy, data should be immedietly / strongly consistent (not eventually consist)
-    // so data / information inside it (persisted properties) cannot be in inconsitent state
-    // - that's way we only allow to change them via methods (setters are private)
-    // in the methods invariants are applied (invariants are buisness rules stating how to chnage grouped in aggregate data so that this package of data,
-    // data as w hole is consitent)
+
 
     [AggregateDdd]
-    public class SolutionToProblemAggregate : AggregateRoot
+    public sealed class SolutionToProblemAggregate : AggregateRoot
     {
 
-        // INFO alternative way - have one id for ProblemAggregate and SolutionToProblemAggregate as problem entity BECOMES solutionToProblem entity
+        // INFO
+        // alternative way - have one id for ProblemAggregate and SolutionToProblemAggregate
+        // as problem entity BECOMES solutionToProblem entity
+
         public ProblemId ProblemId { get; private set; }
         public RequiredSolutionTypes RequiredSolutionTypes { get; private set; } = RequiredSolutionTypes.Empty();
         public SolutionSummary SolutionSummary { get; private set; } = SolutionSummary.Empty();
@@ -28,7 +26,8 @@ namespace the80by20.Modules.Solution.Domain.Solution.Entities
         public Money Price => BasePrice + AddtionalPrice;
         public bool WorkingOnSolutionEnded { get; private set; }
 
-        // INFO for EF purpose
+        // INFO
+        // for EF purpose
         protected SolutionToProblemAggregate()
         {
         }
@@ -49,7 +48,8 @@ namespace the80by20.Modules.Solution.Domain.Solution.Entities
 
         //private SolutionToProblemAggregate(AggregateId id, ProblemId problemId) => (Id, ProblemId) = (id, problemId);
 
-        // INFO creation method for creating new aggregates - place for validations,
+        // INFO
+        // creation method for creating new aggregates - place for validations,
         // when object exists and is retrieved from db, EF is mapping values to porerties and this method is not used
         public static SolutionToProblemAggregate New(ProblemId problemId, RequiredSolutionTypes requiredSolutionTypes)
         {
@@ -60,7 +60,8 @@ namespace the80by20.Modules.Solution.Domain.Solution.Entities
         }
 
 
-        // infointernal so that domain layer can access this method, called by SetBasePriceForSolutionToProblemDomainService
+        // info
+        // internal so that domain layer can access this method, called by SetBasePriceForSolutionToProblemDomainService
         internal void SetBasePrice(Money price)
         {
             BasePrice = price;

@@ -3,12 +3,20 @@ using the80by20.Modules.Solution.Domain.Problem.Entities;
 using the80by20.Modules.Solution.Domain.Problem.Exceptions;
 using the80by20.Modules.Solution.Domain.Shared;
 
-// info look at test from 3 perpsectives
-// 1st testing like pure function give input and verify output
-// 2nd checking state chnage setup aggregate in proper state (via getter or return of events), do command on it and veryfi i state was changed or invariants blocked (domain exception)
-// 3rd verify interaction logic how flow goes - especially good for application logic setup mock s to behave properly and veryfy result, calls on mocks
-// more info in the80by20 gdocs documments
-// always try to veryfi stable api
+// INFO
+// look at test from 3 perspectives
+//
+// 1.like testing pure function - give input and verify output
+//
+// 2.check if state changed correctly
+//   call a command (public api of teste object) and verify if state was changed properly or invariants blocked state change (by checking if domain exception thrown)
+//   verify state chnage via getter or collection of events in aggregate
+//
+// 3.verify if interaction logic flow goes correctly (application logic tests)
+// setup mock so it behaves properly and verify result  (like if proper number of calls on mocks were done)
+
+// always try to tests stable api - so that test is not fragile to refactor, stable api == buisness requierments
+
 namespace the80by20.Tests.Unit
 {
     public class ProblemAggregateTests
