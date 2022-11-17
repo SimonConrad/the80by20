@@ -71,7 +71,7 @@ public sealed class ProblemAggregate : AggregateRoot // TODO make as sealed doma
     public void Confirm()
     {
         if (!RequiredSolutionTypes.Elements.Any())
-            throw new ProblemException($"{nameof(Confirm)} Cannot confirm", Id.Value); // TODO create dedicated exception
+            throw new NoRequiredSolutionTypesException($"{nameof(Confirm)} Cannot confirm", Id.Value);
 
         Confirmed = true;
         Rejected = false;
