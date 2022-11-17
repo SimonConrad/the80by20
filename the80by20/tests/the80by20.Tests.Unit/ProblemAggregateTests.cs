@@ -59,5 +59,21 @@ namespace the80by20.Tests.Unit
             exception.ShouldNotBeNull();
             exception.ShouldBeOfType<NoRequiredSolutionTypesException>();
         }
+
+        //// INFO
+        //[Theory]
+        //[MemberData(nameof(GetCollidingDates))]
+        //public void Fake(DateTime from, DateTime to)
+        //{
+
+        //}
+
+        //public static IEnumerable<object[]> GetCollidingDates()
+        //{
+        //    yield return new object[] { DateTime.Now, DateTime.Now };
+        //    yield return new object[] { DateTime.Now, DateTime.Now };
+        //    yield return new object[] { DateTime.Now, DateTime.Now };
+        //    yield return new object[] { DateTime.Now, DateTime.Now };
+        //}
     }
 }
