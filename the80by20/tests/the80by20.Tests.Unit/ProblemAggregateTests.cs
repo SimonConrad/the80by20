@@ -60,7 +60,7 @@ namespace the80by20.Tests.Unit
             exception.ShouldBeOfType<NoRequiredSolutionTypesException>();
         }
 
-        //// INFO
+        // INFO
         //[Theory]
         //[MemberData(nameof(GetCollidingDates))]
         //public void Fake(DateTime from, DateTime to)
