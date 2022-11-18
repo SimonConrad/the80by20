@@ -10,11 +10,9 @@ using the80by20.Shared.Abstractions.Messaging;
 namespace the80by20.Modules.Solution.App.Solution.Commands.Handlers;
 
 
-public class FinishSolutionCommandHandler
-    : ICommandHandler<FinishSolutionCommand>
+public class FinishSolutionCommandHandler : ICommandHandler<FinishSolutionCommand>
 {
     private readonly ISolutionToProblemAggregateRepository _solutionToProblemAggregateRepository;
-
     private readonly IDomainEventDispatcher _domainEventDispatcher;
     private readonly IEventDispatcher _eventDispatcher;
     private readonly IEventMapper _eventMapper;
@@ -50,7 +48,7 @@ public class FinishSolutionCommandHandler
         // TODO: do following 
 
         // INFO
-        // published to archive problem (soft-delete) - end-of-life of the problem-aggregate object 
+        // dispatch to archive problem (soft-delete) - end-of-life of the problem-aggregate object 
         // event: SolutionFinished
         await _domainEventDispatcher.DispatchAsync(solution.Events.ToArray());
 
