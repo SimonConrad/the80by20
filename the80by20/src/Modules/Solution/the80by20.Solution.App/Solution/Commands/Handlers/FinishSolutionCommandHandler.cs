@@ -33,6 +33,8 @@ public class FinishSolutionCommandHandler : ICommandHandler<FinishSolutionComman
 
     public async Task HandleAsync(FinishSolutionCommand command)
     {
+        // INFO
+        // Finish solution aggregate and persists it
         SolutionToProblemAggregate solution = await _solutionToProblemAggregateRepository.Get(command.SolutionToProblemId);
         solution.FinishWorkOnSolutionToProblem();
         await _solutionToProblemAggregateRepository.SaveAggragate(solution);
@@ -48,18 +50,18 @@ public class FinishSolutionCommandHandler : ICommandHandler<FinishSolutionComman
         // TODO: do following 
 
         // INFO
-        // dispatch to archive problem (soft-delete) - end-of-life of the problem-aggregate object 
-        // event: SolutionFinished
+        // dispatch domain-event to archive problem (by soft-delete, end-of-life of the problem-aggregate object happens)
+        // dispatch SolutionFinished event which is handled by SolutionFinishedHandler in module problem, in its' domain layer
         await _domainEventDispatcher.DispatchAsync(solution.Events.ToArray());
 
         // INFO
-        // published to create product entity - handled in sale module // event: SolutionFinished
-        // perspective *becomes* aggregate solution becomes aggregate product
+        // publish an integration-event SolutionFinished to module sale
+        // handling logic: aggregate solution becomes aggregate product in sale module
         var integrationEvents = _eventMapper.MapAll(solution.Events);
         await _messageBroker.PublishAsync(integrationEvents.ToArray());
 
         // INFO
-        // published to update read-model - optimized for reads, denormalized, eventuall consistnet (not immediate) on purpose
+        // publish and application-event - optimized for reads, denormalized, eventuall consistnet (not immediate) on purpose
         await _eventDispatcher.PublishAsync(new UpdatedSolution(solution));
     }
 }
