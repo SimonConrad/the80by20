@@ -13,14 +13,15 @@ using the80by20.Modules.Users.Domain.UserEntity;
 using the80by20.Modules.Users.Infrastructure.Security;
 using the80by20.Shared.Abstractions.Auth;
 using the80by20.Shared.Infrastucture.Time;
-using the80by20.Tests.Integration.Setup;
+using the80by20.Tests.Integration.Common;
+using the80by20.Tests.Integration.InMemorySqlLite.Setup;
 using Xunit;
 
-namespace the80by20.Tests.Integration.Controllers;
+namespace the80by20.Tests.Integration.InMemorySqlLite.Controllers;
 
 // INFO to run tests sequentially - otherwise database problems
 [Collection(nameof(SystemTestCollectionDefinition))]
-public class UsersControllerTests: ControllerTests, IDisposable
+public class UsersControllerTests : ControllerTests, IDisposable
 {
     public UsersControllerTests(OptionsProvider optionsProvider) : base(optionsProvider)
     {
@@ -69,7 +70,7 @@ public class UsersControllerTests: ControllerTests, IDisposable
         const string password = "secret";
 
         var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
-            "test-user1", passwordManager.HashPassword(password), "Test Jon", Role.User(), clock.CurrentDate(), 
+            "test-user1", passwordManager.HashPassword(password), "Test Jon", Role.User(), clock.CurrentDate(),
             new Dictionary<string, IEnumerable<string>>(), true);
 
         await SqlLiteIneMemoryManager.UsersDbContext.AddAsync(user);
@@ -98,7 +99,7 @@ public class UsersControllerTests: ControllerTests, IDisposable
 
         var claims = new Dictionary<string, IEnumerable<string>>()
         {
-            ["permissions"] = new []{ "users" }
+            ["permissions"] = new[] { "users" }
         };
 
         var user = new User(Guid.NewGuid(), "test-user1@wp.pl",
@@ -110,7 +111,7 @@ public class UsersControllerTests: ControllerTests, IDisposable
         await SqlLiteIneMemoryManager.UsersDbContext.SaveChangesAsync();
 
         // Act
-        Authorize(user.Id, user.Role, claims : user.Claims, email: "test-user1@wp.pl");
+        Authorize(user.Id, user.Role, claims: user.Claims, email: "test-user1@wp.pl");
         var userDto = await Client.GetFromJsonAsync<UserDto>("users/users/me");
 
         // Assert

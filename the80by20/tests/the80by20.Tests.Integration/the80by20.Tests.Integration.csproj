@@ -30,6 +30,7 @@
     <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Solution.Domain\the80by20.Modules.Solution.Domain.csproj" />
     <ProjectReference Include="..\..\src\Modules\Solution\the80by20.Solution.Infrastructure\the80by20.Modules.Solution.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
+    <ProjectReference Include="..\the80by20.Tests.Shared\the80by20.Tests.Shared.csproj" />
   </ItemGroup>
 
 </Project>

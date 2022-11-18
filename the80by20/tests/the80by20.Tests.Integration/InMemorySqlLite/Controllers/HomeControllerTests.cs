@@ -2,10 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using System.Data;
-using the80by20.Tests.Integration.Setup;
+using the80by20.Tests.Integration.Common;
+using the80by20.Tests.Integration.InMemorySqlLite.Setup;
 using Xunit;
 
-namespace the80by20.Tests.Integration.Controllers;
+namespace the80by20.Tests.Integration.InMemorySqlLite.Controllers;
 
 
 // INFO Test Doubles (by Martin Fowler):

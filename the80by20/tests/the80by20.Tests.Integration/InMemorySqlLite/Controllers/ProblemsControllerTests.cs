@@ -13,10 +13,11 @@ using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Modules.Users.Domain.UserEntity;
 using the80by20.Modules.Users.Infrastructure.Security;
 using the80by20.Shared.Infrastucture.Time;
-using the80by20.Tests.Integration.Setup;
+using the80by20.Tests.Integration.Common;
+using the80by20.Tests.Integration.InMemorySqlLite.Setup;
 using Xunit;
 
-namespace the80by20.Tests.Integration.Controllers;
+namespace the80by20.Tests.Integration.InMemorySqlLite.Controllers;
 
 // INFO to run tests sequentially - otherwise database problems
 [Collection(nameof(SystemTestCollectionDefinition))]
@@ -68,7 +69,7 @@ public class ProblemsControllerTests : ControllerTests, IDisposable
         // read about other constarinats of inmemoemory sqlite, chnage to normal db and run integration test in container
         await SqlLiteIneMemoryManager.MasterDataDbContext.Categories.AddRangeAsync(GetCategories());
         await SqlLiteIneMemoryManager.MasterDataDbContext.SaveChangesAsync();
-        
+
 
         // Act
         Authorize(user.Id, user.Role);

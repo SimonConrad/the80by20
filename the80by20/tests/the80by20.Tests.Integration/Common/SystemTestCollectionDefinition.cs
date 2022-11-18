@@ -2,7 +2,7 @@
 
 using Xunit;
 
-namespace the80by20.Tests.Integration.Controllers;
+namespace the80by20.Tests.Integration.Common;
 
 [CollectionDefinition(nameof(SystemTestCollectionDefinition), DisableParallelization = true)]
 public class SystemTestCollectionDefinition { }

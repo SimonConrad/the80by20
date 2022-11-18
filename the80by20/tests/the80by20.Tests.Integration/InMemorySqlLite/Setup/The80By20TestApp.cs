@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace the80by20.Tests.Integration.Setup
+namespace the80by20.Tests.Integration.InMemorySqlLite.Setup
 {
     internal sealed class The80By20TestApp : WebApplicationFactory<Program>
     {

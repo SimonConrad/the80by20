@@ -8,7 +8,7 @@ using the80by20.Modules.Solution.Infrastructure.EF;
 using the80by20.Modules.Users.Infrastructure.EF;
 using the80by20.Shared.Infrastucture.Services;
 
-namespace the80by20.Tests.Integration.Setup;
+namespace the80by20.Tests.Integration.InMemorySqlLite.Setup;
 
 internal static class SqlLiteIneMemoryManager
 {

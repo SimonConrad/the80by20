@@ -29,4 +29,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\tests\the80by20.Tests.Shared\the80by20.Tests.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

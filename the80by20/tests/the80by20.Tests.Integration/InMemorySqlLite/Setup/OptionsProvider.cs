@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace the80by20.Tests.Integration.Setup;
+namespace the80by20.Tests.Integration.InMemorySqlLite.Setup;
 
 public sealed class OptionsProvider
 {
