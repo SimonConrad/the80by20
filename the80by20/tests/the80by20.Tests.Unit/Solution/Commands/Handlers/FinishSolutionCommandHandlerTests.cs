@@ -38,7 +38,6 @@ namespace the80by20.Tests.Unit.Commands.Handlers
             // INFO
             // dispatch domain-event to archive problem (by soft-delete, end-of-life of the problem-aggregate object happens)
             // dispatch SolutionFinished event which is handled by SolutionFinishedHandler in module problem, in its' domain layer
-            await _domainEventDispatcher.Received(1).DispatchAsync(solution.Events.ToArray());
             await _domainEventDispatcher.Received(1).DispatchAsync(Arg.Is<IDomainEvent[]>(x => 
                 x.Count() == 1
                 && x[0].GetType() == typeof(the80by20.Modules.Solution.Domain.Solution.Events.SolutionFinished)
