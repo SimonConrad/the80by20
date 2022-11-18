@@ -1,6 +1,6 @@
 ﻿// TODO 
 // make this test run on ci/cd pipeline
-// run test contenrized so that test db server exists...
+// run test contenrized so that test db server exists... https://hub.docker.com/_/microsoft-mssql-server
 
 using System.Net;
 using System.Net.Http.Headers;
