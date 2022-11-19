@@ -2,10 +2,10 @@ namespace the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttribu
 
 /// <summary>
 /// INFO
-/// Hybryde of Saga + Process Manager
-/// Orchietrate process spanning over multiple modules / or one module
-/// guards consitaent state of application - buinsess transaction
-/// mechanism of compenstation
+/// Hibryde of Saga + Process Manager
+/// orchestrate process spanning over multiple modules / or one module
+/// guards consistent state of application - it is business transaction
+/// have mechanism of compensation - rollback appropriate commands if there was a fail
 /// have state in which it is currently
 /// have data
 /// organise process steps
