@@ -1,7 +1,8 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
+﻿using the80by20.Modules.Solution.Domain.Solution.Policies;
+using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Time;
 
-namespace the80by20.Modules.Solution.Domain.Solution.DomainServicesAndPolicies;
+namespace the80by20.Modules.Solution.Domain.Solution.Factories;
 
 [FactoryDdd]
 public static class DiscountPolicyFactory

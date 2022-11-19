@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
 using the80by20.Modules.Solution.Domain.Shared.DomainServices;
-using the80by20.Modules.Solution.Domain.Solution.DomainServicesAndPolicies;
+using the80by20.Modules.Solution.Domain.Solution.DomainServices;
 
 [assembly: InternalsVisibleTo("the80by20.Tests.Unit")]
 namespace the80by20.Modules.Solution.Domain

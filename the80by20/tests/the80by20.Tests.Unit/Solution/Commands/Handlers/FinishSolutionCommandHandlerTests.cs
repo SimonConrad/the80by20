@@ -6,6 +6,7 @@ using the80by20.Modules.Solution.App.Solution.Services;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Modules.Solution.Domain.Solution.Entities;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
+using the80by20.Modules.Solution.Domain.Solution.ValueObjects;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Events;
 using the80by20.Shared.Abstractions.Kernel;

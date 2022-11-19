@@ -1,5 +1,5 @@
 ﻿using the80by20.Modules.Solution.App.Solution.Events;
-using the80by20.Modules.Solution.Domain.Solution.DomainServicesAndPolicies;
+using the80by20.Modules.Solution.Domain.Solution.DomainServices;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Events;

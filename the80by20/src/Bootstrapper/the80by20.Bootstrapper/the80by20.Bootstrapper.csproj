@@ -20,6 +20,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Modules\Masterdata\the80by20.Masterdata.Api\the80by20.Modules.Masterdata.Api.csproj" />
+		<ProjectReference Include="..\..\Modules\Saga\the80by20.Saga\the80by20.Saga.csproj" />
 		<ProjectReference Include="..\..\Modules\Sale\the80by20.Modules.Sale.Api\the80by20.Modules.Sale.Api.csproj" />
 		<ProjectReference Include="..\..\Modules\Solution\the80by20.Solution.Api\the80by20.Modules.Solution.Api.csproj" />
 		<ProjectReference Include="..\..\Modules\Users\the80by20.Users.Api\the80by20.Modules.Users.Api.csproj" />

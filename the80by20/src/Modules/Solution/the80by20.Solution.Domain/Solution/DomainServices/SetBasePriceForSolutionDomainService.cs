@@ -1,9 +1,10 @@
 ﻿using the80by20.Modules.Solution.Domain.Solution.Entities;
+using the80by20.Modules.Solution.Domain.Solution.Factories;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 using the80by20.Shared.Abstractions.Kernel.Capabilities;
 using the80by20.Shared.Abstractions.Time;
 
-namespace the80by20.Modules.Solution.Domain.Solution.DomainServicesAndPolicies;
+namespace the80by20.Modules.Solution.Domain.Solution.DomainServices;
 
 [DomainServiceDdd]
 public sealed class SetBasePriceForSolutionDomainService

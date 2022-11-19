@@ -3,12 +3,13 @@
 namespace the80by20.Saga;
 
 [Saga]
-public class CreateProductSaga
+public class InitializeSaleSaga
 {
     // INFO
     // 1. Received event ProblemCreated from Solution module
-    // 2. Send command CreateClient to Sale module (to start tracking potential client, same identity
-    // as user, but different meaning i different context)
+    // 2. Send command CreateClient to Sale module (to start tracking potential client, same identity (snowflake id)
+    // as user, but different meaning - because  user in users bounded contexts and client in sale
+    // bounded ctxt, different bounded contexts operates on different user/client attributes, behaviors)
     // 3. Received event SolutionFinished  from Solution module
     // 4. Send command/s ArchiveProblem, ArchiveSolution to Solution module
     // 5. Send command CreateProduct (based on Solution id) to Sale module, sale module read using solution-api-client

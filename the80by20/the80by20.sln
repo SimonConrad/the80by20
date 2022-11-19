@@ -85,7 +85,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "the80by20.Modules.Sale.Infr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Tests.Shared", "tests\the80by20.Tests.Shared\the80by20.Tests.Shared.csproj", "{DDFB27C5-B235-4AB6-A4E2-DD79441F1671}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Saga", "Saga", "{875752A4-F123-4C52-8397-348F6077F53D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "saga", "saga", "{875752A4-F123-4C52-8397-348F6077F53D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "the80by20.Saga", "src\Modules\Saga\the80by20.Saga\the80by20.Saga.csproj", "{E7707E19-C3BC-42D0-8E18-25021A1BDB7D}"
 EndProject
