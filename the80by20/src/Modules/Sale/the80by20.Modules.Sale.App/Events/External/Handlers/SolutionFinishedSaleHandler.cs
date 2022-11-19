@@ -41,6 +41,8 @@ namespace the80by20.Modules.Sale.App.Events.External.Handlers
 
 
             _logger.LogInformation($"Product created {@event.solutionId}");
+            // INFO
+            // publish event ProductCreated which starts Saga InitializeSaleSaga
         }
     }
 }
