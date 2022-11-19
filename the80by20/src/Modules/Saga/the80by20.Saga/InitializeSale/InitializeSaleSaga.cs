@@ -1,6 +1,6 @@
 ﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
-namespace the80by20.Saga;
+namespace the80by20.Saga.InitializeSale;
 
 [Saga]
 public class InitializeSaleSaga

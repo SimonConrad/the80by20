@@ -1,7 +1,7 @@
 ﻿using the80by20.Modules.Users.Infrastructure.EF;
 using the80by20.Tests.Shared;
 
-namespace the80by20.Tests.Integration.Solution.Common
+namespace the80by20.Tests.Integration.Common
 {
     public class TestUsersDbContext : IDisposable
     {

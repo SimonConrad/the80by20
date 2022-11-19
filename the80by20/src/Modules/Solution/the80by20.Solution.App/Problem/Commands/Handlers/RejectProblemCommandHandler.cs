@@ -1,11 +1,11 @@
-﻿using the80by20.Modules.Solution.App.Solution.Problem.Events;
+﻿using the80by20.Modules.Solution.App.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Shared.DomainServices;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Events;
 
-namespace the80by20.Modules.Solution.App.Solution.Problem.Commands.Handlers;
+namespace the80by20.Modules.Solution.App.Problem.Commands.Handlers;
 
 public class RejectProblemCommandHandler : ICommandHandler<RejectProblemCommand>
 {

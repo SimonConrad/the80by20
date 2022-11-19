@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using the80by20.Bootstrapper;
 
 namespace the80by20.Tests.Integration.InMemorySqlLite.Setup
 {

@@ -12,7 +12,7 @@ using the80by20.Shared.Abstractions.Events;
 using the80by20.Shared.Abstractions.Kernel;
 using the80by20.Shared.Abstractions.Messaging;
 
-namespace the80by20.Tests.Unit.Commands.Handlers
+namespace the80by20.Tests.Unit.Solution.Commands.Handlers
 {
     public class FinishSolutionCommandHandlerTests
     {

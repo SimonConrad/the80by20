@@ -28,7 +28,7 @@ using the80by20.Modules.Solution.Domain.Shared;
 //
 // (3)  end to end tests - testing whole user use cases in the context of integration chosen group of components (ex. whole http request in api)
 
-namespace the80by20.Tests.Unit.Entities
+namespace the80by20.Tests.Unit.Solution.Entities
 {
     public class ProblemAggregateTests : IDisposable
     {

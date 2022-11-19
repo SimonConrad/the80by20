@@ -1,5 +1,5 @@
 ﻿using the80by20.Modules.Masterdata.App.Services;
-using the80by20.Modules.Solution.App.Solution.Problem.Events;
+using the80by20.Modules.Solution.App.Problem.Events;
 using the80by20.Modules.Solution.Domain.Problem.Repositories;
 using the80by20.Modules.Solution.Domain.Solution.Repositories;
 using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;

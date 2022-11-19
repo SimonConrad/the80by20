@@ -1,4 +1,4 @@
-﻿using the80by20.Shared.Abstractions.Kernel.Types;
+﻿namespace the80by20.Shared.Abstractions.Kernel.Types;
 
 public class EntityId : TypeId
 {

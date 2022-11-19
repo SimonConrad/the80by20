@@ -1,11 +1,12 @@
+using System.Reflection;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
-using System.Reflection;
-using the80by20.Bootstrapper;
 using the80by20.Shared.Abstractions.Modules;
 using the80by20.Shared.Infrastucture;
 using the80by20.Shared.Infrastucture.Modules;
+
+namespace the80by20.Bootstrapper;
 
 public partial class Program
 {
@@ -67,21 +68,21 @@ public partial class Program
     private static Serilog.Core.Logger CreateLogger(WebApplicationBuilder builder)
     {
         return new LoggerConfiguration()
-                 .MinimumLevel.Information()
-                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
-                 //"Microsoft.EntityFrameworkCore.Database.Command": "Warning",
-                 //"Microsoft.EntityFrameworkCore.Infrastructure": "Warning"
-                 .WriteTo
-                 .Console()
-                 .Enrich.FromLogContext()
-                 .WriteTo.File(builder.Configuration.GetValue<string>("LogFilePath"),
-                         rollingInterval: RollingInterval.Day,
-                         rollOnFileSizeLimit: true,
-                         retainedFileCountLimit: 10,
-                         fileSizeLimitBytes: 4194304, // 4MB
-                                                      //restrictedToMinimumLevel: LogEventLevel.Information,
-                         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] ({SourceContext}.{Method}) {Message}{NewLine}{Exception}")
-                 .CreateLogger();
+            .MinimumLevel.Information()
+            .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
+            //"Microsoft.EntityFrameworkCore.Database.Command": "Warning",
+            //"Microsoft.EntityFrameworkCore.Infrastructure": "Warning"
+            .WriteTo
+            .Console()
+            .Enrich.FromLogContext()
+            .WriteTo.File(builder.Configuration.GetValue<string>("LogFilePath"),
+                rollingInterval: RollingInterval.Day,
+                rollOnFileSizeLimit: true,
+                retainedFileCountLimit: 10,
+                fileSizeLimitBytes: 4194304, // 4MB
+                //restrictedToMinimumLevel: LogEventLevel.Information,
+                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] ({SourceContext}.{Method}) {Message}{NewLine}{Exception}")
+            .CreateLogger();
         // todo .{Method} is not logging method name
         //loggerConfiguration.ReadFrom.Configuration(builder.Configuration);
 

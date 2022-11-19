@@ -7,13 +7,12 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Identity;
 using Shouldly;
-using the80by20.Modules.Solution.App.Solution.Problem.Commands;
+using the80by20.Modules.Solution.App.Problem.Commands;
 using the80by20.Modules.Solution.Domain.Shared;
 using the80by20.Modules.Users.Domain.UserEntity;
 using the80by20.Modules.Users.Infrastructure.Security;
 using the80by20.Shared.Infrastucture.Time;
 using the80by20.Tests.Integration.Common;
-using the80by20.Tests.Integration.Solution.Common;
 using the80by20.Tests.Shared;
 using Xunit;
 
