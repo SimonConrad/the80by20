@@ -1,7 +1,7 @@
 ﻿namespace the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
 /// <summary>
-/// agregat  - model true invariants in consistency boundaries according to real business rules. it is entity it has identity
+/// aggregate  - model true invariants in consistency boundaries according to real business rules. it is entity it has identity
 ///
 /// 
 /// Aggregates designing rules
@@ -69,6 +69,10 @@
 ///         - agg is persisted in transactional (ACID) way in database, best approach one transaction one aggregate
 ///         - if more aggregates states changes need to be persisted in one business transaction then use saga pattern
 ///         - saga makes manging such buinsess transaction in kind of acid way - uses compensation if needed
+///
+///
+/// - do not use lazy loading with aggregates - best option one table but if related data use eager loading
+/// - why? because all aggregate data should be fetched from db at once to avoid potential inconsistency of data problems
 /// </summary>
 public class AggregateDddAttribute : Attribute
 { }
