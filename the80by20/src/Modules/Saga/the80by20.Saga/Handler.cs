@@ -13,7 +13,9 @@ internal class Handler : IEventHandler<ProductCreated>, IEventHandler<ProductsAs
 
     public Task HandleAsync(ProductCreated @event) => _coordinator.ProcessAsync(@event, SagaContext.Empty);
 
+    public Task HandleAsync(ClientCreated @event) => _coordinator.ProcessAsync(@event, SagaContext.Empty);
+    
     public Task HandleAsync(ProductsAssignedToClient @event) => _coordinator.ProcessAsync(@event, SagaContext.Empty);
 
-    public Task HandleAsync(ClientCreated @event) => _coordinator.ProcessAsync(@event, SagaContext.Empty);
+
 }

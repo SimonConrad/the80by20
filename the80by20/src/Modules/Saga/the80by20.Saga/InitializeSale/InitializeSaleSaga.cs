@@ -10,7 +10,7 @@ namespace the80by20.Saga.InitializeSale;
 
 // TODO how to persist in database?
 internal class InitializeSaleSaga : Saga<InitializeSaleSaga.SagaData>,     // INFO alternative instead of chronicle can use mas transit
-    ISagaStartAction<ProductCreated>,
+    ISagaStartAction<ProductCreated>, // todo consider starting with solution-finished event so tha t saga will span over two modules solution and sale, then chnage ProductCreated to saga action
     ISagaAction<ClientCreated>,
     ISagaAction<ProductsAssignedToClient>
 {
