@@ -16,6 +16,10 @@ namespace the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttribu
 /// example of distributed business transaction: process of flight reservation which consists of sending 3 commands to separate modules / services
 /// : 1. reserve-plane 2. reserve-car-to-hotel 3. reserve-hotel
 /// with the need of compensation if any fails (by "rollback")
+///
+/// saga can be alternative to cron job - for example requirment if 10 users signed-up to something
+/// with cron job - every day at midnight check table and so on
+/// instead use sage whchc not query db but react to event of signedup user, and do its logic if user more then 10
 /// </summary>
 public class SagaAttribute : Attribute
 { }
