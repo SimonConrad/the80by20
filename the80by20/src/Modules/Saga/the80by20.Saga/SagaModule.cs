@@ -12,7 +12,8 @@ public class SagaModule : IModule
 
     public void Register(IServiceCollection services)
     {
-        services.AddSaga();
+        //TODO test:
+        //services.AddSaga();
     }
 
     public void Use(IApplicationBuilder app)

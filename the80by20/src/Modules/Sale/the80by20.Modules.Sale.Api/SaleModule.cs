@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using the80by20.Modules.Sale.App.DTO;
+using the80by20.Modules.Sale.App.Services;
 using the80by20.Modules.Sale.Infrastructure;
 using the80by20.Shared.Abstractions.Modules;
+using the80by20.Shared.Infrastucture.Modules;
 
 namespace the80by20.Modules.Sale.Api
 {
@@ -34,6 +37,16 @@ namespace the80by20.Modules.Sale.Api
             // INFO if needed service can be obtain by such code:
             // app.ApplicationServices.GetService...
             // so we don't need to create a constructor with passed to it dependencies
+            
+            // TODO for saga
+            app
+                .UseModuleRequests()
+                .Subscribe<ClientDto, object>("clients/create", async (dto, sp) =>
+                {
+                    var service = sp.GetRequiredService<IClientService>();
+                    await service.CreateAsync(dto);
+                    return null;
+                });
         }
     }
 }

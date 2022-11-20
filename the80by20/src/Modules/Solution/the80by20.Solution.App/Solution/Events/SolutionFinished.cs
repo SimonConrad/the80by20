@@ -17,5 +17,4 @@ namespace the80by20.Modules.Solution.App.Solution.Events
 
     [IntegrationEvent]
     public record SolutionFinished(Guid solutionId) : IEvent;
-
 }
