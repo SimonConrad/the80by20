@@ -5,5 +5,5 @@ namespace the80by20.Modules.Sale.App.Events
 {
 
     [IntegrationEvent]
-    public record ProductCreated(Guid ProductId) : IEvent;
+    public record ProductCreated(Guid ProductId, Guid UserId) : IEvent;
 }

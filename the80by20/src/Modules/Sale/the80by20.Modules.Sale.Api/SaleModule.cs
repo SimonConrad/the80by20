@@ -41,12 +41,15 @@ namespace the80by20.Modules.Sale.Api
             // TODO for saga
             app
                 .UseModuleRequests()
-                .Subscribe<ClientDto, object>("clients/create", async (dto, sp) =>
+                .Subscribe<ClientDto, object>("sale/clients/create", async (dto, sp) =>
                 {
                     var service = sp.GetRequiredService<IClientService>();
                     await service.CreateAsync(dto);
                     return null;
                 });
+            
+            // TODO
+            // expose api: sale/products/assign-product-to-client
         }
     }
 }

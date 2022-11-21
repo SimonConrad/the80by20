@@ -4,7 +4,10 @@ using the80by20.Shared.Abstractions.Events;
 
 namespace the80by20.Saga;
 
-internal class Handler : IEventHandler<ProductCreated>, IEventHandler<ProductsAssignedToClient>, IEventHandler<ClientCreated>
+internal class Handler : IEventHandler<ProductCreated>, 
+    IEventHandler<ProductsAssignedToClient>, 
+    IEventHandler<ClientCreated>,
+    IEventHandler<SolutionArchived>
 {
     private readonly ISagaCoordinator _coordinator;
 
@@ -16,6 +19,8 @@ internal class Handler : IEventHandler<ProductCreated>, IEventHandler<ProductsAs
     public Task HandleAsync(ClientCreated @event) => _coordinator.ProcessAsync(@event, SagaContext.Empty);
     
     public Task HandleAsync(ProductsAssignedToClient @event) => _coordinator.ProcessAsync(@event, SagaContext.Empty);
+    
+    public Task HandleAsync(SolutionArchived @event) => _coordinator.ProcessAsync(@event, SagaContext.Empty);
 
 
 }
