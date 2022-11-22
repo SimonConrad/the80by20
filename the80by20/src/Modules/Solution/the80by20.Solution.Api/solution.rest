@@ -1,7 +1,7 @@
 @url = http://localhost:5000/solution-to-problem
 #@url = https://the80by20.azurewebsites.net/solution-to-problem
 
-@solutionId = 
+@solutionId = f87f77ac-10c1-4d58-9f81-d7a73b1df363
 
 @accessToken = 
 
@@ -13,4 +13,6 @@ GET {{url}}
 ###
 POST {{url}}/solutions/FinishSolutionMocked/{{solutionId}}
 Authorization: Bearer {{accessToken}}
+
+
 

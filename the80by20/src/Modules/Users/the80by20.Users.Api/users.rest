@@ -1,5 +1,5 @@
-@url = http://localhost:5000/users
-#@url = https://the80by20.azurewebsites.net/users
+#@url = http://localhost:5000/users
+@url = https://the80by20.azurewebsites.net/users
 
 @userId = 00000000-0000-0000-0000-000000000001
 

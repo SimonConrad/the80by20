@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿@url = http://localhost:5000/sale
+#@url = https://the80by20.azurewebsites.net/solution-to-problem
 
-namespace the80by20.Modules.Sale.Api
-{
-    class Sale
-    {
-    }
-}
+@solutionId = f87f77ac-10c1-4d58-9f81-d7a73b1df363
+
+@accessToken = 
+
+###
+GET {{url}}
+
+
+
+###
+POST {{url}}/products/CreateProductMocked/{{solutionId}}
+Authorization: Bearer {{accessToken}}

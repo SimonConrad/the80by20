@@ -8,7 +8,7 @@ public static class Extensions
     public static IServiceCollection AddSaga(this IServiceCollection services)
     {
         // TODO debug saga
-        //services.AddChronicle();
+        services.AddChronicle();
         return services;
     }
 }
