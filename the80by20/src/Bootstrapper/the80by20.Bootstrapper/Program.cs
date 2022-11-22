@@ -57,8 +57,10 @@ public partial class Program
             // docker ps
             // rabbitmq: http://localhost:15672/#/
             // ci/cd with rabbitmq azure container registry (with rabbitmq) + web app
-            app.UseConvey();
-            app.UseRabbitMq();
+            
+            // todo rabbitmq
+            // app.UseConvey();
+            // app.UseRabbitMq();
             
             assemblies.Clear();
             modules.Clear();

@@ -46,10 +46,10 @@ public static class Program
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         
-        
-        app.UseConvey();
-        app.UseRabbitMq()
-            .SubscribeEvent<SolutionFinished>();
+        // todo rabbitmq
+        // app.UseConvey();
+        // app.UseRabbitMq()
+        //     .SubscribeEvent<SolutionFinished>();
 
     }
 }

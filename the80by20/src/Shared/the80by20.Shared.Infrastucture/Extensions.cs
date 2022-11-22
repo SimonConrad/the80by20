@@ -98,10 +98,11 @@ namespace the80by20.Shared.Infrastucture
 
             services.Configure<AppOptions>(configuration.GetRequiredSection(key: "app"));
 
-            services
-                .AddConvey()
-                .AddRabbitMq()
-                .Build();
+            // todo rabbitmq
+            // services
+            //     .AddConvey()
+            //     .AddRabbitMq()
+            //     .Build();
             
             return services;
         }

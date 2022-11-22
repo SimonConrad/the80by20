@@ -37,13 +37,14 @@ namespace the80by20.Services.Sale.Infrastructure
             services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
             services.AddHostedService<AppInitializer>();
             
-            services
-                .AddConvey()
-                .AddRabbitMq()
-                .AddEventHandlers()
-                .AddInMemoryEventDispatcher()
-                .Build();
-            
+            //todo rabbitmq
+            // services
+            //     .AddConvey()
+            //     .AddRabbitMq()
+            //     .AddEventHandlers()
+            //     .AddInMemoryEventDispatcher()
+            //     .Build();
+            //
             
             services
                 .AddSingleton<ISolutionApiClient, SolutionApiClient>();
