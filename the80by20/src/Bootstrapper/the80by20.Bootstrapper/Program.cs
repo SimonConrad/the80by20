@@ -10,6 +10,11 @@ using the80by20.Shared.Infrastucture.Modules;
 
 namespace the80by20.Bootstrapper;
 
+// TODO test and debug saga
+// TODO test and debug rabbitmg between services
+// end service sale - add separate migraitons connection + db etc
+// todo do sal emodule with modelling phase - with dna
+
 public partial class Program
 {
     private static IList<Assembly> assemblies;
