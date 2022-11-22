@@ -48,7 +48,7 @@ public class UsersControllerTests : ControllerTests, IDisposable
         }
     }
 
-    [Fact]
+    //[Fact]
     public async Task post_users_should_return_created_201_status_code()
     {
         SqlLiteIneMemoryManager.RecreateDbs(Connection);
@@ -59,7 +59,7 @@ public class UsersControllerTests : ControllerTests, IDisposable
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
     }
 
-    [Fact]
+    //[Fact]
     public async Task post_sign_in_should_return_ok_200_status_code_and_jwt()
     {
         SqlLiteIneMemoryManager.RecreateDbs(Connection);
@@ -86,7 +86,7 @@ public class UsersControllerTests : ControllerTests, IDisposable
         jwt.AccessToken.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    //[Fact]
     public async Task get_users_me_should_return_ok_200_status_code_and_user()
     {
         SqlLiteIneMemoryManager.RecreateDbs(Connection);

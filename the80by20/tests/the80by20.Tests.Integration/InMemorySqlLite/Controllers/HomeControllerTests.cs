@@ -34,7 +34,7 @@ public class HomeControllerTests : ControllerTests, IDisposable
 
     public SqliteConnection Connection { get; private set; }
 
-    [Fact]
+    //[Fact]
     public async Task get_base_endpoint_should_return_200_ok_status_code_and_api_name()
     {
         SqlLiteIneMemoryManager.RecreateDbs(Connection);
