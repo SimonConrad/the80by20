@@ -18,6 +18,12 @@ namespace the80by20.Modules.Sale.App.Events.External.Handlers
 
         public async Task HandleAsync(SolutionFinished @event)
         {
+            // info create product based on solution, becomes perspective
+            // send event ProductCreated
+            _logger.LogInformation($"{nameof(ProductCreated)} {@event.solutionId}");
+            // INFO
+            // publish event ProductCreated which starts Saga InitializeSaleSaga
+            
             // INFO
             // create product, can be with same id as solution, caouse problem becomes solution becomes product
             // send user who created problem notification taht he / she

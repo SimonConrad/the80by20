@@ -19,6 +19,12 @@ namespace the80by20.Services.Sale.App.Events.External.Handlers
 
         public async Task HandleAsync(SolutionFinished @event, CancellationToken cancellationToken = new CancellationToken())
         {
+            // info create product based on solution, becomes perspective
+            // send event ProductCreated
+            _logger.LogInformation($"{nameof(ProductCreated)} {@event.solutionId}");
+            // INFO
+            // publish event ProductCreated which starts Saga InitializeSaleSaga
+            
             // INFO
             // create product, can be with same id as solution, caouse problem becomes solution becomes product
             // send user who created problem notification taht he / she
@@ -41,9 +47,7 @@ namespace the80by20.Services.Sale.App.Events.External.Handlers
             // can be checked by: await Task.Delay(10_000); 
 
 
-            _logger.LogInformation($"Product created {@event.solutionId}");
-            // INFO
-            // publish event ProductCreated which starts Saga InitializeSaleSaga
+           
         }
     }
 }
