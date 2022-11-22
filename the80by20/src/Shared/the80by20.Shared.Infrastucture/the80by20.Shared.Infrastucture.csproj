@@ -14,6 +14,7 @@
 	<ItemGroup>
 		<InternalsVisibleTo Include="the80by20.Bootstrapper" />
 		<InternalsVisibleTo Include="the80by20.Tests.Integration" />
+		<InternalsVisibleTo Include="the80by20.Services.Sale.Infrastructure" />
 	</ItemGroup>
 
 	<ItemGroup>

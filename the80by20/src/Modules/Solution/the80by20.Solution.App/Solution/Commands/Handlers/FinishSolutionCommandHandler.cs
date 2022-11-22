@@ -57,7 +57,7 @@ public class FinishSolutionCommandHandler : ICommandHandler<FinishSolutionComman
         // INFO
         // publish an integration-event SolutionFinished to module sale
         // handling logic: aggregate solution becomes aggregate product in sale module
-        // the80by20.Modules.Sale.App.Events.External.Handlers.SolutionFinishedSaleHandler
+        // the80by20.Services.Sale.App.Events.External.Handlers.SolutionFinishedSaleHandler
         var integrationEvents = _eventMapper.MapAll(solution.Events);
         await _messageBroker.PublishAsync(integrationEvents.ToArray());
 

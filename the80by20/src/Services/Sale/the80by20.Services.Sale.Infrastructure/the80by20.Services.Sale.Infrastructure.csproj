@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Infrastucture\the80by20.Shared.Infrastucture.csproj" />
+      <ProjectReference Include="..\the80by20.Services.Sale.App\the80by20.Services.Sale.App.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="EF\Configurations" />
+      <Folder Include="EF\Mappings" />
+      <Folder Include="EF\Migrations" />
+      <Folder Include="EF\Queries" />
+      <Folder Include="EF\Repositories" />
+    </ItemGroup>
+
+</Project>

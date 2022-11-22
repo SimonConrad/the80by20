@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\the80by20.Shared.Abstractions\the80by20.Shared.Abstractions.csproj" />
+      <ProjectReference Include="..\the80by20.Services.Sale.Domain\the80by20.Services.Sale.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Commands\Handlers" />
+      <Folder Include="Queries\Handlers" />
+    </ItemGroup>
+
+</Project>

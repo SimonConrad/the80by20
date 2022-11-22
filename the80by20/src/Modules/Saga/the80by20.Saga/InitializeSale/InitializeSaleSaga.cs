@@ -17,7 +17,7 @@ namespace the80by20.Saga.InitializeSale;
 
 // INFO 
 // 1. Received event ProductCreated from Sale module
-//      published by the80by20.Modules.Sale.App.Events.External.Handlers.SolutionFinishedSaleHandler
+//      published by the80by20.Services.Sale.App.Events.External.Handlers.SolutionFinishedSaleHandler
 // 2. Send command create-client to Sale module
 //      why create new "user"?, beacouse in sale module user is not *user* but it is *client* - it has same identity (snowflake id) as user,
 //      but different set of attributes and behaviors - user in users bounded context and client in sale

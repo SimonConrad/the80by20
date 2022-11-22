@@ -2,7 +2,7 @@
   "sale": {
     "module": {
       "name": "Sale",
-      "enabled": true
+      "enabled": true // info set enabled to false if using sale-service not sale -module
     }
   }
 }
