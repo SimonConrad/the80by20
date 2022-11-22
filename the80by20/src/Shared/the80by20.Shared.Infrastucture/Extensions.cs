@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Convey;
+using Convey.MessageBrokers.RabbitMQ;
 using the80by20.Shared.Abstractions.Contexts;
 using the80by20.Shared.Abstractions.Modules;
 using the80by20.Shared.Abstractions.Time;
@@ -96,6 +98,11 @@ namespace the80by20.Shared.Infrastucture
 
             services.Configure<AppOptions>(configuration.GetRequiredSection(key: "app"));
 
+            services
+                .AddConvey()
+                .AddRabbitMq()
+                .Build();
+            
             return services;
         }
 

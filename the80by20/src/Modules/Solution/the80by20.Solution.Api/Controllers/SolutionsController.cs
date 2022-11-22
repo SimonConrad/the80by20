@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using the80by20.Modules.Solution.App.ReadModel;
 using the80by20.Modules.Solution.App.Solution.Commands;
+using the80by20.Modules.Solution.App.Solution.Events;
 using the80by20.Shared.Abstractions.Commands;
 using the80by20.Shared.Abstractions.Messaging;
 
@@ -55,12 +56,15 @@ namespace the80by20.Modules.Solution.Api.Controllers
         }
 
         [HttpPost("FinishSolutionMocked/{solutionId:guid}")]
+        [AllowAnonymous]
         public async Task<ActionResult> FinishSolutionMocked(Guid solutionId)
         {
             // todo
             // move to FinishSolutionCommandHandler (API layer or DAL Layer in the repo after save-changes)
             // should go first to FinishSolutionCommandHandler and after successfully command handled in this handler call below
-            await  _commandDispatcher.SendAsync(new FinishSolutionCommand(solutionId));
+            //await  _commandDispatcher.SendAsync(new FinishSolutionCommand(solutionId));
+
+            await _messageBroker.PublishAsync(new SolutionFinished(Guid.NewGuid()));
 
 
             return Ok();

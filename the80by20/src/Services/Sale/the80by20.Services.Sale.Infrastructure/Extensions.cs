@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Convey;
+using Convey.CQRS.Events;
+using Convey.MessageBrokers.RabbitMQ;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using the80by20.Services.Sale.App.Clients.Solution;
 using the80by20.Services.Sale.Infrastructure.Clients;
@@ -34,12 +37,12 @@ namespace the80by20.Services.Sale.Infrastructure
             services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
             services.AddHostedService<AppInitializer>();
             
-            // services
-            //     .AddConvey()
-            //     .AddRabbitMq()
-            //     .AddEventHandlers()
-            //     .AddInMemoryEventDispatcher()
-            //     .Build();
+            services
+                .AddConvey()
+                .AddRabbitMq()
+                .AddEventHandlers()
+                .AddInMemoryEventDispatcher()
+                .Build();
             
             
             services

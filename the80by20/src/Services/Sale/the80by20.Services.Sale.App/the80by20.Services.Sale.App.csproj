@@ -16,4 +16,9 @@
       <Folder Include="Queries\Handlers" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Convey.CQRS.Events" Version="1.0.541" />
+      <PackageReference Include="Convey.MessageBrokers" Version="1.0.541" />
+    </ItemGroup>
+
 </Project>

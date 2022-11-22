@@ -1,4 +1,6 @@
 using System.Reflection;
+using Convey;
+using Convey.MessageBrokers.RabbitMQ;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
@@ -41,6 +43,18 @@ public partial class Program
             WebApplication app = builder.Build();
             UseMiddlewares(app, builder.Configuration, modules);
 
+            // TODO debug communication betweeen services: the80by20.solution and sale-service over rabbit-mq
+         
+            // INFO
+            // to start rabbit-mq - start docker - docker for windows
+            // docker-compose down
+            // docker-compose up -d
+            // docker ps
+            // rabbitmq: http://localhost:15672/#/
+            // ci/cd with rabbitmq azure container registry (with rabbitmq) + web app
+            app.UseConvey();
+            app.UseRabbitMq();
+            
             assemblies.Clear();
             modules.Clear();
 

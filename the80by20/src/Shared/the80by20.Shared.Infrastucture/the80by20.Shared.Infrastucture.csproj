@@ -19,6 +19,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Bogus" Version="34.0.2" />
+		<PackageReference Include="Convey.MessageBrokers.CQRS" Version="1.0.541" />
+		<PackageReference Include="Convey.MessageBrokers.RabbitMQ" Version="1.0.541" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.1.0" />
 		<PackageReference Include="Humanizer" Version="2.14.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />

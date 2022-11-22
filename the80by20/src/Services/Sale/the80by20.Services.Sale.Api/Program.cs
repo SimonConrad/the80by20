@@ -1,4 +1,8 @@
+using Convey;
+using Convey.MessageBrokers.CQRS;
+using Convey.MessageBrokers.RabbitMQ;
 using Microsoft.Extensions.Options;
+using the80by20.Services.Sale.App.Events.External;
 using the80by20.Services.Sale.Infrastructure;
 using the80by20.Shared.Infrastucture;
 
@@ -43,9 +47,9 @@ public static class Program
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         
         
-        // app.UseConvey();
-        // app.UseRabbitMq()
-        //     .SubscribeEvent<ConferenceCreated>();
+        app.UseConvey();
+        app.UseRabbitMq()
+            .SubscribeEvent<SolutionFinished>();
 
     }
 }

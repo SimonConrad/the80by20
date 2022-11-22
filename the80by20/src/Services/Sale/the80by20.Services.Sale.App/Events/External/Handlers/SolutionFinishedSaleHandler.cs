@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Convey.CQRS.Events;
+using Microsoft.Extensions.Logging;
 using the80by20.Services.Sale.App.Clients.Solution;
-using the80by20.Shared.Abstractions.Events;
+
 
 namespace the80by20.Services.Sale.App.Events.External.Handlers
 {
@@ -16,7 +17,7 @@ namespace the80by20.Services.Sale.App.Events.External.Handlers
             _solutionApiClient = solutionApiClient;
         }
 
-        public async Task HandleAsync(SolutionFinished @event)
+        public async Task HandleAsync(SolutionFinished @event, CancellationToken cancellationToken = new CancellationToken())
         {
             // INFO
             // create product, can be with same id as solution, caouse problem becomes solution becomes product
@@ -27,7 +28,7 @@ namespace the80by20.Services.Sale.App.Events.External.Handlers
             // todo
             // get more data using ISolutionApiClient
 
-            var details = await _solutionApiClient.GetSolutionToProblemDto(@event.solutionId);
+            //var details = await _solutionApiClient.GetSolutionToProblemDto(@event.solutionId);
 
 
             // data: prolem / solution becomes product with informations: SolutionSummary, SolutionElements, Price, additional infos from aggregates: problem and solutio

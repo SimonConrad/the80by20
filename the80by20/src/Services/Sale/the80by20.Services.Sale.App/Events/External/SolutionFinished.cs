@@ -1,10 +1,11 @@
-﻿using the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
-using the80by20.Shared.Abstractions.Events;
+﻿
+
+using Convey.CQRS.Events;
+using Convey.MessageBrokers;
 
 namespace the80by20.Services.Sale.App.Events.External
 {
-
-    [IntegrationEvent]
+    [Message("modular-monolith")]
     public record SolutionFinished(Guid solutionId) : IEvent;
 
 }
