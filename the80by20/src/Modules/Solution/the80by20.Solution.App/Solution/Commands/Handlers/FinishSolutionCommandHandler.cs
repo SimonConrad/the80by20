@@ -54,15 +54,17 @@ public class FinishSolutionCommandHandler : ICommandHandler<FinishSolutionComman
         // dispatch SolutionFinished event which is handled by SolutionFinishedHandler in module problem, in its' domain layer
         await _domainEventDispatcher.DispatchAsync(solution.Events.ToArray());
 
+
+        // INFO
+        // publish and application-event - optimized for reads, denormalized, eventuall consistnet (not immediate) on purpose
+        await _eventDispatcher.PublishAsync(new UpdatedSolution(solution));
+        
+        
         // INFO
         // publish an integration-event SolutionFinished to module sale
         // handling logic: aggregate solution becomes aggregate product in sale module
         // the80by20.Services.Sale.App.Events.External.Handlers.SolutionFinishedSaleHandler
         var integrationEvents = _eventMapper.MapAll(solution.Events);
         await _messageBroker.PublishAsync(integrationEvents.ToArray());
-
-        // INFO
-        // publish and application-event - optimized for reads, denormalized, eventuall consistnet (not immediate) on purpose
-        await _eventDispatcher.PublishAsync(new UpdatedSolution(solution));
     }
 }
