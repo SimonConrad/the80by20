@@ -8,16 +8,16 @@ namespace the80by20.Shared.Infrastucture.Messaging.Brokers
     internal sealed class MessageBroker : IMessageBroker
     {
         private readonly IModuleClient _moduleClient;
-        // private readonly IBusPublisher _busPublisher; // todo rabbitmq
+        private readonly IBusPublisher _busPublisher; 
         private readonly IAsyncMessageDispatcher _asyncMessageDispatcher;
         private readonly MessagingOptions _messagingOptions;
 
         public MessageBroker(IModuleClient moduleClient, 
-            // IBusPublisher busPublisher,
+            IBusPublisher busPublisher, // info rabbitmq
             IAsyncMessageDispatcher asyncMessageDispatcher, MessagingOptions messagingOptions)
         {
             _moduleClient = moduleClient;
-            // _busPublisher = busPublisher;
+            _busPublisher = busPublisher;
             _asyncMessageDispatcher = asyncMessageDispatcher;
             _messagingOptions = messagingOptions;
         }
@@ -40,7 +40,7 @@ namespace the80by20.Shared.Infrastucture.Messaging.Brokers
 
             foreach (var message in messages)
             {
-                // await _busPublisher.PublishAsync(message); // External RabbitMQ message broker
+                await _busPublisher.PublishAsync(message); // External RabbitMQ message broker
                 if (_messagingOptions.UseBackgroundDispatcher)
                 {
                     await _asyncMessageDispatcher.PublishAsync(message);

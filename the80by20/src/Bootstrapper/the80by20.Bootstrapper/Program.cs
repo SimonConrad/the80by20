@@ -58,9 +58,9 @@ public partial class Program
             // rabbitmq: http://localhost:15672/#/
             // ci/cd with rabbitmq azure container registry (with rabbitmq) + web app
             
-            // todo rabbitmq
-            // app.UseConvey();
-            // app.UseRabbitMq();
+            // info rabbitmq
+            app.UseConvey();
+            app.UseRabbitMq();
             
             assemblies.Clear();
             modules.Clear();
