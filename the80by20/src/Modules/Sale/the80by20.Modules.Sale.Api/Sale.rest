@@ -6,7 +6,7 @@
 @accessToken = 
 
 ###
-GET {{url}}
+GET {{url}}/home
 
 
 
