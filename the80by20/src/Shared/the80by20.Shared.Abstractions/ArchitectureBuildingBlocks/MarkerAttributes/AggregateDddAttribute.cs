@@ -3,6 +3,8 @@
 /// <summary>
 /// aggregate  - model true invariants in consistency boundaries according to real business rules. it is entity it has identity
 ///
+/// aggregate aggregates set of entities + value-objects which we want to be consistent immediately,
+/// and this consistency is based upon rules which this aggregate have inside
 /// 
 /// Aggregates designing rules
 /// 4 rules about designing aggregates by Eric Evans:
