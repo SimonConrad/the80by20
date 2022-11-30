@@ -1,6 +1,8 @@
 ﻿namespace the80by20.Shared.Abstractions.ArchitectureBuildingBlocks.MarkerAttributes;
 
 /// <summary>
+/// value object - has no identity, has no state, it is comparable by its values, it is immutable object
+/// 
 /// https://www.youtube.com/watch?v=UFXgk3_j_2Q&list=PLUSb1w6ri8jrBc1NPoB6qqFlKlB-TDMWW&index=23
 /// W systemie istnieją obiekty, które tożsamość potrzebują - np karta biblioteczna, ale też istnieją obiekty, które tej tożsamości nie potrzebują
 /// te obiekty nie opsiują CZYM są, tylko JAKIE są,

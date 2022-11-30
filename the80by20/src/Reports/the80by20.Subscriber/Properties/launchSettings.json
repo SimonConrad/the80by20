@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "the80by20.Subscriber": {
-      "commandName": "Project",
-      "commandLineArgs": "--port 7135",
-      "launchBrowser": false
-    }
-  }
-}
